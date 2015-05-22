@@ -1,0 +1,230 @@
+{include file="inc/header.html"} 
+<?php
+
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<style type="text/css">
+	.uc_table .p_inf{text-align:left;padding-left:0}
+</style>
+<div class="blank"></div>
+<!--中间开始-->
+<div class="dlmain Myhomepage">
+		{include file="inc/account_left.html"}
+		<div class="homeright pageright f_r">
+			<div >
+				<div class="blank"></div>
+ 				<div class="full">
+ 					{include file="inc/account_mine_investor_status_top.html"}
+					{if $investor_list}
+ 						<div class="i_deal_list clearfix">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0" class="uc_table">
+								<thead>
+									<tr>
+										<th style="width:6%">序号</th>
+										<th>项目名称</th>
+										{if $type==0}
+										<th style="width:13%">项目估值</th>
+										{/if}
+										<th style="width:13%">投资金额</th>
+										<th style="width:20%">申请时间</th>
+										<th style="width:15%">操作</th>
+	 								</tr>
+ 								</thead>
+ 								<tbody>
+									{foreach from=$investor_list item=item}
+									<tr>
+										<td>{$item.id}</td>
+										<td class="p_inf">
+											<a href="{url r="deal#show" p="id=$item.deal_id"}" target="_blank" title="{$item.deal_name}"><img src="{function name="get_spec_image" v=$item.deal_image w=60 h=45 g=1}"  alt="{$item.deal_name}"/ class="f_l p_img"></a>
+											<a href="{url r="deal#show" p="id=$item.deal_id"}" target="_blank" title="{$item.deal_name}">{function name="msubstr" v=$item.deal_name b=0 e=25}</a>
+										</td>
+										{if $type==0}
+										<td><span class="f_money b">¥{function name="round" v=$item.stock_value e=2}</span></td>
+										{/if}
+										<td><span class="f_money b">¥{function name="round" v=$item.money e=2}</span></td>
+										<td class="deal_name" style="text-align:left;padding-left:26px;">{function name="to_date" v=$item.create_time}</td>
+										<td>
+											{if $item.type==0}
+												{if $item.investor_money_status==0}
+													{if $now>$item.begin_time and $now<$item.end_time}
+ 														审核中
+													{else}
+													 <span class="red">未通过</span>
+													{/if}
+												{elseif $item.investor_money_status==1}
+													{if $now>$item.begin_time and $now<$item.pay_end_time}
+														审核通过<br /><a href="{url r="account#view_order" p="id=$item.order_id"}" class="ui-small-button bg_red f12 b" style="float:none;display:inline-block">继续支付</a>
+ 													{/if}
+												{elseif $item.investor_money_status==2}
+													<span class="red">审核不通过</span>
+												{elseif $item.investor_money_status==3}
+													支付完成<br /><a href="{url r="account#view_order" p="id=$item.order_id"}" class="theme_fcolor">查看</a>
+												{elseif $item.investor_money_status==4}
+													<span class="f_red">您逾期未付款，已违约</span>
+												{/if}
+											{elseif $item.type==1}
+												{if $item.status==0}
+													资格审核中<br /><a href="{url r="investor#applicate_leader" p="deal_id=$item.deal_id"}" style=" color:#0c82c1">编辑申请资料</a>
+												{elseif $item.status==1}
+													您已经是领投人<br /><a href="{url r="account#add_leader_info" p="id=$item.id"}" class="theme_fcolor">上传信息</a><br />
+													{if $item.investor_money_status==0}
+														{if $now>$item.begin_time and $now<$item.end_time}
+														投资审核中
+														{else}
+														 <span class="f_red">投资未通过</span>
+														{/if}
+													{elseif $item.investor_money_status==1}
+														{if $now>$item.begin_time and $now<$item.pay_end_time}
+														审核通过，<a href="{url r="account#view_order" p="id=$item.order_id"}" class="theme_fcolor">继续支付</a>
+	 													{/if}
+													{elseif $item.investor_money_status==2}
+														<span class="f_red">审核不通过</span>
+													{elseif $item.investor_money_status==3}
+													支付完成，<a href="{url r="account#view_order" p="id=$item.order_id"}" class="theme_fcolor">查看</a>
+													{elseif $item.investor_money_status==4}
+														<span class="f_red">您逾期未付款，已违约</span>
+													{/if}
+												{elseif $item.status==2}
+													<span class="f_red">投资人审核不通过</span>
+												{/if}
+											{elseif $item.type==2}
+												{if $item.investor_money_status==0}
+													{if $now>$item.begin_time and $now<$item.end_time}
+													审核中
+													{else}
+													 <span class="f_red">未通过</span>
+													{/if}
+												{elseif $item.investor_money_status==1}
+ 													{if $now>$item.begin_time and $now<$item.pay_end_time}
+													审核通过<br /><a href="{url r="account#view_order" p="id=$item.order_id"}" class="theme_fcolor">继续支付</a>
+ 													{/if}
+												{elseif $item.investor_money_status==2}
+													<span class="f_red">审核不通过</span>
+												{elseif $item.investor_money_status==3}
+													支付完成<br /><a href="{url r="account#view_order" p="id=$item.order_id"}" class="theme_fcolor">查看</a>
+												{elseif $item.investor_money_status==4}
+													<span class="f_red">您逾期未付款，已违约</span>
+												{/if}
+											{/if}
+											
+										</td>
+ 									</tr>
+									{/foreach}
+								</tbody>
+							</table>
+						</div>
+ 					
+					<div class="blank20"></div>
+					<div class="pages">{$pages}</div>
+					<div class="blank20"></div>
+					{else}
+					<div class="empty_tip">
+						还没有{$title}记录
+					</div>
+					{/if}
+				</div>
+				
+				<div class="blank"></div>
+			</div>
+	
+	 		<div class="blank"></div>	
+		</div>
+<!--中间结束-->
+<div class="blank"></div>
+</div>
+<div class="blank"></div>
+<script>
+	$(function(){
+		$(".examine_yes").bind('click',function(){
+ 			var id=$(this).attr("rel");
+			var stock_money=$(this).attr("title");
+			deal_investor(id,1,"是否要通过该询价，通过后您的项目融资金额将会变成"+stock_money,0)
+			 
+		});
+		$(".examine_no").bind('click',function(){
+			var id=$(this).attr("rel");
+			var stock_money=$(this).attr("title");
+			deal_investor(id,0,"是否要拒绝该询价",0)
+			 
+		});
+		
+		$(".gentou_yes").bind('click',function(){
+ 			var id=$(this).attr("rel");
+ 			deal_investor(id,1,"是否允许跟投",2)
+			 
+		});
+		$(".gentou_no").bind('click',function(){
+			var id=$(this).attr("rel");
+ 			deal_investor(id,0,"是否要拒绝跟投",2)
+			 
+		});
+		
+		$(".lead_yes").bind('click',function(){
+ 			var id=$(this).attr("rel");
+ 			deal_lead(id,1,"是否允许该用户成为领投人",2)
+			 
+		});
+		$(".lead_no").bind('click',function(){
+			var id=$(this).attr("rel");
+ 			deal_lead(id,0,"是否要拒绝该用户成为领投人",2)
+			 
+		});
+		
+		$(".lead_examine_yes").bind('click',function(){
+ 			var id=$(this).attr("rel");
+ 			deal_investor(id,1,"是否要通过投资",1)
+			 
+		});
+		$(".lead_examine_no").bind('click',function(){
+			var id=$(this).attr("rel");
+ 			deal_investor(id,0,"是否要拒绝该领投人投资",1)
+			 
+		});
+		
+		
+	});
+	function deal_investor(id,status,msg,type){
+ 			var ajaxurl = APP_ROOT+"/index.php?ctl=account&act=investor_examine&status="+status+"&id="+id+"&type="+type;
+			$.showConfirm(msg,function(){
+				$.ajax({
+					url:ajaxurl,
+					dataType:"json",
+					type:'POST',
+					success:function(ajaxobj){
+						if(ajaxobj.status==1){
+							//$.showSuccess(ajaxobj.info);
+							window.location.reload();
+						}else{
+							$.showErr(ajaxobj.info,function(){
+								$.weeboxs.close();
+							});
+							
+						}
+					}
+				});
+			});
+	}
+	function deal_lead(id,status,msg,type){
+		var ajaxurl = APP_ROOT+"/index.php?ctl=account&act=lead_examine&status="+status+"&id="+id+"&type="+type;
+			$.showConfirm(msg,function(){
+				$.ajax({
+					url:ajaxurl,
+					dataType:"json",
+					type:'POST',
+					success:function(ajaxobj){
+						if(ajaxobj.status==1){
+							//$.showSuccess(ajaxobj.info);
+							window.location.reload();
+						}else{
+							$.showErr(ajaxobj.info,function(){
+								$.weeboxs.close();
+							});
+							
+						}
+					}
+				});
+			});
+	}
+</script>
+{include file="inc/footer.html"} 

@@ -1,0 +1,302 @@
+{include file="inc/header.html"} 
+<?php
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/avatar.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/avatar.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/switch_city.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/switch_city.js";
+$this->_var['dpagejs'][] = APP_ROOT_PATH."/system/region.js";
+$this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/user_register.css";
+?>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<style>
+	.setlist_new {
+		padding: 5px 0;
+		width: 100%;
+	}
+	.tip_box{
+		height:41px;
+		line-height:41px;
+		
+	}
+	.tip_box .form_tip{ color:red;}
+	.tip_box .form_success{ color:green;}
+	.control-group a{height:37px;line-height:37px}
+	.btn_select{_margin-top:10px;}
+	.textareabox{width:300px}
+</style>
+<div class="blank"></div>
+<!--中间开始-->
+<div class="dlmain Myhomepage">
+		 {include file="inc/account_left.html"} 
+		<div class="homeright pageright f_r">
+			<div >
+				<div class="page_title">
+					 个人设置
+				</div>
+				<div class="blank"></div>
+				<div class="left" >
+					<form class="ajax_form" action="{url r="settings#save_index"}" id="user_register_form" >			
+						<div class="form_row control-group">
+							<label class="form_lable">会员帐号:</label>
+							<input type="text" value="{$user_info.user_name}" class="textbox" disabled="true" />
+						</div>
+						<div class="blank0"></div>
+						<div class="form_row control-group">
+							<label class="form_lable">电子邮箱:</label>
+							<input type="text" value="{$user_info.email}" class="textbox" {if $user_info.email}disabled="true"{/if} />
+							{if $user_info.email}
+								<a href="{url r="settings#mail_change"}">修改</a>
+							{/if}
+						</div>
+						<div class="blank0"></div>
+						<div class="form_row control-group">	
+							<label class="form_lable">性别:</label>
+							<a class="btn_select w100 f_l mr10" id="sex_select">
+								<span class="cur_select" id="sex_cur"></span>
+								<div class="select_arrow"></div>
+								<select name="sex" class="select-h" id="sex">
+				              		<option value="-1" {if $user_info.sex eq -1}selected="selected"{/if} >未知</option>
+									<option value="1" {if $user_info.sex eq 1}selected="selected"{/if}>男</option>
+									<option value="0" {if $user_info.sex eq 0}selected="selected"{/if}>女</option>
+								</select>
+							</a>
+						</div>
+						<div class="blank0"></div>
+						<div class="form_row control-group">
+							<label class="form_lable">所在地:</label>
+							<a class="btn_select w100 f_l mr10" id="province_select">
+								<span class="cur_select" id="province_cur"></span>
+								<div class="select_arrow"></div>
+								<select name="province" class="select-h" id="province">
+				              		<option value="" rel="0">请选择省份</option>			
+									{foreach from=$region_lv2 item=region}
+										<option value="{$region.name}" rel="{$region.id}" {if $region.selected}selected="selected"{/if}>{$region.name}</option>
+									{/foreach}
+								</select>
+							</a>
+							<a class="btn_select w100 f_l mr10" id="city_select">
+								<span class="cur_select" id="city_cur"></span>
+								<div class="select_arrow"></div>
+								<select name="city" class="select-h" id="city">
+				              		<option value="" rel="0">请选择城市</option>
+									{foreach from=$region_lv3 item=region}
+										<option value="{$region.name}" rel="{$region.id}" {if $region.selected}selected="selected"{/if}>{$region.name}</option>
+									{/foreach}
+								</select>
+							</a>
+						</div>
+						<div class="form_row control-group" style="height:163px">
+							<label class="form_lable">自我介绍:</label>
+							<textarea name="intro" class="textareabox">{$user_info.intro}</textarea>
+							<div class="blank1"></div>
+							<div class="form_tip">这里可以输入大约300字的自我介绍，让大家多了解你</div>
+						</div>
+						<div class="blank0"></div>
+						<div class="form_row control-group">
+							<label class="form_lable">博客或微博:</label>
+							<div class="f_l">
+								<div  id="weibo_list">
+								{if $weibo_list}
+								{foreach from=$weibo_list item=weibo_item key=key}
+									<div>
+										<input type="text" value="{$weibo_item.weibo_url}" class="textbox" name="weibo_url[]" />
+										{if $key gt 0}
+										<a href="javascript:void(0);" class="del_weibo form_link_btn"  onclick="del_weibo(this);">删除</a>
+										{/if}
+										<div class="blank10"></div>
+									</div>
+								{/foreach}
+								{else}
+									<div>
+										<input type="text" value="" class="textbox" name="weibo_url[]" />
+										<div class="blank10"></div>
+									</div>
+								{/if}
+								</div>
+								<a href="javascript:void(0);" class="more_weibo form_link_btn" onclick="add_weibo();" style="height:20px;line-height:20px">更多</a>
+							</div>
+						</div>
+  						<div class="blank15"></div>
+						<div class="submit_btn_row ">
+							<div class="ui-button theme_bgcolor" rel="green" style="display:inline; margin-left:111px;margin-top:20px;">
+								<div>
+									<span>保存最新的设置</span>
+								</div>
+							</div>
+							<input type="hidden" value="1" name="ajax" />
+						</div>
+						<div class="blank15"></div>
+					</form>
+				</div><!--left-->
+				<div class="right" style="width:210px;">
+					<span style="font-size:14px">个人头像</span>
+					<div class="blank10"></div>
+					<img id="avatar" src="{function name="get_user_avatar" uid=$user_info.id type="middle"}" />
+					<div class="blank20"></div>
+					<label class="fileupload" onclick="upd_file(this,'avatar_file',{$user_info.id});">
+						<input type="file" class="filebox" name="avatar_file" id="avatar_file"  style="cursor:pointer;padding: 0;height: 39px;width: 97px;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
+					</label>
+					<label class="fileuploading hide" ></label>
+				</div>
+				<div id="gotop" style="display: block; z-index: 99;"></div>
+				<div class="blank"></div>
+			</div>
+	
+	 		<div class="blank"></div>	
+		</div>
+<script>
+	var code_timeer = null;
+	var code_lefttime = 0 ;
+		$(document).ready(function(){
+			$("#J_send_sms_verify").bind("click",function(){
+				send_mobile_verify_sms();
+			});
+			$("#user_register_form").find("input[name='verify_coder']").bind("blur",function(){
+				
+				check_register_verifyCoder();
+			});
+		})
+		function form_error(obj,str)
+		{
+			$(obj).parent().find(".tip_box").html("<div class='form_tip'>"+str+"</div>");
+		}
+		function form_success(obj,str)
+		{
+			$(obj).parent().find(".tip_box").html("<div class='form_success'>"+str+"</div>");
+		}
+		function send_mobile_verify_sms(){
+		$("#J_send_sms_verify").unbind("click");
+	
+		if(!$.checkMobilePhone($("#settings-mobile").val()))
+		{
+			form_error($("#settings-mobile"),"手机号码格式错误");	
+			$("#J_send_sms_verify").bind("click",function(){
+				send_mobile_verify_sms();
+			});
+			return false;
+		}
+		
+		
+		if(!$.maxLength($("#settings-mobile").val(),11,true))
+		{
+			$("#settings-mobile").focus();
+			$("#settings-mobile").next().show().text("长度不能超过11位");			
+			$("#settings-mobile").next().css({"color":"red"});
+			$("#J_send_sms_verify").bind("click",function(){
+				
+				send_mobile_verify_sms();
+			});
+			return false;
+		}
+ 		if($.trim($("#settings-mobile").val()).length == 0)
+		{				
+			form_error($("#settings-mobile"),"{function name="sprintf" format="手机号码不能为空" value="手机号码"}");
+			$("#J_send_sms_verify").bind("click",function(){
+				send_mobile_verify_sms();
+			});
+			return false;
+		}
+	
+		var sajaxurl = APP_ROOT+"/index.php?ctl=ajax&act=send_mobile_verify_code&is_only=1";
+		var squery = new Object();
+		squery.mobile = $.trim($("#settings-mobile").val());
+		$.ajax({ 
+			url: sajaxurl,
+			data:squery,
+			type: "POST",
+			dataType: "json",
+			success: function(sdata){
+				if(sdata.status==1)
+				{
+					code_lefttime = 60;
+					code_lefttime_func();
+					$.showSuccess(sdata.info);
+					return false;
+				}
+				else
+				{
+						
+					$("#J_send_sms_verify").bind("click",function(){
+						send_mobile_verify_sms();
+					});
+					$.showErr(sdata.info);
+					return false;
+				}
+			}
+		});	
+		
+		
+	}
+	function code_lefttime_func(){
+		
+		clearTimeout(code_timeer);
+		$("#J_send_sms_verify").val(code_lefttime+"秒后重新发送");
+		$("#J_send_sms_verify").css({"color":"#f1f1f1"});
+		code_lefttime--;
+		if(code_lefttime >0){
+			$("#J_send_sms_verify").attr("disabled","true");
+			code_timeer = setTimeout(code_lefttime_func,1000);
+		}
+		else{
+			code_lefttime = 60;
+			$("#J_send_sms_verify").val("发送验证码");
+			$("#J_send_sms_verify").attr("disabled","false");
+			$("#J_send_sms_verify").css({"color":"#fff"});
+			$("#J_send_sms_verify").bind("click",function(){
+				send_mobile_verify_sms();
+			});
+		}
+		
+	}
+	//检查验证码
+	function check_register_verifyCoder(){
+ 		if($.trim($("#user_register_form").find("input[name='verify_coder']").val())=="")
+		{
+			form_error($("#user_register_form").find("input[name='verify_coder']"),"请输入验证码");		
+		}
+		else
+		{
+			
+			var mobile = $.trim($("#user_register_form").find("input[name='mobile']").val());
+		
+			var code = $.trim($("#user_register_form").find("input[name='verify_coder']").val());
+			if(mobile!=""||code!=""){
+				var ajaxurl = APP_ROOT+"/index.php?ctl=user&act=check_verify_code";
+				var query = new Object();
+				query.mobile = mobile;
+				query.code = code;
+				$.ajax({
+					url: ajaxurl,
+					dataType: "json",
+					data:query,
+					type: "POST",
+					success:function(ajaxobj){
+						if(ajaxobj.status==1)
+						{
+							form_success($("#user_register_form").find("input[name='verify_coder']"),"验证码正确");
+						}
+						if(ajaxobj.status==0)
+						{
+							form_error($("#user_register_form").find("input[name='verify_coder']"),"验证码不正确");
+						}
+					}
+				});
+			}
+		}
+	}
+</script>
+<!--中间结束-->
+<div class="blank"></div>
+</div>
+<div class="blank"></div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		// 项目所属行业
+		funSelect("#sex_select","#sex_cur",'#sex_select option:selected');
+		funSelect("#province_select","#province_cur",'#province_select option:selected');
+		funSelect("#city_select","#city_cur",'#city_select option:selected');
+	});	
+</script>
+{include file="inc/footer.html"} 

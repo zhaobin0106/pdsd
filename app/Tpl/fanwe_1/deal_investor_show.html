@@ -1,0 +1,158 @@
+{include file="inc/header.html"} 
+<?php
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/fancybox.css";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.fancybox.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/deal.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/deal.js";
+
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal_support.css";
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/css/font-awesome.css";
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<script type="text/javascript" src="{$TMPL}/js/jquery.SuperSlide.2.1.js"></script>
+<!-- 项目背景 开始-->
+<div class="deal_body" {if $deal_info.deal_backgroundColor_image neq null} style="background:url({$deal_info.deal_backgroundColor_image}) repeat;" {/if}>
+		<!-- 项目大海报-->
+		<div class="deal_banner" {if $deal_info.deal_background_image neq null}style="background:url({$deal_info.deal_background_image}) top center no-repeat;padding-top:405px;"{/if}>
+			{if $user_level[0]['level'] neq ''}
+			{if $user_level[0]['level'] ge $deal_info.deal_level}
+			<div class="blank"></div>
+			<!--中间开始-->
+			<div class="xqmain">
+				<!--中间页面头部start-->
+				{include file="inc/deal_header.html"}
+				<!--中间页面头部end-->	
+				<div class="xqmain_main">
+					<!--中间页面左边start-->
+					<div class="xqmain_left">
+						<div class="l_hd">
+ 							{if $deal_info.source_vedio eq ''}
+							<img src="{function name="get_spec_image" v=$deal_info.image w=800 h=600}" alt="{$deal_info.name}" />
+							{else}
+ 							<iframe height=600 width=800 src="{$deal_info.source_vedio}" frameborder=0 allowfullscreen></iframe>
+ 							{/if}
+							<span>项目介绍：</span>
+						</div>
+						<div class="l_main">
+							<p>{$deal_info.description}</p>
+							<!--投资者信息-->
+							{include file="inc/investor_info.html"}
+						</div>
+						<div class="blank"></div>
+						<div class="deal_qa">
+							{foreach from=$deal_info.deal_faq_list item=faq}
+ 							<div class="faq_question" rel="{$faq.id}"> - {$faq.question}</div>
+							<div class="faq_answer" rel="{$faq.id}" style="display: none;">{$faq.answer}</div>
+							<div class="blank_10"></div>
+ 							{/foreach}
+						</div>
+						<div class="blank"></div>
+						<div class="l_foot">
+							{if $deal_info.tags neq ''}
+							<div class="l_foot1">
+								<span class="f_l">标签：
+								{foreach from=$deal_info.tags_arr item=tag}
+								{if trim($tag) neq ''}
+									<a href="{url r="deals" p="tag=$tag&type=1"}" title="{$tag}" target="_blank">{$tag}</a>
+								{/if}
+								{/foreach}
+								</span>
+							</div>
+							{/if}
+							<div class="l_foot2 f_l">
+								<span class="lft1 f_l">
+									如果您对项目有疑问，可以在此向项目发起人咨询
+								</span>
+								<span onclick="send_message({$deal_info.user_id});" class="f_r">
+									<a class="ui-small-button theme_bgcolor">对发起人提问</a>
+								</span>
+							</div>
+						</div>
+					</div>
+					<!--中间页面左边end-->
+					{include file="inc/deal_investor_right.html"}
+					<div class="blank"></div>
+				</div>
+			</div>
+			<!--中间结束-->
+			{else}
+			<div style="height:600px;">
+				<h1 class="deal_center">对不起您没有权限，无法浏览该项目!</h1>		
+			</div>
+			{/if}
+			{/if}
+			{if $user_level[0]['level'] eq ''}
+			<div class="blank"></div>
+			<!--中间开始-->
+			<div class="xqmain">
+				<!--中间页面头部start-->	
+				{include file="inc/deal_header.html"}
+				<!--中间页面头部end-->	
+
+				<div class="xqmain_main">
+					<!--中间页面左边start-->
+					<div class="xqmain_left">
+						<div class="l_hd">
+						
+							{if $deal_info.source_vedio eq ''}
+							<img src="{function name="get_spec_image" v=$deal_info.image w=800 h=600}" alt="{$deal_info.name}" />
+							{else}
+ 							<iframe height=600 width=800 src="{$deal_info.source_vedio}" frameborder=0 allowfullscreen></iframe>
+							{/if}
+							<span>项目介绍：</span>
+						</div>
+						<div class="l_main">
+							<p>{$deal_info.description}</p>
+							<!--投资者信息-->
+							{include file="inc/investor_info.html"}
+						</div>
+                        <div class="blank10"></div>
+						<div class="l_foot">
+							{if $deal_info.tags neq ''}
+							<div class="l_foot1">
+								<span class="f_l">标签：
+								{foreach from=$deal_info.tags_arr item=tag}
+								{if trim($tag) neq ''}
+									<a href="{url r="deals" p="tag=$tag&type=1"}" title="{$tag}" target="_blank">{$tag}</a>
+								{/if}
+								{/foreach}
+								</span>
+							</div>
+							{/if}
+							<span id="nc" class="f_r">
+								<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+								<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["tsina","qzone","weixin","tqq","douban","renren"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","weixin","tqq","douban","renren"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+							</span>
+							<div class="l_foot2 f_l">
+								<span class="lft1 f_l">
+									如果您对项目有疑问，可以在此向项目发起人咨询
+								</span>
+								<span onclick="send_message({$deal_info.user_id});" class="f_r" style="cursor:pointer"> 
+									<!-- 对发起人提问 -->
+									<a class="ui-small-button theme_bgcolor">对发起人提问</a>
+								</span>
+							</div>
+						</div>
+					</div>
+					<!--中间页面左边end-->
+					{include file="inc/deal_investor_right.html"}
+					<div class="blank"></div>
+				</div>
+			</div>
+			<!--中间结束-->
+			</div>
+			</div>
+			{/if}
+			<div id="gotop" style="display: block;z-index:99;"></div>
+			<div class="blank"></div>
+		</div>
+	
+</div>
+<!-- 项目背景 结束-->
+<script type="text/javascript">
+    jQuery(".slideTxtBox").slide({trigger:"click",delayTime:500});
+    
+</script>
+{include file="inc/footer.html"}

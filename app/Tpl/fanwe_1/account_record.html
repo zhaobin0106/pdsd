@@ -1,0 +1,61 @@
+{include file="inc/header.html"} 
+<?php
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="blank"></div>
+<!--中间开始-->
+<div class="dlmain Myhomepage">
+ 	{include file="inc/account_left.html"} 
+ 	<div class="homeright pageright f_r">
+	 	<div class="full">
+			<div class="account_money">
+			{include file="inc/account_money_top.html"} 
+			<div class="list_conment">
+				{if $record_list}
+				<div class="i_deal_list clearfix">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="uc_table">
+						<tbody>
+							<tr>
+								<th>项目名称</th>
+								<th>支付时间</th>
+								<th>金额</th>
+								<th>是否支付</th>
+							</tr>
+							{foreach from=$record_list item=record_item}
+							<tr>
+								<td>
+									{if $record_item.deal_name eq null}在线支付{/if}
+								</td>
+								<td>
+									{if $record_item.pay_time eq 0}无{/if}
+									{if $record_item.create_time neq 0}{function name="to_date" v=$record_item.pay_time}{/if}
+								</td>
+								<td>
+									<span class="f_money b">{$record_item.money}</span>
+								</td>
+								<td>
+									{if $record_item.is_paid eq 1}已支付{/if}
+									{if $record_item.is_paid eq 0}<a class="ui-small-button bg_red f12 b" href="{$record_item.url}" style="float:none;display:inline-block">继续支付</a>{/if}
+								</td>
+							</tr>
+							{/foreach}
+						</tbody>
+					</table>
+				</div>
+				<div class="blank20"></div>
+				<div class="pages">{$pages}</div>
+				<div class="blank20"></div>
+				{else}
+				<div class="empty_tip">
+					还没有任何充值记录
+				</div>
+				{/if}
+			</div>
+		</div>
+	</div>
+ <!--中间结束-->
+<div class="blank"></div>
+</div>
+<div class="blank"></div>
+{include file="inc/footer.html"} 

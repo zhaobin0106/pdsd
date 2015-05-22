@@ -1,0 +1,387 @@
+{include file="inc/header.html"} 
+<?php
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/index.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/index.js";
+?>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<script type="text/javascript" src="{$TMPL}/js/jquery.SuperSlide.2.1.js"></script>
+<style>
+	.index_title{
+		font-weight:normal;
+		height:50px;
+		line-height:50px;
+		margin:0 auto;
+		position:relative;
+	}
+	.index_title span{
+		font-size:30px;
+	}
+	.index_title a{
+		position:absolute;
+		right:0;
+		top:8px;
+		color:#fff;
+		width:85px;
+		height:35px;
+		line-height:35px;
+		display:block;
+		text-indent:-999em;
+		background:url({$TMPL}/images/view_more.png) no-repeat;
+	}
+</style>
+
+<!--  海报区域开始  1-->
+<div class="banner slideBox" id="banner">
+	<div class="btn_tit effect_hd">
+		<ul>
+			{foreach from=$image_list item=image_item}
+			<li></li>
+			{/foreach}
+		</ul>
+	</div>
+	<div class="banner_cont effect_bd">
+		<ul>
+			{foreach from=$image_list item=image_item}
+			<li><a href="{$image_item.url}" target=_blank style="display:block;background: url({function name="get_spec_image" v=$image_item.image w=1440 h=350 g=1}) 50% 50% no-repeat;"></a></li>
+			{/foreach}
+		</ul>
+	</div>
+	<div class="fy_box" style="">
+		<!--左右翻页按钮，可以不用-->
+		<a class="prev" href="javascript:void(0)"></a>
+		<a class="next" href="javascript:void(0)"></a>
+	</div>
+	
+</div>
+<script type="text/javascript"> 
+	if(!$(".banner_cont ul").has('li').length){ 
+		$("#banner").css("display","none");
+	} 
+	
+	if($(".banner_cont ul").find('li').length==1){ 
+		$(".btn_tit").css("display","none");
+	}
+	else if($(".banner_cont ul").find('li').length>1){
+		$(".btn_tit").css("display","block");
+	}
+	if($(".banner_cont ul").find('li').length>1){
+		jQuery("#banner").slide({mainCell:".banner_cont ul",effect:"leftLoop",easing:"easeInOutQuint",delayTime:500,autoPlay:true});
+		$("#banner").mousemove(function(){
+			$(this).find(".prev").show();
+			$(this).find(".next").show();
+		}).mouseout(function(){
+			$(this).find(".prev").hide();
+			$(this).find(".next").hide();
+		});
+	}
+</script>
+<!--  海报区域结束  -->
+<div class="adv_index">
+	<adv adv_id="index_top" />
+</div>
+<!--  选项卡开始  -->
+{if $deal_cate}
+<div style="background: #ffffff;width:100%;margin-bottom:20px;padding:18px 0 24px 0;">
+	<h3 class="wrap" style="background:url({$TMPL}/images/new_font.png) no-repeat;font-size:30px; font-weight:normal;height:27px;line-height:27px;margin:0 auto;text-indent:-999em">最新上线</h3>
+	<div class="blank10"></div>
+	<div id="getId">
+		<div class="tabT effect_hd">
+			<ul class="tab">
+				{foreach from=$deal_cate item=deal_cate key=key name=cate}
+				{if $smarty.foreach.cate.iteration lte 7}
+				<li id="tabId{$deal_cate.id}">{$deal_cate.cate_name}</li>
+				{/if}
+				{/foreach}
+			</ul>
+		</div>
+		<div class="tabB effect_bd">
+			{foreach from=$deal_cate item=deal_cate_item key=k1 name=deal_cates}
+			{if $smarty.foreach.deal_cates.iteration lte 7}
+			<div id="tabC{$deal_cate_item.id}" class="tabCont">
+				<div class="con">	
+					<a href="{url r="deal#show" p="id=$deal_cate_item.id"}" title="{$deal_cate_item.name}" target="_blank">
+						{if $deal_cate_item.adv_image}
+							<img src="{function name="get_spec_image" v=$deal_cate_item.adv_image}" alt="{$deal_cate_item.name}" alt="{$deal_cate_item.name}">
+						{/if}
+						{if $deal_cate_item.adv_image eq null}
+							<img src="{if $deal_cate_item.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$deal_cate_item.image}{/if}" alt="{$deal_cate_item.name}" alt="{$deal_cate_item.name}">
+						{/if}
+					</a>
+				</div>
+				<div class="con2">
+					<!--1-->
+					<div class="deal_content_box">
+						<div class="blank15"></div>
+						<h3><a href="{url r="deal#show" p="id=$deal_cate_item.id"}" title="{$deal_cate_item.name}" class="deal_title" target="_blank">{function name="msubstr" v=$deal_cate_item.name b=0 e=23}</a></h3>
+						<div class="blank20"></div>
+						<div class="ui-button theme_bgcolor f20" style="width:214px">
+							<a href="{url r="deal#show" p="id=$deal_cate_item.id"}" target="_blank">立即支持</a>
+						</div>
+						<div class="blank5"></div>
+						<div class="inf"><span>{function name="msubstr" v=$deal_cate_item.brief b=0 e=40}</span></div>
+					</div>
+					<!--2-->
+					<div class="blank15"></div>
+					<div class="paiduan" style="height:20px;line-height:20px;">
+						<span class="caption-title">目标：<em>{$deal_cate_item.num_days}天</em> <em><i class="font-yen">¥</i>{function name="round" v=$deal_cate_item.limit_price e=2}</em></span>
+						<span class="f_r ">
+							{if $deal_cate_item.begin_time > $now}
+							<span class="common-begin">即将开始</span>
+							{elseif $deal_cate_item.end_time < $now and $deal_cate_item.end_time neq 0}
+							 <span  {if $deal_cate_item.percent gte 100}class="common-success"{else}class="common-fail"{/if}>
+								{if $deal_cate_item.percent gte 100}已成功
+								{else $deal_cate_item.percent gt 0}筹资失败
+								{/if}
+							</span> 	 
+							{else}
+								{if $deal_item.percent gte 100}
+									<span class="common-success">已成功</span>
+								{else}
+									<span class="common-sprite">
+										{if $deal_cate_item.end_time eq 0}
+											长期项目
+										{else}
+											{if $deal_item.type eq 1}
+											融资中
+											{else}
+											筹资中
+											{/if}
+										{/if}
+									</span>
+								{/if}
+									
+							{/if}
+						</span>
+					</div>
+					<div class="blank10"></div>
+					<!--3-->
+					<div class="deal_content_box">             
+					{if $deal_cate_item.begin_time > $now}
+						<div class="ui-progress">
+							<span style="width:{$deal_cate_item.percent}%;background:#ffae00;"></span>
+						</div>
+					{elseif $deal_cate_item.end_time < $now and $deal_cate_item.end_time neq 0}
+						{if $deal_cate_item.percent gte 100}				
+						<div class="ui-success">
+							<span style="width:100%;"></span>
+						</div>
+						{else $deal_cate_item.percent gt 0}
+						<div class="ui-progress">
+							<span style="width:{$deal_cate_item.percent}%;background:#4d4d4f;"></span>
+						</div>
+						{/if}
+					{else}
+							{if $deal_item.percent gte 100}
+								<div class="ui-success">
+									<span style="width:100%;"></span>
+								</div>
+							{else}
+								{if $deal_cate_item.end_time eq 0}
+									<div class="ui-progress">
+										<span class="theme_bgcolor" style="width:{$deal_cate_item.percent}%;"></span>
+									</div>
+								{else}
+									<div class="ui-progress">
+										<span class="theme_bgcolor" style="width:{$deal_cate_item.percent}%;"></span>
+									</div>
+								{/if}	
+							{/if}
+							
+							
+					{/if}
+						<div class="blank"></div>
+						{if $deal_item.begin_time > $now}
+							<div class="div3" style="text-align:left; width:100%; text-align:center;">
+								<span class="num til">距开始时间还剩<font>{$deal_item.left_begin_days}</font>天</span>
+							</div>
+						{else}
+								
+						<div class="div3" style="text-align:left;">
+							<span class="num">{$deal_cate_item.percent}%</span>
+							<div class="blank5"></div>
+							<span class="til">已达</span>
+						</div>
+						<div class="div3">
+							<span class="num"><font>{function name="round" v=$deal_cate_item.support_amount e=2}</font>元</span>
+							<div class="blank5"></div>
+							{if $deal_cate_item.type eq 1}
+							<span class="til">已预购</span>
+							{else}
+							<span class="til">已筹资</span>
+							{/if}
+							
+							
+						</div>
+						
+						<div class="div3" style="text-align:right;">
+						{if $deal_cate_item.begin_time > $now}
+							<span class="num"><font>{$deal_cate_item.left_days}</font>天</span>
+						{elseif $deal_cate_item.end_time < $now and $deal_cate_item.end_time neq 0}
+							<span class="num">{if $deal_cate_item.percent gt 100}{function name="to_date" v="$deal_cate_item.success_time" f="y/m/d"}{else}{function name="to_date" v="$deal_cate_item.end_time" f="y/m/d"}{/if}</span>
+						{else}
+							<span class="num">
+								{if $deal_cate_item.end_time eq 0}
+								长期项目
+								{else}
+								<font>{$deal_cate_item.remain_days}</font>天
+								{/if}
+							</span>
+						{/if}	
+							<div class="blank5"></div>
+							<span class="til">
+								{if $deal_cate_item.begin_time > $now}
+									已经预热
+								{elseif ($deal_cate_item.end_time < $now and $deal_cate_item.end_time neq 0) }
+									结束时间
+								{else}
+									{if $deal_cate_item.end_time eq 0}
+										长期项目
+									{else}
+										剩余时间
+									{/if}
+								{/if}
+							</span>				
+						</div>
+						{/if}
+						<div class="blank1"></div>
+					</div>
+				</div>
+			</div>
+			{/if}
+			{/foreach}
+		</div>
+	</div> 
+	<script type="text/javascript">jQuery("#getId").slide({effect:"top",delayTime:300});</script>
+</div>
+{/if} 
+<!--  选项卡结束  -->
+
+<!--  项目列表开始  -->
+<div class="wrap">
+	<div class="category" style="display:none;">
+		<ul style="float:left">
+			<li><a href="{url r="deals" p="r=rec"}" target=_blank>推荐项目</a></li>
+			<li><a href="{url r="deals" p="r=new"}" target=_blank>最新上线</a></li>
+			<li><a href="{url r="deals" p="r=nend"}" target=_blank>即将结束</a></li>
+			<li><a href="{url r="deals" p="r=classic"}" target=_blank>经典项目</a></li>
+		</ul>
+		<ul class="tab-nav" style="float:right">
+			{foreach from=$cate_list item=cate_item name="address"}
+				{if $smarty.foreach.address.iteration lt 11}
+					<li>{if $cate_item.pid eq 0}<a href="{url r="deals" p="id=$cate_item.id"}" title="{$cate_item.name}" target=_blank>{$cate_item.name}</a>{/if}</li>
+				{/if}
+			{/foreach}
+		</ul>
+	</div>
+	<div class="blank"></div>
+	{if $deal_list}
+	<h3 class="wrap index_title">
+	 	<span>产品众筹</span>
+	 	<a href="{url r="deals"}" target="_blank" class="f_r">查看更多</a>
+	</h3>
+	<div class="blank"></div>
+	<div id="pin_box">
+		{include file="inc/deal_list.html"}
+	</div>
+	<div class="blank20"></div>
+	{/if}
+	{if $deal_list_invest}
+	<h3 class="wrap index_title">
+	 	<span>股权众筹</span>
+	 	<a href="{url r="deals" p="type=1"}" target="_blank" class="f_r">查看更多</a>
+	</h3>
+	<div class="blank"></div>
+	<div id="pin_box">
+		{include file="inc/deal_list_invest.html"}
+	</div>
+	{/if}
+ </div>
+<!--  项目列表结束  -->
+<div class="blank30"></div>
+<!--梦想开始的地方开始-->
+<div class="support">
+	<div class="blank"></div>
+    <div class="wrap" style="position:relative;">  
+    <a href="{if app_conf("INVEST_STATUS") eq 0}{url r="deals"}{/if}{if app_conf("INVEST_STATUS") eq 1}{url r="deals"}{/if}{if app_conf("INVEST_STATUS") eq 2}{url r="deals"}&type=1{/if}" target='_blank' class="ckgd">查看更多项目</a>
+    <div class="mod-title" style="width:450px;margin:30px auto;text-align:center;line-height: 40px;">
+           
+		    <span style="font-size:36px;color:#766262;">梦想开始的地方</span></br>
+           <span style="font-size:19px;color:#969595;"> 手里有闲钱不知道怎么花，支持这些有趣的项目</span>
+        </div>
+        <div class="support-con clearfix">
+            <ul class="support-big clearfix">
+                <li>
+                	<a href="{url r="project#choose"}" alt="点击查看创业者指南" title="点击查看创业者指南" target="_blank">
+						<span class="icon-sup mx_1"></span>
+						<div class="blank10"></div>
+						<h3>我有项目</h3>
+						<div class="blank5"></div>
+						<p><span>点击立即发布项目&nbsp;&nbsp;</span><i class="fa fa-arrow-right"></i></p>
+					</a>
+                </li>
+				
+                <li>
+					<a href="{if app_conf("INVEST_STATUS") eq 0}{url r="deals"}{/if}{if app_conf("INVEST_STATUS") eq 1}{url r="deals"}{/if}{if app_conf("INVEST_STATUS") eq 2}{url r="deals"}&type=1{/if}" alt="点击查看投资人手册" title="点击查看投资人手册" target="_blank">
+						<span class="icon-sup mx_2"></span>
+						<div class="blank10"></div>
+						<h3>我想投资</h3>
+						<div class="blank5"></div>
+						<p><span>点击查看所有项目&nbsp;&nbsp;</span><i class="fa fa-arrow-right"></i></p>
+					</a>
+                </li>
+                <li>
+					<a href="{url r="faq"}" alt="点击查看新手手册" title="点击查看新手手册" target="_blank">
+						<span class="icon-sup mx_3"></span>
+						<div class="blank10"></div>
+						<h3>新手指南</h3>
+						<div class="blank5"></div>
+						<p><span>点击查看新手手册&nbsp;&nbsp;</span><i class="fa fa-arrow-right"></i></p>
+					</a>
+                </li>
+                <li>
+					<a href="javascript:void(0);" alt="待开放" onclick="$.showSuccess('新功能敬请期待');" title="待开放">
+						<span class="icon-sup mx_4"></span>
+						<div class="blank10"></div>
+						<h3>待开放</h3>
+						<div class="blank5"></div>
+						<p><span>--------&nbsp;&nbsp;</span><i class="fa fa-arrow-right"></i></p>
+					</a>
+                </li>               
+            </ul>
+			<div style="float:left;border-right:1px solid #dbdbdb;height:135px;width:20px;margin-top:15px;"></div>
+            <ul class="support-sm clearfix" style="float:right;">
+                <li>
+                	<a>
+                		<span class="icon-sup mxr_3"></span>
+                		<div class="support-sm-r f_r">
+		                    <h3>项目总数</h3>
+	                    	<span class="number red">{$virtual_effect}<em>个</em></span>	
+                		</div>
+                	</a>
+                </li>
+                <li>
+                	<a>
+                		<span class="icon-sup mxr_2"></span>
+                		<div class="support-sm-r f_r">
+		                    <h3>累计支持人</h3>
+		                    <span class="number violet">{$virtual_person}<em>人</em></span>
+	                    </div>
+                	</a>
+                	
+                </li>
+                <li>
+                	<a>
+                		<span class="icon-sup mxr_1"></span>
+                		<div class="support-sm-r f_r">
+		                    <h3>累计筹资金额</h3>
+		                    <span class="number yellow"><em>¥</em>{$virtual_money}</span>
+		                </div>
+                	</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--梦想开始的地方结束-->
+<div id="gotop" style="display: block;z-index:99;"></div>
+{include file="inc/footer.html"} 

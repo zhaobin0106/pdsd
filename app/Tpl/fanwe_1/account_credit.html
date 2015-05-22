@@ -1,0 +1,60 @@
+{include file="inc/header.html"} 
+<?php
+
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<div class="blank"></div>
+<!--中间开始-->
+<div class="dlmain Myhomepage">
+	{include file="inc/account_left.html"}
+	<div class="homeright pageright f_r">
+		<div class="full">
+			<div class="account_money">
+				{include file="inc/account_money_top.html"} 
+				<div class="list_conment">
+					{if $log_list}
+					<div class="i_deal_list clearfix">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="uc_table">
+							<tbody>
+								<tr>
+									<th>日志内容</th>
+									<th>类型</th>
+									<th width="120">金额</th>
+									<th width="160">时间</th>
+					
+								</tr>
+								{foreach from=$log_list item=log_item}
+								<tr>
+									<td class="deal_name" style="text-align:left;">{$log_item.log_info}</td>
+									<td>{if $log_item.money gt 0}增加{else}减少{/if}</td>
+									<td>
+										<span class="f_money b"><?php 
+											echo format_price(abs($this->_var['log_item']['money']));
+										?></span>
+									</td>
+									<td>{function name="to_date" v=$log_item.log_time}</td>
+								</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+					<div class="blank20"></div>
+					<div class="pages">{$pages}</div>
+					<div class="blank20"></div>
+					{else}
+					<div class="empty_tip">
+						还没有资金记录
+					</div>
+					{/if}
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+<!--中间结束-->
+<div class="blank"></div>
+</div>
+<div class="blank"></div>
+{include file="inc/footer.html"} 

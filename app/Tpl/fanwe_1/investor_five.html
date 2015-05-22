@@ -1,0 +1,556 @@
+{include file="inc/header.html"}
+<link href="{$APP_ROOT}/admin/public/kindeditor/themes/default/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$APP_ROOT}/public/runtime/admin/lang.js"></script>
+<script type='text/javascript' src='{$APP_ROOT}/admin/public/kindeditor/kindeditor.js'></script>
+<script type='text/javascript' src='{$TMPL}/js/jQuery-jcDate.js'></script>
+<link rel="stylesheet" type="text/css" href="{$TMPL}/css/jcDate.css">
+<script type="text/javascript">
+    var ROOT = '{$APP_ROOT}/m.php';
+    var VAR_MODULE = "m";
+    var VAR_ACTION = "a";
+    var WEB_SESSION_ID = '<?php echo es_session::id(); ?>';
+    var EMOT_URL = '{$APP_ROOT}/public/emoticons/';
+    var MAX_FILE_SIZE = "<?php echo (app_conf("MAX_IMAGE_SIZE")/1000000)."MB"; ?>";
+    var FILE_UPLOAD_URL ='{$APP_ROOT}/m.php?m=File&a=do_upload&' ;
+</script>
+<style type="text/css">
+    .group{position:relative;}
+    .holder_tip{left:0;top:0;}
+    .group1{overflow:hidden;}
+    .group1 .holder_tip{left:}
+    .jcDateIco{cursor:pointer;}
+</style>
+<div class="blank20"></div>
+<div class="location_box wrap1000">
+    <div class="location f_l">
+        <i class="fl ico loc_ico mr5"></i>
+        <label>您现在的位置：</label><a>发布股权项目</a><em>>></em><a>未来三年内计划</a>
+    </div>
+</div>
+<div class="blank10"></div>
+<div class="step_box step_box5">
+    <ul>
+        <li class="l1"><span>1</span> 项目基本信息</li>
+        <li class="l2"><span>2</span> 市场定位与商业模式</li>
+        <li class="l3"><span>3</span> 编辑及管理团队</li>
+        <li class="l4"><span>4</span> 项目历史执行资料</li>
+        <li class="l5 cur"><span>5</span> 未来三年内计划</li>
+        <li class="l6"><span>6</span> 项目附件</li>
+        <li class="l7"><span>7</span> 提交审核</li>
+    </ul>
+</div>
+<div class="blank30"></div>
+<table style="display:none;">
+<tr id="plan_income_demo" class="tr_income_row">
+    <td>
+        <div class="group">
+            <input type="text" name="plan[1][income][1][type]" value="" class="textbox" style="width:180px;">
+            <span class="holder_tip">请输入收入类别</span>
+        </div>
+    </td>
+    <td>
+        <div class="group">
+            <input type="text" name="plan[1][income][1][money]" value="" class="textbox amount" style="width:120px;" />
+            <span class="holder_tip">请输入收入金额</span>
+        </div>
+    </td>
+    <td>
+        <div class="group">
+            <input type="text" name="plan[1][income][1][memo]" value="" class="textbox" style="width:490px;">
+            <span class="holder_tip">请输入备注</span>
+        </div>
+    </td>
+</tr>
+<tr id="plan_out_demo" class="tr_out_row">
+    <td>
+        <div class="group">
+            <input type="text" name="plan[1][out][1][type]" value="" class="textbox" style="width:180px;" />
+            <span class="holder_tip">请输入支出类别</span>
+        </div>
+    </td>
+    <td>
+        <div class="group">
+            <input type="text" name="plan[1][out][1][money]" value="" class="textbox amount" style="width:120px;" />
+            <span class="holder_tip">请输入支出金额</span>
+        </div>
+    </td>
+    <td>
+        <div class="group">
+            <input type="text" name="plan[1][out][1][memo]" value="" class="textbox" style="width:490px;" />
+            <span class="holder_tip">请输入备注</span>
+        </div>
+    </td>
+</tr>
+</table>
+<div class="mod_box project_edit project_agencyAdd_stepfour">
+	<div class="con_tit theme_fcolor f_20">未来三年内计划</div>
+    <div class="blank20"></div>
+	<div class="con3">
+    	<form method="post" action="{url r="project#investor_five_save"}" id="agencyAdd_stepfour_form">
+    		<input type="hidden" name="siteid" value="1">
+			<input type="hidden" value="{$id}" name="id" />
+            <ul>
+            	{foreach from=$plan_list item=plan key=plan_key_num}
+				<?php $this->_var['plan_key_num']++; ?>
+                 <li class="xm-content plan_table">
+    <div class="tit f18 theme_fcolor">
+        <i></i>
+        <div class="tit_bg"></div>
+        <div class="tit_text theme_fcolor">
+            <span class="num b">{$plan_key_num}</span>第<span class="daxie">{$plan_key_num}</span>阶段
+        </div>
+        <div class="tit_r f_r">
+            <a class="ui-button bg_red plan_del f_l f14 mr10 mt5" style="height:30px;line-height:30px;padding:0 10px">删除第<span class="daxie">{$plan_key_num}</span>阶段</a>
+        </div>
+    </div>
+    <div class="blank10"></div>
+    <div class="pro">
+        <div class="form_row control-group">
+            <label class="form_lable theme_fcolor">1、阶段名称:</label>
+            <div id="weibo_list" class="group group1 overflow_hide">
+                <input type="text" value="{$plan.info.name}" name="plan[{$plan_key_num}][info][name]" class="textbox">
+                <div class="blank"></div>
+                <span class="holder_tip">请输入阶段名称</span>
+            </div>
+            <div class="blank0"></div>
+        </div>
+        <div class="form_row control-group">
+            <label class="form_lable theme_fcolor">2、起止时间:</label>
+            <div class="col-md-3 date input-append">
+                <input type="text" value="{$plan.info.begin_time}" placeholder="请选择日期" name="plan[{$plan_key_num}][info][begin_time]" class="textbox jcDateIco jcDate_{$plan_key_num}" style="width:100px">
+                <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>
+            <span class="f_l mr10 ml10" style="line-height:45px">至</span>
+            <div class="col-md-3 date input-append">
+                <input type="text" value="{$plan.info.end_time}" placeholder="请选择日期" name="plan[{$plan_key_num}][info][end_time]" class="textbox jcDateIco jcDate_{$plan_key_num}" style="width:100px">
+                <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>
+            <div class="blank0"></div>
+            <script type="text/javascript">
+            	$("input.jcDate_{$plan_key_num}").jcDate({
+				    IcoClass : "jcDateIco_{$plan_key_num}",
+				    Event : "click",
+				    Speed : 100,
+				    Left :-125,
+				    Top : 28,
+				    format : "-",
+				    Timeout : 100,
+                    Oldyearall : 0,  // 配置过去多少年
+                    Newyearall : 3  // 配置未来多少年
+				});
+            </script>
+        </div>
+        <div class="form_row control-group">
+            <label class="form_lable theme_fcolor">3、阶段达成目标描述:</label>
+            <div>
+                <div class="blank0"></div>
+                <textarea id='plan[{$plan_key_num}]describe' name='plan[{$plan_key_num}][info][describe]' class='ketext' style='width:936px; height:350px;' >{$plan.info.describe}</textarea>
+            </div>
+            <div class="blank0"></div>
+        </div>
+        <div class="form_row control-group">
+            <label class="form_lable theme_fcolor">4、完成阶段目标的主要措施、方法、手段:</label>
+            <div>
+                <div class="blank0"></div>
+                <textarea id='plan[{$plan_key_num}]do_describe' name='plan[{$plan_key_num}][info][do_describe]' class='ketext' style='width:936px; height:350px;' >{$plan.info.do_describe}</textarea>
+            </div>
+            <div class="blank0"></div>
+        </div>
+        <div class="form_row control-group">
+            <label class="form_lable">
+                <span class="theme_fcolor f_l mr10">5、阶段收入：</span>
+                <div class="f_l f14">
+                    <span class="ui_check info_view   {if $plan.info.is_income eq 1} ui_checked{/if}" type="radio" onclick="setSR(1,this)" rel="plan[{$plan_key_num}][info][is_income]">
+                        <input type="radio" name="plan[{$plan_key_num}][info][is_income]" {if $plan.info.is_income eq 1}checked="checked"{/if} id="plan[{$plan_key_num}]is_income" value="1" />
+                    </span>
+                    有 
+                    <span class="ui_check  info_view ml20 {if $plan.info.is_income eq 0} ui_checked{/if}" type="radio" onclick="setSR(0,this)" rel="plan[{$plan_key_num}][info][is_income]">
+                        <input type="radio" name="plan[{$plan_key_num}][info][is_income]" {if $plan.info.is_income eq 0}checked="checked"{/if} id="plan[{$plan_key_num}]no_income" value="0"  />
+                    </span> 
+                    无
+                </div>
+            </label>
+            <table width="100%" border="0" cellpadding=0 cellspacing=0 class="tab2 income_table" rel="plan{$plan_key_num}_income" {if $plan.info.is_income eq 0}style="display:none"{/if}>
+                <thead>
+					<tr class="col">
+						<td width="20%">收入类别</td>
+                    	<td width="15%">收入金额（元）</td>
+                    	<td>备注</td>
+					</tr>
+				</thead>
+				<tbody>
+				{foreach from=$plan.income item=income key=income_key_num}
+				<tr class="plan[{$plan_key_num}]_income_row tr_income_row">
+                    <td>
+                        <div class="group">
+                            <input type="text" name="plan[{$plan_key_num}][income][{$income_key_num}][type]" value="{$income.type}" class="textbox" style="width:180px;">
+                            <span class="holder_tip">请输入收入类别</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="group">
+                            <input type="text" name="plan[{$plan_key_num}][income][{$income_key_num}][money]" value="{$income.money}" class="textbox amount" style="width:120px;" />
+                            <span class="holder_tip">请输入收入金额</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="group">
+                            <input type="text" name="plan[{$plan_key_num}][income][{$income_key_num}][memo]" value="{$income.memo}" class="textbox" style="width:490px;">
+                            <span class="holder_tip">请输入备注</span>
+                        </div>
+                    </td>
+                </tr>
+				{/foreach}
+            	
+                <tr id="intotalrow{$plan_key_num}">
+                    <td>合计</td>
+                    <td id="intotal1" class="item_income">{$plan.info.item_income}</td>
+                    <td>
+                         <input type="hidden" name="plan[{$plan_key_num}][info][item_income]" class="item_income_input" value="{$plan.info.item_income}"> 
+                        <input type="hidden" name="plan[{$plan_key_num}][income_num]" value="{if $plan.info.income_num}{$plan.info.income_num}{else}0{/if}" />
+                        <input type="button" value="添加收入类别" class="ui-button theme_bgcolor" id="plan{$plan_key_num}_income_button" />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="blank0"></div>
+        </div>
+        <div class="form_row control-group">
+            <label class="form_lable">
+                <span class="theme_fcolor f_l mr10">6、阶段开支：</span>
+                <div class="f_l f14">
+                	<span class="ui_check info_view {if $plan.info.is_out eq 1} ui_checked{/if} " type="radio" onclick="setKZ(1,this)" rel="plan[{$plan_key_num}][info][is_out]">
+                        <input type="radio" name="plan[{$plan_key_num}][info][is_out]" {if $plan.info.is_out eq 1}checked="checked"{/if} id="plan[{$plan_key_num}]is_out" value="1" />
+                    </span>
+                    有
+                    <span class="ui_check  info_view ml20 {if $plan.info.is_out eq 0} ui_checked{/if} " type="radio" onclick="setKZ(0,this)" rel="plan[{$plan_key_num}][info][is_out]">
+                        <input type="radio" name="plan[{$plan_key_num}][info][is_out]" {if $plan.info.is_out eq 0}checked="checked"{/if} id="plan[{$plan_key_num}]no_out" value="0"  />
+                    </span> 
+                    无
+                </div>
+            </label>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab2 out_table" id="plan{$plan_key_num}_out_list" {if $plan.info.is_out==0}style="display:none"{/if}>
+                <tbody>
+                <tr class="col">
+                    <td width="20%">开支类别</td>
+                    <td width="15%">开支金额（元）</td>
+                    <td>备注</td>
+                </tr>
+				{foreach from=$plan.out item=out key=out_key_num}
+				 <tr  class="plan[{$plan_key_num}]out_row tr_out_row">
+                    <td>
+                        <div class="group">
+                            <input type="text" name="plan[{$plan_key_num}][out][{$out_key_num}][type]" value="{$out.type}" class="textbox" style="width:180px;" />
+                            <span class="holder_tip">请输入开支类别</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="group">
+                            <input type="text" name="plan[{$plan_key_num}][out][{$out_key_num}][money]" value="{$out.money}" class="textbox amount" style="width:120px;" />
+                            <span class="holder_tip">请输入开支金额</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="group">
+                            <input type="text" name="plan[{$plan_key_num}][out][{$out_key_num}][memo]" value="{$out.memo}" class="textbox" style="width:490px;" />
+                            <span class="holder_tip">请输入备注</span>
+                        </div>
+                    </td>
+                </tr>
+				{/foreach}
+                
+                <tr id="outtotalrow{$plan_key_num}">
+                    <td>合计</td>
+                    <td id="outtotal1" class="item_out">{$plan.info.item_out}</td>
+                    <td>
+                         <input type="hidden" name="plan[{$plan_key_num}][info][item_out]" class="item_out_input" value="{$plan.info.item_out}"> 
+                        <input type="hidden" name="plan[{$plan_key_num}][out_num]" value="{if $plan.info.out_num}{$plan.info.out_num}{else}0{/if}" />
+                        <input type="button" class="ui-button theme_bgcolor" value="添加开支类别" id="plan{$plan_key_num}_pay_button" />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="blank0"></div>
+        </div>
+    </div>   
+</li>
+<script type="text/javascript">
+$(function(){
+    $("#plan{$plan_key_num}_income_button").live('click',function(){
+        var demo_income="<tr>"+$('#plan_income_demo').html()+"</tr>";
+        var num=parseInt($("input[name='plan[{$plan_key_num}][income_num]']").val())+1;
+        $("input[name='plan[{$plan_key_num}][income_num]']").val(num);
+        var new_income=demo_income.replace(/\[income\]\[1\]/g,"[income]["+num+"]");
+		new_income=new_income.replace(/plan\[1\]/g,"plan[{$plan_key_num}]");
+        $("#intotalrow{$plan_key_num}").before(new_income);
+    });
+    $("#plan{$plan_key_num}_pay_button").live('click',function(){
+        var demo_pay="<tr>"+$("#plan_out_demo").html()+"</tr>";
+        var num=parseInt($("input[name='plan[{$plan_key_num}][out_num]']").val())+1;
+        $("input[name='plan[{$plan_key_num}][out_num]']").val(num);
+        var new_pay=demo_pay.replace(/\[out\]\[1\]/g,"[out]["+num+"]");
+		new_pay=new_pay.replace(/plan\[1\]/g,"plan[{$plan_key_num}]");
+        $("#outtotalrow{$plan_key_num}").before(new_pay);
+    });
+});
+
+//筛选
+$(function(){
+	$(".ui_check").click(function(){
+		if($(this).find("input").attr("type")=="radio"){
+			var rel=$(this).attr("rel");
+			$(".ui_check[rel='"+rel+"']").removeClass("ui_checked");
+			$(".ui_check[rel='"+rel+"'] input").attr("checked",false);
+			$(this).addClass("ui_checked");
+			$(this).find("input").attr("checked","checked");
+		}
+		else{
+			if($(this).hasClass("ui_checked")){
+				$(this).removeClass("ui_checked");
+				$(this).find("input").attr("checked",false);
+			}
+			else{
+				$(this).addClass("ui_checked");
+				$(this).find("input").attr("checked","checked");
+			}
+		}
+	});
+});
+</script>
+
+				{/foreach}
+				{$plan_html}
+                <li class="tc" id="add_new_plan_tr">
+                    <input type="hidden" name="plan_step" value="{$plan_num}">
+                    <input type="button" class="ui-button theme_bgcolor" value="添加下一阶段" id="add_new_plan" style="float:none;display:inline-block" />
+                </li>
+            </ul>
+            <div class="blank20"></div>
+            <div id="endphasepos" class="xm-content">
+                <div class="con26">
+                    <span class="theme_fcolor f_15 f_b">累计盈亏：</span>
+                    （累计盈亏未计算筹备开支/ 单位：元）
+                </div>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab2">
+                <tbody>
+                    <tr class="col">
+                        <td width="30%">累计收入金额（元）</td>
+                        <td width="30%">累计开支金额（元）</td>
+                        <td>累计盈亏金额（元）</td>
+                    </tr>
+                    <tr>
+                        <td id="totalsr">0</td>
+                        <td id="totalkz">0</td>
+                        <td id="totalyk" class="f_green">0</td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            <div class="blank0"></div>
+			{if $item.investor_edit}
+				<div class="button_row tc">
+                    <div class="blank15"></div>
+			 		<input type="button" value="保存" name="submit_form" class="ui-center-button theme_bgcolor" id="ui-button" style="margin:0 5px;*margin-left:400px" />
+					<div class="ui-center-button bg_gray" rel="green" onclick="window.history.go(-1)" style="margin:0 5px;">
+						返回
+					</div>
+					<input type="hidden" value="1" name="ajax" />
+					<div class="blank15"></div>
+				</div>
+			{/if}
+			{if !$item.investor_edit}
+	            <div class="button_row">
+                    <div class="blank15"></div>
+	                <div class="ui-button bg_red" id="previous" style="margin-left:370px;" ><a href="{url r="project#investor_four" p="id=$id"}" style="color:#fff;">上一步</a></div>  
+					<input type="button" value="下一步" name="submit_form" class="ui-button theme_bgcolor ml20" id="ui-button" />
+				    <input type="hidden" value="1" name="ajax" />
+	                <div class="blank15"></div>
+	            </div>
+			{/if}
+    	</form>
+	</div>
+</div>
+<div class="blank20"></div>
+<script type="text/javascript">
+    $(function(){
+        show_tip();
+    });
+</script>
+<script type="text/javascript">
+total_price();
+$(function(){
+    $(".plan_table").live('blur',function(){
+        total_price();
+    });
+
+    // 添加下一个阶段
+    $("#add_new_plan").bind("click",function(){
+        var num=parseInt($("input[name='plan_step']").val())+1;
+        $("input[name='plan_step']").val(num);
+        $.ajax({
+            'url':APP_ROOT+"/index.php?ctl=project&act=add_investor_item&num="+num+"&html=add_new_plan",
+            'type':'POST',
+            'dataType':'json',
+            success:function(data){
+                if(data.status==1){
+                    $("#add_new_plan_tr").before(data.html);
+                    bindKindeditor();
+                }
+            }
+        });
+    });
+
+    // 删除阶段
+    $(".plan_del").live('click',function(){
+        var num=$(".plan_del").index($(this));
+        $(".xm-content:eq("+num+")").remove();
+        total_price();
+    });
+});
+
+//选择日期控件
+$("input.jcDate_1").jcDate({
+    IcoClass : "jcDateIco",
+    Event : "click",
+    Speed : 100,
+    Left :-125,
+    Top : 28,
+    format : "-",
+    Timeout : 100,
+    Oldyearall : 0,  // 配置过去多少年
+    Newyearall : 3  // 配置未来多少年
+});
+
+// 是否有阶段收入
+function setSR(state,obj) {
+    var $textarea_obj = $(obj).parent().parent().parent().find("table");
+    if(state==1) {
+        $textarea_obj.show();
+    } else {
+	  $textarea_obj.find(".tr_income_row").remove("tr") ;
+       $textarea_obj.hide();
+    }
+	total_price();
+}
+
+// 是否有阶段开支
+function setKZ(state,obj) {
+    var $textarea_obj = $(obj).parent().parent().parent().find("table");
+    if(state==1) {
+        $textarea_obj.show();
+    } else {
+		$textarea_obj.find(".tr_out_row").remove("tr") ;
+        $textarea_obj.hide();
+    }
+	total_price();
+}
+
+// 统计盈亏
+function total_price(){
+    var total_income=0;
+    var total_out=0;
+    $(".plan_table").each(function(i){
+        var item_income=0;
+        var item_out=0;
+        $(this).find(".income_table .amount").each(function(){
+            $(this).val(formatMoney( $(this).val(),0));
+            if($(this).val()!=''){
+                item_income=item_income+parseInt($(this).val());
+            }
+        });
+        $(this).find(".out_table .amount").each(function(){
+             $(this).val(formatMoney( $(this).val(),0));
+            if($(this).val()!=''){
+                item_out=item_out+parseInt($(this).val());
+            }
+        });
+        $(this).find(".item_income").html(item_income);
+        $(this).find(".item_income_input").val(item_income);
+        $(this).find(".item_out").html(item_out);
+        $(this).find(".item_out_input").val(item_out);
+        total_income=total_income+item_income;
+        total_out=total_out+item_out;
+    });
+    total_left=total_income-total_out;
+    $("#totalsr").html(total_income);
+    $("#totalkz").html(total_out);
+    $("#totalyk").html(total_left);
+ }
+
+ // 检测money,输入的非正规数字时归零处理 
+function formatMoney(s,type) {
+    var zf = 0;
+    if(s<0) {
+        zf = 1;
+        s = 0;
+    }
+    if (/[^0-9\.]/.test(s)) return "0";
+    // if (s == null || s == "") return "0";
+    // s = s.toString().replace(/^(\d*)$/, "$1.");
+    // s = (s + "00").replace(/(\d*\.\d\d)\d*/, "$1");
+    // s = s.replace(".", ",");
+    var re = /(\d)(\d{3},)/;
+    while (re.test(s))
+    s = s.replace(re, "$1,$2");
+    s = s.replace(/,(\d\d)$/, ".$1");
+    if (type == 0) {
+        var a = s.split(".");
+        if (a[1] == "00") {
+            s = a[0];
+        }
+    }
+    if(zf==1) {
+        s = "-"+s;
+    }
+    return s;
+}
+
+$(document).ready(function(){
+	bind_project_form();
+});
+
+function bind_project_form()
+{	
+	$("#agencyAdd_stepfour_form").bind("submit",function(){
+		var ajaxurl = $(this).attr("action");
+		var query = $(this).serialize();
+	//	query+="&description_2="+ encodeURIComponent($("textarea[name='descript1']").val())+"&description_3="+encodeURIComponent($("textarea[name='descript2']").val())
+
++"&description_4="+encodeURIComponent($("textarea[name='descript3']").val())+"&description_5="+encodeURIComponent($("textarea[name='descript4']").val())
+
++"&description_6="+encodeURIComponent($("textarea[name='descript5']").val())+"&description_7="+encodeURIComponent($("textarea[name='descript6']").val());
+		$.ajax({ 
+				url: ajaxurl,
+				dataType: "json",
+				data:query,
+				type: "POST",
+				success: function(ajaxobj){
+					if(ajaxobj.status)
+					{
+						$.showSuccess(ajaxobj.info,function(){
+							 location.href = ajaxobj.jump;
+						});
+					}
+					else
+					{
+						if(ajaxobj.jump!="")
+							location.href = ajaxobj.jump;
+						else
+						$.showErr(ajaxobj.info);
+					}						
+				},
+				error:function(ajaxobj)
+				{
+					if(ajaxobj.responseText!='')
+					alert(ajaxobj.responseText);
+				}
+			});
+			return false;
+		});
+
+	$("#ui-button").bind("click",function(){
+		$("#agencyAdd_stepfour_form").submit();
+	});
+}
+</script>
+{include file="inc/footer.html"} 

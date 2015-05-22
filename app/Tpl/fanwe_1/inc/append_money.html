@@ -1,0 +1,83 @@
+<style>
+	.fileupload .filebox{ cursor:pointer; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0; opacity:0; padding:0; height:40px; width:97px; }
+	.control-group input.textbox { width:97px; }
+</style>
+<div class="full" style="padding-right:20px;">
+<form id="add_append_form" action="{url r="investor#save_investment_money"}">				
+	<div class="append_money_hd f18 theme_fcolor">投资项目</div>
+	<div class="blank20"></div>
+	
+	<div class="form_row control-group">
+		<label class="form_style f_l" style="margin-right:15px">追加投资金额:</label>
+		<div class="f_l">
+			<input type="text" placeholder="请输入金额"  name="money" class="textbox w100 f_l money" value="" style="margin-right:5px;"  onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-.]+/,'');}).call(this)" onblur="this.v();"/>
+			<span class="f_l" style="line-height:45px;">万元</span>
+		</div>
+	</div>
+	<div class="blank"></div>
+	<div class="form_row control-group">
+		<label class="form_style f_l" style="margin-right:15px">是否愿意担任有限合伙企业普通合伙人:</label>
+		<div style="margin-top:15px">
+			<!--0无状态 1愿意 2不愿意-->
+			<input type="radio"  name="is_partner" value="1" checked="checked" />是
+			<input type="radio"  name="is_partner" value="2" />否
+		</div>
+	</div>
+	<div class="submit_btn_row" style="margin-left:130px;">
+		<div class="ui-button theme_bgcolor mr10 button_y" rel="green">
+			<div>
+				<span>确认</span>
+			</div>
+		</div>
+		<div class="ui-button bg_gray button_n" rel="green">
+			<div>
+				<span>取消</span>
+			</div>
+		</div>
+		<input type="hidden" value="1" name="ajax" />
+		<input type="hidden" value="{$deal_id}" name="deal_id" />
+		<input type="hidden" value="{$user_id}" name="user_id" />
+	</div>
+	<div class="blank5"></div>
+</form>
+</div>
+<script type="text/javascript">
+	$(function(){
+		add_investment_money();
+		$("#add_append_form").find(".button_n").bind("click",function(){
+			$.weeboxs.close();
+		});
+	});
+	
+	function add_investment_money(){
+		$("#add_append_form .button_y").bind("click",function(){
+			if((isNaN($(".money").val())||parseFloat($(".money").val())<=0)||$(".money").val()=='')
+			{
+				$.showErr("请输入正确的投资金额");
+				return false;
+			}
+			var ajaxurl = $("#add_append_form").attr("action");
+			var query = $("#add_append_form").serialize();
+			$.ajax({
+				url: ajaxurl,
+				dataType: "json",
+				data:query,
+				type: "POST",
+				success:function(ajaxobj){
+					if(ajaxobj.status==1){
+						$.showSuccess('追加成功!',function(){
+							location.reload();
+						}); 
+					}
+					if(ajaxobj.status==0){
+						$.showErr(ajaxobj.info,function(){
+							//location.reload();
+						});
+						
+					}
+				}
+			});
+		});
+		return false;
+	}
+</script>

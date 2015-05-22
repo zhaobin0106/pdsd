@@ -1,0 +1,168 @@
+{include file="inc/header.html"} 
+<?php
+
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
+?>
+<script type='text/javascript' src='{$TMPL}/js/jQuery-jcDate.js'></script>
+<script type='text/javascript' src='{$APP_ROOT}/admin/public/kindeditor/kindeditor.js'></script>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<style type="text/css">
+	.control-group{height:auto;}
+	.control-group .control-cont{
+		height:45px;
+		line-height:45px;
+	}
+	.account_leader_list .leader_list{
+		border-bottom:1px solid #ddd;
+		padding:10px 0;
+		overflow:hidden;
+	}
+	.account_leader_list .leader_list li{
+		margin-bottom:10px;
+		overflow:hidden;
+	}
+	.account_leader_list li .ui-small-button{
+		padding:0 20px;
+	}
+	.account_leader_list .view_icon{
+		width:12px;
+		height:12px;
+		display:block;
+		background:url({$TMPL}/images/uc_icon.png) 0 -24px no-repeat;
+		position:absolute;
+		top:10px;
+		right:3px;
+	}
+	.account_leader_list .view_icon_cur{
+		width:12px;
+		height:12px;
+		display:block;
+		background:url({$TMPL}/images/uc_icon.png)  no-repeat;
+		position:absolute;
+		top:7px;
+		right:3px;
+	}
+</style>
+<div class="blank"></div>
+<!--中间开始-->
+<div class="dlmain Myhomepage">
+	{include file="inc/account_left.html"}
+	<div class="homeright pageright f_r account_leader_list">
+		<div>
+			<div class="page_title">
+				<a href="{url p="deal#show" r="id=$deal.id"}" target="_blank">{$deal.name}</a>-领投申请列表
+			</div>
+			<div class="blank"></div>
+				<div class="full">
+ 				<div class="list_title clearfix">
+					<div>
+						<a href="{url r="account#get_investor_status" p="type=0&id=$deal_id"}">询价</a>
+					</div>
+					<div>
+						<a href="{url r="account#get_investor_status" p="type=1&id=$deal_id"}">领投</a>
+					</div>
+					<div>
+						<a href="{url r="account#get_investor_status" p="type=2&id=$deal_id"}">跟投</a>
+					</div>
+					<div class="cur">
+						<a href="{url r="account#get_leader_list" p="type=2&id=$deal_id"}">领投资格</a>
+					</div>
+				</div>
+				<div class="blank10"></div>
+				{if $investor_list}
+				<div class="i_deal_list clearfix">
+					{foreach from=$investor_list item=item}
+					{if $item}
+					<ul class="leader_list">
+						<li>
+							<label class="title control-label">申请人：</label>
+							<div class="control-cont f14 f_l">{$item.user_name}</div>
+						</li>
+						<li>
+							<label class="title control-label">领投人行业：</label>
+							<div class="control-cont f14 f_l">{foreach from=$item.cates item=cate key=k}{$cate}{if $k neq 0},{/if}{/foreach}</div>
+							<div class="ui-small-button theme_bgcolor view_deal f_r f14 pr">
+								点击查看详情
+								<i class="view_icon_cur"></i>
+							</div>
+						</li>
+						<li class="show_box hidden">
+							<label class="title control-label">领投人简介：</label>
+							<div class="blank20"></div>
+							<div>
+								 <textarea id='intro_{$k}' name='intro_{$k}' class='ketext' style='width:771px; height:350px;' >{$item.introduce}</textarea>
+							</div>
+						</li>
+						<li >
+							{if $item.status==0}
+							<a class="ui-button theme_bgcolor lead_yes mr10" rel="{$item.id}">允许成为领头人</a>
+							<a class="ui-button bg_red lead_no"  rel="{$item.id}">不允许成为领投人</a>
+							{elseif $item.status==1}
+								<span class="f_red f14">投资人审核通过</span>
+								{elseif $item.status==2}
+								<span class="f_red f14">投资人审核不通过</span>
+							{/if}
+						</li>
+					</ul>
+					{/if}
+					{/foreach}
+				</div>
+				<div class="blank10"></div>
+				<div class="pages">{$pages}</div>
+				<div class="blank10"></div>
+				{else}
+				<div class="empty_tip">
+					还没有{$title}记录
+				</div>
+				{/if}		
+			</div>
+			<div class="blank"></div>
+		</div>
+ 		<div class="blank"></div>	
+	</div>
+	<div class="blank"></div>	
+</div>
+<!--中间结束-->
+<div class="blank"></div>
+<script type="text/javascript">
+	$(function(){
+		$(".view_deal").click(function(){
+			var $li_obj = $(this).parent().parent();
+			if($li_obj.find(".show_box").is(":visible")){
+				$(this).html('点击查看详情<i class="view_icon_cur"></i>');
+			}
+			else{
+				$(this).html('点击收起详情<i class="view_icon"></i>');
+			}
+			$li_obj.find(".show_box").toggle();
+		});
+		$(".lead_yes").bind('click',function(){
+ 			var id=$(this).attr("rel");
+ 			deal_lead(id,1,"是否允许该用户成为领投人",2);
+		});
+		$(".lead_no").bind('click',function(){
+			var id=$(this).attr("rel");
+ 			deal_lead(id,0,"是否要拒绝该用户成为领投人",2);
+		});
+	});
+	
+	function deal_lead(id,status,msg,type){
+		var ajaxurl = APP_ROOT+"/index.php?ctl=account&act=lead_examine&status="+status+"&id="+id+"&type="+type;
+		$.showConfirm(msg,function(){
+			$.ajax({
+				url:ajaxurl,
+				dataType:"json",
+				type:'POST',
+				success:function(ajaxobj){
+					if(ajaxobj.status==1){
+						//$.showSuccess(ajaxobj.info);
+						window.location.reload();
+					}else{
+						$.showErr(ajaxobj.info);
+					}
+				}
+			});
+		});
+	}
+</script>
+{include file="inc/footer.html"} 

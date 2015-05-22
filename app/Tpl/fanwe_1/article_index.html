@@ -1,0 +1,103 @@
+{include file="inc/header.html"}
+<style>
+	.wrap1{ width:960px; height:auto;}
+	.blank
+	{
+		height: 20px;
+		line-height: 20px;
+		clear: both;
+		visibility: hidden;
+	}
+	.article_box_left { float:left; width:679px; padding-right:20px; overflow:hidden }
+	.article_box_left h2 { font-size:22px; line-height:40px; font-weight:normal; }
+	.article_box_right { width:240px; float:left; padding-left:20px; overflow:hidden }
+	small{ font-size:85%; }
+	.muted { color:#999; }
+	.rt_title { border-bottom: 1px solid #e3e3e3;height: 25px;line-height: 25px;font-size: 25px;font-weight: normal;padding-bottom: 10px; } 
+	.article_box_right li { border-bottom:1px dashed #e3e3e3; line-height:19px; padding:20px 0; overflow:hidden; }
+	.article_box_right li a { color:#00648d; }
+	.article_box_right li a:hover { color:#12adff; text-decoration:underline; }
+</style>
+<div class="blank20"></div>
+<div class="adv_article">
+	<adv adv_id="article_top" />
+</div>
+<div class="adv_1">
+	<div class="wenzhang_adv_bg"></div>
+</div>
+<div class="location_box wrap1000">
+	<div class="location f_l">
+		<i class="fl ico loc_ico mr5"></i>
+		<label>您现在的位置：</label>{if $nav_top.top}<a href="{$nav_top.top.url}">{$nav_top.top.name}</a>{/if}{if $nav_top.list}<em>>></em><a href="{$nav_top.list.url}">{$nav_top.list.name}</a>{/if}
+		<em>>></em>{if $nav_top.cate_child}<a href="{$nav_top.cate_child.url}">{$nav_top.cate_child.name}</a>{/if}
+		<em>>></em>{if $nav_top.article}<a>{$nav_top.article.name}</a>{/if}
+	</div>
+</div>
+<div class="blank10"></div>
+<div id="bdw">
+	 
+	<div class="wrap1 cf clearfix" style="height:auto;font-size:14px; padding:30px 20px; background-color:#fff;">
+		<div class="article_box_left">
+			<div style="border-bottom:1px dashed #e3e3e3">
+				<h2 class="top_1" style="text-align:left;">{$article.title}</h2>
+				<small class="muted">发布日期：{function name="to_date" v=$article.update_time f="Y-m-d"}&nbsp;&nbsp;来源：{function name="app_conf" v="SITE_NAME" }</small>
+				<div class="blank20"></div>
+			</div>
+			<div class="content" style="text-align:left;padding-top:10px;font-size:14px; color:#404040;overflow:hidden">
+				{$article.content}
+			</div>
+		</div>
+		<div class="article_box_right">
+			{if $article_list}
+			<div class="l2">
+				<h2 class="rt_title">相关话题</h2>
+				<ul>
+					{foreach from=$article_list item=article_list} 
+						<li><a href="{$article_list.url}" >{$article_list.cate_title}</a></li>
+			        {/foreach}
+				</ul>
+			</div>
+			<div class="blank"></div>
+			{/if}
+			<div class="l2">
+				<h2 class="rt_title">其他分类</h2>
+				<ul>
+					{foreach from=$other_cate item=cate} 
+						<li><a href="{$cate.url}" >{$cate.titles}</a></li>
+			        {/foreach}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="blank20"></div>
+<script type="text/javascript">
+	//项目列表为空时，填充默认高度
+	$(document).ready(function(){
+		var v_deal_item=$("#pin_box").children().hasClass("deal_item_box");
+		var w_height=$(window).height();
+		var h_height=$(".header").outerHeight();
+		var f_height=$(".footer").outerHeight();
+		var wrap_height=w_height-h_height-f_height-40;
+		var wz_height=$("#bdw").height();
+		if(wz_height<wrap_height){
+			
+			$("#bdw").css("height",wrap_height+"px");
+			$(".cf").css("height",(wrap_height-60)+"px");
+			
+		}
+		else{
+			$("#bdw").css("height",wz_height+"px");
+		}
+		
+		var abl_height=$(".article_box_left").height();
+		var abr_height=$(".article_box_right").height();
+		if(abl_height>=abr_height){
+			$(".article_box_left").css("borderRight","1px solid #e3e3e3");
+		}
+		else{
+			$(".article_box_right").css("borderLeft","1px solid #e3e3e3");
+		}
+	})
+</script>	
+{include file="inc/footer.html"} 

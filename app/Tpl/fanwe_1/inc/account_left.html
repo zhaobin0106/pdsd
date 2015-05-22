@@ -1,0 +1,61 @@
+<div class="homeleft pageleft f_l ">
+	<div class="menutitle">项目管理</div>
+	<ul class="homemenulist">
+		<li {if $module eq 'account'&& $action eq 'index'}class="select"{/if}>
+			<a href="{url r="account#index"}" class="a1">
+				<i></i>支持的项目
+			</a>
+		</li>
+		{if app_conf("INVEST_STATUS") eq 0 || app_conf("INVEST_STATUS") eq 2}
+			<li {if $module eq 'account'&& $action eq 'mine_investor_status' }class="select"{/if}>
+				<a href="{url r="account#mine_investor_status" p="type=0"}" class="a1">
+					<i></i>投资的项目
+				</a>
+			</li>
+		{/if}
+		<li {if $module eq 'account'&& ($action eq 'project' || $action eq 'get_investor_status' || $action eq 'get_leader_list' || $action eq 'support' || $action eq 'paid')}class="select"{/if}>
+			<a href="{url r="account#project"}" class="a2">
+				<i></i>我的项目
+			</a>
+		</li>
+		<li {if $module eq 'account'&& $action eq 'focus'}class="select"{/if}>
+			<a href="{url r="account#focus"}" class="a3">
+				<i></i>关注的项目
+			</a>
+		</li>
+		<li {if $module eq 'account'&& $action eq 'recommend'}class="select"{/if}>
+			<a href="{url r="account#recommend"}" class="a3">
+				<i></i>推荐的项目
+			</a>
+		</li>
+		<li {if $module eq 'account' && $action eq 'money_index' || $action eq 'money_inchange' || $action eq 'pay' || $action eq 'refund' || $action eq 'money_inchange_log' || $action eq 'money_carry_bank' || $action eq 'money_carry_log' || $action eq 'money_carry_addbank' || $action eq 'addbank' || $action eq 'money_carry_addbank' || $action eq 'money_carry'|| $action eq 'record'|| $action eq 'credit'}class="select"{/if}>
+			<a href="{url r="account#money_index"}">
+				<i></i>资金管理
+			</a>
+		</li>
+ 	</ul>
+	<div class="menutitle">个人设置</div>
+	<ul class="homemenulist">
+ 		<li {if $module eq 'settings'&& $action eq 'index'}class="select"{/if}>
+			<a href="{url r="settings#index"}" class="a5">
+				<i></i>资料修改
+			</a>
+		</li>
+		<li {if $module eq 'settings'&& $action eq 'security'}class="select"{/if}>
+			<a href="{url r="settings#security"}" class="a12">
+				<i></i>安全信息
+			</a>
+		</li>
+ 		<li {if $module eq 'settings'&& $action eq 'consignee'}class="select"{/if}>
+			<a href="{url r="settings#consignee"}" class="a8">
+				<i></i>收件地址管理
+			</a>
+			</li>
+		<li {if $module eq 'settings'&& $action eq 'bind'}class="select"{/if}>
+			<a href="{url r="settings#bind"}" class="a7">
+				<i></i>绑定设置
+			</a>
+		</li>
+
+	</ul>
+</div>

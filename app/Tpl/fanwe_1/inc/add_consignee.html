@@ -1,0 +1,78 @@
+<?php
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/switch_city.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/switch_city.js";
+$this->_var['dpagejs'][] = APP_ROOT_PATH."/system/region.js";
+$this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/add_consignee.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/add_consignee.js";
+?>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<style type="text/css">
+	.control-group{height:auto;}
+	.control-group label{height:37px;line-height:37px}
+	.control-group .btn_select{_margin-top:10px}
+</style>
+<div class="full" style="padding-right:20px;">
+	<form class="ajax_form" action="{url r="settings#save_consignee"}">									
+		<div class="control-group" style="height:auto">
+			<label class="form_lable" style="line-height:38px;">收货人姓名:</label>
+			<input type="text" class="small_textbox w100" value="{$consignee_info.consignee}" name="consignee" />
+		</div>
+		<div class="blank0"></div>
+		<div class="control-group" style="height:auto">
+			<label class="form_lable" style="line-height:38px;">地区:</label>
+			<a class="btn_select w110 f_l mr10" id="province_select">
+				<span class="cur_select" id="province_cur"></span>
+				<div class="select_arrow"></div>
+				<select name="province" class="select-h" id="province">
+	          		<option value="" rel="0">请选择省份</option>			
+					{foreach from=$region_lv2 item=region}
+						<option value="{$region.name}" rel="{$region.id}" {if $region.selected}selected="selected"{/if}>{$region.name}</option>
+					{/foreach}
+				</select>
+			</a>
+			<a class="btn_select w110 f_l mr10" id="city_select">
+				<span class="cur_select" id="city_cur"></span>
+				<div class="select_arrow"></div>
+				<select name="city" class="select-h" id="city">
+	          		<option value="" rel="0">请选择城市</option>
+					{foreach from=$region_lv3 item=region}
+						<option value="{$region.name}" rel="{$region.id}" {if $region.selected}selected="selected"{/if}>{$region.name}</option>
+					{/foreach}
+				</select>
+			</a>
+		</div>
+		<div class="blank0"></div>
+		<div class="control-group"  style="height:auto">
+			<label class="form_lable">详细地址:</label>
+			<textarea name="address" class="textareabox w250 f_l" style="height:60px;">{$consignee_info.address}</textarea>
+		</div>
+		<div class="blank0"></div>
+		<div class="control-group" style="height:auto">
+			<label class="form_lable" style="line-height:38px;">邮编:</label>
+			<input type="text"  name="zip" class="small_textbox w100" value="{$consignee_info.zip}" />
+		</div>
+		<div class="blank0"></div>
+		<div class="control-group">
+			<label class="form_lable" style="line-height:38px;">手机:</label>
+			<input type="text"  name="mobile" class="small_textbox w250" value="{$consignee_info.mobile}" />
+		</div>
+		<div class="blank10"></div>
+		<div class="submit_btn_row control-group">
+			<label class="form_lable" style="line-height:38px;"></label>
+			<div class="ui-button theme_bgcolor" rel="green">
+				保存
+			</div>
+			<input type="hidden" value="1" name="ajax" />
+			<input type="hidden" value="{$consignee_info.id}" name="id" />
+			<div class="blank15"></div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	$(function(){
+		// 初始化select下拉列表
+		funSelect("#province_select","#province_cur",'#province_select option:selected');
+		funSelect("#city_select","#city_cur",'#city_select option:selected');
+	});	
+</script>

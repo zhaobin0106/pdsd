@@ -1,0 +1,303 @@
+{include file="inc/header.html"} 
+<?php
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/index.css";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/index.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/index.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/discover.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/discover.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<script type="text/javascript">
+	 $(function(){
+		$("#xzdq1").bind('click',function(){
+			$("#xzdq").toggle(100);
+		});
+		$("#xzdq1_hide").bind('click',function(){
+			$("#xzdq").hide();
+		});
+	 });
+	 function setTab(name,cursel,n){
+	 	
+		 for(i=1;i<=n;i++){
+		  var menu=document.getElementById(name+i);
+		  var con=document.getElementById("con_"+name+"_"+i);
+		  menu.className=i==cursel?"hover":"";
+		  
+		  if(i==cursel){
+		  	$("#"+"con_"+name+"_"+i).show();
+		  	//con.style.display="block";
+		  }else{
+		  		$("#"+"con_"+name+"_"+i).hide();
+		  	//con.style.display="none";
+		  }
+ 		 }
+	}
+</script>
+<style>
+.ui-deals .child_cate { background:#f8f8f8; border:1px solid #ebebeb; width:1168px; padding:5px; margin-top:10px; }
+.ui-deals .child_cate ul li a { border:0; padding:0;}
+.ui-deals .child_cate ul li a:hover { background:none; color:#12adff; }
+.ui-deals .child_cate ul li.current a, .ui-deals .child_cate ul li.current a:hover { background:none; color:#12adff; font-weight:bold; }
+.btn-select {
+	cursor:pointer;
+	position:relative;
+	display:inline-block;
+	width:118px;
+	height:28px;
+	background:url({$TMPL}/images/images/select_bg.gif) no-repeat;
+	color:#666;
+}
+.btn-select .cur-select {
+	position:absolute;
+	display:block;
+	width:118px;
+	height:28px;
+	line-height:28px;
+	text-indent:10px;
+}
+.btn-select select {
+	cursor:pointer;
+	position:absolute;
+	top:0;
+	left:-9px;
+	width:118px;
+	height:28px;
+	filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0; opacity:0; 
+	font:14px/20px "Microsoft YaHei";
+	color:#666;
+}
+.btn-select select option {
+	text-indent:10px;
+}
+.btn-select select option:hover {
+	background-color:#12adff;
+	color:#fff;
+}
+.search-right-title>a {
+display: block;
+float: left;
+color: #999;
+font-family: "Microsoft YaHei","微软雅黑","Helvetica Neue",Arial,"STHeiti",SimSun,sans-serif;
+font-size: 14px;
+}
+.region-link {
+cursor: pointer;
+}
+.search-right-title>a>i {
+display: inline-block;
+margin-right: 10px;
+}
+.tab-content>.active {
+display: block;
+}
+
+.city-content .item span {
+color: #12adff;
+float: left;
+padding: 5px 0;
+width: 22px;
+display: block;
+}
+.city-content .item ul {
+margin-left: 22px;
+}
+ul {
+list-style: none;
+}
+.city-content ul,.city-content li,.tab-content div{
+	word-wrap: break-word;
+outline: none;
+padding: 0;
+margin: 0;
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+font-family: "Microsoft YaHei","微软雅黑","Helvetica Neue",Arial,"STHeiti",SimSun,sans-serif;
+}
+h1, h2, h3, h4, h5, h6, p, ul, ol, dd, dt, dl {
+-webkit-margin-before: 0;
+-webkit-margin-after: 0;
+-webkit-margin-start: 0;
+-webkit-margin-end: 0;
+}
+
+.city-content ul {	
+margin-bottom: 10px;
+}
+.city-content li{
+ display: block;
+ float: left;
+}
+.city-content li a {
+float: left;
+padding: 2px 5px;
+width: 70px;
+color: #666;
+}
+.city-content li a:hover{
+float: left;
+padding: 2px 5px;
+width: 70px;
+background: #12adff;
+color: #fff;
+border-radius:2px;
+}
+.tab-content{ width:510px;}
+.city-content .item{ clear:both;}
+</style>
+
+<div id="J_wrap">
+ 	<div class="blank20"></div>
+	<div class="ui-deals wrap" style="overflow:hidden;">
+		<adv adv_id="deals_top" />
+		<div class="blank20"></div>
+		<div class="ui_deals_filter">
+			<div class="ui_deals_filter_item">
+				<div class="ui_deals_filter_l f_r">
+					<ul>
+						{foreach from=$cate_list item=cate_item}
+						<li {if $pid eq $cate_item.id}class="current"{/if}>
+							{if $cate_item.pid eq 0}
+							<a href="{$cate_item.url}" title="{$cate_item.name}">{$cate_item.name}</a>
+							{/if}
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+				{if $child_cate_list}
+				<div class="blank0"></div>
+				<div class="ui_deals_filter_l child_cate">
+					<ul>
+						{foreach from=$child_cate_list item=child_cate_item}
+						<li {if $p_id eq $child_cate_item.id}class="current"{/if}>
+							<a href="{$child_cate_item.url}" title="{$child_cate_item.name}">{$child_cate_item.name}</a>
+						</li>
+						{/foreach}
+					</ul>
+					<div class="blank0"></div>
+				</div>
+				<div class="blank5"></div>
+				{/if}
+			</div>
+		</div>
+		<div class="blank"></div>
+		<div id="pin_box" style="margin-top:0">
+			<div class="filter-box">
+				<div class="range f_r">
+				<a class="btn-select" id="btn_select"> 
+					<span class="cur-select">请选择</span> 
+					<select name="deal_sort" class="deal_sort">
+						<option {if !$p_r}selected="selected"{/if}  value="{url r="deals" p="type=$p_type"}">请选择</option>
+						<option {if $p_r eq 'rec'}selected="selected"{/if} value="{url r="deals" p="r=rec&type=$p_type"}">推荐项目</option>
+						<option {if $p_r eq 'yure'}selected="selected"{/if} value="{url r="deals" p="r=yure&type=$p_type"}">正在预热</option>
+						<option {if $p_r eq 'new'}selected="selected"{/if} value="{url r="deals" p="r=new&type=$p_type"}">最新上线</option>
+						<option {if $p_r eq 'nend'}selected="selected"{/if} value="{url r="deals" p="r=nend&type=$p_type"}">即将结束</option>
+						<option {if $p_r eq 'classic'}selected="selected"{/if} value="{url r="deals" p="r=classic&type=$p_type"}">经典项目</option>
+					</select>
+				</a>
+				</div>	
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$(".cur-select").html(
+							$('#btn_select option:selected').html()
+						);
+					});
+					$("#btn_select").bind("change",
+						function(){
+							$(".cur-select").html($('#btn_select option:selected').html());
+							location.href = $('#btn_select option:selected').val();
+						}
+					);
+				</script>
+				<div class="rel-key-rec f_r" style="margin-right:10px">
+					<a href="{url r="deals" p="type=$p_type"}" {if $p_state eq ''} class="current"{/if}>所有项目{if $p_state eq ''}({$deal_count}){/if}</a>
+					{foreach from=$state_list item=state_item key=key}
+					<a href="{$state_item.url}" title="{$state_item.name}" {if $p_state eq $key}class="current"{/if}>{$state_item.name}{if $p_state eq $key}({$deal_count}){/if}</a>
+					{/foreach}	
+				</div>
+				<div class="f_l" style="margin-top:5px;">
+					<div class="search-right-title">
+						<a href="javascript:void(0);" class="region-link" id="xzdq1"> <i class="fa_1"></i>{if $p_loc}{$p_loc}<a href="{if $is_classic}{url r="deals#index" p="r=classic"}{else}{url r="deals#index"}{/if}" class="fa_no"></a>{else}选择地区 {/if}</a>
+					</div>
+					<div id="xzdq" class="xzdq">
+						<a href="javascript:void(0);" id="xzdq1_hide" class="hide" style="background:url({$TMPL}/images/xzdq_hide.png);	margin-right: 10px;
+	margin-top: 5px;"></a>
+						<br />
+						<div id="Tab1" class="Tab1">
+							<div class="Menubox">
+								<ul>
+								   <li class="hover con_top" name="hot">热门地区</li>
+								   {foreach from=$area_array_str item=area_item}
+								   <li  class="con_top" name="{$area_item}">{$area_item}</li>
+								   {/foreach}
+								</ul>
+							</div>
+							<script>
+								$(function(){
+									$(".con_top").bind('click',function(){
+										 var name=$(this).attr("name");
+										 $(".con_top").each(function(i){
+										 	var each_name=$(this).attr("name");
+										 	if(each_name==name){
+												$(this).addClass("hover");
+												$("#con_one_"+each_name).show();
+											}else{
+												$(this).removeClass("hover");
+												$("#con_one_"+each_name).hide();
+											}
+										 });
+									});
+									 
+								});
+							</script>
+							<div class="Contentbox">  
+								<div id="con_one_hot" class="con_box" >
+									{foreach from=$hot_area item=city_item}
+										<a href="{$city_item.url}" title="{$city_item.name}">{$city_item.name}</a>
+									{/foreach}
+								</div>
+								 {foreach from=$area_array item=area_item key=k}
+								 <div id="con_one_{$area_array_str[$k]}" class="tab-content con_box" style="display:none">
+									 <div class="city-content tab-pane active" id="city_item_ABCD">
+										{foreach from=$area_item item=item key=k_str}
+										<div class="item">
+										    <span>{$k_str}</span>
+											<ul>
+												{foreach from=$item item=item_1 key=k_str}
+												<li><a href="{$item_1.url}">{$item_1.name}</a></li>
+												{/foreach}
+												<div class="clear"></div>
+											</ul>
+											<div class="blank"></div>
+										</div>
+										{/foreach}
+									</div>
+ 								 </div>
+								 {/foreach}
+							</div>
+						</div>
+					</div>
+					<div class="blank"></div>
+				</div>
+			<div class="blank"></div>	
+			</div>
+			{if $p_type eq 1}
+				{include file="inc/deal_list_invest.html"}
+			{else}
+				{include file="inc/deal_list.html"}
+			{/if}
+			
+			
+		</div>	
+		<div class="blank"></div>
+		<div id="pin_loading" rel="{url r="ajax#deals" p="r=$p_r&id=$p_id&loc=$p_loc&tag=$p_tag&k=$p_k&p=$current_page&state=$p_state&type=$p_type"}">正在努力加载</div>	
+		<div class="pages">{$pages}</div>
+		<div class="blank20"></div>
+	</div>
+</div>	
+<script type="text/javascript">
+	$(function(){
+		$("embed").attr({ windowlessVideo: "1", wmode: "transparent" });
+
+	});
+</script>
+{include file="inc/footer.html"} 

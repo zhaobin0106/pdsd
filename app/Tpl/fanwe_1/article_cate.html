@@ -1,0 +1,61 @@
+{include file="inc/header.html"}
+<style>
+.db_1 {
+	position:relative;
+	margin:0px auto 0px;
+	width:960px;
+	overflow:hidden;
+	padding:20px;
+	padding-top:10px;
+	background-color:#fff;
+}
+</style>
+<div id="J_wrap">
+	<div class="blank20"></div>
+	<div class="adv_article_cate">
+		<adv adv_id="article_cate_top" />
+	</div>
+	<div class="blank20"></div>
+	<div class="location_box wrap">
+		<div class="location f_l">
+			<i class="fl ico loc_ico mr5"></i>
+			<label>您现在的位置：</label>{if $nav_top.top}<a href="{$nav_top.top.url}">{$nav_top.top.name}</a>{/if}{if $nav_top.list}<em>>></em><a href="{$nav_top.list.url}">{$nav_top.list.name}</a>{/if}
+			{if $nav_top.cate_child}<em>>></em><a href="{$nav_top.cate_child.url}">{$nav_top.cate_child.name}</a>{/if}
+		</div>
+	</div>
+	<div class="blank10"></div>
+	<div class="article_main article_box">
+		<div class="article_l f_gray">
+			<ul><!--class="on"-->
+				<li {if $module eq 'article_cate' && $action eq 'index' && $id eq 0}class="on"{/if}>
+        			<a href="{url r="article_cate" p="id=$artilce_cate_item.cate_id"}">全部</a>
+        		</li>
+				{foreach from=$artilce_cate item=artilce_cate_item}
+					{if $artilce_cate_item.is_effect eq 1 && $artilce_cate_item.is_delete eq 0 && $artilce_cate_item.type_id eq 0}
+						<li {if $artilce_cate_item.current eq 1}class="on"{/if}>
+		        			<a href="{url r="article_cate" p="id=$artilce_cate_item.cate_id"}">{$artilce_cate_item.title}</a>
+		        		</li>
+					{/if}
+        		{/foreach}
+				<li {if $module eq 'faq' && $action eq 'index' && $id eq 0}class="on"{/if}>
+        			<a href="{url r="faq"}">常见问题</a>
+        		</li>
+			</ul>
+		</div>
+		<div class="article_r">
+			{include file="inc/inc_article_cate.html"}
+			<div class="blank20"></div>
+			<div class="pages" style="width:100%;">{$pages}</div>
+			<div class="blank20"></div>
+		</div>
+	</div>
+	<div class="blank20"></div>	
+</div>
+<script type="text/javascript">
+	var article_l_h = $(".article_l").outerHeight()+60;
+	var article_r_h = $(".article_r").outerHeight();
+	if(article_r_h <= article_l_h){
+		$(".article_r").css("height",article_l_h+"px");
+	}
+</script>
+{include file="inc/footer.html"}

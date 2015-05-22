@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Generator" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{if $page_title neq ''}{$page_title} - {/if}{$site_name} - {$seo_title}</title>
+<meta name="keywords" content="{if $page_seo_keyword neq ''}{$page_seo_keyword}{else}{$seo_keyword}{/if}" />
+<meta name="description" content="{if $page_seo_description neq ''}{$page_seo_description}{else}{$seo_description}{/if}" />
+<?php
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/css/font-awesome.css";
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/css/layout.css";
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/css/style.css";
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/weebox.css";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery-1.8.2.min.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.bgiframe.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.weebox.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.pngfix.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/lazyload.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+if(app_conf("APP_MSG_SENDER_OPEN")==1)
+{
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/msg_sender.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/msg_sender.js";
+}
+if(HAS_DEAL_NOTIFY>0)
+{
+$this->_var['notifypagejs'][] = $this->_var['TMPL_REAL']."/js/notify_sender.js";
+$this->_var['cnotifypagejs'][] = $this->_var['TMPL_REAL']."/js/notify_sender.js";	
+}
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/plupload/plupload.full.min.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/plupload/plupload.full.min.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
+<script type="text/javascript">
+var APP_ROOT = '{$APP_ROOT}';
+var LOADER_IMG = '{$TMPL}/images/lazy_loading.gif';
+var ERROR_IMG = '{$TMPL}/images/image_err.gif';
+{if app_conf("APP_MSG_SENDER_OPEN") eq 1}
+var send_span = {function name="app_conf" v="SEND_SPAN"}000;
+{/if}
+</script>
+<script type="text/javascript" src="{function name="parse_script" v="$pagejs" c="$cpagejs"}"></script>
+{if HAS_DEAL_NOTIFY>0}
+<script type="text/javascript" src="{function name="parse_script" v="$notifypagejs" c="$cnotifypagejs"}"></script>
+{/if}
+
+<!--[if IE 6]>
+	<script src="{$TMPL}/js/DD_belatedPNG_0.0.8a-min.js"></script>
+	<script>
+	DD_belatedPNG.fix('.banner .btn_tit ul li.on , .banner .btn_tit ul li , .mx_1 , .mx_2 , .mx_3 , .mx_4 , .xzdq1 , .zcz , .timeline-left-gray , .deal_log_title .title , .timeline-comment-top , .timeline-start span , .pageleft a , .dz , .kj , .mf , .boxaddress , .xzdq , .con6 .sub , .fx i , .attention_focus_deal i , .head_down_icon , .banner .prev , .banner .next , .mxr_1 , .mxr_2 , .mxr_3 , .shenhe .shenhe_info li , .mod_title i , .box4 .mod_cont3 .leader_t , .box4 .mod_cont3 .leader_w , .box4 .mod_cont3 .leader_r , .box4 .mod_cont3 .leader_x , .box4 .mod_cont3 .leader_p , .step_box , .pageleft a i , .invester_all .col_a , .article_l li.on , .article_box .article_r_list h3 , .deals_cate_equity .equity_box .equity_box_l .inf_2 i , .fa , .send_message'); 
+	</script>
+<![endif]-->
+</head>
+<body>
+<div class="header" id="J_head">
+	<div class="wrap">
+		<div class="logo f_l">
+			<a class="link" href="{$APP_ROOT}/">
+				<?php
+					$this->_var['logo_image'] = app_conf("SITE_LOGO");
+				?>
+				{function name="load_page_png" v=$logo_image}
+			</a>
+		</div>
+		<ul class="main_nav f_l">
+		{foreach from=$nav_list item=nav_item}
+			<li class="{if $deal_type} {if $deal_type eq 'gq_type' && $nav_item.u_module eq 'deals' && $nav_item.u_action eq 'index' && $nav_item.u_param eq 'type=1'}current{elseif  $deal_type eq 'product_type' && $nav_item.u_module eq 'deals' && $nav_item.u_action eq 'index' && $nav_item.u_param eq ''}current{elseif  $deal_type eq 'home' && $nav_item.u_module eq 'investor' && $nav_item.u_action eq 'invester_list' }current{elseif  $deal_type eq 'article_type' && $nav_item.u_module eq 'article_cate' && $nav_item.u_action eq ''&& $nav_item.u_param eq '' }current{/if} {else} {if $nav_item.current eq 1}current{/if}{/if}">
+				<a href="{$nav_item.url}"  target="{if $nav_item.blank eq 1}_blank{/if}" title="{$nav_item.name}">
+					<span>{$nav_item.name}</span>	
+				</a>	
+			</li>
+		{/foreach}	
+		</ul>
+		<div class="f_l">
+			<form action="{url r="deals"}" method="post" id="header_search_form">
+			<div class="header_seach f_l">		
+			<input type="button" value="" class="seach_submit" id="header_submit">
+			<input type="text" id="header_keyword" name="k" placeholder="搜索项目" class="seach_text"> 
+            {if app_conf("INVEST_STATUS") eq 0}
+				<div id="ddlText" class="ddlspan ">产品众筹</div> 
+            	<input type="hidden" name="hid_ddlText" value="0" />
+			{/if}
+			{if app_conf("INVEST_STATUS") eq 1}
+				<div id="ddlText" class="ddlspan ">产品众筹</div> 
+            	<input type="hidden" name="hid_ddlText" value="0" />
+			{/if}
+			{if app_conf("INVEST_STATUS") eq 2}
+				<div id="ddlText" class="ddlspan ">股权众筹</div> 
+            	<input type="hidden" name="hid_ddlText" value="1" />
+			{/if}
+            <ul class="ddlul" tagdom="ddlText">
+				{if app_conf("INVEST_STATUS") eq 0} 
+         			<li livalue="0" class="libg class_select">产品众筹</li>  
+             		<li livalue="1" class="class_select">股权众筹</li>
+				{/if}
+				{if app_conf("INVEST_STATUS") eq 1}
+					<li livalue="0" class="libg class_select">产品众筹</li>  
+				{/if}
+				{if app_conf("INVEST_STATUS") eq 2}
+					<li livalue="1" class="libg class_select">股权众筹</li>
+				{/if}
+            </ul>
+				{if app_conf("INVEST_STATUS") eq 0} 
+					<input type="hidden" name="type" value="0"/>				
+					<input type="hidden" name="redirect" value="1"/>		
+				{/if}
+				{if app_conf("INVEST_STATUS") eq 1}
+					<input type="hidden" name="type" value="0"/>		
+				{/if}
+				{if app_conf("INVEST_STATUS") eq 2}
+					<input type="hidden" name="type" value="1"/>	
+				{/if}		
+			</div>
+			</form>	
+        </div>
+		<div class="f_r" style="width:320px;">		
+			{insert name="login_tip"}
+		</div>
+	</div>		
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		// 头部搜索类目选项
+		$("#ddlText").click(function(e){  
+            e.stopPropagation();
+            var $this=$(this);
+            $this.next().next(".ddlul").css("width",($this.width()+5)+"px").show();     
+            var lia=$this.prev("input[name='hid_ddlText']").val();
+            if($.trim(lia)!=""){
+                $(".ddlul li").each(function() {  
+                    if($this.attr("livalue")==lia){  
+                        $this.addClass("libg");   
+                    }
+                    else{
+                    	$this.removeClass("libg");
+                	}
+                });  
+            }
+            $(".ddlul li").bind('hover',function(){
+                $(this).addClass("libg").siblings().removeClass("libg");  
+            });
+        });  
+        $(document).click(function(event)  {   
+            var eo  =  $(event.target);   
+            if($(".ddlul").is(":visible") && eo.attr("class") != "ddlul" && !eo.parent(".ddlul").length) {  
+                $('.ddlul').hide();   
+            }  
+        });   
+        $(".ddlul li").live('click',function(){  
+            $(this).parent().prev().prev("#ddlText").text($(this).html());  
+            $(this).parent().prev("input[name='hid_ddlText']").val($(this).attr("livalue"));
+            $("input[name='type']").val($(this).attr("livalue"));
+            $(".ddlul").hide();
+    	});
+
+
+		//解决input中placeholder值在ie中无法支持的问题
+		var doc=document,inputs=doc.getElementsByTagName('input'),supportPlaceholder='placeholder'in doc.createElement('input'),placeholder=function(input){var text=input.getAttribute('placeholder'),defaultValue=input.defaultValue;
+		if(defaultValue==''){
+			input.value=text}
+			input.onfocus=function(){
+				if(input.value===text){
+				this.value=''
+				}
+			};
+			input.onblur=function(){
+				if(input.value===''){
+					this.value=text
+				}
+			}
+		};
+		if(!supportPlaceholder){
+			for(var i=0,len=inputs.length;i<len;i++){
+				var input=inputs[i],text=input.getAttribute('placeholder');
+				if(input.type==='text'&&text){
+					placeholder(input)
+				}
+			}
+		}
+	});
+</script>
