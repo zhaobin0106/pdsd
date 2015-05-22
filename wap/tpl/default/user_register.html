@@ -1,0 +1,65 @@
+{include file="inc/header.html"}
+<script>
+	{if app_conf("USER_VERIFY") eq 2}
+		var is_mobile=1;
+	{else}
+		var is_mobile=0;
+	{/if}
+</script>
+<?php
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajax_user_register.js";
+$this->_var['dcpagejs'][] = "";
+?>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<style type="text/css">
+	.btn_yzm{width:108px;float:none;font-size:1.4rem;letter-spacing:0;}
+	.textbox{
+		border:1px solid #ddd;
+	}
+	.login ul li{height:auto;margin:10px 0;}
+	.login .input100{margin:0;}
+</style>
+<!--login-->  
+<section class="user_register">
+  <form id="user_register_form" name="user_register_form" action="{url_wap r="user#do_register"}">
+	<div class="login tc p10 pl15 pr15">
+		<span class="title pt10">注册{$site_name}会员</span>
+		<ul id="register_group">
+			{if app_conf("USER_VERIFY") neq 2}
+			<li class="webkit-box">
+ 				<label class="input_lable mr10">电子邮箱:</label>
+				<input class="input100 sizing webkit-box-flex" type="text" name="email" value="" placeholder="输入电子邮箱" >
+ 			</li>
+			{/if}
+			<li class="webkit-box">
+				<label class="input_lable mr10">会员名称:</label>
+				<input class="input100 sizing webkit-box-flex" type="text" name="user_name" value="" placeholder="会员名">
+			</li>
+			<li class="webkit-box">
+				<label class="input_lable mr10">输入密码:</label>
+				<input class="input100 sizing webkit-box-flex" type="password" name="user_pwd" value="" placeholder="输入密码">
+			</li>
+			<li class="webkit-box">
+				<label class="input_lable mr10">确认密码:</label>
+				<input class="input100 sizing webkit-box-flex" type="password" name="confirm_user_pwd" value="" placeholder="确认密码">
+			</li>
+			
+			{if app_conf("USER_VERIFY") eq 2}
+			<li class="webkit-box">
+				<label class="input_lable mr10">手机号码:</label>
+				<input class="input100 sizing webkit-box-flex" type="text" name="mobile" id="settings-mobile" value="" placeholder="输入手机">
+			</li>
+			<li class="webkit-box">
+				<label class="input_lable mr10" style="width:59px;font-size:0">验证码</label>
+				<input class="input100 webkit-box-flex" type="text" name="verify_coder" value="" placeholder="输入验证码" style="margin-right:10px">
+				<input class="ui-button btn_yzm bg_red" type="button" value="获取验证码"  id="J_send_sms_verify" rel="ui-button">
+			</li>
+			{/if}
+		</ul>
+		<div class="blank15"></div> 
+		<input class="ui-button theme_color" type="button" name="submit_form"  value="注册" rel="ui-button">
+		<input type="hidden" value="1" name="ajax" />
+	</div>
+  </form>
+</div>
+{include file="footer.html"}

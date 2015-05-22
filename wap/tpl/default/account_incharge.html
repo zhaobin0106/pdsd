@@ -1,0 +1,22 @@
+{include file="inc/header_account.html"} 
+<section class="account_incharge">
+	<form class="ajax_form" action="{url_wap r="account#do_incharge"}">
+		<div class="ul_block">
+			<ul>
+				<li class="webkit-box">
+					<label class="input_lable">充值金额</label>
+					<input type="text" class="textbox webkit-box-flex" value="" placeholder="请输入充值金额" name="money" />
+				</li>	
+			</ul>
+		</div>
+		<div class="blank15"></div>
+		<div class="submit_btn_row">
+			<input type="submit" rel="finish" class="ui-button theme_color finish" value="去付款" />
+			<div class="blank15"></div>
+			<a href="{url_wap r="settings#index"}" class="ui-button bg_red">取消充值</a>
+			<input type="hidden" value="1" name="ajax" />
+			<div class="blank15"></div>
+		</div>
+	</form>
+</section>
+{include file="inc/footer.html"} 

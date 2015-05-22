@@ -1,0 +1,31 @@
+{include file="inc/header.html"}
+<section class="settings_consignee">
+    <div class="editAddress">
+        <form>
+            <ul>
+            	{foreach from="$consignee_list" item=item}
+                <li onclick="window.location.href='{url_wap r="settings#add_consignee" p="id=$item.id"}';">
+                    <div class="mainlist webkit-box">
+                        <label class="input_lable">收货人：</label>
+                        <div class="r_list">{$item.consignee}</div>
+                    </div>
+                    <div class="mainlist webkit-box">
+                        <label class="input_lable">手机号：</label>
+                        <div class="r_list">{$item.mobile}</div>
+                    </div>
+                    <div class="mainlist webkit-box">
+                        <label class="input_lable">收货地址：</label>
+                        <div class="r_list">{$item.address}</div>
+                    </div>
+                    <input class="edit_select" type="radio" value="tenpaywap" name="paypath">
+                </li>
+        	   {/foreach}
+    	    </ul>
+            <div class="editaddressbtn">
+                <input type="button" rel="addadd_btn" class="addadd_btn" value="添加新地址" onclick="window.location.href='{url_wap r="settings#add_consignee"}';"  style=" width:100%;">
+                <input id="eidt_btn" type="button" rel="eidt_btn" class="eidt_btn" value="删除" disabled="disabled" style="background:#bdbdbd; display:none;">
+            </div>
+        </form>
+    </div>
+</section>
+{include file="inc/footer.html"}

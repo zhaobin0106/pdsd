@@ -1,0 +1,540 @@
+﻿执行日期：2015-01-24-15：26：35
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[o5bgfd8u09jzcg5qby74gpjrkdpgrfts]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[848]]></order_id>
+<out_trade_no><![CDATA[20150124248]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[2BE3F3C6F86E9D2B8A0EBBDB46D7D0B3]]></sign>
+<time_end><![CDATA[20150124152634]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010955964]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：26：35
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'Y',
+  'mch_id' => '1227297802',
+  'nonce_str' => 'o5bgfd8u09jzcg5qby74gpjrkdpgrfts',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '848',
+  'out_trade_no' => '20150124248',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => '2BE3F3C6F86E9D2B8A0EBBDB46D7D0B3',
+  'time_end' => '20150124152634',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010955964',
+)
+
+
+执行日期：2015-01-24-15：26：50
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[o5bgfd8u09jzcg5qby74gpjrkdpgrfts]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[848]]></order_id>
+<out_trade_no><![CDATA[20150124248]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[2BE3F3C6F86E9D2B8A0EBBDB46D7D0B3]]></sign>
+<time_end><![CDATA[20150124152634]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010955964]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：26：50
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'Y',
+  'mch_id' => '1227297802',
+  'nonce_str' => 'o5bgfd8u09jzcg5qby74gpjrkdpgrfts',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '848',
+  'out_trade_no' => '20150124248',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => '2BE3F3C6F86E9D2B8A0EBBDB46D7D0B3',
+  'time_end' => '20150124152634',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010955964',
+)
+
+
+执行日期：2015-01-24-15：27：08
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[o5bgfd8u09jzcg5qby74gpjrkdpgrfts]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[848]]></order_id>
+<out_trade_no><![CDATA[20150124248]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[2BE3F3C6F86E9D2B8A0EBBDB46D7D0B3]]></sign>
+<time_end><![CDATA[20150124152634]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010955964]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：27：08
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'Y',
+  'mch_id' => '1227297802',
+  'nonce_str' => 'o5bgfd8u09jzcg5qby74gpjrkdpgrfts',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '848',
+  'out_trade_no' => '20150124248',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => '2BE3F3C6F86E9D2B8A0EBBDB46D7D0B3',
+  'time_end' => '20150124152634',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010955964',
+)
+
+
+执行日期：2015-01-24-15：27：40
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[o5bgfd8u09jzcg5qby74gpjrkdpgrfts]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[848]]></order_id>
+<out_trade_no><![CDATA[20150124248]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[2BE3F3C6F86E9D2B8A0EBBDB46D7D0B3]]></sign>
+<time_end><![CDATA[20150124152634]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010955964]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：27：40
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'Y',
+  'mch_id' => '1227297802',
+  'nonce_str' => 'o5bgfd8u09jzcg5qby74gpjrkdpgrfts',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '848',
+  'out_trade_no' => '20150124248',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => '2BE3F3C6F86E9D2B8A0EBBDB46D7D0B3',
+  'time_end' => '20150124152634',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010955964',
+)
+
+
+执行日期：2015-01-24-15：27：48
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[wzpmbroza6xmc3dfq2d6qukujqkevif4]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[845]]></order_id>
+<out_trade_no><![CDATA[20150124310]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[01C7BA5A67DFE9F36B5883167673135E]]></sign>
+<time_end><![CDATA[20150124145341]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010943180]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：27：48
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'Y',
+  'mch_id' => '1227297802',
+  'nonce_str' => 'wzpmbroza6xmc3dfq2d6qukujqkevif4',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '845',
+  'out_trade_no' => '20150124310',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => '01C7BA5A67DFE9F36B5883167673135E',
+  'time_end' => '20150124145341',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010943180',
+)
+
+
+执行日期：2015-01-24-15：30：42
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[o5bgfd8u09jzcg5qby74gpjrkdpgrfts]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[848]]></order_id>
+<out_trade_no><![CDATA[20150124248]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[2BE3F3C6F86E9D2B8A0EBBDB46D7D0B3]]></sign>
+<time_end><![CDATA[20150124152634]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010955964]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：30：42
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'Y',
+  'mch_id' => '1227297802',
+  'nonce_str' => 'o5bgfd8u09jzcg5qby74gpjrkdpgrfts',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '848',
+  'out_trade_no' => '20150124248',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => '2BE3F3C6F86E9D2B8A0EBBDB46D7D0B3',
+  'time_end' => '20150124152634',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010955964',
+)
+
+
+执行日期：2015-01-24-15：31：26
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[ubfxmt9mrra9notkaw1yova2d0ehlufh]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[843]]></order_id>
+<out_trade_no><![CDATA[20150124990]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[4A15C0B39B0B14BE5E0FFB9E1070E2BA]]></sign>
+<time_end><![CDATA[20150124142716]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010955873]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：31：26
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'Y',
+  'mch_id' => '1227297802',
+  'nonce_str' => 'ubfxmt9mrra9notkaw1yova2d0ehlufh',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '843',
+  'out_trade_no' => '20150124990',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => '4A15C0B39B0B14BE5E0FFB9E1070E2BA',
+  'time_end' => '20150124142716',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010955873',
+)
+
+
+执行日期：2015-01-24-15：31：42
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[g3t7ny5o4imrub5pt592e148rx7n32i1]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[846]]></order_id>
+<out_trade_no><![CDATA[20150124833]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[E6C31F6AB1FF6819D70F305C4C219719]]></sign>
+<time_end><![CDATA[20150124145736]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010949984]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：31：42
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'Y',
+  'mch_id' => '1227297802',
+  'nonce_str' => 'g3t7ny5o4imrub5pt592e148rx7n32i1',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '846',
+  'out_trade_no' => '20150124833',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => 'E6C31F6AB1FF6819D70F305C4C219719',
+  'time_end' => '20150124145736',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010949984',
+)
+
+
+执行日期：2015-01-24-15：39：09
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[j8hox1wks3znthnpacjyxyyjgv1o1xvt]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[847]]></order_id>
+<out_trade_no><![CDATA[20150124689]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[43D172F488AAC24EAC457CED00B337BE]]></sign>
+<time_end><![CDATA[20150124150456]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010951160]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：39：09
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'Y',
+  'mch_id' => '1227297802',
+  'nonce_str' => 'j8hox1wks3znthnpacjyxyyjgv1o1xvt',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '847',
+  'out_trade_no' => '20150124689',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => '43D172F488AAC24EAC457CED00B337BE',
+  'time_end' => '20150124150456',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010951160',
+)
+
+
+执行日期：2015-01-24-15：40：27
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[0ypi9ycc215o6xlf62c6bqn4cc1nhyc5]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[844]]></order_id>
+<out_trade_no><![CDATA[20150124330]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[39657849DD5CC08624DF27EC80735775]]></sign>
+<time_end><![CDATA[20150124143620]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010957653]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：40：27
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'Y',
+  'mch_id' => '1227297802',
+  'nonce_str' => '0ypi9ycc215o6xlf62c6bqn4cc1nhyc5',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '844',
+  'out_trade_no' => '20150124330',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => '39657849DD5CC08624DF27EC80735775',
+  'time_end' => '20150124143620',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010957653',
+)
+
+
+执行日期：2015-01-24-15：41：38
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[N]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[zipf4d60hqiwz96wdxprfo0q9zw57ltg]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[841]]></order_id>
+<out_trade_no><![CDATA[20150124149]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[6F87F58C06D443B1296A5D41FA69F71A]]></sign>
+<time_end><![CDATA[20150124140726]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010955282]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：41：38
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'N',
+  'mch_id' => '1227297802',
+  'nonce_str' => 'zipf4d60hqiwz96wdxprfo0q9zw57ltg',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '841',
+  'out_trade_no' => '20150124149',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => '6F87F58C06D443B1296A5D41FA69F71A',
+  'time_end' => '20150124140726',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010955282',
+)
+
+
+执行日期：2015-01-24-15：43：58
+【签名失败】:
+<xml><appid><![CDATA[wx6fcde3c1682a1167]]></appid>
+<bank_type><![CDATA[CITIC_CREDIT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1227297802]]></mch_id>
+<nonce_str><![CDATA[slb2ga0c8mglfq0njusj04a5s4ljrhd7]]></nonce_str>
+<openid><![CDATA[oV_WpuKNDbpzvxAokbRx3SFljtxE]]></openid>
+<order_id><![CDATA[842]]></order_id>
+<out_trade_no><![CDATA[20150124896]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[9E396340BC0AEE3D4E6D4338701CFE36]]></sign>
+<time_end><![CDATA[20150124140948]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+<transaction_id><![CDATA[1010160892201501240010949898]]></transaction_id>
+</xml>
+
+
+执行日期：2015-01-24-15：43：58
+【接收到的xmltoarray通知】:
+array (
+  'appid' => 'wx6fcde3c1682a1167',
+  'bank_type' => 'CITIC_CREDIT',
+  'cash_fee' => '1',
+  'fee_type' => 'CNY',
+  'is_subscribe' => 'Y',
+  'mch_id' => '1227297802',
+  'nonce_str' => 'slb2ga0c8mglfq0njusj04a5s4ljrhd7',
+  'openid' => 'oV_WpuKNDbpzvxAokbRx3SFljtxE',
+  'order_id' => '842',
+  'out_trade_no' => '20150124896',
+  'result_code' => 'SUCCESS',
+  'return_code' => 'SUCCESS',
+  'sign' => '9E396340BC0AEE3D4E6D4338701CFE36',
+  'time_end' => '20150124140948',
+  'total_fee' => '1',
+  'trade_type' => 'JSAPI',
+  'transaction_id' => '1010160892201501240010949898',
+)
+
+

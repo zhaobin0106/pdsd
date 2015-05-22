@@ -1,0 +1,338 @@
+{include file="inc/header.html"}
+<style>
+body{
+	background:#f4f4f4;
+}
+</style>
+<?php
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/switch_city.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/switch_city.js";
+$this->_var['dpagejs'][] = APP_ROOT_PATH."/system/region.js";
+$this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/avatar.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/avatar.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+?>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}">
+</script>
+<section class="settings_modify">
+	<form id="user_register_form">
+		<ul class="ul_block sizing">
+			<li class="u_img webkit-box">
+				<label class="input_lable mr10">头像</label>
+				<div class="list_con webkit-box-flex" style="padding:10px 0;">
+					<a onclick="javascript:upd_file(this,'avatar_file');">
+						<div class="user_pic">
+		                    <img id="avatar" src="{function name="get_user_avatar" uid=$user_info.id type="middle"}" width="100%">
+		                </div>
+						<div class="go_see" style="top: 34px;"><i class="fa fa-chevron-right"></i></div>
+						<input  type="file" class="filebox" name="avatar_file" id="avatar_file"  style="cursor:pointer;padding: 0;height:100%;width:100%;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;"/>
+					</a>
+				</div>
+			</li>
+			<li class="webkit-box">
+				<label class="input_lable mr10">账号</label>
+				<input type="text" class="textbox webkit-box-flex" value="{$user_info.user_name}" disabled="true"/>
+			</li>
+			<li class="webkit-box">
+				<label class="input_lable mr10">邮箱</label>
+				<input type="text" class="textbox webkit-box-flex" value="{$user_info.email}" disabled="true"/>
+			</li>
+			<li class="webkit-box">
+				<label class="input_lable mr10">性别</label>
+				<div class="list_con webkit-box-flex" style="margin-top:-3px;">
+					<span style="line-height:47px; ">男</span>
+					<input class="mt mr10" {if $user_info.sex eq 1}checked="checked"{/if} type="radio" value="1" name="sex" style="display:inline-block;margin-top:-3px"/>
+					<span style="line-height:47px;">女</span>
+					<input class="mt mr10" {if $user_info.sex eq 0}checked="checked"{/if} type="radio" value="0" name="sex"  style="display:inline-block;margin-right:12px;margin-top:-3px"/>
+					<span style="line-height:47px;">未知</span>
+					<input class="mt mr10" {if $user_info.sex eq -1}checked="checked"{/if} type="radio" value="-1" name="sex"  style="display:inline-block;margin-right:12px;margin-top:-3px"/>
+				</div>
+				<div class="blank"></div>
+			</li>
+			<li class="webkit-box">
+				<label class="input_lable mr10">省市</label>
+				<div class="list_con webkit-box-flex">
+				  	<div class="select_mod"> 
+					  	<select name="province" id="province" class="f_select">               
+		                    <option value="" rel="0">请选择省份</option>          
+		                    {foreach from=$region_lv2 item=region}
+		                    <option value="{$region.name}" rel="{$region.id}" {if $region.selected}selected="selected"{/if}>{$region.name}</option>
+		                    {/foreach}
+	                  	</select>
+				  	</div>
+				  	<div class="select_mod"> 
+					  	<select name="city" id="city" class="f_select">             
+		                   	<option value="" rel="0">请选择城市</option>
+		                    {foreach from=$region_lv3 item=region}
+		                    <option value="{$region.name}" rel="{$region.id}" {if $region.selected}selected="selected"{/if}>{$region.name}</option>
+		                    {/foreach}
+	                  	</select>
+				  	</div>
+				</div>
+				<div class="blank"></div>
+			</li>
+			<li class="profile webkit-box">
+				<label class="input_lable mr10">简介</label>
+				<div class="list_con webkit-box-flex">
+					<textarea id="intro" rows="5" width="100%" placeholder="这里可以输入大约300字的自我介绍，让大家多了解你">{$user_info.intro}</textarea>
+				</div>
+			</li>
+			<li class="webkit-box">
+				<label class="input_lable mr10">微博</label>
+				<input id="weibo_url" type="text" value="{$weibo_list[0].weibo_url}" class="textbox webkit-box-flex" placeholder="输入微博地址"/>
+			</li>
+			{if app_conf("USER_VERIFY") eq 2}
+				<li class="webkit-box">
+					<label class="input_lable mr10">手机</label>
+					<input id="mobile" type="text" value="{$user_info.mobile}" name="mobile" {if $user_info.mobile}disabled="disabled"{/if} class="textbox webkit-box-flex" placeholder="请输入手机号"/>
+					<div class="blank"></div>
+				</li>
+				{if !$user_info.mobile}
+					<li class="webkit-box">
+						<label class="input_lable mr10">验证码</label>
+						<input id="verify_coder" type="text" value="" name="verify_coder" class="textbox webkit-box-flex" placeholder="请输入验证码" />
+						<input class="ui-button btn_yzm bg_red" id="J_send_sms_verify" type="button" value="获取验证码"/>
+					</li>
+				{/if}
+			{/if}
+		</ul>
+		<input class="surealter_btn" type="button" onclick="javascript:save_modify();" value="确认修改"/>
+	</form>
+</section>
+<div class="blank15"></div>
+<script type="text/javascript">
+
+$("#user_register_form").find("li").last().css("borderBottom",0);
+var code_timeer = null;
+	var code_lefttime = 0 ;
+		$(document).ready(function(){
+			$("#J_send_sms_verify").bind("click",function(){
+				send_mobile_verify_sms();
+			});
+			$("#user_register_form").find("input[name='verify_coder']").bind("blur",function(){
+				
+				check_register_verifyCoder();
+			});
+		})
+		function form_error(obj,str)
+		{
+			$(obj).html("<div class='form_tip'>"+str+"</div>");
+		}
+		function form_success(obj,str)
+		{
+			$(obj).html("<div class='form_success'>"+str+"</div>");
+		}
+		function send_mobile_verify_sms(){
+		$("#J_send_sms_verify").unbind("click");
+	
+		if(!$.checkMobilePhone($("#mobile").val()))
+		{
+			$.showErr("手机号码格式错误");
+			$("#J_send_sms_verify").bind("click",function(){
+				send_mobile_verify_sms();
+			});
+			return false;
+		}
+		
+		
+		if(!$.maxLength($("#mobile").val(),11,true))
+		{
+			$.showErr("手机号码长度不能超过11位");
+			$("#J_send_sms_verify").bind("click",function(){
+				
+				send_mobile_verify_sms();
+			});
+			return false;
+		}
+ 		if($.trim($("#mobile").val()).length == 0)
+		{				
+			$.showErr("手机号码不能为空！");
+			
+			$("#J_send_sms_verify").bind("click",function(){
+				send_mobile_verify_sms();
+			});
+			return false;
+		}
+		var sajaxurl = '{url_wap r="ajax#send_mobile_verify_code" p="is_only=1"}';//APP_ROOT+"/index.php?ctl=ajax&act=send_mobile_verify_code";
+		var squery = new Object();
+		squery.mobile = $.trim($("#mobile").val());
+		$.ajax({ 
+			url: sajaxurl,
+			data:squery,
+			type: "POST",
+			dataType: "json",
+			success: function(sdata){
+				if(sdata.status==1)
+				{
+					code_lefttime = 60;
+					code_lefttime_func();
+					$.showSuccess(sdata.info);
+					//alert(sdata.info);
+					return false;
+				}
+				else
+				{
+						
+					$("#J_send_sms_verify").bind("click",function(){
+						send_mobile_verify_sms();
+					});
+					$.showErr(sdata.info);
+					return false;
+				}
+			}
+		});	
+		
+		
+	}
+	function code_lefttime_func(){
+		
+		clearTimeout(code_timeer);
+		$("#J_send_sms_verify").val(code_lefttime+"秒后重新发送");
+		$("#J_send_sms_verify").css({"color":"#f1f1f1"});
+		code_lefttime--;
+		if(code_lefttime >0){
+			$("#J_send_sms_verify").attr("disabled","true");
+			code_timeer = setTimeout(code_lefttime_func,1000);
+		}
+		else{
+			code_lefttime = 60;
+			$("#J_send_sms_verify").val("发送验证码");
+			$("#J_send_sms_verify").attr("disabled","false");
+			$("#J_send_sms_verify").css({"color":"#fff"});
+			$("#J_send_sms_verify").bind("click",function(){
+				send_mobile_verify_sms();
+			});
+		}
+		
+	}
+	//检查验证码
+	function check_register_verifyCoder(){
+ 		if($.trim($("#user_register_form").find("input[name='verify_coder']").val())=="")
+		{
+			//form_error($("#user_register_form").find("input[name='verify_coder']"),"请输入验证码");		
+			$.showErr("请输入验证码");
+		}
+		else
+		{
+			
+			var mobile = $.trim($("#user_register_form").find("input[name='mobile']").val());
+		
+			var code = $.trim($("#user_register_form").find("input[name='verify_coder']").val());
+			if(mobile!=""||code!=""){
+			
+				var ajaxurl ='{url_wap r="user#check_verify_code"}';//APP_ROOT+"/index.php?ctl=user&act=check_verify_code";
+				var query = new Object();
+				query.mobile = mobile;
+				query.code = code;
+				$.ajax({
+					url: ajaxurl,
+					dataType: "json",
+					data:query,
+					type: "POST",
+					success:function(ajaxobj){
+						if(ajaxobj.status==1)
+						{
+							//form_success($("#user_register_form").find("input[name='verify_coder']"),"验证码正确");
+							//alert("验证码正确");
+							
+						}
+						if(ajaxobj.status==0)
+						{
+							//form_error($("#user_register_form").find("input[name='verify_coder']"),"验证码不正确");
+							$.showErr("验证码不正确!");
+						}
+					}
+				});
+			}
+		}
+	}
+	
+	function save_modify(){
+		
+		var province=$("#province").val();
+		var city=$("#city").val();
+		var intro=$("#intro").val();
+		var mobile=$("#mobile").val();
+		var verify_coder=$("#verify_coder").val();
+		var sex=$("input[name='sex']:checked").val();
+		var weibo_url=$("#weibo_url").val();
+		var post_url='{url_wap r="settings#save_modify"}';
+		var query =new Object();
+			query.province=province;
+			query.city=city;
+			query.intro=intro;
+			query.weibo_url=weibo_url;
+			query.sex=sex;
+			if(typeof(verify_coder)!="undefined"){
+				query.verify_coder=verify_coder;
+				query.mobile=mobile;
+			}
+		$.ajax({
+			url:post_url,
+			dataType:"json",
+			data:query,
+			type:"post",
+			cache:false,
+			success:function(data){
+				if(data.info!=null){
+					$.showErr(data.info);
+				}else{
+					$.showSuccess(data.info);
+				}
+				window.location.reload();
+			},
+			error:function(){
+				$.showErr("服务器繁忙，请您稍后再试！");
+			}
+		});
+		return false;
+	}
+	
+function upd_file(obj,file_id)
+{	
+	$("input[name='"+file_id+"']").bind("change",function(){			
+		$(obj).hide();
+		$(obj).parent().find(".fileuploading").removeClass("hide");
+		$(obj).parent().find(".fileuploading").removeClass("show");
+		$(obj).parent().find(".fileuploading").addClass("show");
+		  $.ajaxFileUpload
+		   (
+			   {
+				    url:'{url_wap r="avatar#upload"}&uid={$user_info.id}',
+				    secureuri:false,
+				    fileElementId:file_id,
+				    dataType: 'json',
+				    success: function (data, status)
+				    {
+				   		$(obj).show();
+				   		$(obj).parent().find(".fileuploading").removeClass("hide");
+						$(obj).parent().find(".fileuploading").removeClass("show");
+						$(obj).parent().find(".fileuploading").addClass("hide");
+				   		if(data.status==1)
+				   		{
+				   			document.getElementById("avatar").src = data.middle_url+"?r="+Math.random();
+				   		}
+				   		else
+				   		{
+				   			$.showErr(data.msg);
+				   		}
+				   		
+				    },
+				    error: function (data, status, e)
+				    {
+						$.showErr(data.responseText);;
+				    	$(obj).show();
+				    	$(obj).parent().find(".fileuploading").removeClass("hide");
+						$(obj).parent().find(".fileuploading").removeClass("show");
+						$(obj).parent().find(".fileuploading").addClass("hide");
+				    }
+			   }
+		   );
+		  $("input[name='"+file_id+"']").unbind("change");
+	});	
+}
+</script>
+{include file="inc/footer.html"}

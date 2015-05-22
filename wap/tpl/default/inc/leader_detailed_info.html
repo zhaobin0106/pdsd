@@ -1,0 +1,88 @@
+<style type="text/css">
+.leader{
+	padding:5px 10px;
+	overflow:hidden;
+	width:280px;
+}
+.leader h3{
+	height:45px;
+	line-height:45px;
+	font-size:1.8rem;
+	border-bottom:2px solid #ddd;
+}
+.leader h3 .f_r{
+	font-size:1.3rem;
+}
+.leader .l{
+	width:70px;
+	text-align:center;
+}
+.leader .l img{
+	width:70px;
+	height:70px;
+	margin:0;
+	-moz-border-radius:50%; -khtml-border-radius:50%; -webkit-border-radius:50%; border-radius:50%;
+}
+.leader .l .btn_send{
+	height:24px;
+	line-height:24px;
+	display:block;
+	padding:0 5px;
+	text-align:center;
+	color:#fff;
+	font-size:1.3rem
+}
+.leader .l .btn_send i{font-size:1.4rem;}
+.leader .text{
+	font-size:1.3rem;
+	color:#666;
+	padding:0;
+	padding-bottom:5px;
+	overflow:hidden;
+	border:0;
+}
+.leader_info_bd{
+	width:260px;
+	overflow:hidden;
+}
+.leader_info_bd .title{
+	padding:5px 0;
+	border-bottom:1px solid #ddd;
+}
+.leader_info_bd .conment{
+	max-height:200px;
+	overflow:hidden;
+	overflow-y:auto;
+	word-break:break-word;
+}
+.fa_box{
+	width:18px;
+	height:18px;
+	line-height:18px;
+	text-align:center;
+	color:#fff;
+	display:inline-block;
+	border-radius:3px;
+}
+</style>
+<div class="leader sizing">
+	<div class="text webkit-box">
+		<div class="l mr10">
+			{function name="show_wap_blank_avatar" p="$leader_info.user_id" t="middle"}
+			
+		</div>
+		<div class="r webkit-box-flex">
+	    	<span class="f16">{$leader_info.user_name}</span>
+			<div class="blank5"></div>
+	        <div class="conment">{$leader_info.identify_name}</div>
+		</div>
+	</div>
+	<div class="leader_info_bd">
+		<div class="title theme_fcolor"><span class="fa_box theme_color mr5"><i class="fa fa-pencil"></i></span>详细资料</div>
+		<div class="blank10"></div>
+		<div class="conment f12 f_666">{$leader_info.introduce}</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(".weebox").css("width","300px");
+</script>

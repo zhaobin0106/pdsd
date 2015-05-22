@@ -1,0 +1,18 @@
+{include file="inc/header.html"} 
+
+
+	{foreach from=$cates item=cates_item}
+	<ul>
+			<a href="" title="{$cates_item.name}">{$cates_item.name}</a>
+			
+			{foreach from=$cates_list item=cates_list_item}
+				{if $cates_item.id eq $cates_list_item.pid}
+					<li >
+						<a href="" title="{$cates_list_item.name}">{$cates_list_item.name}</a>
+					</li>
+				{/if}
+			{/foreach}
+		
+	</ul>
+	{/foreach}
+{include file="inc/footer.html"}

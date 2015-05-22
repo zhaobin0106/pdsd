@@ -1,0 +1,47 @@
+{include file="inc/header_account.html"}
+<style>
+body { background:#f8f8f8; }
+</style>
+</div>
+<div class="wraper">
+	<div class="account_record m10">
+		<ul>
+			{foreach from=$record_list item=record_item}
+			<li class="webkit-box sizing p10">
+				<div class="accountlist_fl {if $record_item.is_paid eq 0}thirds{/if}{if $record_item.is_paid eq 1}half{/if} tl pt10 pb10">
+					<h1>{if $record_item.deal_name eq null}在线支付{/if}</h1>
+					<span class="f_999">
+ 						{if $record_item.create_time neq 0}{function name="to_date" v=$record_item.pay_time}{/if}
+					</span>
+				</div>
+				<div class="accountlist_fr {if $record_item.is_paid eq 0}thirds tc{/if}{if $record_item.is_paid eq 1}half tr{/if} pt10 pb10">
+					<h2 class="f_red">¥{$record_item.money}</h2>
+					<span><em class="f_999 pl5 pr5">类型</em>
+					{if $record_item.is_paid eq 1} 已支付{/if}
+					{if $record_item.is_paid eq 0}未支付{/if}</span>
+				</div>
+				{if $record_item.is_paid eq 0}
+				<div class="submit_btn_row webkit-box-flex pt10 pb10 mt5 tr">
+					<input type="button" rel="finish" class="ui-button theme_color finish f_r" value="去支付" onclick="window.location.href='{$record_item.pay_url}';"   />
+					<input type="hidden" value="1" name="ajax" />				
+				</div>
+				{/if}
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+	<div class="pages mb20">
+		{$pages}
+	</div>
+</div>
+<div class="alwaysfoot">
+     <div class="Recharge f_l tc theme_color1" onclick="window.location.href='{url_wap r="account#incharge"}';">
+    	<a href="{url_wap r="account#incharge"}" >充值</a>
+	</div>
+	<div class="withdrawal f_l tc bg_red" onclick="window.location.href='{url_wap r="account#refund"}';">
+		<a href="{url_wap r="account#refund"}">提现</a>
+	</div>
+  
+ 	<div class="blank"></div>
+</div>
+{include file="inc/footer.html"}

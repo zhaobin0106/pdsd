@@ -1,0 +1,51 @@
+<?php
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/upload_log_image.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/upload_log_image.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
+?>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<style>
+	.fileupload .filebox{ cursor:pointer; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0; opacity:0; padding:0; height:40px; width:97px; }
+	.control-group input { width:97px; }
+	.textbox{
+		border:1px solid #ddd;
+	}
+</style>
+<div class="full">
+	<form id="add_update_form" action="{url_wap r="deal#save_update"}">						
+		<div class="control-group webkit-box">
+			<label class="input_lable mr10">动态内容:</label>
+			<textarea name="log_info" class="textbox webkit-box-flex" style="height:60px;line-height:30px;"></textarea>
+		</div>	
+		<div class="blank10"></div>
+		<div class="form_row control-group webkit-box">
+			<label class="input_lable mr10">相关图片:</label>
+			<div class="mr10">
+				<label class="fileupload ui_button theme_color pr" onclick="upd_file(this,'image_file');" style="font-size:1.4rem;width:80px;height:40px; margin-top:0;cursor:pointer">
+					<span class="ps" style="width:80px;height:40px;display:block;">选择图片</span>
+					<input type="file" class="filebox" name="image_file" id="image_file"/>
+				</label>
+				<label class="fileuploading hide" ></label>						
+			</div>
+			<div class="log_image_upd">
+				<img width="40" height="40" src="" />
+				<input type="hidden" name="image" value="" />
+			</div>
+		</div>
+		<div class="blank10"></div>
+		<div class="form_row control-group webkit-box">
+			<label class="input_lable mr10">视频链接:</label>
+			<input type="text"  name="vedio" class="textbox" value=""  style="width:100%;margin-right:0;"/>
+		</div>
+		<div class="blank15"></div>
+		<div class="submit_btn_row">
+			<div class="ui-button green" rel="green">
+				<div>
+					<span>保存</span>
+				</div>
+			</div>
+			<input type="hidden" value="1" name="ajax" />
+			<input type="hidden" value="{$deal_info.id}" name="id" />
+		</div>			
+	</form>
+</div>

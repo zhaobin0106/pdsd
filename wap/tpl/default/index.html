@@ -1,0 +1,235 @@
+{include file="inc/header.html"} 
+<script type="text/javascript" src="{$TMPL}/js/TouchSlide.1.1.js"></script>
+<!--banner 开始 -->
+<style type="text/css">
+</style>
+<section class="index">
+    <div class="oComment_height">
+        <nav class="index_nav">
+            <ul class="webkit-box">
+                <li class="curr"><a href="{url_wap r="deals#index"}">产品众筹</a></li>
+                <li><a href="{url_wap r="deals#index" p="type=1"}" class="equity">股权众筹</a></li>
+                <li><a href="{url_wap r="article_cate"}">新闻资讯</a></li>
+                <li class="nav_last"><a>分类</a></li>  
+            </ul>
+            <i id="nav_line"></i>
+        </nav>
+        <div class="oComment_1" style="padding-top:49px;">
+             <!--banner 开始 -->
+            {if $adv_list}
+            <div id="slideBox" class="banner">
+                <div class="bd">
+                    <ul>
+                        {foreach from=$adv_list item=adv key=k}
+                        <li>
+                            <a href="{$adv.url}"><img src="{$adv.img}"></a>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+                <div class="hd">
+                    <ul></ul>
+                </div>
+            </div>
+            <script type="text/javascript">
+                if($("#slideBox .bd ul").find('li').length>1){
+                    TouchSlide({ 
+                        slideCell:"#slideBox",
+                        titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                        mainCell:".bd ul", 
+                        effect:"leftLoop", 
+                        autoPage:true,//自动分页
+                        autoPlay:true //自动播放
+                    });
+                }
+                if($("#slideBox > .hd").find("li").length <=1){
+                    $("#slideBox > .hd").hide();
+                }
+            </script>
+            {/if}
+            <!--banner 结束 -->
+            <!-- 首页分类 开始 -->
+            <div class="index_category sizing" id="category_slidebox">
+                <div class="bd">
+                    <ul>
+                    {foreach from=$cate_list item=cate name=cate_list key=k}
+                    {if $cate.pid eq 0}
+                        {if $smarty.foreach.cate_list.iteration mod 8 eq 1}
+                        <li class="itemss">
+                        {/if}
+                            <div class="items">
+                                <div class="item {if $k%6 eq 0}bg1{/if}{if $k%6 eq 1}bg2{/if}{if $k%6 eq 2}bg3{/if}{if $k%6 eq 3}bg4{/if}{if $k%6 eq 4}bg5{/if}{if $k%6 eq 5}bg6{/if}">
+                                    <a href="{url_wap r="deals#index" p="id=$cate.id"}" class="">
+                                        <span>{$cate.name}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        {if $smarty.foreach.cate_list.iteration % 8 eq 0}
+                        </li>
+                        {/if}
+                    {/if}
+                    {/foreach}
+                     </ul>
+                </div>
+                <div class="hd">
+                    <ul></ul>
+                </div>
+            </div>
+            <script type="text/javascript">
+                if($("#category_slidebox .bd ul").find('li').length>1){
+                    TouchSlide({ 
+                        slideCell:"#category_slidebox",
+                        titCell:"#category_slidebox .hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                        mainCell:"#category_slidebox .bd ul", 
+                        effect:"leftLoop", 
+                        autoPage:true,//自动分页
+                        autoPlay:false //自动播放
+                    });
+                }
+                if($("#category_slidebox .hd").find("li").length <=1){
+                    $("#category_slidebox .hd").hide();
+                }
+            </script>
+            <!-- 首页分类 结束 -->
+            <!--list 开始 -->
+            <div class="blank10"></div>
+            <h2 class="h2-title bdl sizing">
+                精品项目
+                <span class="f_r">
+                    <a href="{url_wap r="deals#index"}">查看产品众筹&nbsp;<i class="fa fa-angle-right"></i></a>
+                    <a href="{url_wap r="deals#index" p="type=1"}" class="equity">查看股权众筹&nbsp;<i class="fa fa-angle-right"></i></a>
+                </span>
+            </h2>
+            <div class="tabul-box">
+                <a name="classify"></a>
+                <div class="tabul-div">
+                    <ul class="tab-ul">
+                        <li>
+                            <a class="current">综合推荐</a>
+                        </li>
+                        <li>
+                            <a href="{url_wap r="deals" p="r=rec"}">推荐项目</a>
+                        </li>
+                        <li>
+                            <a href="{url_wap r="deals" p="r=yure"}">正在预热</a>
+                        </li>
+                        <li>
+                            <a href="{url_wap r="deals" p="r=new"}">最新上线</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>   
+        </div>
+    </div>
+    {foreach from=$deal_list item=deal key=k}
+    <section class="deal_item_list">
+        <a href="{$deal.url}" title="{$deal.name}">
+            <div class="deal_item_box">
+                <!--1-->
+                <div class="imgbox">
+                    <img src="{$deal.image}" alt="{$deal.name}">
+                </div>
+                <div class="clear"></div>
+                <h3 class="deal_title sizing">{$deal.name}</h3>
+                <div class="clear"></div>
+                <!--2-->
+                <div class="paiduan">
+                    <span class="caption-title">
+                        已筹资：<span class="symbol">¥</span><span class="f_money">{function name="round" v=$deal.support_amount e=2}</span>&nbsp;&nbsp; 
+                        目标：<span class="symbol" style="color:#333">¥</span><span class="f_money" style="color:#333">{function name="round" v=$deal.limit_price e=2}</span>
+                    </span>
+                    <span class="f_r ">
+                	{if $deal.status eq 0}
+                        <span class="common common-fail">即将开始</span>
+                	{else}
+                    	{if $deal.percent >=100}
+							<span class="common common-success">已成功</span>
+						{else}
+	                        {if $deal.status eq 1}
+	                            <span class="common common-success">已成功</span>
+	                        {/if}
+	                        {if $deal.status eq 2}
+	                            <span class="common common-fail">筹资失败</span>
+	                        {/if}
+	                        {if $deal.status eq 3}
+	                            <span class="common common-sprite">筹资中</span>
+	                        {/if}
+	                        {if $deal.status eq 4}
+	                            <span class="common common-sprite">长期项目</span>
+	                        {/if}
+						{/if}
+					{/if}
+                    </span>
+                </div>
+                <div class="clear"></div>
+                <!--3-->
+                <div class="deal_content_box pd">
+                    <div class="ui">
+                        {if $deal.percent gte 100}
+                        <span class="common-success" style="width:100%;"></span>
+                        {else}
+                        <span class="progress" style="width:{$deal.percent}%;"></span>
+                        {/if}
+                    </div>
+                    <div class="blank">
+                    </div>
+                    {if $deal.status==0}
+                    <div class="div_dt">
+                        <span class="num">距离开始还有{$deal.left_days}天</span><br />
+                        <span class="til"></span>
+                    </div>
+                    {else}
+                    <div class="div_dt">
+                        <span class="num">{$deal.percent}%</span><br />
+                        <span class="til">已达</span>
+                    </div>
+                    <div class="div_dt">
+                    	
+                        {if $deal.remain_days >0}
+                        <span class="num">{$deal.remain_days}天</span><br />
+                        <span class="til">剩余时间</span>
+                        {else}
+                        <span class="num">{$deal.end_time}</span><br />
+                        <span class="til">结束时间</span>
+                        {/if}
+                        
+                    </div>
+                    <div class="div_dt" style="border:none;">
+                        <span class="num">{$deal.support_count}</span><br />
+                        <span class="til">支持者</span>
+                    </div>
+                    {/if}
+                    <div class="blank"></div>
+                </div>
+            </div>
+        </a>
+    </section>
+    {/foreach}  
+    <!--list 结束 -->
+    <div class="readall">
+        <a href="{url_wap r="deals#index"}"><span class="f_l ck">更多产品众筹</span><span class="f_r jh"><i class="fa fa-angle-right"></i></span></a>
+    </div>
+	<div class="readall">
+        <a href="{url_wap r="deals#index" p="type=1"}"><span class="f_l ck">更多股权众筹</span><span class="f_r jh"><i class="fa fa-angle-right"></i></span></a>
+    </div>
+    <div class="blank10"></div>
+</section>
+<script type="text/javascript">
+    // deal_show_menu();
+    // //项目详情页左侧导航菜单固定
+    // var resetDeal_show_menu=null;
+    // function deal_show_menu() {
+    //     var scroH = $(window).scrollTop();
+    //     clearTimeout(resetDeal_show_menu);
+    //     $(window).scroll(function(){
+    //         if(scroH >= 100){
+    //         $(".index_nav").addClass("affix");
+    //         }
+    //         else{
+    //             $(".index_nav").removeClass("affix");
+    //         }
+    //         resetDeal_show_menu = setTimeout(deal_show_menu,100);
+    //     });
+    // }
+</script>
+{include file="inc/footer.html"}
