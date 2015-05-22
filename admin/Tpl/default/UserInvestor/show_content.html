@@ -1,0 +1,79 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<PHP>
+	function get_refund_user_name($uid)
+	{
+		return M("User")->where("id=".$uid)->getField("user_name");
+	}
+</PHP>
+<div class="main">
+<div class="main_title">{$user.do_info}{$user.user_name}成为{$user.is_investor_name}</div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data" onsubmit="return confirm('确认将{$user.do_info}该用户，确认吗？');">
+<table class="form" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>	
+ 		<tr>
+			<td class="item_name">身份证姓名：</td>
+			<td class="item_input"><input type="text" value="{$user.identify_name}" disabled="true"></td>
+		</tr>
+		<tr>
+			<td class="item_name">身份证号码：</td>
+			<td class="item_input"><input type="text" value="{$user.identify_number}" disabled="true"></td>
+		</tr>
+		<tr>
+			<td class="item_name">身份证正面 ：</td>
+			<td class="item_input"><img src="{$user.identify_positive_image}" height="100" /></td>
+		</tr>
+		<tr>
+			<td class="item_name">身份证反面</td>
+			<td class="item_input"><img src="{$user.identify_nagative_image}"  height="100" /></td>
+		</tr>
+ 	<if condition="$user.is_investor eq 2">
+	<tr>
+		<td class="item_title">机构名称:</td>
+		<td class="item_input"><input type="text" name="identify_business_name" value="{$user.identify_business_name}"></td>
+	</tr>
+	<tr>
+		<td class="item_title">营业执照：</td>
+		<td class="item_input"><img src="{$user.identify_business_licence}"  height="100"></td>
+	</tr>
+	<tr>
+		<td class="item_title">组织机构代码证：</td>
+		<td class="item_input"><img src="{$user.identify_business_code}"  height="100"> </td>
+	</tr>
+	<tr>
+		<td class="item_title">税务登记证:</td>
+		<td class="item_input"><img src="{$user.identify_business_tax}"  height="100"></td>
+	</tr>
+	</if>
+	<if condition="$status eq 2">
+	<tr>
+		<td class="item_title">拒绝理由:</td>
+		<td class="item_input">
+			<textarea name="investor_send_info">{$user.investor_send_info}</textarea>
+		</td>
+	</tr>	
+	</if>
+	<if condition="$show_bnt eq 0">
+	<tr>
+		<td class="item_title">&nbsp;</td>
+		<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="id" value="{$user.id}" />
+			<input type="hidden" name="status" value="{$status}" />
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="UserInvestor" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="investor_go_allow" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="确认" />
+			<input type="reset" class="button" value="{%RESET}" />
+		</td>
+	</tr>
+	</if>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+</div>
