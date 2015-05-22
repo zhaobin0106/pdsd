@@ -1,0 +1,22 @@
+{foreach from=$data.item.field_list item=introduce}
+						<div>
+							{$introduce.field_show_name}
+							{if $introduce.field_type eq 0}
+								<input name="consignee" id="consignee" type="text"  data-err="姓名必须大于2个字！" value="">
+							{/if}
+							{if $introduce.field_type eq 1}
+								<select id="sel" onChange="chg()">
+									{foreach from=$introduce.value_scope item=sex}
+										<option value="txt">{$sex}</option>
+									{/foreach}
+								<lect>
+							{/if}
+						</div>
+					{/foreach}
+
+
+
+退货详情： 姓名:叶丹 电话:18958076234 地址:浙江省杭州市江干区机场路313号花园工业区18号楼三楼 亲,请附带一张纸条一起寄回哦，纸条写上您所有的信息（包括联系人 联系电话 拍的旺旺名 订单编号）. 这样方便我们收到货后可以尽快处理.（拒收一切到付件和平邮件，请保留退回来的快递单号）请务必按要求操作. 不填写任何信息直接寄回的. 所产生的一切后果由买家承担!PS:如有质量问题邮费都是我们来承担！江浙沪6元 省外12 元！
+
+
+退货地址为：叶丹，18958076234，浙江省杭州市江干区机场路313号花园工业区18号楼3楼

@@ -1,0 +1,5 @@
+项目已经结束无法投资！
+
+
+
+if($deal_ifo['end_time']<NOW_TIME||$deal_ifo['pay_end_time']<NOW_TIME){
