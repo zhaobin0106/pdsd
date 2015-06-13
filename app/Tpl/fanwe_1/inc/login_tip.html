@@ -3,9 +3,9 @@
 	<span>
 		<a href="javascript:void(0);" id="mymessage" style="padding: 0 6px;
 	border-right: 1px solid #d2d2d2; display:none;">消息 <b class="head_down_icon"></b></a>
-		<a href="javascript:void(0);" id="mycenter" style="">{function name="msubstr" v=$user_info.user_name b=0 e=10}<s class="icon_arrow icon_arrow_down"></s></a>
+		<a href="javascript:void(0);" id="mycenter" style="color:#aaa">欢迎您，<b style="color:#65D033;font-weight:bold">{function name="msubstr" v=$user_info.user_name b=0 e=10}<s class="icon_arrow icon_arrow_down"></s></b></a>
 		<i class="line"></i>
-		<a href="{url r="user#loginout"}" title="退出" id="user_login_out" style="padding: 0 6px; ">退出</a>
+		<a href="{url r="user#loginout"}" title="退出" id="user_login_out" style="padding: 0 6px;color:#aaa">退出</a>
 	</span>
 	<div id="mymessage_drop" style="position:absolute; display:none;">
 		<div class="drop_box">
@@ -28,18 +28,18 @@
 	</div>
 	{else}
 	<span>
-		<a title="登录" href="javascript:void(0)" style="padding: 0 6px; " onclick="javascript:show_pop_login();" >登录</a>
+		<a title="登录" href="javascript:void(0)" style="padding: 0 6px;color:#aaa " onclick="javascript:show_pop_login();" >登录</a>
 		<i class="line"></i>
 		{if app_conf("USER_INVESTMENT") eq 1}
 			<a href="{url r="user#register"}" title="创业者注册">创业者注册</a>&nbsp;&nbsp;
 			<a href="{url r="user#register"}" title="投资者注册">投资者注册</a>&nbsp;&nbsp;
 		{/if}
 		{if app_conf("USER_INVESTMENT") eq 0}
-			<a href="{url r="user#register"}" title="注册" style="padding: 0 6px; ">注册</a>
+			<a href="{url r="user#register"}" title="注册" style="padding: 0 6px;color:#aaa">注册</a>
 		{/if}	
 	</span>
 	{/if}
-	<a href="{url r="project#choose"}" class="ui-button theme_bgcolor ml15 mt20" style="float:left;padding:0 15px;height:35px;line-height:35px;">发起项目</a>	
+	<!--<a href="{url r="project#choose"}" class="ui-button theme_bgcolor ml15 mt20" style="float:left;padding:0 15px;height:35px;line-height:35px;">发起项目</a>-->	
 </div> 
 {if $USER_NOTIFY_COUNT>0 or $USER_MESSAGE_COUNT>0}
 	{if $HIDE_USER_NOTIFY eq 0}

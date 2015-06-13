@@ -2,73 +2,34 @@
 	.db .bdshare-button-style0-16 { float:left; }  
 	.db .bdshare-button-style0-16 a , .db .bdshare-button-style0-16 .bds_more { padding-left:0; background-image:none; margin-top:0; }
 	.bdshare-button-style0-16 a:hover { filter:alpha(opacity=100); opacity:1; }
-	.foot-logo img{ width:90px; height:90px;}
+	.foot-logo img{ width:90px; height:90px;}	
 </style>
 <!--footer static-->
-<div class="footer" pbid="footer" id="J_footer">
+<div class="footer" pbid="footer" id="J_footer" style="padding-top:0px">
 	<!--footer section start-->
-	<div class="footer-section">
+	<div class="footer-section" style="padding:20px 0px;background:#EE7A00;margin-bottom:0px;">
 		<div class="footer-wrap">
+		
 			<!--footer map start-->
-			<div class="foot-map">
+			<div class="foot-map" style="width:600px;">
 				{foreach from=$help_cates item=help_item name="help_items"}
-					{if $smarty.foreach.help_items.index lt 6}
-						<dl {if $smarty.foreach.help_items.last}class="last"{/if}>
-							<dt>{$help_item.title}</dt>
-							{foreach from=$help_item.article item=article_list}
-							<dd><a href="{$article_list.url}" >{$article_list.title}</a></dd>
+					{if $smarty.foreach.help_items.index lt 2}
+						<dl style="float:none;width:600px;margin-bottom:20px">
+							<dt style="color:#333;font-size:15px;"><b>{$help_item.title}</b></dt>
+							{foreach from=$help_item.article item=article_list name="article_list"}
+							<dd style="color:#333;display:inline-block;font-size:15px"><a href="{$article_list.url}"  style="color:#333;" ><b>{$article_list.title}</b></a>&nbsp;&nbsp;<span {if $smarty.foreach.article_list.last}style="display:none"{/if}>|</span>&nbsp;&nbsp;</dd>
 							{/foreach}
 						</dl>
 					{/if}
 				{/foreach}
-			</div>
-			<!--foot map end-->
-			<div class="foot-logo">
-				<h1>
-					<span><img src="{function name="app_conf" v="QR_CODE"}" /></span>
-				</h1>
-				<h2></h2>
-			</div>
-		</div>
-	</div>
-	<div class="blank"></div>
-	<!--footer section start-->
-	<div class="footer-copy ">
-		<div class="footer-wrap">
-			 {foreach from=$g_links item=links}
-			<div class="ft-links">
-				<div class="g_links {if $links.type==1}g_imglinks{/if}">
-					<span class="f_l" {if $links.type==1}style="height:30px;line-height:30px"{/if}>{$links.name}：</span>
-					<div class="g_links_text f_l">
-						{foreach from=$links.list item=g_links key=k}
-							{if $key eq 2}
-							|
-							{/if}
-							{if $links.type==1}
-							{if $g_links.img}
-							<a href="{$g_links.url}" target="_blank"><img src="{$g_links.img}" alt="{$g_links.name}" height=30></a>
- 							{/if}
-							{else}
-							{if $g_links.name}
-							<a href="{$g_links.url}" target="_blank">{$g_links.name}</a>
-							{/if}
-							{/if}
-							
-						
-						{/foreach}  
-					</div>		
-				</div>
-			</div>
-			<div class="blank10"></div>
-			 {/foreach}
-			
-			<div class="db">
-				<span class="f_l">关注我们：</span>
-				<div class="bdsharebuttonbox">
-					<a href="#" class="db3" data-cmd="qzone" title="分享到QQ空间"></a>
-					<a href="#" class="db1" data-cmd="tsina" title="分享到新浪微博"></a>
-					<a href="#" class="db4" data-cmd="tqq" title="分享到腾讯微博"></a>
-					<a href="#" class="db2" data-cmd="renren" title="分享到人人网"></a>
+				
+				<div class="db" style="float:none;font:12px/1.5 'Microsoft Yahei','\5FAE\8F6F\96C5\9ED1',Arial,'Hiragino Sans GB','\5B8B\4F53';">
+				<span class="f_l" style="color:#333;font-size:15px;float:none;display:block;margin-bottom:20px"><b>关注我们</b></span>
+				<div class="bdsharebuttonbox" style="float:none">
+					<a href="#" class="" data-cmd="tsina" title="分享到新浪微博" style="display:inline-block;width:65px;height:65px;margin-right:20px"><img src="./app/Tpl/fanwe_1/images/fenxiang02.png" alt="新浪微博" title="新浪微博" /></a>
+					<a href="#" class="" data-cmd="tqq" title="分享到腾讯微博" style="display:inline-block;width:65px;height:65px;margin-right:20px"><img src="./app/Tpl/fanwe_1/images/fenxiang03.png" alt="腾讯微博" title="腾讯微博" /></a>
+					<a href="#" class="" data-cmd="qzone" title="分享到QQ空间" style="display:inline-block;width:65px;height:65px;margin-right:20px"><img src="./app/Tpl/fanwe_1/images/fenxiang01.png" alt="QQ空间" title="QQ空间" /></a>					
+					<!--<a href="#" class="db2" data-cmd="renren" title="分享到人人网"></a>-->
 				</div>
 				<script>
 					window._bd_share_config={
@@ -76,10 +37,48 @@
 					with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 				</script>
 			</div>
-			<div style="color:#a5a5a5;font:12px 'SimSun';float:right;line-height:24px; text-align:right;">
+			</div>
+			<!--foot map end-->												
+						
+				
+				<div class="foot-logo" style="padding-top:0px;margin-right:50px;">
+					<!--<h1>
+					<span><img src="{function name="app_conf" v="QR_CODE"}" /></span>
+					</h1>-->					
+					<div><img  style="width:140px;height:70px;margin-bottom:10px" src="./app/Tpl/fanwe_1/images/ma02.png"  alt="标题" title="标题" /></div>
+					<div><img  style="width:140px;height:140px;margin-bottom:10px" src="./app/Tpl/fanwe_1/images/er03.png"  alt="二维码" title="二维码" /></div>
+					<div style="color:#333;font-size:15px;font-weight:700;text-align:center"><p>公众账号：乐天百特</p></div>
+				</div>
+				
+				<div class="foot-logo" style="padding-top:0px;margin-right:100px;">					
+					<div><img  style="width:140px;height:70px;margin-bottom:10px" src="./app/Tpl/fanwe_1/images/ma01.png"  alt="标题" title="标题" /></div>
+					<div><img  style="width:140px;height:140px;margin-bottom:10px" src="./app/Tpl/fanwe_1/images/er03.png"  alt="二维码" title="二维码" /></div>
+					<div style="color:#333;font-size:15px;font-weight:700;text-align:center"><p>新浪微博：拼地时代</p></div>
+				</div>
+				
+		</div>
+	</div>
+	
+	
+	
+	
+	<div class="blank"></div>
+	<!--footer section start-->
+	<div class="footer-copy " style="height:80px">
+		<div class="footer-wrap">
+		 
+			<div style="color:#ddd;font:14px 'SimSun';float:left;line-height:24px;text-align:center;font-weight:700;margin-top:20px">
 				{function name="app_conf" v="SITE_LICENSE"}&nbsp;{function name="app_conf" v="STATE_CDOE"}<br />
 				{function name="app_conf" v="NETWORK_FOR_RECORD"}
-			</div>	
+			</div>
+			
+			<div style="color:#ddd;font:14px 'SimSun';line-height:33px;font-weight:700;margin-top:20px;float:right">
+				<div>					
+					<div style=""><p><img style="vertical-align:middle;margin-right:10px" src="./app/Tpl/fanwe_1/images/lian01.png" alt="联系" title="联系" />联系电话：13381168353&nbsp;&nbsp;&nbsp;&nbsp;座机：010-62626261</p></div>
+				</div>
+				<div style=""><p><img style="vertical-align:middle;margin-right:10px" src="./app/Tpl/fanwe_1/images/lian02.png" alt="联系" title="联系" />地址：北京市大兴区北臧村镇赵家场村魏永路与左堤路交界处</p></div>
+			</div>
+							
 		</div>
 	</div>
 </div>	    

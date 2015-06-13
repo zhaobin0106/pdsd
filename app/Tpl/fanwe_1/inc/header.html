@@ -56,7 +56,8 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 <body>
 <div class="header" id="J_head">
 	<div class="wrap">
-		<div class="logo f_l">
+		
+		<div class="f_l">
 			<a class="link" href="{$APP_ROOT}/">
 				<?php
 					$this->_var['logo_image'] = app_conf("SITE_LOGO");
@@ -64,60 +65,22 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 				{function name="load_page_png" v=$logo_image}
 			</a>
 		</div>
-		<ul class="main_nav f_l">
-		{foreach from=$nav_list item=nav_item}
-			<li class="{if $deal_type} {if $deal_type eq 'gq_type' && $nav_item.u_module eq 'deals' && $nav_item.u_action eq 'index' && $nav_item.u_param eq 'type=1'}current{elseif  $deal_type eq 'product_type' && $nav_item.u_module eq 'deals' && $nav_item.u_action eq 'index' && $nav_item.u_param eq ''}current{elseif  $deal_type eq 'home' && $nav_item.u_module eq 'investor' && $nav_item.u_action eq 'invester_list' }current{elseif  $deal_type eq 'article_type' && $nav_item.u_module eq 'article_cate' && $nav_item.u_action eq ''&& $nav_item.u_param eq '' }current{/if} {else} {if $nav_item.current eq 1}current{/if}{/if}">
-				<a href="{$nav_item.url}"  target="{if $nav_item.blank eq 1}_blank{/if}" title="{$nav_item.name}">
-					<span>{$nav_item.name}</span>	
-				</a>	
-			</li>
-		{/foreach}	
+		
+		
+		<ul class="main_nav f_l" style="margin-left:120px;">		
+			<li  class=""><a  style="border-bottom:0px solid #eee;" href="http://pdsd.maipiaoqu.com/"  target=""><span>首页</span></a></li>			
+			<li  class=""><a  style="border-bottom:0px solid #eee;" href="http://pdsd.maipiaoqu.com/index.php?ctl=deals"  target=""><span>拼地</span></a></li>
+			<li  class=""><a  style="border-bottom:0px solid #eee;" href="http://pdsd.maipiaoqu.com/index.php?ctl=news"  target=""><span>尝尝再说</span></a></li>
+			<li  class=""><a  style="border-bottom:0px solid #eee;" href="http://pdsd.maipiaoqu.com/index.php?ctl=article_cate"  target=""><span>去地里看看</span></a></li>
+			<li  class=""><a  style="border-bottom:0px solid #eee;" href="http://pdsd.maipiaoqu.com/index.php?ctl=investor&act=invester_list"  target=""><span>拼地尝鲜市场</span></a></li>
+		
 		</ul>
-		<div class="f_l">
-			<form action="{url r="deals"}" method="post" id="header_search_form">
-			<div class="header_seach f_l">		
-			<input type="button" value="" class="seach_submit" id="header_submit">
-			<input type="text" id="header_keyword" name="k" placeholder="搜索项目" class="seach_text"> 
-            {if app_conf("INVEST_STATUS") eq 0}
-				<div id="ddlText" class="ddlspan ">产品众筹</div> 
-            	<input type="hidden" name="hid_ddlText" value="0" />
-			{/if}
-			{if app_conf("INVEST_STATUS") eq 1}
-				<div id="ddlText" class="ddlspan ">产品众筹</div> 
-            	<input type="hidden" name="hid_ddlText" value="0" />
-			{/if}
-			{if app_conf("INVEST_STATUS") eq 2}
-				<div id="ddlText" class="ddlspan ">股权众筹</div> 
-            	<input type="hidden" name="hid_ddlText" value="1" />
-			{/if}
-            <ul class="ddlul" tagdom="ddlText">
-				{if app_conf("INVEST_STATUS") eq 0} 
-         			<li livalue="0" class="libg class_select">产品众筹</li>  
-             		<li livalue="1" class="class_select">股权众筹</li>
-				{/if}
-				{if app_conf("INVEST_STATUS") eq 1}
-					<li livalue="0" class="libg class_select">产品众筹</li>  
-				{/if}
-				{if app_conf("INVEST_STATUS") eq 2}
-					<li livalue="1" class="libg class_select">股权众筹</li>
-				{/if}
-            </ul>
-				{if app_conf("INVEST_STATUS") eq 0} 
-					<input type="hidden" name="type" value="0"/>				
-					<input type="hidden" name="redirect" value="1"/>		
-				{/if}
-				{if app_conf("INVEST_STATUS") eq 1}
-					<input type="hidden" name="type" value="0"/>		
-				{/if}
-				{if app_conf("INVEST_STATUS") eq 2}
-					<input type="hidden" name="type" value="1"/>	
-				{/if}		
-			</div>
-			</form>	
-        </div>
-		<div class="f_r" style="width:320px;">		
+		
+		
+		<div class="f_r">		
 			{insert name="login_tip"}
 		</div>
+		
 	</div>		
 </div>
 <script type="text/javascript">
