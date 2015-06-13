@@ -150,8 +150,11 @@ border-radius:2px;
 	<div class="ui-deals wrap" style="overflow:hidden;">
 		<adv adv_id="deals_top" />
 		<div class="blank20"></div>
+		
+		<!-- 项目分类 开始-->
 		<div class="ui_deals_filter">
 			<div class="ui_deals_filter_item">
+				
 				<div class="ui_deals_filter_l f_r">
 					<ul>
 						{foreach from=$cate_list item=cate_item}
@@ -163,6 +166,7 @@ border-radius:2px;
 						{/foreach}
 					</ul>
 				</div>
+				
 				{if $child_cate_list}
 				<div class="blank0"></div>
 				<div class="ui_deals_filter_l child_cate">
@@ -177,8 +181,15 @@ border-radius:2px;
 				</div>
 				<div class="blank5"></div>
 				{/if}
+				
 			</div>
 		</div>
+		<!-- 项目分类 结束-->
+		
+		
+		
+		
+		
 		<div class="blank"></div>
 		<div id="pin_box" style="margin-top:0">
 			<div class="filter-box">
@@ -195,6 +206,7 @@ border-radius:2px;
 					</select>
 				</a>
 				</div>	
+				
 				<script type="text/javascript">
 					$(document).ready(function(){
 						$(".cur-select").html(
@@ -208,6 +220,7 @@ border-radius:2px;
 						}
 					);
 				</script>
+				
 				<div class="rel-key-rec f_r" style="margin-right:10px">
 					<a href="{url r="deals" p="type=$p_type"}" {if $p_state eq ''} class="current"{/if}>所有项目{if $p_state eq ''}({$deal_count}){/if}</a>
 					{foreach from=$state_list item=state_item key=key}
@@ -284,10 +297,12 @@ border-radius:2px;
 				{include file="inc/deal_list_invest.html"}
 			{else}
 				{include file="inc/deal_list.html"}
-			{/if}
-			
-			
+			{/if}					
 		</div>	
+		
+		
+		
+		
 		<div class="blank"></div>
 		<div id="pin_loading" rel="{url r="ajax#deals" p="r=$p_r&id=$p_id&loc=$p_loc&tag=$p_tag&k=$p_k&p=$current_page&state=$p_state&type=$p_type"}">正在努力加载</div>	
 		<div class="pages">{$pages}</div>
