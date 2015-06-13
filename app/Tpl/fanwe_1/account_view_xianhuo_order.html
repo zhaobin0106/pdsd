@@ -23,15 +23,14 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 		<div class="switch_nav">
 			<ul>
 				{if $deal_info.type eq 1}
-				<li class="current"><a href="{url r="account#mine_investor_status"}">投资的项目</a></li>
+				<li class="current"><a href="{url r="account#mine_investor_status"}">购买的商品</a></li>
 				{else}
-				<li class="current"><a href="{url r="account#index"}">支持的项目</a></li>
+				<li class="current"><a href="{url r="account#xianhuo"}">购买的商品</a></li>
 				{/if}
 						{if $user_info.user_level eq 14}
 				
 				<li><a href="{url r="account#project"}">我的项目</a></li>
 				{/if}
-				<li><a href="{url r="account#focus"}">关注的项目</a></li>
 				<li><a href="{url r="account#credit"}">收支明细</a></li>
 				
 			</ul>
@@ -45,7 +44,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 			<table class="data-table order_table">
 
 				<tr>
-					<td class="deal_name" width=150>项目名称</td>
+					<td class="deal_name" width=150>商品名称</td>
 					<td>
 						{if $deal_info}
 						<a href="{url r="deal#show" p="id=$deal_info.id"}" target="_blank" class="theme_fcolor">{$order_info.deal_name}</a>
@@ -90,9 +89,9 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 					<td class="deal_name">应付金额</td>
 					<td>
 						
-						{if $order_info.kuaidi_price gt 0}
+						{if $order_info.kuaidi_jiage gt 0}
 						项目金额：<span class="f_money">{function name="format_price" v=$order_info.deal_price}</span>&nbsp;&nbsp;
-						运费：<span class="f_money">{function name="format_price" v=$order_info.kuaidi_price}</span>&nbsp;&nbsp;
+						运费：<span class="f_money">{function name="format_price" v=$order_info.kuaidi_jiage}</span>&nbsp;&nbsp;
 						总额：<span class="f_money">{function name="format_price" v=$order_info.total_price}</span>
 						{else}
 						{function name="format_price" v=$order_info.total_price}
@@ -103,9 +102,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 				<tr>
 					<td class="deal_name">收款情况</td>
 					<td>
-						{if $order_info.order_status eq 1}
-						因项目过期，资金已退到个人帐户
-						{/if}
+	
 						{if $order_info.order_status eq 2}
 						因项目限额已满，资金已退到个人帐户
 						{/if}	
@@ -126,36 +123,21 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 						{function name="to_date" v=$order_info.pay_time}
 					</td>
 				</tr>
-				{if $order_info.is_zhongjiang neq 0}
-				<tr>
-					<td class="deal_name">中奖情况</td>
-					<td>
-								{if $order_info.is_zhongjiang eq 1}
-								恭喜您成功中奖
-								{/if}
-								{if $order_info.is_zhongjiang eq 2}
-								很遗憾您未中奖
-								{/if}
-					</td>
-				</tr>
-				{/if}
 				{if $order_info.order_status eq 3}
 				<tr>
-					<td class="deal_name">回报情况</td>
+					<td class="deal_name">发货情况</td>
 					<td>
-						{if $order_info.is_success eq 0}
+						{if $order_info.repay_time eq 0}
 							{if $order_info.is_refund eq 1}
-							项目失败，金额已退回会员帐户
+							购买失败，金额已退回会员帐户
 							{else}
-							项目未成功
+							购买成功，等待发货
 							{/if}
 						{else}
-							{if $order_info.repay_time eq 0}
-							项目成功，回报未发放
-							{else}
 							{$order_info.repay_memo}
+							已发货
 							{/if}
-						{/if}
+
 					</td>
 				</tr>
 				{if $deal_info.type eq 1}
@@ -195,7 +177,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 						<script>
 							$(function(){
 								$("#J_detail_panel").bind("click",function(){
-									var ajaxurl = APP_ROOT+"/index.php?ctl=ajax&act=set_repay_make";
+									var ajaxurl = APP_ROOT+"/index.php?ctl=ajax&act=set_sp_repay_make";
 				   
 									var query = new Object();
 									query.id = {$order_info.id};
@@ -227,7 +209,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 			</table>
 			{if $order_info.order_status eq 0}
 			<div class="blank"></div>
-			<form class="pay_form" action="{url r="account#go_order_pay"}" target="_blank" method="post">									
+			<form class="pay_form" action="{url r="account#go_xianhuo_order_pay"}" target="_blank" method="post">									
 				
 				{if $user_info.money gt 0}
 					<div class="form_row">
@@ -256,7 +238,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 							<span>确定，去付款</span>
 						</div>
 					</div>				
-					<input type="hidden" id="back_url" value="{url r="account#view_order" p="id=$order_info.id"}" />	
+					<input type="hidden" id="back_url" value="{url r="account#view_xianhuo_order" p="id=$order_info.id"}" />	
 					<input type="hidden" value="{$order_info.id}" name="order_id" />	
 					<input type="hidden" value="1" name="ajax" />
 					<div class="blank"></div>				
@@ -270,7 +252,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 <div class="blank"></div>
 <script type="text/javascript">
 	var left_money=$(".pay_form").find("input[name='max_pay']").val();
-	var need_money=$(".pay_form").find("input[name='max_credit']").val();
+	var need_money=Number($(".pay_form").find("input[name='max_credit']").val());
 	$(function(){
 		$("input[name='ye_check']").attr("checked","checked");
 		if(left_money>=need_money){

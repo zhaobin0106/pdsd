@@ -55,7 +55,6 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 					<th width="100">价格</th>
 					<th width="400">描述</th>
 					<th width="100">限额</th>
-					<th width="100">配送</th>
 					<th width="">操作</th>
 				</tr>
 				{foreach from=$deal_item_list item=item}
@@ -65,7 +64,6 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 					</td>
 					<td>{$item.description}</td>
 					<td>{if $item.is_limit_user eq 0}不限{else} {if $item.limit_user eq 0}不限{else}{$item.limit_user}位{/if}{/if}</td>
-					<td>{if $item.is_delivery eq 0}无需配送{else}运费 {if $item.delivery_fee eq 0}包邮{else}{function name="format_price" v=$item.delivery_fee}{/if}{/if}</td>
 					<td>
 						<a href="{url r="project#edit_item" p="id=$item.id"}">编辑</a> &nbsp; &nbsp;
 						<a href="{url r="project#del_item" p="id=$item.id"}" class="del_item">删除</a>
@@ -101,7 +99,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 					<label class="fileuploading hide" ></label>
 				</div>
 				<div class="blank0"></div>	
-				<div class="form_row control-group">
+<!-- 				<div class="form_row control-group">
 					<label class="form_lable">是否配送:</label>
 					<a class="btn_select w100 f_l mr10" id="is_delivery_select">
 						<span class="cur_select" id="is_delivery_cur"></span>
@@ -111,13 +109,16 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 							<option value="1">是</option>
 						</select>
 					</a>
-				</div>
-				<div class="blank0"></div>
+				</div> -->
+				<input type="hidden" name="is_delivery" value="1"/>
+<!-- 				<div class="blank0"></div>
 				<div class="form_row control-group" style="display:none;">
 					<label class="form_lable">运费:</label>
 					<input type="text" value="" class="textbox w100" name="delivery_fee" />
 					<label class="tip_box" >元</label>
-				</div>
+				</div> -->
+									<input type="hidden" value=""  name="delivery_fee" />
+				
 				<div class="blank0"></div>
 				<div class="form_row control-group">
 					<label class="form_lable">是否限购:</label>
@@ -168,10 +169,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 						<div class="blank"></div>
 						预计回报发放时间：项目成功结束后<span id="repaid_day">0</span>天内
 					</div>
-					<div id="delivery_box" class="f14">
-						<div class="blank"></div>
-						运费 ￥<span id="delivery_fee_box">0</span>
-					</div>
+	
 					<div class="blank10"></div>
 					<div class="ui-button_green">
 						<div>

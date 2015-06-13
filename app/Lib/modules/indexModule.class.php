@@ -41,6 +41,8 @@ class indexModule extends BaseModule
 		$GLOBALS['tmpl']->assign("current_page",1);
  		$deal_result = get_deal_list($limit,'type=0');
 		$GLOBALS['tmpl']->assign("deal_list",$deal_result['list']);
+		$fore_result = get_fore_list($limit,'type=0');
+		$GLOBALS['tmpl']->assign("fore_list",$fore_result['list']);
  		$deal_invest_result = get_deal_list($limit,'type=1');
 		$GLOBALS['tmpl']->assign("deal_list_invest",$deal_invest_result['list']);
 		//===============首页项目列表END===================

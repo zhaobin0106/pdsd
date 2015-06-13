@@ -7,7 +7,7 @@
 // | Author: 云淡风轻(97139915@qq.com)
 // +----------------------------------------------------------------------
 require APP_ROOT_PATH.'app/Lib/shop_lip.php';
- class dealModule extends BaseModule
+ class foreModule extends BaseModule
 {
 	public function index()
 	{		
@@ -20,7 +20,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		get_mortgate();
 		//获取项目的ID
 		$id = intval($_REQUEST['id']);
-		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".$id." and is_delete = 0 and (is_effect = 1 or (is_effect = 0 and user_id = ".intval($GLOBALS['user_info']['id'])."))");
+		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$id." and is_delete = 0 and (is_effect = 1 or (is_effect = 0 and user_id = ".intval($GLOBALS['user_info']['id'])."))");
 		$deal_info['deal_type']=$GLOBALS['db']->getOne("select name from ".DB_PREFIX."deal_cate where id=".$deal_info['cate_id']);
 		$deal_info['login_time']=$GLOBALS['db']->getOne("select login_time from ".DB_PREFIX."user where id=".$deal_info['user_id']);
  		if(!$deal_info)
@@ -40,8 +40,8 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 			$xun_num=$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."investment_list where  type=0 and  deal_id=".$id);
 			$GLOBALS['tmpl']->assign('xun_num',intval($xun_num));
 		}		
-		$deal_info = cache_deal_extra($deal_info);
-		$comment_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_comment where deal_id = ".$id." and log_id = 0 and status=1");
+		$deal_info = cache_fore_extra($deal_info);
+		$comment_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_comment where fore_id = ".$id." and log_id = 0 and status=1");
 		$GLOBALS['tmpl']->assign('comment_count',$comment_count);
 		$this->init_deal_page(@$deal_info);	
 		
@@ -119,7 +119,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 			$GLOBALS['tmpl']->display("deal_investor_show.html");
 		}else{
 			//普通众筹
-			$GLOBALS['tmpl']->display("deal_show.html");
+			$GLOBALS['tmpl']->display("fore_show.html");
 		}
 		
 		
@@ -157,10 +157,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
  			//统计每个子项目真实+虚拟（人）
 			$deal_info['deal_item_list'][$k]['virtual_person_list']=intval($v['virtual_person']+$v['support_count']);
  		}
- 		foreach ($deal_info['deal_xianhuo_list'] as $k=>$v){
- 			//统计每个子项目真实+虚拟（人）
- 			$deal_info['deal_xianhuo_list'][$k]['virtual_person_list']=intval($v['virtual_person']+$v['support_count']);
- 		}
+
  		if($deal_info['type']==1){
 	 		$deal_info['person']=$deal_info['invote_num'];
 			$deal_info['total_virtual_price']=number_price_format($deal_info['invote_money']/10000);
@@ -172,16 +169,15 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
  		}
  		//项目等级放到项目详细页面模块（对详细页面进行控制）
 		$deal_info['deal_level']=$GLOBALS['db']->getOne("select level from ".DB_PREFIX."deal_level where id=".intval($deal_info['user_level']));
-		$deal_info['virtual_person']=$GLOBALS['db']->getOne("select sum(virtual_person) from ".DB_PREFIX."deal_item where deal_id=".$deal_info['id']);
+		$deal_info['virtual_person']=$GLOBALS['db']->getOne("select sum(virtual_person) from ".DB_PREFIX."fore_item where deal_id=".$deal_info['id']);
 		//初始化与虚拟金额有所关联的几个比较特殊的数据 end
 		if(!empty($deal_info['vedio'])&&!preg_match("/http://player.youku.com/embed/i",$deal_info['source_video'])){
 			$deal_info['source_vedio']= preg_replace("/id_(.*)\.html(.*)/i","http://player.youku.com/embed/\${1}",baseName($deal_info['vedio']));
-			$GLOBALS['db']->query("update ".DB_PREFIX."deal set source_vedio='".$deal_info['source_vedio']."'  where id=".$deal_info['id']);
+			$GLOBALS['db']->query("update ".DB_PREFIX."fore set source_vedio='".$deal_info['source_vedio']."'  where id=".$deal_info['id']);
 		}
   		$GLOBALS['tmpl']->assign("deal_info",$deal_info);
 	
 		$deal_item_list = $deal_info['deal_item_list'];
-		$deal_xianhuo_list = $deal_info['deal_xianhuo_list'];
 		
 		//开启限购后剩余几位
 		foreach ($deal_item_list as $k=>$v){
@@ -189,17 +185,12 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 				$deal_item_list[$k]['remain_person']=$v['limit_user']-$v['virtual_person']-$v['support_count'];
 			}
 		}
-		foreach ($deal_xianhuo_list as $k=>$v){
-			if($v['limit_user']>0){
-				$deal_xianhuo_list[$k]['remain_person']=$v['limit_user']-$v['virtual_person']-$v['support_count'];
-			}
-		}
+
 		$GLOBALS['tmpl']->assign("deal_item_list",$deal_item_list);
-		$GLOBALS['tmpl']->assign("deal_xianhuo_list",$deal_xianhuo_list);
 		
  		if($GLOBALS['user_info'])
 		{
-			$is_focus = $GLOBALS['db']->getOne("select  count(*) from ".DB_PREFIX."deal_focus_log where deal_id = ".$deal_info['id']." and user_id = ".intval($GLOBALS['user_info']['id']));
+			$is_focus = $GLOBALS['db']->getOne("select  count(*) from ".DB_PREFIX."fore_focus_log where fore_id = ".$deal_info['id']." and user_id = ".intval($GLOBALS['user_info']['id']));
 			$GLOBALS['tmpl']->assign("is_focus",$is_focus);
 		}
 	
@@ -207,13 +198,13 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 	public function comment()
 	{
 		$id = intval($_REQUEST['id']);
-		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".$id." and is_delete = 0 and (is_effect = 1 or (is_effect = 0 and user_id = ".intval($GLOBALS['user_info']['id'])."))");
+		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$id." and is_delete = 0 and (is_effect = 1 or (is_effect = 0 and user_id = ".intval($GLOBALS['user_info']['id'])."))");
 		$deal_info['deal_type']=$GLOBALS['db']->getOne("select name from ".DB_PREFIX."deal_cate where id=".$deal_info['cate_id']);
 		if(!$deal_info)
 		{
 			app_redirect(url("index"));
 		}		
-		$deal_info = cache_deal_extra($deal_info);
+		$deal_info = cache_fore_extra($deal_info);
 		
 		$this->init_deal_page($deal_info);	
 		
@@ -223,8 +214,8 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		if($page==0)$page = 1;		
 		$limit = (($page-1)*$page_size).",".$page_size	;
 
-		$comment_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_comment where deal_id = ".$id." and log_id = 0 and status=1 order by create_time desc limit ".$limit);
-		$comment_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_comment where deal_id = ".$id." and log_id = 0 and status=1");
+		$comment_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_comment where fore_id = ".$id." and log_id = 0 and status=1 order by create_time desc limit ".$limit);
+		$comment_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_comment where fore_id = ".$id." and log_id = 0 and status=1");
 		
 		$GLOBALS['tmpl']->assign("comment_list",$comment_list);
 		$GLOBALS['tmpl']->assign("comment_count",$comment_count);
@@ -233,19 +224,19 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		$p  =  $page->show();
 		$GLOBALS['tmpl']->assign('pages',$p);	
 		
-		$GLOBALS['tmpl']->display("deal_comment.html");
+		$GLOBALS['tmpl']->display("fore_comment.html");
 	}
 	
 	public function support()
 	{
 		$id = intval($_REQUEST['id']);
-		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".$id." and is_delete = 0 and (is_effect = 1 or (is_effect = 0 and user_id = ".intval($GLOBALS['user_info']['id'])."))");
+		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$id." and is_delete = 0 and (is_effect = 1 or (is_effect = 0 and user_id = ".intval($GLOBALS['user_info']['id'])."))");
 		$deal_info['deal_type']=$GLOBALS['db']->getOne("select name from ".DB_PREFIX."deal_cate where id=".$deal_info['cate_id']);
 		if(!$deal_info)
 		{
 			app_redirect(url("index"));
 		}		
-		$deal_info = cache_deal_extra($deal_info);
+		$deal_info = cache_fore_extra($deal_info);
 		
 		$this->init_deal_page($deal_info);	
 		
@@ -254,8 +245,8 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		if($page==0)$page = 1;		
 		$limit = (($page-1)*$page_size).",".$page_size	;
 
-		$support_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_support_log where deal_id = ".$id." order by create_time desc limit ".$limit);
-		$support_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_support_log where deal_id = ".$id);
+		$support_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_support_log where fore_id = ".$id." order by create_time desc limit ".$limit);
+		$support_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_support_log where fore_id = ".$id);
 		//支持者优化 start
 		$user_ids=array();
 		
@@ -279,7 +270,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		$p  =  $page->show();
 		$GLOBALS['tmpl']->assign('pages',$p);	
 		
-		$comment_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_comment where deal_id = ".$id." and log_id = 0 and status=1");
+		$comment_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_comment where fore_id = ".$id." and log_id = 0 and status=1");
 		$GLOBALS['tmpl']->assign('comment_count',$comment_count);
 		$GLOBALS['tmpl']->display("deal_support.html");
 	}
@@ -293,7 +284,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		else
 		{
 			$id = intval($_REQUEST['id']);
-			$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".$id." and is_delete = 0 and is_effect = 1");
+			$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$id." and is_delete = 0 and is_effect = 1");
 			if(!$deal_info)
 			{
 				$data['status'] = 3;	
@@ -301,17 +292,17 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 				ajax_return($data);
 			}
 			
-			$focus_data = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_focus_log where deal_id = ".$id." and user_id = ".intval($GLOBALS['user_info']['id']));
+			$focus_data = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_focus_log where fore_id = ".$id." and user_id = ".intval($GLOBALS['user_info']['id']));
 			if($focus_data)
 			{
-				$GLOBALS['db']->query("update ".DB_PREFIX."deal set focus_count = focus_count - 1 where id = ".$id." and is_effect = 1");
+				$GLOBALS['db']->query("update ".DB_PREFIX."fore set focus_count = focus_count - 1 where id = ".$id." and is_effect = 1");
 				if($GLOBALS['db']->affected_rows()>0)
 				{
-					$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_focus_log where id = ".$focus_data['id']);
+					$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_focus_log where id = ".$focus_data['id']);
 					$GLOBALS['db']->query("update ".DB_PREFIX."user set focus_count = focus_count - 1 where id = ".intval($GLOBALS['user_info']['id']));
 					
 					//删除准备队列
-					$GLOBALS['db']->query("delete from ".DB_PREFIX."user_deal_notify where user_id = ".intval($GLOBALS['user_info']['id'])." and deal_id = ".$id);
+					$GLOBALS['db']->query("delete from ".DB_PREFIX."user_deal_notify where user_id = ".intval($GLOBALS['user_info']['id'])." and fore_id = ".$id);
 					$data['status'] = 2;	
 				}	
 				else
@@ -322,13 +313,13 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 			}
 			else
 			{
-				$GLOBALS['db']->query("update ".DB_PREFIX."deal set focus_count = focus_count + 1 where id = ".$id." and is_effect = 1");
+				$GLOBALS['db']->query("update ".DB_PREFIX."fore set focus_count = focus_count + 1 where id = ".$id." and is_effect = 1");
 				if($GLOBALS['db']->affected_rows()>0)
 				{
 					$focus_data['user_id'] = intval($GLOBALS['user_info']['id']);
-					$focus_data['deal_id'] = $id;
+					$focus_data['fore_id'] = $id;
 					$focus_data['create_time'] = NOW_TIME;
-					$GLOBALS['db']->autoExecute(DB_PREFIX."deal_focus_log",$focus_data);
+					$GLOBALS['db']->autoExecute(DB_PREFIX."fore_focus_log",$focus_data);
 					$GLOBALS['db']->query("update ".DB_PREFIX."user set focus_count = focus_count + 1 where id = ".intval($GLOBALS['user_info']['id']));
 					
 					//关注项目成功，准备加入准备队列
@@ -336,7 +327,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 					{
 						//未成功的项止准备生成队列
 						$notify['user_id'] = $GLOBALS['user_info']['id'];
-						$notify['deal_id'] = $deal_info['id'];
+						$notify['fore_id'] = $deal_info['id'];
 						$notify['create_time'] = NOW_TIME;
 						$GLOBALS['db']->autoExecute(DB_PREFIX."user_deal_notify",$notify,"INSERT","","SILENT");
 					}
@@ -360,7 +351,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 	{
 		
 		$id = intval($_REQUEST['id']);
-		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".$id." and is_delete = 0 and (is_effect = 1 or (is_effect = 0 and user_id = ".intval($GLOBALS['user_info']['id'])."))");
+		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$id." and is_delete = 0 and (is_effect = 1 or (is_effect = 0 and user_id = ".intval($GLOBALS['user_info']['id'])."))");
 		$deal_info['deal_type']=$GLOBALS['db']->getOne("select name from ".DB_PREFIX."deal_cate where id=".$deal_info['cate_id']);
 		if(!$deal_info)
 		{
@@ -378,8 +369,8 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 			$GLOBALS['tmpl']->assign('yu_money',intval($yu_money));
 			$GLOBALS['tmpl']->assign("percent_invest",round($yu_money/$deal_info['limit_price']*100));
 		}	
-		$deal_info = cache_deal_extra($deal_info);
-		$comment_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_comment where deal_id = ".$id." and log_id = 0 and status=1");
+		$deal_info = cache_fore_extra($deal_info);
+		$comment_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_comment where fore_id = ".$id." and log_id = 0 and status=1");
 		$GLOBALS['tmpl']->assign('comment_count',$comment_count);
 		$this->init_deal_page($deal_info);	
 
@@ -393,14 +384,14 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		$limit = (($page-1)*$page_size+($step-1)*$step_size).",".$step_size	;
 		$GLOBALS['tmpl']->assign("current_page",$page);
 		
-		$log_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_log where deal_id = ".$deal_info['id']." order by create_time desc limit ".$limit);				
-		$log_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_log where deal_id = ".$deal_info['id']);
+		$log_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_log where fore_id = ".$deal_info['id']." order by create_time desc limit ".$limit);				
+		$log_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_log where fore_id = ".$deal_info['id']);
 		
 		
 		if(!$log_list||(($page-1)*$page_size+($step-1)*$step_size)+count($log_list)>=$log_count)
 		{
 			//最后一页
-			$log_list[] = array("deal_id"=>$deal_info['id'],
+			$log_list[] = array("fore_id"=>$deal_info['id'],
 								"create_time"=>$deal_info['begin_time']+1,
 								"id"=>0);
 		}
@@ -416,7 +407,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 				$last_time_key = $log_list[$k]['online_time_key'] = $online_time['key'];				
 			}
 			
-			$log_list[$k] = cache_log_comment($log_list[$k]);
+			$log_list[$k] = cache_fore_log_comment($log_list[$k]);
 		}
 
 		$GLOBALS['tmpl']->assign("log_list",$log_list);		
@@ -437,16 +428,16 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 	{
 		
 		$id = intval($_REQUEST['id']);
-		$update_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_log where id = ".$id);
-		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".intval($update_info['deal_id'])." and is_delete = 0 and (is_effect = 1 or (is_effect = 0 and user_id = ".intval($GLOBALS['user_info']['id'])."))");
+		$update_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_log where id = ".$id);
+		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".intval($update_info['fore_id'])." and is_delete = 0 and (is_effect = 1 or (is_effect = 0 and user_id = ".intval($GLOBALS['user_info']['id'])."))");
 		if(!$deal_info)
 		{
 			app_redirect(url("index"));
 		}		
-		$deal_info = cache_deal_extra($deal_info);
+		$deal_info = cache_fore_extra($deal_info);
 		$this->init_deal_page($deal_info);	
 		
-		$log_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_log where id = ".$id);				
+		$log_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_log where id = ".$id);				
 		
 		foreach($log_list as $k=>$v)
 		{
@@ -459,13 +450,13 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 			}
 			
 			
-			$log_list[$k]['comment_count'] = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_comment where log_id = ".$v['id']." and status=1 and deal_id = ".$deal_info['id']);
+			$log_list[$k]['comment_count'] = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_comment where log_id = ".$v['id']." and status=1 and deal_id = ".$deal_info['id']);
 			
 			$page_size = DEAL_COMMENT_PAGE_SIZE;
 			$page = intval($_REQUEST['p']);
 			if($page==0)$page = 1;		
 			$limit = (($page-1)*$page_size).",".$page_size;
-			$log_list[$k]['comment_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_comment where log_id = ".$v['id']." and status=1 and deal_id = ".$deal_info['id']." order by create_time desc limit ".$limit);
+			$log_list[$k]['comment_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_comment where log_id = ".$v['id']." and status=1 and fore_id = ".$deal_info['id']." order by create_time desc limit ".$limit);
 
 			require APP_ROOT_PATH.'app/Lib/page.php';
 			$page = new Page($log_list[$k]['comment_count'],$page_size);   //初始化分页对象 		
@@ -489,7 +480,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		else
 		{
 			$id = intval($_REQUEST['id']);
-			$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".$id." and is_delete = 0 and is_effect = 1 and user_id = ".intval($GLOBALS['user_info']['id']));
+			$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$id." and is_delete = 0 and is_effect = 1 and user_id = ".intval($GLOBALS['user_info']['id']));
 			if(!$deal_info)
 			{
 				showErr("不能更新该项目的动态",1);
@@ -514,7 +505,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 
 	
 		$id = intval($_REQUEST['id']);
-		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".$id." and is_delete = 0 and is_effect = 1 and user_id = ".intval($GLOBALS['user_info']['id']));
+		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$id." and is_delete = 0 and is_effect = 1 and user_id = ".intval($GLOBALS['user_info']['id']));
 		if(!$deal_info)
 		{
 			showErr("不能更新该项目的动态",$ajax);
@@ -542,12 +533,12 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 				}
 			}
 			$data['user_id'] = intval($GLOBALS['user_info']['id']);
-			$data['deal_id'] = $id;
+			$data['fore_id'] = $id;
 			$data['create_time'] = NOW_TIME;
 			$data['user_name'] = $GLOBALS['user_info']['user_name'];
-			$GLOBALS['db']->autoExecute(DB_PREFIX."deal_log",$data);
-			$GLOBALS['db']->query("update ".DB_PREFIX."deal set log_count = log_count + 1 where id = ".$deal_info['id']);
-			showSuccess("",$ajax,url("deal#update",array("id"=>$deal_info['id'])));
+			$GLOBALS['db']->autoExecute(DB_PREFIX."fore_log",$data);
+			$GLOBALS['db']->query("update ".DB_PREFIX."fore set log_count = log_count + 1 where id = ".$deal_info['id']);
+			showSuccess("",$ajax,url("fore#update",array("id"=>$deal_info['id'])));
 		}
 	}
 	
@@ -559,19 +550,19 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 			showErr("",$ajax,url("user#login"));
 		}
 		$comment_id = intval($_REQUEST['id']);
-		$comment_item = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_comment where id = ".$comment_id." and user_id = ".intval($GLOBALS['user_info']['id']));
+		$comment_item = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_comment where id = ".$comment_id." and user_id = ".intval($GLOBALS['user_info']['id']));
 		if($comment_item)
 		{
-			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_comment where id = ".$comment_id." and user_id = ".intval($GLOBALS['user_info']['id']));
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_comment where id = ".$comment_id." and user_id = ".intval($GLOBALS['user_info']['id']));
 			if($comment_item['log_id']==0)
-			$GLOBALS['db']->query("update ".DB_PREFIX."deal set comment_count = comment_count - 1 where id = ".$comment_item['deal_id']);
+			$GLOBALS['db']->query("update ".DB_PREFIX."fore set comment_count = comment_count - 1 where id = ".$comment_item['fore_id']);
 			if($ajax==1)
 			{
 				if($GLOBALS['db']->affected_rows()>0)
 				{
 					$data['status'] = 1;
 					$data['logid'] = $comment_item['log_id'];
-					$data['counthtml'] = "评论(".$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_comment where log_id = ".$comment_item['log_id']).")";
+					$data['counthtml'] = "评论(".$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_comment where log_id = ".$comment_item['log_id']).")";
 					ajax_return($data);
 				}
 				else
@@ -598,8 +589,8 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 			showErr("",$ajax,url("user#login"));
 		}
 		
-		$comment['deal_id'] = intval($_REQUEST['deal_id']);
-		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".$comment['deal_id']." and is_delete = 0 and is_effect = 1 ");
+		$comment['fore_id'] = intval($_REQUEST['fore_id']);
+		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."foer where id = ".$comment['fore_id']." and is_delete = 0 and is_effect = 1 ");
 		if(!$deal_info)
 		{
 			showErr("该项目暂时不能评论",$ajax);
@@ -614,33 +605,33 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		$comment['log_id'] = intval($_REQUEST['log_id']);
 		$comment['user_name'] = $GLOBALS['user_info']['user_name'];
 		$comment['pid'] = intval($_REQUEST['pid']);
-		$comment['deal_user_id'] = intval($GLOBALS['db']->getOne("select user_id from ".DB_PREFIX."deal where id = ".$comment['deal_id']));
-		$comment['reply_user_id'] = intval($GLOBALS['db']->getOne("select user_id from ".DB_PREFIX."deal_comment where id = ".$comment['pid']));		
+		$comment['deal_user_id'] = intval($GLOBALS['db']->getOne("select user_id from ".DB_PREFIX."fore where id = ".$comment['fore_id']));
+		$comment['reply_user_id'] = intval($GLOBALS['db']->getOne("select user_id from ".DB_PREFIX."fore_comment where id = ".$comment['pid']));		
 		$comment['deal_user_name'] = $GLOBALS['db']->getOne("select user_name from ".DB_PREFIX."user where id = ".intval($comment['deal_user_id']));
 		$comment['reply_user_name'] = $GLOBALS['db']->getOne("select user_name from ".DB_PREFIX."user where id = ".intval($comment['reply_user_id']));
 		if(app_conf("USER_MESSAGE_AUTO_EFFECT")){
 			$comment['status']=1;
 		}
- 		$GLOBALS['db']->autoExecute(DB_PREFIX."deal_comment",$comment);
+ 		$GLOBALS['db']->autoExecute(DB_PREFIX."fore_comment",$comment);
 		$comment['id'] = $GLOBALS['db']->insert_id();		
 		
 		if(intval($_REQUEST['syn_weibo'])==1)
 		{
 			$weibo_info = array();
-			$weibo_info['content'] = $comment['content']." ".get_domain().url("deal#show",array("id"=>$comment['deal_id']));
-			$img = $GLOBALS['db']->getOne("select image from ".DB_PREFIX."deal where id = ".intval($comment['deal_id']));
+			$weibo_info['content'] = $comment['content']." ".get_domain().url("fore#show",array("id"=>$comment['fore_id']));
+			$img = $GLOBALS['db']->getOne("select image from ".DB_PREFIX."fore where id = ".intval($comment['fore_id']));
 			if($img)$weibo_info['img'] = APP_ROOT_PATH."/".$img;
 			syn_weibo($weibo_info);
 		}
 		
-		$GLOBALS['db']->query("update ".DB_PREFIX."deal_log set comment_data_cache = '' where id = ".intval($_REQUEST['log_id']));
+		$GLOBALS['db']->query("update ".DB_PREFIX."fore_log set comment_data_cache = '' where id = ".intval($_REQUEST['log_id']));
 		
 		if($ajax==1)
 		{
 			$data['status'] = 1;
 			$GLOBALS['tmpl']->assign("comment_item",$comment);
 			$data['html'] = $GLOBALS['tmpl']->fetch("inc/comment_item.html");
-			$data['counthtml'] = "评论(".$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_comment where log_id = ".$comment['log_id']).")";
+			$data['counthtml'] = "评论(".$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_comment where log_id = ".$comment['log_id']).")";
 			ajax_return($data);
 		}
 		else
@@ -656,9 +647,8 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		{
 			showErr("",$ajax,url("user#login"));
 		}
-		
-		$comment['deal_id'] = intval($_REQUEST['id']);
-		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".$comment['deal_id']." and is_delete = 0 and is_effect = 1 ");
+		$comment['fore_id'] = intval($_REQUEST['id']);
+		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$comment['fore_id']." and is_delete = 0 and is_effect = 1 ");
 		if(!$deal_info)
 		{
 			showErr("该项目暂时不能评论",$ajax);
@@ -672,23 +662,23 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		$comment['create_time'] =  NOW_TIME;
 		$comment['user_name'] = $GLOBALS['user_info']['user_name'];
 		$comment['pid'] = intval($_REQUEST['pid']);
-		$comment['deal_user_id'] = intval($GLOBALS['db']->getOne("select user_id from ".DB_PREFIX."deal where id = ".$comment['deal_id']));
-		$comment['reply_user_id'] = intval($GLOBALS['db']->getOne("select user_id from ".DB_PREFIX."deal_comment where id = ".$comment['pid']));		
+		$comment['deal_user_id'] = intval($GLOBALS['db']->getOne("select user_id from ".DB_PREFIX."fore where id = ".$comment['fore_id']));
+		$comment['reply_user_id'] = intval($GLOBALS['db']->getOne("select user_id from ".DB_PREFIX."fore_comment where id = ".$comment['pid']));		
 		$comment['deal_user_name'] = $GLOBALS['db']->getOne("select user_name from ".DB_PREFIX."user where id = ".intval($comment['deal_user_id']));
 		$comment['reply_user_name'] = $GLOBALS['db']->getOne("select user_name from ".DB_PREFIX."user where id = ".intval($comment['reply_user_id']));
 		if(app_conf("USER_MESSAGE_AUTO_EFFECT")){
 			$comment['status']=1;
 		}
-		$GLOBALS['db']->autoExecute(DB_PREFIX."deal_comment",$comment);
+		$GLOBALS['db']->autoExecute(DB_PREFIX."fore_comment",$comment);
 		$comment['id'] = $GLOBALS['db']->insert_id();		
 		
-		$GLOBALS['db']->query("update ".DB_PREFIX."deal set comment_count = comment_count+1 where id = ".$comment['deal_id']);
+		$GLOBALS['db']->query("update ".DB_PREFIX."fore set comment_count = comment_count+1 where id = ".$comment['fore_id']);
 		
 		if(intval($_REQUEST['syn_weibo'])==1)
 		{
 			$weibo_info = array();
-			$weibo_info['content'] = $comment['content']." ".get_domain().url("deal#show",array("id"=>$comment['deal_id']));
-			$img = $GLOBALS['db']->getOne("select image from ".DB_PREFIX."deal where id = ".intval($comment['deal_id']));
+			$weibo_info['content'] = $comment['content']." ".get_domain().url("fore#show",array("id"=>$comment['fore_id']));
+			$img = $GLOBALS['db']->getOne("select image from ".DB_PREFIX."fore where id = ".intval($comment['fore_id']));
 			if($img)$weibo_info['img'] = APP_ROOT_PATH."/".$img;
 			syn_weibo($weibo_info);
 		}

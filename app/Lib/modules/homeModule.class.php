@@ -108,8 +108,11 @@ class homeModule extends BaseModule
 		$page = new Page($deal_count,$page_size);   //初始化分页对象 		
 		$p  =  $page->show();
 		$GLOBALS['tmpl']->assign('pages',$p);		
-		
+		if($home_user_info['user_level'] == 14){
 		$GLOBALS['tmpl']->display("home_index.html");
+		}else{
+		app_redirect(url("home#support&id=".$id));									
+		}
 	}
 	
 	

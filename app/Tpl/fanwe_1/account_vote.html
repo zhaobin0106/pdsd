@@ -44,10 +44,10 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 									{function name="format_price" v=$order_item.deal_price}
 								</td>
 								<td>
-									{if $order_item.delivery_fee eq 0}
+									{if $order_item.kuaidi_price eq 0}
 									--
 									{else}
-									{function name="format_price" v=$order_item.delivery_fee}
+									{function name="format_price" v=$order_item.kuaidi_price}
 									{/if}
 								</td>
 								<td>			

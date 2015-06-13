@@ -14,18 +14,18 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 	<div class="homeright pageright f_r">
 		<div class="full">
 		<div class="deal_name_title">
-		{$deal_info.name} 支持记录
+		{$deal_info.name} 报名记录
 		</div>
 		{if $support_list}
 		<table class="data-table">
 			{foreach from=$support_list item=support_item}
 			<tr>
-				<td class="data-title">支持者</td>
+				<td class="data-title">报名者</td>
 				<td width=193 class="tl"><a href="{url r="home" p="id=$support_item.user_id"}" class="linkgreen" target="_blank">{$support_item.user_name}</a></td>
-				<td class="data-title">支持金额</td>
+				<td class="data-title">报名费用</td>
 				<td width=193 class="tl">
-					{if $support_item.kuaidi_price gt 0}
-					{function name="format_price" v=$support_item.deal_price}+运费{function name="format_price" v=$support_item.kuaidi_price}={function name="format_price" v=$support_item.total_price}
+					{if $support_item.kuaidi_jiage gt 0}
+					{function name="format_price" v=$support_item.deal_price}+运费{function name="format_price" v=$support_item.kuaidi_jiage}={function name="format_price" v=$support_item.total_price}
 					{else}
 					{function name="format_price" v=$support_item.total_price}
 					{/if}
@@ -70,7 +70,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 			<tr>
 				<td class="data-title">回报设置</td>
 				<td colspan="5" class="tl">
-					<form id="repay_form_{$support_item.id}" class="repay_form" action="{url r="account#save_repay" p="id=$support_item.id"}">
+					<form id="repay_form_{$support_item.id}" class="repay_form" action="{url r="account#save_chi_repay" p="id=$support_item.id"}">
 					<input type="hidden" name="ajax" value="1" />
 					<textarea class="repay_memo" name="repay_memo">{$support_item.repay_memo}</textarea>
 					<div class="ui-button theme_bgcolor set_repay" rel="green" id="{$support_item.id}">

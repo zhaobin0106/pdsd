@@ -901,6 +901,33 @@ function cache_log_comment($log)
 	return $log;
 }
 
+function cache_fore_log_comment($log)
+{
+	if($log['comment_data_cache']==""&&$log['id']>0)
+	{
+		$comment_data_cache = array();
+		$log['comment_count'] = $comment_data_cache['comment_count'] = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_comment where log_id = ".$log['id']);
+		$log['comment_list'] = $comment_data_cache['comment_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_comment where log_id = ".$log['id']." order by create_time desc limit 3");
+		if($log['comment_count']<=count($log['comment_list']))
+		{
+			$log['more_comment'] = $comment_data_cache['more_comment']  = false;
+		}
+		else
+		{
+			$log['more_comment'] = $comment_data_cache['more_comment']  = true;
+		}
+		$GLOBALS['db']->query("update ".DB_PREFIX."fore_log set comment_data_cache = '".serialize($comment_data_cache)."' where id = ".$log['id']);
+	}
+	else
+	{
+		$comment_data_cache = unserialize($log['comment_data_cache']);
+		$log['comment_count'] = $comment_data_cache['comment_count'];
+		$log['comment_list'] = $comment_data_cache['comment_list'];
+		$log['more_comment'] = $comment_data_cache['more_comment'];
+	}
+	return $log;
+}
+
 function cache_log_deal($log)
 {
 	if($log['deal_info_cache']=="")
@@ -923,6 +950,27 @@ function cache_log_deal($log)
 	
 }
 
+function cache_log_fore($log)
+{
+	if($log['deal_info_cache']=="")
+	{
+		$deal_info_cache = array();
+		$log['deal_info'] = $deal_info_cache['deal_info'] = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$log['deal_id']);
+		if($log['deal_info'])
+		{
+			$log['deal_info']['remain_days']  = $deal_info_cache['deal_info']['remain_days'] = ceil(($log['deal_info']['end_time'] - NOW_TIME)/(24*3600));
+			$log['deal_info']['percent']  = $deal_info_cache['deal_info']['percent'] = round($log['deal_info']['support_amount']/$log['deal_info']['limit_price']*100);
+		}
+		$GLOBALS['db']->query("update ".DB_PREFIX."fore_log set deal_info_cache = '".serialize($deal_info_cache)."' where id = ".$log['id']);
+	}
+	else
+	{
+		$deal_info_cache = unserialize($log['deal_info_cache']);
+		$log['deal_info'] = $deal_info_cache['deal_info'];
+	}
+	return $log;
+
+}
 //缓存项目信息
 function cache_deal_extra($deal_info)
 {
@@ -931,13 +979,23 @@ function cache_deal_extra($deal_info)
 		$deal_extra_cache = array();
 		$deal_info['deal_faq_list'] = $deal_extra_cache['deal_faq_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_faq where deal_id = ".$deal_info['id']." order by sort asc");		
 		$deal_info['deal_item_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_item where deal_id = ".$deal_info['id']." order by price asc");
+		$deal_info['deal_xianhuo_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_xianhuo where deal_id = ".$deal_info['id']." and is_open = 1 order by price asc");
+		
 		foreach($deal_info['deal_item_list'] as $k=>$v)
 		{
 			$deal_info['deal_item_list'][$k]['images'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_item_image where deal_id=".$deal_info['id']." and deal_item_id = ".$v['id']);
 			$deal_info['deal_item_list'][$k]['price_format'] = number_price_format($v['price']);				
 		
 		}
+		foreach($deal_info['deal_xianhuo_list'] as $k=>$v)
+		{
+			$deal_info['deal_xianhuo_list'][$k]['images'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_xianhuo_image where deal_id=".$deal_info['id']." and deal_xianhuo_id = ".$v['id']);
+			$deal_info['deal_xianhuo_list'][$k]['price_format'] = number_price_format($v['price']);
+		
+		}
 		$deal_extra_cache['deal_item_list'] = $deal_info['deal_item_list'];
+		$deal_extra_cache['deal_xianhuo_list'] = $deal_info['deal_xianhuo_list'];
+		
 		$GLOBALS['db']->query("update ".DB_PREFIX."deal set deal_extra_cache  = '".serialize($deal_extra_cache)."' where id = ".$deal_info['id']);
 	}
 	else
@@ -945,6 +1003,44 @@ function cache_deal_extra($deal_info)
 		$deal_extra_cache = unserialize($deal_info['deal_extra_cache']);
 		$deal_info['deal_faq_list'] = $deal_extra_cache['deal_faq_list'];
 		$deal_info['deal_item_list'] = $deal_extra_cache['deal_item_list'];
+		$deal_info['deal_xianhuo_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_xianhuo where deal_id = ".$deal_info['id']." and is_open = 1 order by price asc");
+		foreach($deal_info['deal_xianhuo_list'] as $k=>$v)
+		{
+			$deal_info['deal_xianhuo_list'][$k]['images'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_xianhuo_image where deal_id=".$deal_info['id']." and deal_xianhuo_id = ".$v['id']);
+			$deal_info['deal_xianhuo_list'][$k]['price_format'] = number_price_format($v['price']);
+		
+		}
+		
+	}
+	return $deal_info;
+}
+
+
+//缓存项目信息
+function cache_fore_extra($deal_info)
+{
+	if($deal_info['deal_extra_cache']=="")
+	{
+		$deal_extra_cache = array();
+		$deal_info['deal_faq_list'] = $deal_extra_cache['deal_faq_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_faq where fore_id = ".$deal_info['id']." order by sort asc");
+		$deal_info['deal_item_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_item where fore_id = ".$deal_info['id']." order by price asc");
+		foreach($deal_info['deal_item_list'] as $k=>$v)
+		{
+			$deal_info['deal_item_list'][$k]['images'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_item_image where fore_id=".$deal_info['id']." and fore_item_id = ".$v['id']);
+			$deal_info['deal_item_list'][$k]['price_format'] = number_price_format($v['price']);
+
+		}
+
+		$deal_extra_cache['deal_item_list'] = $deal_info['deal_item_list'];
+
+		$GLOBALS['db']->query("update ".DB_PREFIX."fore set deal_extra_cache  = '".serialize($deal_extra_cache)."' where id = ".$deal_info['id']);
+	}
+	else
+	{
+		$deal_extra_cache = unserialize($deal_info['deal_extra_cache']);
+		$deal_info['deal_faq_list'] = $deal_extra_cache['deal_faq_list'];
+		$deal_info['deal_item_list'] = $deal_extra_cache['deal_item_list'];
+
 	}
 	return $deal_info;
 }
@@ -1078,6 +1174,123 @@ function get_deal_list($limit="",$conditions="",$orderby=" sort asc ",$deal_type
 	return array("rs_count"=>$deal_count,"list"=>$deal_list);
 }
 
+
+function get_fore_list($limit="",$conditions="",$orderby=" sort asc ",$deal_type="fore"){
+
+
+
+	if($limit!=""){
+		$limit = " LIMIT ".$limit;
+	}
+	
+	if($orderby!=""){
+		$orderby = " ORDER BY ".$orderby;
+	}
+	
+	if(app_conf("INVEST_STATUS")==0)
+	{
+		$condition = " 1=1 AND d.is_delete = 0 AND d.is_effect = 1 ";
+	}
+	elseif(app_conf("INVEST_STATUS")==1)
+	{
+		$condition = " 1=1 AND d.is_delete = 0 AND d.is_effect = 1 and d.type=0 ";
+	}
+	elseif(app_conf("INVEST_STATUS")==2)
+	{
+		$condition = " 1=1 AND d.is_delete = 0 AND d.is_effect = 1 and d.type=1 ";
+	}
+	
+	if($conditions!=""){
+		$condition.=" AND ".$conditions;
+	}
+	
+	//权限浏览控制
+	//	if($GLOBALS['user_info']['user_level']!=0){
+	//		$level=$GLOBALS['db']->getOne("SELECT level from ".DB_PREFIX."user_level where id=".$GLOBALS['user_info']['user_level']);
+	//		$condition .=" AND (d.user_level ='' or d.user_level=0 or d.user_level <=$level)   ";
+	//	}
+	//	else{
+	//		$condition.=" AND (d.user_level =0 or d.user_level =1 or d.user_level ='')  ";
+	//	}
+	$deal_count = $GLOBALS['db']->getOne("select count(*)  from ".DB_PREFIX."fore as d  where ".$condition);
+	
+	/*（所需项目）准备虚拟数据 start*/
+	$deal_list = array();
+	$level_list=$GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_level ");
+	$level_list_array=array();
+	foreach($level_list_array as $k=>$v){
+		if($v['id']){
+			$level_list_array[$v['id']]=$v['level'];
+		}
+	}
+	if($deal_count > 0){
+		$now_time = NOW_TIME;
+		$deal_list = $GLOBALS['db']->getAll("select d.* from ".DB_PREFIX."fore  as d   where ".$condition.$orderby.$limit);
+		file_put_contents("condition.txt", print_r("select d.* from ".DB_PREFIX."fore  as d   where ".$condition.$orderby.$limit,1));
+		$deal_ids = array();
+		foreach($deal_list as $k=>$v)
+		{
+			$deal_list[$k]['remain_days'] = ceil(($v['end_time'] - $now_time)/(24*3600));
+			if($v['begin_time'] > $now_time){
+				$deal_list[$k]['left_days'] = intval(($now_time - $v['create_time']) / 24 / 3600);
+			}
+			$deal_list[$k]['num_days'] = ceil(($v['end_time'] - $v['begin_time'])/(24*3600));
+			$deal_ids[] =  $v['id'];
+			//查询出对应项目id的user_level
+			$deal_list[$k]['deal_level']=$level_list_array[intval($deal_list[$k]['user_level'])];
+			if($v['begin_time'] > $now_time){
+				$deal_list[$k]['left_begin_days'] = intval(($v['begin_time']  - $now_time) / 24 / 3600);
+			}
+			if($v['begin_time'] > $now_time){
+				$deal_list[$k]['status']= '0';
+			}
+			elseif($v['end_time'] < $now_time && $v['end_time']>0){
+				if($deal_list[$k]['percent'] >=100){
+					$deal_list[$k]['status']= '1';
+				}
+				else{
+					$deal_list[$k]['status']= '2';
+				}
+			}
+			else{
+				if ($v['end_time'] > 0) {
+					$deal_list[$k]['status']= '3';
+				}
+				else
+					$deal_list[$k]['status']= '4';
+			}
+				
+			if($v['type']==1){
+				$deal_list[$k]['virtual_person']=$deal_list[$k]['invote_num'];
+				$deal_list[$k]['support_count'] =$deal_list[$k]['invote_num'];
+				$deal_list[$k]['support_amount'] =$deal_list[$k]['invote_money'];
+				$deal_list[$k]['percent'] = round(($deal_list[$k]['support_amount'])/$v['limit_price']*100);
+				$deal_list[$k]['limit_price_w']=($deal_list[$k]['limit_price'])/10000;
+				$deal_list[$k]['invote_mini_money_w']=round(($deal_list[$k]['invote_mini_money'])/10000);
+			}else{
+				$deal_list[$k]['virtual_person']=$deal_list[$k]['virtual_num'];
+				$deal_list[$k]['support_count'] =$deal_list[$k]['virtual_num']+$deal_list[$k]['support_count'];
+				$deal_list[$k]['support_amount'] =$deal_list[$k]['virtual_price']+$deal_list[$k]['support_amount'];
+				$deal_list[$k]['percent'] = round(($deal_list[$k]['support_amount'])/$v['limit_price']*100);
+			}
+			if($deal_type=='deal_cate'||$deal_type=='deal_cate_preheat'){
+				$deal_list[$k]['user_info']=$GLOBALS['db']->getRowCached("select * from  ".DB_PREFIX."user where id=".$v['user_id']);
+				$deal_list[$k]['deal_comment_num']=$GLOBALS['db']->getOneCached("select count(*) from ".DB_PREFIX."fore_comment where fore_id = ".$v['id']." and log_id = 0 and status=1 ");
+				$deal_list[$k]['deal_comment_num']=intval($deal_list[$k]['deal_comment_num']);
+				$deal_list[$k]['cate_name']=$GLOBALS['db']->getOneCached("select name from ".DB_PREFIX."deal_cate where id=".$v['cate_id']);
+				if($deal_type=='deal_cate_preheat'){
+					//关注
+					$deal_list[$k]['focus_num']=$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_comment where fore_id = ".$v['id']." and log_id = 0 and status=1 ");
+				}
+			}
+		}
+			
+	}
+	
+	
+	return array("rs_count"=>$deal_count,"list"=>$deal_list);
+	
+}
 //最新动态
 function deal_log_list($limit="",$condition="",$orderby="d.create_time desc"){
 	$log_list = $GLOBALS['db']->getAll("select l.*,d.name as deal_name from ".DB_PREFIX."deal_log as l left join ".DB_PREFIX."deal as d on d.id=l.deal_id where $condition order by $orderby limit ".$limit);
@@ -1119,7 +1332,7 @@ function send_deal_success_1(){
 			$msg_data3['send_type']=0;
 			$msg_data3['content']=addslashes($msg3);
 			$msg_data3['send_time']=0;
-			$msg_data3['title']='项目'.$v['name'].'众筹成功-项目ID-'.$v['id'];;
+			$msg_data3['title']='项目'.$v['name'].'拼地成功-项目ID-'.$v['id'];;
 			$msg_data3['is_send']=0;
 			$msg_data3['create_time'] = NOW_TIME;
 			$msg_data3['user_id'] = $v['user_id'];
@@ -1161,6 +1374,74 @@ function send_deal_success_1(){
 			}
 		}
 	}
+	
+}
+
+function send_fore_success_1(){
+
+	if(app_conf("SMS_ON")==0){
+		return false;
+	}
+	//项目成功发起者短信
+	$deal_s_user=$GLOBALS['db']->getAll("select d.*,u.mobile from ".DB_PREFIX."fore d LEFT JOIN ".DB_PREFIX."user u ON u.id = d.user_id where d.is_success=1 and d.is_has_send_success=0 and d.is_delete = 0 ");
+	
+	$tmpl3=$GLOBALS['db']->getRowCached("select * from ".DB_PREFIX."msg_template where name='TPL_SMS_USER_S'");
+	$tmpl_content3 = $tmpl3['content'];
+	
+	foreach ($deal_s_user as $k=>$v){
+		if($v['id']&&$v['mobile']){
+			$user_s_msg['user_name']=$v['user_name'];
+			$user_s_msg['deal_name']=$v['name'];
+	
+			$GLOBALS['tmpl']->assign("user_s_msg",$user_s_msg);
+			$msg3=$GLOBALS['tmpl']->fetch("str:".$tmpl_content3);
+			$msg_data3['dest']=$v['mobile'];
+			$msg_data3['send_type']=0;
+			$msg_data3['content']=addslashes($msg3);
+			$msg_data3['send_time']=0;
+			$msg_data3['title']='项目'.$v['name'].'试吃成功-项目ID-'.$v['id'];;
+			$msg_data3['is_send']=0;
+			$msg_data3['create_time'] = NOW_TIME;
+			$msg_data3['user_id'] = $v['user_id'];
+			$msg_data3['is_html'] = $tmpl3['is_html'];
+			$GLOBALS['db']->query("UPDATE ".DB_PREFIX."fore SET is_has_send_success=1 WHERE id = ".$v['id']);
+			if($GLOBALS['db']->affected_rows()){
+				$re=$GLOBALS['db']->autoExecute(DB_PREFIX."deal_msg_list",$msg_data3); //插入
+			}
+		}
+	}
+	
+	$success_deal_user=$GLOBALS['db']->getAll("SELECT dlo.* FROM ".DB_PREFIX."fore_item_order dlo LEFT JOIN ".DB_PREFIX."fore d ON d.id= dlo.fore_id WHERE d.is_success=1 and d.is_has_send_success=1 and d.is_delete = 0 AND dlo.order_status=3 AND dlo.is_success=1 AND dlo.is_has_send_success=0 ");
+	
+	if($success_deal_user){
+		//项目成功支持者
+		$tmpl=$GLOBALS['db']->getRowCached("select * from ".DB_PREFIX."msg_template where name='TPL_SMS_DEAL_SUCCESS'");
+		$tmpl_content = $tmpl['content'];
+	
+		foreach ($success_deal_user as $k=>$v){
+			if($v['id']&&$v['mobile']){
+				$success_user_info['user_name'] = $v['user_name'];
+				$success_user_info['deal_name'] = $v['deal_name'];
+				//封装发送到前台($success_user_info前台取)
+				$GLOBALS['tmpl']->assign("success_user_info",$success_user_info);
+				$msg=$GLOBALS['tmpl']->fetch("str:".$tmpl_content);
+				$msg_data['dest']=$v['mobile'];
+				$msg_data['send_type']=0;
+				$msg_data['content']=addslashes($msg);
+				$msg_data['send_time']=0;
+				$msg_data['is_send']=0;
+				$msg_data['title']='项目'.$v['deal_name'].'报名成功--订单号'.$v['id'];;
+				$msg_data['create_time'] = NOW_TIME;
+				$msg_data['user_id'] = $v['user_id'];
+				$msg_data['is_html'] = $tmpl['is_html'];
+				$GLOBALS['db']->query("UPDATE ".DB_PREFIX."fore_item_order SET is_has_send_success=1 WHERE id = ".$v['id']);
+				if($GLOBALS['db']->affected_rows()){
+					$GLOBALS['db']->autoExecute(DB_PREFIX."deal_msg_list",$msg_data); //插入
+				}
+			}
+		}
+	}
+	
 	
 }
 //项目失败发送短信(支持人、项目发起人)

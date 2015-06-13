@@ -47,6 +47,216 @@ class ajaxModule extends BaseModule
 		
 	}
 	
+
+	
+	//这里会导致多出最后一个的bug=================================
+	public function fores()
+	{
+	
+		$r = strim($_REQUEST['r']);   //推荐类型
+		$param['r'] = $r?$r:'';
+		$id = intval($_REQUEST['id']);  //分类id
+		$param['id'] = $id;
+		$loc = strim($_REQUEST['loc']);  //地区
+		$param['loc'] = $loc;
+		$tag = strim($_REQUEST['tag']);  //标签
+		$param['tag'] = $tag;
+		$type = intval($_REQUEST['type']);  //类型
+		$param['type'] = $type;
+		$kw = strim($_REQUEST['k']);    //关键词
+		$param['tag'] = $tag;
+		$state = intval($_REQUEST['state']);  //状态
+		$param['state'] = $state;
+		$step = intval($_REQUEST['step']);
+		$param['step'] = $step;
+	
+		$page_size = DEAL_PAGE_SIZE;
+		$step_size = DEAL_STEP_SIZE;
+	
+		if($step==0)$step = 1;
+		$page = intval($_REQUEST['p']);
+		if($page==0)$page = 1;
+		$limit = (($page-1)*$page_size+($step-1)*$step_size).",".$step_size	;
+	
+		$condition = " d.is_delete = 0 and d.is_effect = 1 ";
+		if($r!="")
+		{
+			if($r=="new")
+			{
+				$condition.=" and ".NOW_TIME." - d.begin_time < ".(24*3600)." and ".NOW_TIME." - d.begin_time > 0 ";  //上线不超过一天
+			}
+			if($r=="rec")
+			{
+				$condition.=" and ".NOW_TIME." <= d.end_time AND ".NOW_TIME." >= d.begin_time and d.is_recommend = 1 ";
+			}
+			if($r=="yure")
+			{
+				$condition.=" and ".NOW_TIME." - d.begin_time < ".(24*3600)." and ".NOW_TIME." - d.begin_time <  0 ";  //上线不超过一天
+			}
+			if($r=="nend")
+			{
+				$condition.=" and d.end_time - ".NOW_TIME." < ".(24*3600)." and d.end_time - ".NOW_TIME." > 0 ";  //当天就要结束
+			}
+			if($r=="classic")
+			{
+				$condition.=" and d.is_classic = 1 ";
+			}
+			if($r=="limit_price")
+			{
+				$condition.=" and max(d.limit_price) ";
+			}
+		}
+	
+		switch($state)
+		{
+			//筹资成功
+			case 1 :
+				$condition.=" and d.is_success=1  ";
+				$GLOBALS['tmpl']->assign("page_title","筹资成功");
+				break;
+				//筹资失败
+			case 2 :
+				$condition.=" and d.end_time < ".NOW_TIME." and d.end_time!=0  and d.is_success=0  ";
+				$GLOBALS['tmpl']->assign("page_title","筹资失败");
+				break;
+				//筹资中
+			case 3 :
+				$condition.=" and (d.end_time > ".NOW_TIME." or d.end_time=0 ) and d.begin_time < ".NOW_TIME." and d.is_success=0  ";
+				$GLOBALS['tmpl']->assign("page_title","筹资中");
+				break;
+		}
+	
+		$cate_list = load_dynamic_cache("INDEX_CATE_LIST");
+	
+		if(!$cate_list)
+		{
+			$cate_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_cate order by sort asc");
+			set_dynamic_cache("INDEX_CATE_LIST",$cate_list);
+		}
+		$cate_result = array();
+		$kk = 0 ;
+		foreach($cate_list as $k=>$v){
+			if($v['pid'] == 0){
+				$temp_param = $param;
+				$cate_result[$k+1]['id'] = $v['id'];
+				$cate_result[$k+1]['name'] = $v['name'];
+				$temp_param['id'] = $v['id'];
+				$cate_result[$k+1]['url'] = url("fores",$temp_param);
+				$kk ++;
+			}
+		}
+	
+		$GLOBALS['tmpl']->assign("cate_list",$cate_result);
+	
+		$pid = 0;
+		//获取父类id
+		if($cate_list){
+			foreach($cate_list as $k=>$v)
+			{
+				if($v['id'] ==  $id){
+					if($v['pid'] > 0){
+						$pid = $v['pid'];
+					}
+					else{
+						$pid = $id;
+					}
+				}
+			}
+		}
+	
+		/*子分类 start*/
+		$cate_ids = array();
+		$is_has_child = false;
+		$temp_cate_ids = array();
+		if($cate_list){
+			$child_cate_result= array();
+			foreach($cate_list as $k=>$v)
+			{
+				if($v['pid'] == $pid){
+					if($v['pid'] > 0){
+						$temp_param = $param;
+						$child_cate_result[$v['id']]['id'] = $v['id'];
+						$child_cate_result[$v['id']]['name'] = $v['name'];
+						$temp_param['id'] = $v['id'];
+						$child_cate_result[$v['id']]['url'] = url("fores",$temp_param);
+							
+						if($v['id'] == $id){
+							$is_has_child = true;
+						}
+					}
+				}
+				if($v['pid'] == $pid || $pid==0){
+					$temp_cate_ids[] = $v['id'];
+				}
+			}
+		}
+	
+		//假如选择了子类 那么使用子类ID  否则使用 父类和其子类
+		if($is_has_child){
+			$cate_ids[] = $id;
+		}
+		else{
+			$cate_ids[] = $pid;
+			$cate_ids = array_merge($cate_ids,$temp_cate_ids);
+		}
+	
+		if(count($cate_ids)>0)
+		{
+			$condition.= " and d.cate_id in (".implode(",",$cate_ids).")";
+	
+		}
+	
+		if($loc!="")
+		{
+			$condition.=" and (d.province = '".$loc."' or d.city = '".$loc."') ";
+		}
+		if($tag!="")
+		{
+			$unicode_tag = str_to_unicode_string($tag);
+			$condition.=" and match(d.tags_match) against('".$unicode_tag."'  IN BOOLEAN MODE) ";
+		}
+	
+		if($kw!="")
+		{
+			$kws_div = div_str($kw);
+			foreach($kws_div as $k=>$item)
+			{
+	
+				$kws[$k] = str_to_unicode_string($item);
+			}
+			$ukeyword = implode(" ",$kws);
+			$condition.=" and (match(d.name_match) against('".$ukeyword."'  IN BOOLEAN MODE) or match(d.tags_match) against('".$ukeyword."'  IN BOOLEAN MODE)  or name like '%".$kw."%') ";
+	
+		}
+	
+		$condition.=" and type=$type ";
+	
+		$result = get_fore_list($limit,$condition);
+		$GLOBALS['tmpl']->assign("fore_list",$result['list']);
+		$data['html'] = $GLOBALS['tmpl']->fetch("inc/fore_list.html");
+	
+		if($step*$step_size<$page_size)
+		{
+			if($result['rs_count']<=(($page-1)*$page_size+($step-1)*$step_size)+$step_size)
+			{
+	
+				$data['step'] = 0;
+				ajax_return($data);
+			}
+			else
+			{
+				$data['step'] = $step+1;
+				ajax_return($data);
+			}
+		}
+		else
+		{
+			$data['step'] = 0;
+			ajax_return($data);
+		}
+	
+	
+	}
 	//这里会导致多出最后一个的bug=================================
 	public function deals()
 	{		
@@ -986,6 +1196,32 @@ class ajaxModule extends BaseModule
 			if($order_info['repay_make_time']==0){
 				$GLOBALS['db']->query("update ".DB_PREFIX."deal_order set repay_make_time =  ".get_gmtime()." where id = ".$order_info['id']." and user_id = ".intval($GLOBALS['user_info']['id']));
 				showSuccess("设置成功",1);		
+			}
+		}
+	}
+	public function set_sc_repay_make(){
+		$id = intval($_REQUEST['id']);
+		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_item_order where id = ".$id." and repay_time>0 and user_id = ".intval($GLOBALS['user_info']['id']));
+		if(!$order_info)
+		{
+			showErr("无效的项目支持",1);
+		}else{
+			if($order_info['repay_make_time']==0){
+				$GLOBALS['db']->query("update ".DB_PREFIX."fore_item_order set repay_make_time =  ".get_gmtime()." where id = ".$order_info['id']." and user_id = ".intval($GLOBALS['user_info']['id']));
+				showSuccess("设置成功",1);
+			}
+		}
+	}
+	public function set_sp_repay_make(){
+		$id = intval($_REQUEST['id']);
+		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_xianhuo_order where id = ".$id." and repay_time>0 and user_id = ".intval($GLOBALS['user_info']['id']));
+		if(!$order_info)
+		{
+			showErr("无效的项目支持",1);
+		}else{
+			if($order_info['repay_make_time']==0){
+				$GLOBALS['db']->query("update ".DB_PREFIX."deal_xianhuo_order set repay_make_time =  ".get_gmtime()." where id = ".$order_info['id']." and user_id = ".intval($GLOBALS['user_info']['id']));
+				showSuccess("设置成功",1);
 			}
 		}
 	}

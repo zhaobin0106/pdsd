@@ -1,0 +1,96 @@
+{include file="inc/header.html"} 
+<?php
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/deal_list.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/deal_list.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/account_support.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/account_support.js";
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<div class="blank"></div>
+<div class="dlmain Myhomepage">
+	 {include file="inc/account_left.html"} 
+	<div class="homeright pageright f_r">
+		<div class="full">
+		<div class="deal_name_title">
+		{$deal_info.name} 购买记录
+		</div>
+		{if $goumai_list}
+		<table class="data-table">
+			{foreach from=$goumai_list item=goumai_item}
+			<tr>
+				<td class="data-title">购买者</td>
+				<td width=193 class="tl"><a href="{url r="home" p="id=$goumai_item.user_id"}" class="linkgreen" target="_blank">{$goumai_item.user_name}</a></td>
+				<td class="data-title">购买金额</td>
+				<td width=193 class="tl">
+					{if $goumai_item.kuaidi_jiage gt 0}
+					{function name="format_price" v=$goumai_item.deal_price}+运费{function name="format_price" v=$goumai_item.kuaidi_jiage}={function name="format_price" v=$goumai_item.total_price}
+					{else}
+					{function name="format_price" v=$goumai_item.total_price}
+					{/if}
+				</td>
+				<td class="data-title">下单时间</td>
+				<td width=193 class="tl">{function name="to_date" v=$goumai_item.create_time}</td>
+			</tr>
+									<tr>
+				<td class="data-title">配送信息</td>
+				<td colspan="5" class="tl">
+				名称:{$goumai_item.kuaidi_name} 介绍：{$goumai_item.kuaidi_desc}
+				</td>				
+			</tr>
+		
+			{if $goumai_item.province neq '' or  $goumai_item.city neq ''}
+			<tr>
+				<td class="data-title">收货信息</td>
+				<td colspan="5" class="tl">
+				地址:{$goumai_item.province}{$goumai_item.city}{$goumai_item.address} 邮编:{$goumai_item.zip} 收件人:{$goumai_item.consignee} 电话:{$goumai_item.mobile}
+				</td>				
+			</tr>
+			{/if}
+			{if $goumai_item.support_memo neq ''}
+			<tr>
+				<td class="data-title">备注</td>
+				<td colspan="5" class="tl">{function name="nl2br" v=$goumai_item.support_memo}</td>				
+			</tr>
+			{/if}
+			<tr>
+				<td class="data-title">发货设置</td>
+				<td colspan="5" class="tl">
+					<form id="repay_form_{$goumai_item.id}" class="repay_form" action="{url r="account#save_xianhuo_repay" p="id=$goumai_item.id"}">
+					<input type="hidden" name="ajax" value="1" />
+					<textarea class="repay_memo" name="repay_memo">{$goumai_item.repay_memo}</textarea>
+					<div class="ui-button theme_bgcolor set_repay" rel="green" id="{$goumai_item.id}">
+						<div>
+							<span>立即设置发货</span>
+						</div>
+					</div>	
+					<div class="blank1"></div>
+					<span class="repay_tip">请设置内容，如需发货的请输入相应的配送信息与单号。</span>
+					</form>
+				</td>				
+			</tr>
+			<tr>
+				<td colspan="6" class="data-split">					
+				</td>				
+			</tr>
+			{/foreach}
+		</table>
+		
+		{else}
+		<div class="empty_tip">
+			没有任何购买记录
+		</div>
+		{/if}
+		
+		
+		</div>
+		<div class="blank20"></div>
+		<div class="pages">{$pages}</div>
+		<div class="blank20"></div>
+		
+	</div>
+	<div class="blank"></div>
+</div>
+<div class="blank"></div>
+{include file="inc/footer.html"} 

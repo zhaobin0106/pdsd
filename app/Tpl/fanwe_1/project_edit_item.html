@@ -44,7 +44,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 				<div class="public_left">									
 					<div class="blank20"></div>
 					<div class="form_row control-group">
-						<label class="title control-label w100">账户</label>
+						<label class="title control-label w100">金额</label>
 						<input type="text" value="{function name="round" v=$item.price e=2}" class="textbox" name="price" style="width:100px;" />
 						<label class="tip_box">元</label>
 					</div>
@@ -61,7 +61,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 						</label>
 						<label class="fileuploading hide" ></label>
 					</div>
-					<div class="clear"></div>
+<!-- 					<div class="clear"></div>
 					<div class="form_row control-group">
 						<label class="title control-label w100">是否配送:</label>
 						<a class="btn_select w100 f_l mr10" id="is_delivery_select">
@@ -78,7 +78,10 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 						<label class="title control-label w100">运费:</label>
 						<input type="text" value="{function name="round" v=$item.delivery_fee e=2}" class="textbox w100" name="delivery_fee" />
 						<label class="tip_box">元</label>
-					</div>
+					</div> -->
+									<input type="hidden" name="is_delivery" value="1"/>
+														<input type="hidden" value=""  name="delivery_fee" />
+					
 					<div class="clear"></div>
 					<div class="form_row control-group">
 						<label class="title control-label w100">是否限购:</label>
@@ -134,11 +137,11 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 							预计回报发放时间：项目成功结束后<span id="repaid_day">{$item.repaid_day}</span>天内
 							
 						</div>
-						<div id="delivery_box">
+<!-- 						<div id="delivery_box">
 							<div class="blank"></div>
 							运费 ￥<span id="delivery_fee_box">{function name="round" v=$item.delivery_fee e=2}</span>
 							
-						</div>
+						</div> -->
 						<div class="blank"></div>
 						<div class="ui-button_green">
 							<div>

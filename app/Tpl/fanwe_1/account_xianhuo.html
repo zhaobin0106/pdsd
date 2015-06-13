@@ -13,7 +13,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 	<div class="homeright pageright f_r">
 		<div>
 			<div class="page_title">
-				支持的项目
+				购买的商品
 			</div>
 			<div class="blank"></div>
 			 
@@ -23,7 +23,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="uc_table">
 						<tbody>
 							<tr border="0" style="background-color:#f4f4f4; color:#555; height:40px;">
-								<th class="tl" style="padding-left:26px">项目名称</th>
+								<th class="tl" style="padding-left:26px">商品名称</th>
 								<th width="100">金额</th>
 								<th width="80">运费</th>
 								<th width="150">状态</th>
@@ -43,45 +43,28 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 									<span class="f_money b">{function name="format_price" v=$order_item.deal_price}</span>
 								</td>
 								<td>
-									{if $order_item.kuaidi_price eq 0}
+									{if $order_item.kuaidi_jiage eq 0}
 									--
 									{else}
-									<span class="f_money b">{function name="format_price" v=$order_item.kuaidi_price}</span>
+									<span class="f_money b">{function name="format_price" v=$order_item.kuaidi_jiage}</span>
 									{/if}
 								</td>
 								<td>			
 									{if $order_item.order_status eq 0}
 									<span class="f_money">已用余额支付：{function name="format_price" v=$order_item.credit_pay}</span><br />剩余支付未完成
 									{else}		
-									{if $order_item.deal_info}
-								
-											{if $order_item.deal_info.is_success eq 1}
-												{if $order_item.deal_info.begin_time > $now}未开始{/if}
-												{if $order_item.deal_info.end_time < $now and $order_item.deal_info.end_time neq 0}已成功&nbsp;{if $order_item.repay_time gt 0}回报已发放{if $order_item.repay_make_time gt 0} <br /> 确认收到{else} <br /> 未确认收到{/if} {else}等待发放回报{/if}{/if}
-												{if $order_item.deal_info.begin_time < $now and ($order_item.deal_info.end_time > $now or $order_item.deal_info.end_time eq 0)}已成功&nbsp;{if $order_item.repay_time gt 0}回报已发放{if $order_item.repay_make_time gt 0} 确认收到{else} 未确认收到{/if}{else}等待发放回报{/if}{/if}
-											{else}
-												{if $order_item.deal_info.begin_time > $now}未开始{/if}
-												{if $order_item.deal_info.end_time < $now and $order_item.deal_info.end_time neq 0}未成功&nbsp;{if $order_item.is_refund eq 1}已退款{else}等待退款{/if}{/if}
-												{if $order_item.deal_info.begin_time < $now and ($order_item.deal_info.end_time > $now or $order_item.deal_info.end_time eq 0)}未结束{/if}
-											{/if}
-								
-									{else}
-									
-										{if $order_item.is_success eq 0}
-										未成功&nbsp;{if $order_item.repay_time gt 0}回报已发放{if $order_item.repay_make_time gt 0}<br /> 确认收到{else} <br /> 未确认收到{/if}{else}等待发放回报{/if}
-										{else}
-										已成功&nbsp;{if $order_item.is_refund eq 1}已退款{else}等待退款{/if}
-										{/if}
-									{/if}
+								{if $order_item.repay_time gt 0}支付成功&nbsp;已发货 {elseif $order_item.repay_time eq 0}{if $order_item.is_refund eq 1}失败，已退款{else}支付成功&nbsp;等待发货{/if}{/if}
+
 									{/if}
 								</td>
 								<td>
 									{if $order_item.order_status eq 0}
-										<a href="{url r="account#view_order" p="id=$order_item.id"}" class="ui-small-button bg_red f12 b" style="float:none;display:inline-block">继续支付</a><br />
-										<a href="{url r="account#del_order" p="id=$order_item.id"}" class="del_deal">删除</a>
+										<a href="{url r="account#view_xianhuo_order" p="id=$order_item.id"}" class="ui-small-button bg_red f12 b" style="float:none;display:inline-block">继续支付</a><br />
+										<a href="{url r="account#del_xianhuo_order" p="id=$order_item.id"}" class="del_deal">删除</a>
 									{else}
-										<a href="{url r="account#view_order" p="id=$order_item.id"}" target="_blank">查看详情</a><br/>
-										<a href="{url r="account#bujiao" p="id=$order_item.id"}" target="_blank">补交快递</a>
+										<a href="{url r="account#view_xianhuo_order" p="id=$order_item.id"}" target="_blank">查看详情</a><br/>
+										<a href="{url r="account#sbujiao" p="id=$order_item.id"}" target="_blank">补交快递</a>
+										
 									{/if}
 								</td>
 							</tr>

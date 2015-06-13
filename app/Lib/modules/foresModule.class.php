@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 require APP_ROOT_PATH.'app/Lib/page.php';
-class dealsModule extends BaseModule
+class foresModule extends BaseModule
 {
 	public function index()
 	{	
@@ -60,7 +60,7 @@ class dealsModule extends BaseModule
        
 		if(intval($_REQUEST['redirect'])==1)
 		{
-  			app_redirect(url("deals",$param));
+  			app_redirect(url("fores",$param));
 		}
 		 
  		$cate_list = load_dynamic_cache("INDEX_CATE_LIST");
@@ -72,14 +72,15 @@ class dealsModule extends BaseModule
 		}
 		$cate_result = array();
 		foreach($cate_list as $k=>$v){
-			if($v['pid'] == 40){
+			if($v['pid'] == 41){
 				$temp_param = $param;
 				$cate_result[$k+1]['id'] = $v['id'];
 				$cate_result[$k+1]['name'] = $v['name'];
 				$temp_param['id'] = $v['id'];
-				$cate_result[$k+1]['url'] = url("deals",$temp_param);
+				$cate_result[$k+1]['url'] = url("fores",$temp_param);
 			}
 		}
+		
 		$GLOBALS['tmpl']->assign("cate_list",$cate_result);
 		
 		$pid = $id;
@@ -87,9 +88,7 @@ class dealsModule extends BaseModule
 		
 		if($cate_list){
 			$pid = $this->get_child($cate_list,$pid);
-			
 		}
-		
 		/*子分类 start*/
 		$cate_ids = array();
 		$is_child = false;
@@ -105,7 +104,7 @@ class dealsModule extends BaseModule
 						$child_cate_result[$v['id']]['id'] = $v['id'];
 						$child_cate_result[$v['id']]['name'] = $v['name'];
 						$temp_param['id'] = $v['id'];
-						$child_cate_result[$v['id']]['url'] = url("deals",$temp_param);
+						$child_cate_result[$v['id']]['url'] = url("fores",$temp_param);
 						 if($id==$v['id']){
 						 	$is_child = true;
 						 }
@@ -117,6 +116,7 @@ class dealsModule extends BaseModule
 				}
 			}		
 		}
+		
 		//假如选择了子类 那么使用子类ID  否则使用 父类和其子类
 		if($is_child){
 			$cate_ids[] = $id;
@@ -133,13 +133,13 @@ class dealsModule extends BaseModule
        $city_list = load_dynamic_cache("INDEX_CITY_LIST"); 
         if(!$city_list)
 		{
-			$city_list = $GLOBALS['db']->getAll("select province from ".DB_PREFIX."deal group by province order by sort asc");
+			$city_list = $GLOBALS['db']->getAll("select province from ".DB_PREFIX."fore group by province order by sort asc");
 			set_dynamic_cache("INDEX_CITY_LIST",$city_list);
 		}
 		foreach($city_list as $k=>$v){
 			$temp_param = $param;
 			$temp_param['loc'] = $v['province'];
-			$city_list[$k]['url'] = url("deals",$temp_param);
+			$city_list[$k]['url'] = url("fores",$temp_param);
 		}
         	
 		$GLOBALS['tmpl']->assign("city_list",$city_list);
@@ -149,9 +149,9 @@ class dealsModule extends BaseModule
 		$hot_area=array();
 		foreach($area_list as $k=>$v){
 			$temp_param['loc'] = $v['name'];
-			$area[strtoupper($v['py'][0])][$v['name']]=array('url'=> url("deals",$temp_param),'name'=>$v['name']);
+			$area[strtoupper($v['py'][0])][$v['name']]=array('url'=> url("fores",$temp_param),'name'=>$v['name']);
 			if($v['is_hot']){
-				$hot_area[]=array('url'=> url("deals",$temp_param),'name'=>$v['name']);
+				$hot_area[]=array('url'=> url("fores",$temp_param),'name'=>$v['name']);
 			}
  			
 		}
@@ -190,7 +190,7 @@ class dealsModule extends BaseModule
 		foreach($state_list as $k=>$v){
 			$temp_param = $param;
 			$temp_param['state'] = $k;
-			$state_list[$k]['url'] = url("deals",$temp_param);
+			$state_list[$k]['url'] = url("fores",$temp_param);
 		}
 		$GLOBALS['tmpl']->assign("state_list",$state_list);
 
@@ -300,11 +300,11 @@ class dealsModule extends BaseModule
 		}
 		
 		
-		$result = get_deal_list($limit,$condition);
+		$result = get_fore_list($limit,$condition);
  		if($type==1){
  			$GLOBALS['tmpl']->assign("deal_list_invest",$result['list']);
 		}else{
- 			$GLOBALS['tmpl']->assign("deal_list",$result['list']);
+ 			$GLOBALS['tmpl']->assign("fore_list",$result['list']);
 		}
 		
 		$GLOBALS['tmpl']->assign("deal_count",$result['rs_count']);
@@ -321,24 +321,24 @@ class dealsModule extends BaseModule
  			$page_title='';
  			if($type==1){
  				foreach($GLOBALS['nav_list'] as $k=>$v){
- 					if($v['u_module']=='deals'&&$v['u_action']=='index'&&$v['u_param']=='type=1'){
+ 					if($v['u_module']=='fores'&&$v['u_action']=='index'&&$v['u_param']=='type=1'){
  						$page_title=$v['name'];
  					}
   				}
   				$page_title=$page_title?$page_title:'股权项目';
  			}else{
  				foreach($GLOBALS['nav_list'] as $k=>$v){
- 					if($v['u_module']=='deals'&&$v['u_action']=='index'&&$v['u_param']==''){
+ 					if($v['u_module']=='fores'&&$v['u_action']=='index'&&$v['u_param']==''){
  						$page_title=$v['name'];
  					}
  							
  				}
- 				$page_title=$page_title?$page_title:'产品项目';
+ 				$page_title=$page_title?$page_title:'试吃项目';
  			}
  			$GLOBALS['tmpl']->assign("page_title",$page_title);
  		}
  		
-		$GLOBALS['tmpl']->display("deals_index.html");
+		$GLOBALS['tmpl']->display("fores_index.html");
 	}
 	
 	public function get_child($cate_list,$pid){
@@ -346,9 +346,10 @@ class dealsModule extends BaseModule
 			{
 				if($v['id'] ==  $pid){
 					if($v['pid'] > 0){
-		
+						//$pid =$this->get_child($cate_list,$v['pid']) ;
+						//if($pid==$v['pid']){
 							return $pid;
-						
+						//}
 					}
 					else{
 						return $pid;

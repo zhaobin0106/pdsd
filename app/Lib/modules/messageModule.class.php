@@ -126,7 +126,6 @@ class messageModule extends BaseModule
 			$data['is_read'] = 1;
 
 			$GLOBALS['db']->autoExecute(DB_PREFIX."user_message",$data);
-			
 			//2.生成收件
 			$data = array();
 			$data['create_time'] = NOW_TIME;

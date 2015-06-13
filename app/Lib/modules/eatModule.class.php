@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 
 require APP_ROOT_PATH.'app/Lib/shop_lip.php';
-class projectModule extends BaseModule
+class eatModule extends BaseModule
 {
 	public function __construct()
 	{
@@ -287,18 +287,17 @@ class projectModule extends BaseModule
 		
 		$id = intval($_REQUEST['id']);
 		
-		$GLOBALS['db']->query("delete from ".DB_PREFIX."deal where id = ".$id." and is_edit = 1 and user_id = ".intval($GLOBALS['user_info']['id']." and is_effect = 0 and is_delete = 0"));
+		$GLOBALS['db']->query("delete from ".DB_PREFIX."fore where id = ".$id." and is_edit = 1 and user_id = ".intval($GLOBALS['user_info']['id']." and is_effect = 0 and is_delete = 0"));
 		if($GLOBALS['db']->affected_rows()>0)
 		{
-			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_item where deal_id = ".$id);
-			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_item_image where deal_id = ".$id);
-			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_comment where deal_id = ".$id);
-			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_faq where deal_id = ".$id);
-			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_focus_log where deal_id = ".$id);
-			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_log where deal_id = ".$id);
-			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_pay_log where deal_id = ".$id);
-			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_support_log where deal_id = ".$id);
-			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_visit_log where deal_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_item where fore_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_item_image where fore_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_comment where fore_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_faq where fore_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_focus_log where fore_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_log where fore_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_support_log where fore_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_visit_log where fore_id = ".$id);
 			showSuccess("",$ajax,get_gopreview());
 		}
 		else

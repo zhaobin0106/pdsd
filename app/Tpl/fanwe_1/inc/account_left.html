@@ -6,6 +6,16 @@
 				<i></i>支持的项目
 			</a>
 		</li>
+				<li {if $module eq 'account'&& $action eq 'xianhuo'}class="select"{/if}>
+			<a href="{url r="account#xianhuo"}" class="a1">
+				<i></i>购买的商品
+			</a>
+		</li>
+						<li {if $module eq 'account'&& $action eq 'shichi'}class="select"{/if}>
+			<a href="{url r="account#shichi"}" class="a1">
+				<i></i>报名的试吃
+			</a>
+		</li>
 		{if app_conf("INVEST_STATUS") eq 0 || app_conf("INVEST_STATUS") eq 2}
 			<li {if $module eq 'account'&& $action eq 'mine_investor_status' }class="select"{/if}>
 				<a href="{url r="account#mine_investor_status" p="type=0"}" class="a1">
@@ -13,11 +23,20 @@
 				</a>
 			</li>
 		{/if}
+		{if $user_info.user_level eq 14}
 		<li {if $module eq 'account'&& ($action eq 'project' || $action eq 'get_investor_status' || $action eq 'get_leader_list' || $action eq 'support' || $action eq 'paid')}class="select"{/if}>
 			<a href="{url r="account#project"}" class="a2">
 				<i></i>我的项目
 			</a>
 		</li>
+		{/if}
+		{if $user_info.user_level eq 14}
+		<li {if $module eq 'account'&& ($action eq 'eat')}class="select"{/if}>
+			<a href="{url r="account#eat"}" class="a2">
+				<i></i>我的试吃
+			</a>
+		</li>
+		{/if}
 		<li {if $module eq 'account'&& $action eq 'focus'}class="select"{/if}>
 			<a href="{url r="account#focus"}" class="a3">
 				<i></i>关注的项目

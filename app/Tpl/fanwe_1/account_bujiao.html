@@ -1,0 +1,47 @@
+{include file="inc/header.html"} 
+<?php
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/refund.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/refund.js";
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<div class="blank"></div>
+<div class="dlmain Myhomepage">
+ 	{include file="inc/account_left.html"} 
+	<div class="homeright pageright f_r">
+		<div class="full">
+			<div class="account_money">
+				<h2>补交快递费用 </h2>
+						<div class="list_conment">
+					{include file="inc/money_box.html"}
+				</div>
+				<div class="list_conment">
+					<form class="ajax_form" action="{url r="account#do_bujiao"}">		
+					<input type="hidden" name="deal_id" value="{$order_info.deal_id}" />
+										<input type="hidden" name="order_id" value="{$order_info.id}" />		
+							
+						<div class="form_row control-group">
+							<label class="title control-label">补交费用:</label>
+							<input type="text" class="textbox" value="" name="money" ><a style="font-size:16px;">人民币(元)</a></input>
+						</div>
+						<div class="blank15"></div>
+						<div class="submit_btn_row">
+							<div class="ui-button theme_bgcolor" rel="green" style="margin-left:85px;display:inline">
+								<div>
+									<span>确定付款</span>
+								</div>
+							</div>					
+							<a href="{url r="account#index"}" class="cancel_incharge">取消</a>
+							<input type="hidden" value="1" name="ajax" />					
+							<div class="blank15"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="blank0"></div>
+</div>	
+<div class="blank"></div>
+{include file="inc/footer.html"} 
