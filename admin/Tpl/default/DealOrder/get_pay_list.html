@@ -49,8 +49,10 @@
 <div class="blank5"></div>
 <div class="button_row">
 	<div class="main_title"> <a href="{:u("Deal/online_index")}" class="back_list">{%BACK_LIST}</a></div>
-
 	<input type="button" class="button" value="删除" onclick="del();" />
+		<input type="button" class="button" value="设为中奖" onclick="zhongjiang();" />
+			<input type="button" class="button" value="设为未中奖" onclick="weizhongjiang();" />
+	
 </div>
 <div class="blank5"></div>
 <div class="search_row">
@@ -59,6 +61,7 @@
 		退款:<input type="text" class="textbox" name="is_refund" value="{:trim($_REQUEST['is_refund'])}" style="width:30px;" />
 		支付状态:<input type="text" class="textbox" name="order_status" value="{:trim($_REQUEST['order_status'])}" style="width:100px;" />
 		预计回报时间:<input type="text" class="textbox" name="repay_time" value="{:trim($_REQUEST['repay_time'])}" style="width:100px;" />
+		子项目ID:<input type="text" class="textbox"name="deal_item_id" value="{:trim($_REQUEST['deal_item_id'])}" style="width:50px"/>
 		<input type="hidden" value="DealOrder" name="m" />
 		<input type="hidden" value="get_pay_list" name="a" />
 		<input type="hidden" value="{$_REQUEST['deal_id']}" name="deal_id" />
@@ -86,6 +89,7 @@
 		,order_status|get_order_status:状态
 		,repay_make_time|get_order_make_status=$deal:确认收到回报
 		,is_refund|get_status:退款
+		,is_zhongjiang|get_zhongjiang:中奖
 		,repay_time|to_date:回报日期
 		,create_time|to_date:下单日期" 
 	actionlist="view:查看,del:删除" /> 

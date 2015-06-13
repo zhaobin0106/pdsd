@@ -52,7 +52,9 @@ class IndexAction extends AuthAction{
 		$info['user_refund_num']=$GLOBALS['db']->getOne("select count(*)  from ".DB_PREFIX."user_refund where is_pay=0 ");
  		//支付成功
  		$info['deal_order']=$GLOBALS['db']->getRow("select count(*) as num,sum(total_price) as money  from ".DB_PREFIX."deal_order  where  order_status=3 ");
- 	 
+ 		$info['fore_order']=$GLOBALS['db']->getRow("select count(*) as num,sum(total_price) as money  from ".DB_PREFIX."fore_item_order  where  order_status=3 ");
+ 		$info['xianhuo_order']=$GLOBALS['db']->getRow("select count(*) as num,sum(total_price) as money  from ".DB_PREFIX."deal_xianhuo_order  where  order_status=3 ");
+ 		$info['sum_money']=$info['deal_order']['money']+$info['fore_order']['money']+$info['xianhuo_order']['money'];
  		$this->assign("info",$info);
  		$this->display();
 	}	

@@ -1,0 +1,62 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<div class="main">
+<div class="main_title">更新动态</div>
+<div class="blank5"></div>
+<div class="main_title" style="font-size:12px; font-weight:normal;">
+<div class="blank5"></div>
+	<form id="add_update_form" action="__APP__" method="post" enctype="multipart/form-data" onsubmit="return save_update();">	
+	<table class="form" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+		<tr>
+		<td class="item_title">动态内容:</td>
+		<td class="item_input"><textarea name="log_info" class="textbox require" style="width:400px;"> </textarea>
+		</td>
+	</tr>	
+	<tr>
+		<td class="item_title">相关图片:</td>
+		<td class="item_input">
+		<label class="fileupload f_l" onclick="upd_file(this,'image_file');" style="height:39px; margin-top:0;cursor:pointer">
+					<input type="file" class="filebox" name="image_file" id="image_file"/>
+				</label>
+				<label class="fileuploading hide"></label>	
+									<div class="log_image_upd">
+				<img width="50" height="50" src="" />
+				<input type="hidden" name="image" value="" />
+			</div>	
+						<div class="log_image_upd">
+				<img width="50" height="50" src="" />
+				<input type="hidden" name="image" value="" />
+			</div>
+		</td>
+	</tr>
+	</tr>
+		<tr>
+		<td class="item_title">视频地址:</td>
+		<td class="item_input"><input type="text" name="vedio" class="textbox require"/> 
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">&nbsp;</td>
+		<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="id" value="{$deal_info.id}" />
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="save_update" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="保存" />
+		</td>
+	</tr>
+		<div class="submit_btn_row" style="margin-left:74px;">
+			<div class="ui-button theme_bgcolor" rel="green">
+				<div>
+					<span>保存</span>
+				</div>
+			</div>
+			<input type="hidden" value="1" name="ajax" />
+			<input type="hidden" value="{$deal_info.id}" name="id" />
+		</div>
+	</form>
+</div>

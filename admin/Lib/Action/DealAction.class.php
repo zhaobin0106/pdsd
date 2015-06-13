@@ -64,7 +64,7 @@ class DealAction extends CommonAction{
 			$this->_list ( $model, $map );
 		}
 		
-		$cate_list = M("DealCate")->findAll();
+		$cate_list = M("DealCate")->where('pid=40')->findAll();
 		$this->assign("cate_list",$cate_list);
 		$this->display ();
 	}
@@ -112,7 +112,7 @@ class DealAction extends CommonAction{
 			$this->_list ( $model, $map );
 		}
 		
-		$cate_list = M("DealCate")->findAll();
+		$cate_list = M("DealCate")->where('pid=40')->findAll();
 		$this->assign("cate_list",$cate_list);
 		$this->display ();
 	}
@@ -145,14 +145,14 @@ class DealAction extends CommonAction{
 			$this->_list ( $model, $map );
 		}
 		
-		$cate_list = M("DealCate")->findAll();
+		$cate_list = M("DealCate")->where('pid=40')->findAll();
 		$this->assign("cate_list",$cate_list);
 		$this->display ();
 	}
 	
 	public function add()
 	{
-		$cate_list = M("DealCate")->findAll();
+		$cate_list = M("DealCate")->where('pid=40')->findAll();
 		$cate_list = D("DealCate")->toNameFormatTree($cate_list);
 		$this->assign("cate_list",$cate_list);
 		
@@ -218,7 +218,7 @@ class DealAction extends CommonAction{
 		$vo['end_time'] = $vo['end_time']!=0?to_date($vo['end_time']):'';
  		$this->assign ( 'vo', $vo );
 		
-		$cate_list = M("DealCate")->findAll();
+		$cate_list = M("DealCate")->where('pid=40')->findAll();
 		$cate_list = D("DealCate")->toNameFormatTree($cate_list);
 		$this->assign("cate_list",$cate_list);
 		
@@ -876,7 +876,26 @@ class DealAction extends CommonAction{
 		
 		$this->display();
 	}
+	public function deal_xianhuo()
+	{
+		$deal_id = intval($_REQUEST['id']);
+		$deal_info = M("Deal")->getById($deal_id);
+		$this->assign("deal_info",$deal_info);
+		if($deal_info)
+		{
+			$map['deal_id'] = $deal_info['id'];
+			if (method_exists ( $this, '_filter' )) {
+				$this->_filter ( $map );
+			}
+			$name=$this->getActionName();
+			$model = D ("DealXianhuo");
+			if (! empty ( $model )) {
+				$this->_list ( $model, $map );
+			}
+		}
 	
+		$this->display();
+	}
 	public function add_deal_item()
 	{
 		$deal_id = intval($_REQUEST['id']);
@@ -884,7 +903,13 @@ class DealAction extends CommonAction{
 		$this->assign("deal_info",$deal_info);
 		$this->display();
 	}
-	
+	public function add_deal_xianhuo()
+	{
+		$deal_id = intval($_REQUEST['id']);
+		$deal_info = M("Deal")->getById($deal_id);
+		$this->assign("deal_info",$deal_info);
+		$this->display();
+	}
 	
 	public function insert_deal_item() {
 		B('FilterString');
@@ -927,7 +952,72 @@ class DealAction extends CommonAction{
 			$this->error(L("INSERT_FAILED"));
 		}
 	}
+	public function insert_deal_xianhuo() {
+		B('FilterString');
+		$ajax = intval($_REQUEST['ajax']);
+		$data = M("DealXianhuo")->create ();
+		//开始验证有效性
+		$this->assign("jumpUrl",u(MODULE_NAME."/add_deal_xianhuo",array("id"=>$data['deal_id'])));
+		if(!check_empty($data['price']))
+		{
+			$this->error("请输入价格");
+		}
 	
+		// 更新数据
+	
+		$list=M("DealXianhuo")->add($data);
+		$log_info =  "项目ID".$data['deal_id'].":".format_price($data['price']);
+		if (false !== $list) {
+			//成功提示
+				
+			$imgs = $_REQUEST['image'];
+			foreach($imgs as $k=>$v)
+			{
+				if($v!='')
+				{
+					$img_data['deal_id'] = $data['deal_id'];
+					$img_data['deal_item_id'] = $list;
+					$img_data['image'] = $v;
+					M("DealXianhuoImage")->add($img_data);
+				}
+			}
+			M("Deal")->where("id=".$data['deal_id'])->setField("deal_extra_cache","");
+			save_log($log_info.L("INSERT_SUCCESS"),1);
+			$this->success(L("INSERT_SUCCESS"));
+		} else {
+			//错误提示
+			save_log($log_info.L("INSERT_FAILED"),0);
+			$this->error(L("INSERT_FAILED"));
+		}
+	}
+	public function insert_deal_item_shouhuo(){
+		B('FilterString');
+		$ajax = intval($_REQUEST['ajax']);
+		$_POST['is_kuaidi'] = $_POST['is_delivery'];
+		$data = M("DealItemShouhuo")->create ();
+		$this->assign("jumpUrl",u(MODULE_NAME."/deal_item_addshouhuo",array("id"=>$data['deal_item_id'])));
+		if(!check_empty($data['kuaidi_name']))
+		{
+			$this->error("请输入名称");
+		}
+		$list=M("DealItemShouhuo")->add($data);
+		$this->success(L("INSERT_SUCCESS"));
+		
+}
+public function insert_deal_xianhuo_shouhuo(){
+	B('FilterString');
+	$ajax = intval($_REQUEST['ajax']);
+	$_POST['is_kuaidi'] = $_POST['is_delivery'];
+	$data = M("DealXianhuoShouhuo")->create ();
+	$this->assign("jumpUrl",u(MODULE_NAME."/deal_xianhuo_addshouhuo",array("id"=>$data['deal_xianhuo_id'])));
+	if(!check_empty($data['kuaidi_name']))
+	{
+		$this->error("请输入名称");
+	}
+	$list=M("DealXianhuoShouhuo")->add($data);
+	$this->success(L("INSERT_SUCCESS"));
+
+}
 	public function edit_deal_item()
 	{
 		$id = intval($_REQUEST ['id']);
@@ -944,6 +1034,109 @@ class DealAction extends CommonAction{
 		$this->assign("img_list",$imgs);
 		
 		$this->display();
+	}
+	public function edit_deal_xianhuo()
+	{
+		$id = intval($_REQUEST ['id']);
+		$condition['id'] = $id;
+		$vo = M("DealXianhuo")->where($condition)->find();
+		$this->assign ( 'vo', $vo );
+		//输出图片集
+		$img_list = M("DealXianhuoImage")->where("deal_xianhuo_id=".$vo['id'])->findAll();
+		$imgs = array();
+		foreach($img_list as $k=>$v)
+		{
+			$imgs[$k] = $v['image'];
+		}
+		$this->assign("img_list",$imgs);
+	
+		$this->display();
+	}
+	public function edit_deal_item_shouhuo()
+	{
+		$id = intval($_REQUEST ['id']);
+		$condition['id'] = $id;
+		$vo = M("DealItemShouhuo")->where($condition)->find();
+		$this->assign ( 'vo', $vo );
+		//输出图片集
+// 		$img_list = M("DealItemImage")->where("deal_item_id=".$vo['id'])->findAll();
+// 		$imgs = array();
+// 		foreach($img_list as $k=>$v)
+// 		{
+// 			$imgs[$k] = $v['image'];
+// 		}
+//		$this->assign("img_list",$imgs);
+	
+		$this->display();
+	}
+	public function edit_deal_xianhuo_shouhuo()
+	{
+		$id = intval($_REQUEST ['id']);
+		$condition['id'] = $id;
+		$vo = M("DealXianhuoShouhuo")->where($condition)->find();
+		$this->assign ( 'vo', $vo );
+
+	
+		$this->display();
+	}
+	public function deal_item_shouhuolist()
+	{
+		$id = intval($_REQUEST ['id']);
+		$vo = M("DealItem")->getById($id);
+		$this->assign ( 'vo', $vo );
+		if($vo)
+		{
+			$map['deal_item_id'] = $vo['id'];		
+			if (method_exists ( $this, '_filter' )) {
+				$this->_filter ( $map );
+			}
+			$name=$this->getActionName();
+			$model = D ("DealItemShouhuo");
+			if (! empty ( $model )) {
+				$this->_list ( $model, $map );
+			}
+		}
+		
+		$this->display();
+		
+	}
+	public function deal_xianhuo_shouhuolist()
+	{
+		$id = intval($_REQUEST ['id']);
+		$vo = M("DealXianhuo")->getById($id);
+		$this->assign ( 'vo', $vo );
+		if($vo)
+		{
+			$map['deal_xianhuo_id'] = $vo['id'];
+			if (method_exists ( $this, '_filter' )) {
+				$this->_filter ( $map );
+			}
+			$name=$this->getActionName();
+			$model = D ("DealXianhuoShouhuo");
+			if (! empty ( $model )) {
+				$this->_list ( $model, $map );
+			}
+		}
+	
+		$this->display();
+	}
+	public function deal_item_addshouhuo()
+	{
+		$id = intval($_REQUEST ['id']);
+		$condition['id'] = $id;
+		$vo = M("DealItem")->where($condition)->find();
+		$this->assign ( 'vo', $vo );
+		$this->display();
+		
+	}
+	public function deal_xianhuo_addshouhuo()
+	{
+		$id = intval($_REQUEST ['id']);
+		$condition['id'] = $id;
+		$vo = M("DealXianhuo")->where($condition)->find();
+		$this->assign ( 'vo', $vo );
+		$this->display();
+	
 	}
 	
 	public function update_deal_item() {
@@ -995,6 +1188,101 @@ class DealAction extends CommonAction{
 		}
 	}
 	
+	public function update_deal_xianhuo() {
+		B('FilterString');
+		$ajax = intval($_REQUEST['ajax']);
+		$data = M("DealXianhuo")->create ();
+	
+		//开始验证有效性
+		$this->assign("jumpUrl",u(MODULE_NAME."/edit_deal_xianhuo",array("id"=>$data['id'])));
+		if(!check_empty($data['price']))
+		{
+			$this->error("请输入价格");
+		}
+	
+		// 更新数据
+		$list=M("DealXianhuo")->save($data);
+		$log_info =  "项目ID".$data['deal_id'].":".format_price($data['price']);
+		if (false !== $list) {
+			if($data['virtual_person']>0){
+	
+			}
+			//成功提示
+			//开始处理图片
+			M("DealXianhuoImage")->where("deal_xianhuo_id=".$data['id'])->delete();
+			$imgs=array($_REQUEST['img0'],$_REQUEST['img1'],$_REQUEST['img2'],$_REQUEST['img3']);
+			//$imgs = $_REQUEST['image'];
+			foreach($imgs as $k=>$v)
+			{
+				if($v!='')
+				{
+					$img_data['deal_xianhuo_id'] = $data['id'];
+					$img_data['deal_id'] = $data['deal_id'];
+					$img_data['image'] = $v;
+					M("DealXianhuoImage")->add($img_data);
+				}
+			}
+			M("Deal")->where("id=".$data['deal_id'])->setField("deal_extra_cache","");
+			M("DealLog")->where("deal_id=".$data['deal_id'])->setField("deal_info_cache","");
+			//end 处理图片
+			save_log($log_info.L("UPDATE_SUCCESS"),1);
+
+			$this->success(L("UPDATE_SUCCESS"));
+		} else {
+			//错误提示
+			save_log($log_info.L("UPDATE_FAILED"),0);
+			$this->error(L("UPDATE_FAILED"));
+		}
+	}
+	
+	public function update_deal_item_shouhuo() {
+		B('FilterString');
+		$ajax = intval($_REQUEST['ajax']);
+		$_POST['is_kuaidi'] = $_POST['is_delivery'];
+		$data = M("DealItemShouhuo")->create ();
+	
+		//开始验证有效性
+		$this->assign("jumpUrl",u(MODULE_NAME."/edit_deal_item_shouhuo",array("id"=>$data['id'])));
+		if(!check_empty($data['kuaidi_name']))
+		{
+			$this->error("请输入名称");
+		}
+	
+		// 更新数据
+		$list=M("DealItemShouhuo")->save($data);
+		if (false !== $list) {
+
+			$this->success(L("UPDATE_SUCCESS"));
+		} else {
+			//错误提示
+			$this->error(L("UPDATE_FAILED"));
+		}
+	}
+	public function update_deal_xianhuo_shouhuo() {
+		B('FilterString');
+		$ajax = intval($_REQUEST['ajax']);
+		$_POST['is_kuaidi'] = $_POST['is_delivery'];
+		$data = M("DealXianhuoShouhuo")->create ();
+	
+		//开始验证有效性
+		$this->assign("jumpUrl",u(MODULE_NAME."/edit_deal_xianhuo_shouhuo",array("id"=>$data['id'])));
+		if(!check_empty($data['kuaidi_name']))
+		{
+			$this->error("请输入名称");
+		}
+	
+		// 更新数据
+		$list=M("DealXianhuoShouhuo")->save($data);
+		if (false !== $list) {
+	
+			$this->success(L("UPDATE_SUCCESS"));
+		} else {
+			//错误提示
+			$this->error(L("UPDATE_FAILED"));
+		}
+	}
+	
+	
 	public function del_deal_item()
 	{
 		$ajax = intval($_REQUEST['ajax']);
@@ -1023,7 +1311,78 @@ class DealAction extends CommonAction{
 				$this->error (l("INVALID_OPERATION"),$ajax);
 		}
 	}
+	public function del_deal_xianhuo()
+	{
+		$ajax = intval($_REQUEST['ajax']);
+		$id = $_REQUEST ['id'];
+		if (isset ( $id )) {
+			$condition = array ('id' => array ('in', explode ( ',', $id ) ) );
+			$rel_data = M("DealXianhuo")->where($condition)->findAll();
+			foreach($rel_data as $data)
+			{
+				$deal_id = $data['deal_id'];
+				$info[] = format_price($data['price']);
+			}
+			if($info) $info = implode(",",$info);
+			$info = "项目ID".$deal_id.":".$info;
+			$list = M("DealXianhuo")->where ( $condition )->delete();
+			if ($list!==false) {
+				M("Deal")->where("id=".$deal_id)->setField("deal_extra_cache","");
+				save_log($info.l("FOREVER_DELETE_SUCCESS"),1);
+				$this->success (l("FOREVER_DELETE_SUCCESS"),$ajax);
+			} else {
+				save_log($info.l("FOREVER_DELETE_FAILED"),0);
+				$this->error (l("FOREVER_DELETE_FAILED"),$ajax);
+			}
+		} else {
+			$this->error (l("INVALID_OPERATION"),$ajax);
+		}
+	}
+	public function del_deal_item_shouhuo()
+	{
+		$ajax = intval($_REQUEST['ajax']);
+		$id = $_REQUEST ['id'];
+		if (isset ( $id )) {
+			$condition = array ('id' => array ('in', explode ( ',', $id ) ) );
+			$rel_data = M("DealItemShouhuo")->where($condition)->findAll();
+			foreach($rel_data as $data)
+			{
+				$deal_item_id = $data['deal_item_id'];
+			}
+		
+			$list = M("DealItemShouhuo")->where ( $condition )->delete();
+			if ($list!==false) {
+				$this->success (l("FOREVER_DELETE_SUCCESS"),$ajax);
+			} else {
+				$this->error (l("FOREVER_DELETE_FAILED"),$ajax);
+			}
+		} else {
+			$this->error (l("INVALID_OPERATION"),$ajax);
+		}
+	}
 	
+	public function del_deal_xianhuo_shouhuo()
+	{
+		$ajax = intval($_REQUEST['ajax']);
+		$id = $_REQUEST ['id'];
+		if (isset ( $id )) {
+			$condition = array ('id' => array ('in', explode ( ',', $id ) ) );
+			$rel_data = M("DealXianhuoShouhuo")->where($condition)->findAll();
+			foreach($rel_data as $data)
+			{
+				$deal_xianhuo_id = $data['deal_xianhuo_id'];
+			}
+	
+			$list = M("DealXianhuoShouhuo")->where ( $condition )->delete();
+			if ($list!==false) {
+				$this->success (l("FOREVER_DELETE_SUCCESS"),$ajax);
+			} else {
+				$this->error (l("FOREVER_DELETE_FAILED"),$ajax);
+			}
+		} else {
+			$this->error (l("INVALID_OPERATION"),$ajax);
+		}
+	}
 	
 	
 	//pay_log 放款日志
@@ -1034,13 +1393,13 @@ class DealAction extends CommonAction{
 		//当项目佣金比例大于0时
 		if($deal_info['pay_radio']> 0)
 		{
-			$deal_info['commission'] = $deal_info['support_amount']*$deal_info['pay_radio'] + $deal_info['delivery_fee_amount'];
-			$deal_info['pay_amount'] =$deal_info['support_amount'] -$deal_info['commission'];
+			$deal_info['commission'] = $deal_info['support_amount']*$deal_info['pay_radio'] ;
+			$deal_info['pay_amount'] =$deal_info['support_amount']+ $deal_info['delivery_fee_amount'] -$deal_info['commission'];
 		}
 		//当项目佣金比例等于0时
 		else{
-			$deal_info['commission'] = $deal_info['support_amount']*app_conf("PAY_RADIO") + $deal_info['delivery_fee_amount'];
-			$deal_info['pay_amount'] =$deal_info['support_amount'] -$deal_info['commission'];
+			$deal_info['commission'] = $deal_info['support_amount']*app_conf("PAY_RADIO") ;
+			$deal_info['pay_amount'] =$deal_info['support_amount']+ $deal_info['delivery_fee_amount'] -$deal_info['commission'];
 		}
 	
 	//	$deal_info['commission'] = $deal_info['support_amount'] - $deal_info['pay_amount'] + $deal_info['delivery_fee_amount'];
@@ -1184,7 +1543,27 @@ class DealAction extends CommonAction{
 		
 		$this->display();
 	}
-	
+	public function add_deal_log()
+	{
+		$ajax = intval($_REQUEST['ajax']);
+		$id = intval($_REQUEST['id']);
+		
+		$deal_info = M("Deal")->getById($id);
+		$this->assign('deal_info',$deal_info);
+		
+		if(!$deal_info)
+		{
+					$this->error ("不能更新该项目的动态",$ajax);
+		}
+		else
+		{
+			$this->assign("deal_info",$deal_info);
+			$data['html'] =$this->fetch("add_update");
+			$data['status'] = 1;
+			$this->assign('data',$data);
+		}
+$this->display("add_update");		
+	}
 	public function del_deal_log()
 	{
 		$ajax = intval($_REQUEST['ajax']);

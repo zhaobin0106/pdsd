@@ -1,0 +1,82 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/fore_item_edit.js' />
+<script type="text/javascript" src="__ROOT__/system/region.js"></script>	
+<load href='__TMPL__Common/js/deal_edit.js' />
+<div class="main">
+<div class="main_title">添加配送 <a href="{:u("Fore/deal_item_shouhuolist",array("id"=>$vo['id']))}">配送列表</a></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data">
+<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+			<td class="item_title">名称</td>
+					<td class="item_input">
+			<input type="text" name="kuaidi_name"/>
+			</td>
+			</tr>
+		<tr>
+		<td class="item_title">简介:</td>
+		<td class="item_input"><textarea name="kuaidi_desc" class="textarea"></textarea></td>
+	</tr>
+
+	<tr>
+		<td class="item_title">是否需要配送</td>
+		<td class="item_input">
+			<select name="is_delivery">
+				<option value="0">否</option>
+				<option value="1">是</option>
+			</select>
+		</td>
+	</tr>
+	<tr id="delivery_fee">
+		<td class="item_title">运费:</td>
+		<td class="item_input"><input type="text" class="textbox" name="kuaidi_jiage" /></td>
+	</tr>
+		<tr>
+			<td class="item_title">是否显示</td>
+					<td class="item_input">
+			<input type="radio" name="is_show" value="1" />显示
+						<input type="radio" name="is_show" value="1" />不显示
+						<script>document.getElementsByName("is_show")[0].checked="checked";</script>
+			</td>
+			</tr>
+				<tr>
+			<td class="item_title">排序</td>
+					<td class="item_input">
+			<input type="text" name="sort" value="0"/>
+			</td>
+			</tr>
+
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+	</table>
+	<div class="blank5"></div>
+	<table class="form" cellpadding=0 cellspacing=0>
+		<tr>
+			<td colspan=2 class="topTd"></td>
+		</tr>
+		<tr>
+			<td class="item_title"></td>
+			<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Fore" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="insert_deal_item_shouhuo" />
+			<input type="hidden" name="fore_item_id" value="{$vo.id}" />
+			<input type="hidden" name="fore_id" value="{$vo.fore_id}" />
+			
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%ADD}" />
+			<input type="reset" class="button" value="{%RESET}" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 class="bottomTd"></td>
+		</tr>
+	</table> 		 
+	</form>
+</div>
+<include file="Public:footer" />

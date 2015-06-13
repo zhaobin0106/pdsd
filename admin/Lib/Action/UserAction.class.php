@@ -183,7 +183,59 @@ class UserAction extends CommonAction{
 		$this->display ();
 	}
 		
-
+	public function send(){
+		$ajax = intval($_REQUEST['ajax']);
+		$id = $_REQUEST ['id'];
+		$this->assign('id',$id);
+		$this->display('usermessage');
+				}
+public function send_message(){
+	$id = $_REQUEST ['id'];
+	$send_user_id = 115;
+	
+	if (isset ( $id )) {
+		$arrlist = explode(',', $id);
+		foreach($arrlist as $v)
+		{
+			$receive_user_info = $GLOBALS['db']->getRow("select user_name from ".DB_PREFIX."user where is_effect = 1 and id = ".$v);
+			$data = array();
+			$data['create_time'] = NOW_TIME;
+			$data['message'] = strim($_REQUEST['message']);
+			$data['user_id'] = $send_user_id;
+			$data['dest_user_id'] = $v;
+			$data['send_user_id'] = $send_user_id;
+			$data['receive_user_id'] = $v;
+			$data['user_name'] = '管理员';
+			$data['dest_user_name'] = $receive_user_info['user_name'];
+			$data['send_user_name'] = '管理员';
+			$data['receive_user_name'] = $receive_user_info['user_name'];
+			$data['message_type'] = "outbox";
+			$data['is_read'] = 1;
+			
+			$GLOBALS['db']->autoExecute(DB_PREFIX."user_message",$data);
+				
+			//2.生成收件
+			$data = array();
+			$data['create_time'] = NOW_TIME;
+			$data['message'] = strim($_REQUEST['message']);
+			$data['user_id'] = $v;
+			$data['dest_user_id'] = $send_user_id;
+			$data['send_user_id'] = $send_user_id;
+			$data['receive_user_id'] = $v;
+			$data['user_name'] = $receive_user_info['user_name'];
+			$data['dest_user_name'] = '管理员';
+			$data['send_user_name'] = '管理员';
+			$data['receive_user_name'] = $receive_user_info['user_name'];
+			$data['message_type'] = "inbox";
+			
+			$GLOBALS['db']->autoExecute(DB_PREFIX."user_message",$data);
+				
+		}
+	
+		$this->success("发送成功");
+		
+		}
+}
 	public function delete() {
 		//彻底删除指定记录
 		$ajax = intval($_REQUEST['ajax']);

@@ -240,6 +240,30 @@ function get_status($status)
 	else
 	return l("NO");
 }
+function get_zhongjiang($status)
+{
+	if($status == 1)
+	{
+		return l("YES");
+
+	}elseif($status == 2){
+		return l("NO");
+
+	}else{
+		return ' ';
+	}
+}
+function get_type($type)
+{
+	if($type == 0)
+	{
+		return "拼地";
+	}elseif($type == 1)
+	{
+		return "现货";
+	}
+}
+
 function show_content($content,$id)
 {
 	return "<a title='".l("VIEW")."' href='javascript:void(0);' onclick='show_content(".$id.")'>".l("VIEW")."</a>";
@@ -285,6 +309,11 @@ function get_deal_name($id)
 	return get_title($name);
 }
 
+function get_fore_name($id)
+{
+	$name = M("Fore")->where("id=".$id)->getField("name");
+	return get_title($name);
+}
 function get_send_status($status)
 {
 	return L("SEND_STATUS_".$status);

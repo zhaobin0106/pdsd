@@ -1,0 +1,83 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/deal_item_edit.js' />
+<script type="text/javascript" src="__ROOT__/system/region.js"></script>	
+<load href='__TMPL__Common/js/deal_edit.js' />
+<div class="main">
+<div class="main_title">{%EDIT} <a href="{:u("Deal/deal_item_shouhuolist",array("id"=>$vo['deal_item_id']))}">配送列表</a></div>
+<div class="blank5"></div>
+
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data">
+<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+			<td class="item_title">名称</td>
+					<td class="item_input">
+			<input type="text" name="kuaidi_name" value="{$vo.kuaidi_name}"/>
+			</td>
+			</tr>
+		<tr>
+		<td class="item_title">简介:</td>
+		<td class="item_input"><textarea name="kuaidi_desc" class="textarea" >{$vo.kuaidi_desc}</textarea></td>
+	</tr>
+
+	<tr>
+		<td class="item_title">是否需要配送</td>
+		<td class="item_input">
+			<select name="is_delivery">
+				<option value="0" <if condition="$vo['is_kuaidi'] eq 0">selected="selected"</if> >否</option>
+				<option value="1" <if condition="$vo['is_kuaidi'] eq 1">selected="selected"</if> >是</option>
+			</select>
+		</td>
+	</tr>
+	<tr id="delivery_fee">
+		<td class="item_title">运费:</td>
+		<td class="item_input"><input type="text" class="textbox" name="kuaidi_price" value="{$vo.kuaidi_price}" /></td>
+	</tr>
+		<tr>
+			<td class="item_title">是否显示</td>
+					<td class="item_input">
+			<input type="radio" name="is_show" value="1" <if condition="$vo['is_show'] eq 1">checked</if> />显示
+			<input type="radio" name="is_show" value="0" <if condition="$vo['is_show'] eq 0">checked</if>/>不显示
+			</td>
+			</tr>
+				<tr>
+			<td class="item_title">排序</td>
+					<td class="item_input">
+			<input type="text" name="sort" value="{$vo.sort}"/>
+			</td>
+			</tr>
+
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+
+<div class="blank5"></div>
+	<table class="form" cellpadding=0 cellspacing=0>
+		<tr>
+			<td colspan=2 class="topTd"></td>
+		</tr>
+		<tr>
+			<td class="item_title"></td>
+			<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="update_deal_item_shouhuo" />
+			<input type="hidden" name="deal_id" value="{$vo.deal_id}" />
+			<input type="hidden" name="id" value="{$vo.id}" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%EDIT}" />
+			<input type="reset" class="button" value="{%RESET}" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 class="bottomTd"></td>
+		</tr>
+	</table> 		 
+</form>
+</div>
+<include file="Public:footer" />

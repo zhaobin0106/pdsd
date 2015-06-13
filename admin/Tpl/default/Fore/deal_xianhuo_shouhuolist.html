@@ -1,0 +1,35 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">配送列表 <a href="{:u("Deal/deal_xianhuo",array("id"=>$vo['deal_id']))}" class="back_list">返回现货列表</a></div>
+<div class="blank5"></div>
+
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}" onclick="deal_xianhuo_addshouhuo({$vo.id});" />
+	<input type="button" class="button" value="删除" onclick="del_deal_xianhuo_shouhuo();" />
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="deal" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,kuaidi_name:名称
+		,kuaidi_desc:简介
+		,is_kuaidi|get_status:是否快递
+		,is_show|get_status:是否显示
+		,sort:排序"
+	actionlist="edit_deal_xianhuo_shouhuo:{%EDIT}, del_deal_xianhuo_shouhuo:删除"/> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

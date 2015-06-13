@@ -300,6 +300,7 @@ abstract class Action extends Think
         if(empty($type)) $type  =   C('DEFAULT_AJAX_RETURN');
         if(strtoupper($type)=='JSON') {
             // 返回JSON数据格式到客户端 包含状态信息
+        	 
             header("Content-Type:text/html; charset=utf-8");
             exit(json_encode($result));
         }elseif(strtoupper($type)=='XML'){
@@ -355,6 +356,7 @@ abstract class Action extends Think
         // 判断是否为AJAX返回
         if($ajax || $this->isAjax()) $this->ajaxReturn('',$message,$status);
         // 提示标题
+        
         $this->assign('msgTitle',$status? L('_OPERATION_SUCCESS_') : L('_OPERATION_FAIL_'));
         //如果设置了关闭窗口，则提示完毕后自动关闭窗口
         if($this->get('closeWin'))    $this->assign('jumpUrl','javascript:window.close();');

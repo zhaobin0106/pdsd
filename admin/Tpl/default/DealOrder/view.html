@@ -53,8 +53,18 @@
 		<td class="item_input">{$order_info.user_name}</td>
 
 	</tr>	
+						<tr>
+		<td class="item_title">订单号:</td>
+		<td class="item_input" colspan=5>{$order_info.dingdanhao}</td>
+
+	</tr>
+		<tr>
+		<td class="item_title">配送信息:</td>
+		<td class="item_input" colspan=5>名称：{$order_info.kuaidi_name} 简介：{$order_info.kuaidi_desc}</td>
+
+	</tr>
 	<tr>
-		<td class="item_title">配送地址:</td>
+		<td class="item_title">收货地址:</td>
 		<td class="item_input" colspan=5>{$order_info.province}{$order_info.city}{$order_info.address},邮编：{$order_info.zip},收货人：{$order_info.consignee}手机：{$order_info.mobile}</td>
 
 	</tr>	
@@ -87,7 +97,7 @@
 		<td class="item_title">项目:</td>
 		<td class="item_input">{$order_info.deal_price|format_price}</td>
 		<td class="item_title">运费:</td>
-		<td class="item_input">{$order_info.delivery_fee|format_price}</td>
+		<td class="item_input">{$order_info.kuaidi_price|format_price}</td>
 	</tr>
 	<tr>
 		<td class="item_title">余额支付:</td>

@@ -1,0 +1,82 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<PHP>
+	function get_huowu($id,$deal)
+	{
+		if($deal['repay_time'])
+		{
+				return $deal['repay_memo'];
+		
+		}else{
+		 			return "<a href='javascript:void(0);' onclick=\"{window.location.href='".u("Order/mb_sure",array("id"=>$id,"info"=>$deal))."';} \" >查看</a>";
+		
+		}
+	}
+	function get_order_status($status)
+	{
+		if($status==0)return "未支付";
+		if($status==1)return "过期支付";
+		if($status==2)return "限额已满";
+		if($status==3)return "已支付";
+	}
+		function get_order_make_status($status,$deal)
+	{
+
+				if($deal['repay_time']){
+					return "已领取";
+				}else{
+					return "未领取";
+				}
+
+
+			
+		 
+	}
+</PHP>
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/fore.js' />
+<script type="text/javascript">
+	function view(id)
+	{
+		location.href = ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=view&id="+id;
+	}
+</script>
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">活动报名记录</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="删除" onclick="del();" />
+</div>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		类型:<select name="type">
+			<option value="NULL" <if condition="$_REQUEST['type'] eq 'NULL'">selected="selected"</if> >请选择</option>
+			<option value="1" <if condition="$_REQUEST['type'] eq '1'">selected="selected"</if> >拼地</option>
+			<option value="2" <if condition="$_REQUEST['type'] eq '2'">selected="selected"</if> >试吃</option>
+			<option value="3" <if condition="$_REQUEST['type'] eq '3'">selected="selected"</if> >商品</option>
+			</select>
+		订单号: <input type="text" class="textbox" name="dingdanhao" value="{:trim($_REQUEST['dingdanhao'])}" style="width:100px;" />
+		<input type="hidden" value="Order" name="m" />
+		<input type="hidden" value="index" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fore" 
+	action="true" 
+	datasource="list" 
+	show="dingdanhao:订单号
+		,user_name:用户名"	
+	actionlist="id|get_huowu=$fore" /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

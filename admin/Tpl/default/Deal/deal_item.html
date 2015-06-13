@@ -22,13 +22,12 @@
 	datasource="list" 
 	show="id:{%ID}|50px
 		,price|format_price:价格
-		,is_delivery|get_status:配送
 		,support_count:支持人数
 		,virtual_person:虚拟购买人数
 		,support_amount|format_price:已筹金额
 		,limit_user:限购人数
-		,repaid_day:成功后回报天数" 
-	actionlist="edit_deal_item:{%EDIT}, del_deal_item:删除" /> 
+		,repaid_day:成功后回报天数"
+	actionlist="edit_deal_item:{%EDIT}, del_deal_item:删除,deal_item_shouhuolist:配送列表" /> 
 
 <div class="blank5"></div>
 <div class="page">{$page}</div>

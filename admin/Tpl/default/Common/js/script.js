@@ -183,6 +183,7 @@ function del(id)
 		});
 		id = idArray.join(",");
 	}
+
 	if(confirm(LANG['CONFIRM_DELETE']))
 	$.ajax({ 
 			url: ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=delete&id="+id, 
@@ -196,6 +197,34 @@ function del(id)
 	});
 }
 //完全删除
+function del_goumai(id)
+{
+	if(!id)
+	{
+		idBox = $(".key:checked");
+		if(idBox.length == 0)
+		{
+			alert(LANG['DELETE_EMPTY_WARNING']);
+			return;
+		}
+		idArray = new Array();
+		$.each( idBox, function(i, n){
+			idArray.push($(n).val());
+		});
+		id = idArray.join(",");
+	}
+	if(confirm(LANG['CONFIRM_DELETE']))
+	$.ajax({ 
+			url: ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=delete_goumai&id="+id, 
+			data: "ajax=1",
+			dataType: "json",
+			success: function(obj){
+				$("#info").html(obj.info);
+				if(obj.status==1)
+				location.href=location.href;
+			}
+	});
+}
 function foreverdel(id)
 {
 	if(!id)
@@ -300,7 +329,23 @@ function export_csv()
 	var url= ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=export_csv";
 	location.href = url+param;
 }
-
+function export_csvs()
+{
+	var inputs = $(".search_row").find("input");
+	var selects = $(".search_row").find("select");
+	var param = '';
+	for(i=0;i<inputs.length;i++)
+	{
+		if(inputs[i].name!='m'&&inputs[i].name!='a')
+		param += "&"+inputs[i].name+"="+$(inputs[i]).val();
+	}
+	for(i=0;i<selects.length;i++)
+	{
+		param += "&"+selects[i].name+"="+$(selects[i]).val();
+	}
+	var url= ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=export_csvs";
+	location.href = url+param;
+}
 function init_word_box()
 {
 	$(".word-only").bind("keydown",function(e){

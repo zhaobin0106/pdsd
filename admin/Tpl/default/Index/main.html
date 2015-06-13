@@ -71,10 +71,18 @@
 		</tr>
 		<tr>
 			<td class="item_title" style="width:200px;">
-				订单成功数
+				项目订单成功数
 			</td>
 			<td class="item_input">
 				 <a href="{:u("DealOrder/index",array("order_status"=>3))}">{$info.deal_order.num}个</a>
+			</td>
+		</tr>
+				<tr>
+			<td class="item_title" style="width:200px;">
+				活动订单成功数
+			</td>
+			<td class="item_input">
+				 <a href="{:u("ForeItemOrder/index",array("order_status"=>3))}">{$info.fore_order.num}个</a>
 			</td>
 		</tr>
 		<tr>
@@ -82,7 +90,7 @@
 				成交金额
 			</td>
 			<td class="item_input">
-				 ￥{$info.deal_order.money}元
+				 ￥{$info.sum_money}元
 			</td>
 		</tr>
  		<tr>

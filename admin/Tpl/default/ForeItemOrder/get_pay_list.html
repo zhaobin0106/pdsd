@@ -1,0 +1,92 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<PHP>
+	function get_order_status($status)
+	{
+		if($status==0)return "未支付";
+		if($status==1)return "过期支付";
+		if($status==2)return "限额已满";
+		if($status==3)return "已支付";
+	}
+	 
+	function get_order_make_status($status,$deal)
+	{
+
+				if($deal['repay_time']){
+					return "已参与";
+				}else{
+					return "未参与";
+				}
+
+
+			
+		 
+	}
+</PHP>
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/fore.js' />
+<script type="text/javascript">
+	function view(id)
+	{
+		location.href = ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=view&id="+id;
+	}
+</script>
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+	<if condition="$deal_info.type eq 1">
+		<div class="main_title">{$deal_info.name}-投资列表</div>
+		<else/>
+		<div class="main_title">{$deal_info.name}-支持列表</div>
+	</if>
+
+<div class="blank5"></div>
+<div class="button_row">
+	<div class="main_title"> <a href="{:u("Fore/online_index")}" class="back_list">{%BACK_LIST}</a></div>
+	<input type="button" class="button" value="删除" onclick="del();" />
+<!-- 		<input type="button" class="button" value="设为中奖" onclick="zhongjiang();" />
+			<input type="button" class="button" value="设为未中奖" onclick="weizhongjiang();" /> -->
+	
+</div>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+ 		报名者: <input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
+		退款:<input type="text" class="textbox" name="is_refund" value="{:trim($_REQUEST['is_refund'])}" style="width:30px;" />
+		支付状态:<input type="text" class="textbox" name="order_status" value="{:trim($_REQUEST['order_status'])}" style="width:100px;" />
+		预计回报时间:<input type="text" class="textbox" name="repay_time" value="{:trim($_REQUEST['repay_time'])}" style="width:100px;" />
+		子项目ID:<input type="text" class="textbox"name="fore_item_id" value="{:trim($_REQUEST['deal_item_id'])}" style="width:50px"/>
+		<input type="hidden" value="ForeItemOrder" name="m" />
+		<input type="hidden" value="get_pay_list" name="a" />
+		<input type="hidden" value="{$_REQUEST['fore_id']}" name="fore_id" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+		<input type="button" class="button" value="{%EXPORT}" onclick="export_csv();" />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="fore" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,deal_name|get_title:名称
+		,type|get_fore_type_name:类型
+		,user_name:报名人
+		,total_price|format_price:应付总额
+		,credit_pay|format_price:余额支付
+		,online_pay|format_price:在线支付
+		,order_status|get_order_status:状态
+		,repay_make_time|get_order_make_status=$fore:确认参与活动
+		,is_refund|get_status:退款
+		,repay_time|to_date:参与活动日期
+		,create_time|to_date:报名日期" 
+	actionlist="view:查看,del:删除" /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

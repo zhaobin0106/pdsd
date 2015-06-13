@@ -1,0 +1,24 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<div style="margin-left:10px;">
+<div style="margin-bottom:10px">用户名：{$info['user_name']}</div>
+<div style="margin-bottom:10px">邮箱：{$info['email']}</div>
+<div style="margin-bottom:10px">手机号：{$info['iphone']}</div>
+<div style="margin-bottom:10px">应付总额：{$info['total_status']}</div>
+<div style="color:red;margin-bottom:10px">是否退款：<if condition="$info['is_refund'] eq 0">否<else/>是</if></div>
+<div style="margin-bottom:10px">是否领取：	<if condition="$deal['repay_time']">已领取<else/>未领取</if></div>
+<if condition="$info['is_refund'] eq 0">
+	<form name="user_message" id="user_message_form" method="post" action="__APP__">
+设置领取信息：<div><textarea name="repay_memo" class="textareabox" style="height:100px;width:422px"></textarea></div>
+					<input type="hidden" name="info" value="{$info['ltype']}" />
+		
+<input type="hidden" name="id" value="{$id}" />
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Order" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="save_memo" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="确认" />
+
+
+	</form>
+</if>
+</div>

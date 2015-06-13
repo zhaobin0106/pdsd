@@ -1,0 +1,27 @@
+{// 引入标签库 }
+<tagLib name="html" />
+
+	<form name="user_message" id="user_message_form" method="post" action="__APP__">
+	<table class="form" cellpadding=0 cellspacing=0>
+
+<tr>
+			<td class="item_title">发送内容:</td>
+		<td>	
+		<textarea name="message" class="textareabox" style="height:100px;width:422px"></textarea>
+		</td>
+		</tr>
+		<div class="blank10"></div>
+	<tr>
+		<td class="item_title">&nbsp;</td>
+		<td class="item_input">
+			<!--隐藏元素-->
+				
+				<input type="hidden" name="id" value="{$id}" />
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="User" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="send_message" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="发送" />
+		</td>
+	</tr>
+
+	</form>
