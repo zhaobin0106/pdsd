@@ -1390,7 +1390,7 @@ function syn_deal($deal_id)
 		$deal_info['focus_count'] = intval($GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_focus_log where deal_id = ".$deal_info['id']));
 		$deal_info['view_count'] = intval($GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_visit_log where deal_id = ".$deal_info['id']));
 		$deal_info['support_amount'] = doubleval($GLOBALS['db']->getOne("select sum(price) from ".DB_PREFIX."deal_support_log where deal_id = ".$deal_info['id']));
-		$deal_info['delivery_fee_amount'] = doubleval($GLOBALS['db']->getOne("select sum(delivery_fee) from ".DB_PREFIX."deal_order where deal_id = ".$deal_info['id']." and order_status=3 "));
+		$deal_info['delivery_fee_amount'] = doubleval($GLOBALS['db']->getOne("select sum(kuaidi_price) from ".DB_PREFIX."deal_order where deal_id = ".$deal_info['id']." and order_status=3 "));
 
 		if($deal_info['type']==0){
 			$deal_info["virtual_num"]=$GLOBALS['db']->getOne("select sum(virtual_person) from ".DB_PREFIX."deal_item where deal_id=".$deal_id);
@@ -1450,6 +1450,73 @@ function syn_deal($deal_id)
 }
 
 
+function syn_fore($deal_id)
+{
+	$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$deal_id);
+
+	if($deal_info)
+	{
+		$deal_info['comment_count'] = intval($GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_comment where fore_id = ".$deal_info['id']." and log_id = 0"));
+		$deal_info['support_count'] = intval($GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_support_log where fore_id = ".$deal_info['id']));
+		$deal_info['focus_count'] = intval($GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_focus_log where fore_id = ".$deal_info['id']));
+		$deal_info['view_count'] = intval($GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_visit_log where fore_id = ".$deal_info['id']));
+		$deal_info['support_amount'] = doubleval($GLOBALS['db']->getOne("select sum(price) from ".DB_PREFIX."fore_support_log where fore_id = ".$deal_info['id']));
+		$deal_info['delivery_fee_amount'] = doubleval($GLOBALS['db']->getOne("select sum(kuaidi_jiage) from ".DB_PREFIX."fore_item_order where fore_id = ".$deal_info['id']." and order_status=3 "));
+
+		if($deal_info['type']==0){
+			$deal_info["virtual_num"]=$GLOBALS['db']->getOne("select sum(virtual_person) from ".DB_PREFIX."fore_item where fore_id=".$deal_id);
+			$deal_info["virtual_price"]=$GLOBALS['db']->getOne("select sum(virtual_person*price) from ".DB_PREFIX."fore_item where fore_id=".$deal_id);
+			if(($deal_info['support_amount']+$deal_info["virtual_price"])>=$deal_info['limit_price'])
+			{
+				$deal_info['is_success'] = 1;
+			}
+			else
+			{
+				$deal_info['is_success'] = 0;
+			}
+		}elseif($deal_info['type']==1){
+			$deal_info["gen_num"]=$GLOBALS['db']->getOne("select count(distinct(user_id)) from ".DB_PREFIX."investment_list where  type=2 and  deal_id=".$deal_id);
+			$deal_info["xun_num"]=$GLOBALS['db']->getOne("select count(distinct(user_id)) from ".DB_PREFIX."investment_list where  type=0 and  deal_id=".$deal_id);
+			$deal_info["invote_num"]=$GLOBALS['db']->getOne("select count(distinct(user_id)) from ".DB_PREFIX."investment_list where  deal_id=".$deal_id);
+			$deal_info["invote_money"]=$GLOBALS['db']->getOne("select sum(money) from ".DB_PREFIX."investment_list where deal_id=$deal_id ");
+			if($deal_info['invote_money']>=$deal_info['limit_price'])
+			{
+				$deal_info['is_success'] = 1;
+			}
+			else
+			{
+				$deal_info['is_success'] = 0;
+			}
+		}
+
+		if($deal_info['pay_radio'] > 0){
+			$deal_info['pay_amount'] = ($deal_info['support_amount']*(1-$deal_info['pay_radio']))+$deal_info['delivery_fee_amount'];
+		}
+		else
+		{
+			$deal_info['pay_amount'] = ($deal_info['support_amount']*(1-app_conf("PAY_RADIO")))+$deal_info['delivery_fee_amount'];
+
+		}
+
+		$deal_info['tags_match'] = "";
+		$deal_info['tags_match_row'] = "";
+		$GLOBALS['db']->autoExecute(DB_PREFIX."fore", $deal_info, $mode = 'UPDATE', "id=".$deal_info['id'], $querymode = 'SILENT');
+
+		$tags_arr = preg_split("/[, ]/",$deal_info["tags"]);
+
+		foreach($tags_arr as $tgs){
+			if(trim($tgs)!="")
+				insert_match_item(trim($tgs),"fore",$deal_info['id'],"tags_match");
+		}
+
+		$name_arr = div_str($deal_info['name']);
+		foreach($name_arr as $name_item){
+			if(trim($name_item)!="")
+				insert_match_item(trim($name_item),"fore",$deal_info['id'],"name_match");
+		}
+
+	}
+}
 
 //发密码验证邮件
 function send_user_password_mail($user_id)
@@ -1538,9 +1605,9 @@ function pay_order($order_id)
 
 		$order_info['pay_time'] = get_gmtime();
 		if($order_info['type']==1){
-			$GLOBALS['db']->query("update ".DB_PREFIX."deal set support_count = support_count + 1,support_amount = support_amount + ".$order_info['deal_price'].",pay_amount = pay_amount + ".$order_info['total_price'].",delivery_fee_amount = delivery_fee_amount + ".$order_info['delivery_fee']." where id = ".$order_info['deal_id']." and is_effect = 1 and is_delete = 0 and begin_time < ".get_gmtime()." and (pay_end_time > ".get_gmtime()." or pay_end_time = 0)");
+			$GLOBALS['db']->query("update ".DB_PREFIX."deal set support_count = support_count + 1,support_amount = support_amount + ".$order_info['deal_price'].",pay_amount = pay_amount + ".$order_info['total_price'].",delivery_fee_amount = delivery_fee_amount + ".$order_info['kuadi_price']." where id = ".$order_info['deal_id']." and is_effect = 1 and is_delete = 0 and begin_time < ".get_gmtime()." and (pay_end_time > ".get_gmtime()." or pay_end_time = 0)");
 		}else{
-			$GLOBALS['db']->query("update ".DB_PREFIX."deal set support_count = support_count + 1,support_amount = support_amount + ".$order_info['deal_price'].",pay_amount = pay_amount + ".$order_info['total_price'].",delivery_fee_amount = delivery_fee_amount + ".$order_info['delivery_fee']." where id = ".$order_info['deal_id']." and is_effect = 1 and is_delete = 0 and begin_time < ".get_gmtime()." and (end_time > ".get_gmtime()." or end_time = 0)");
+			$GLOBALS['db']->query("update ".DB_PREFIX."deal set support_count = support_count + 1,support_amount = support_amount + ".$order_info['deal_price'].",pay_amount = pay_amount + ".$order_info['total_price'].",delivery_fee_amount = delivery_fee_amount + ".$order_info['kuaidi_price']." where id = ".$order_info['deal_id']." and is_effect = 1 and is_delete = 0 and begin_time < ".get_gmtime()." and (end_time > ".get_gmtime()." or end_time = 0)");
 		}
 		if($GLOBALS['db']->affected_rows()>0)
 		{
@@ -1595,7 +1662,7 @@ function pay_order($order_id)
 				$result['status'] = 2;
 				$order_info['order_status'] = 2;
 				$order_info['is_refund'] =1;
-				$GLOBALS['db']->query("update ".DB_PREFIX."deal set support_count = support_count - 1,support_amount = support_amount - ".$order_info['deal_price'].",pay_amount = pay_amount - ".$order_info['total_price'].",delivery_fee_amount = delivery_fee_amount - ".$order_info['delivery_fee']." where id = ".$order_info['deal_id']);
+				$GLOBALS['db']->query("update ".DB_PREFIX."deal set support_count = support_count - 1,support_amount = support_amount - ".$order_info['deal_price'].",pay_amount = pay_amount - ".$order_info['total_price'].",delivery_fee_amount = delivery_fee_amount - ".$order_info['kuaidi_price']." where id = ".$order_info['deal_id']);
 				$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_support_log where id = ".$support_log_id);
 				modify_account(array("money"=>$order_info['total_price']),$order_info['user_id'],$order_info['deal_name']."限额已满，转存入会员帐户");
 			}
@@ -1617,7 +1684,160 @@ function pay_order($order_id)
 	}
 	return $result;
 }
+function pay_fore_order($order_id)
+{
+require_once APP_ROOT_PATH."system/libs/user.php";
+$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_item_order where id = ".$order_id);
+$GLOBALS['db']->query("update ".DB_PREFIX."fore_item_order set order_status = 4 where id = ".$order_id." and (credit_pay+online_pay>=total_price) and order_status = 0");
+if($GLOBALS['db']->affected_rows()>0) //订单已成功支付
+{
+	$order_info['order_status'] = 4;
+	if($order_info['credit_pay']+$order_info['online_pay']>$order_info['total_price'])
+	{
+		$more_money = $order_info['credit_pay']+$order_info['online_pay'] - $order_info['total_price'];
+		modify_account(array("money"=>$more_money),$order_info['user_id'],$order_info['deal_name']."超额支付，转存入会员帐户");
+	}
 
+	$order_info['pay_time'] = get_gmtime();
+	if($order_info['type']==1){
+		$GLOBALS['db']->query("update ".DB_PREFIX."fore set support_count = support_count + 1,support_amount = support_amount + ".$order_info['deal_price'].",pay_amount = pay_amount + ".$order_info['total_price'].",delivery_fee_amount = delivery_fee_amount + ".$order_info['kuadi_jiage']." where id = ".$order_info['fore_id']." and is_effect = 1 and is_delete = 0 and begin_time < ".get_gmtime()." and (pay_end_time > ".get_gmtime()." or pay_end_time = 0)");
+	}else{
+		$GLOBALS['db']->query("update ".DB_PREFIX."fore set support_count = support_count + 1,support_amount = support_amount + ".$order_info['deal_price'].",pay_amount = pay_amount + ".$order_info['total_price'].",delivery_fee_amount = delivery_fee_amount + ".$order_info['kuaidi_jiage']." where id = ".$order_info['fore_id']." and is_effect = 1 and is_delete = 0 and begin_time < ".get_gmtime()." and (end_time > ".get_gmtime()." or end_time = 0)");
+	}
+	if($GLOBALS['db']->affected_rows()>0)
+	{
+		//记录支持日志
+		$support_log['fore_id'] = $order_info['fore_id'];
+		$support_log['user_id'] = $order_info['user_id'];
+		$support_log['create_time'] = get_gmtime();
+		$support_log['price'] = $order_info['deal_price'];
+		$support_log['fore_item_id'] = $order_info['fore_item_id'];
+		$GLOBALS['db']->autoExecute(DB_PREFIX."fore_support_log",$support_log);
+		$support_log_id = intval($GLOBALS['db']->insert_id());
+
+
+		$GLOBALS['db']->query("update ".DB_PREFIX."fore_item set support_count = support_count + 1,support_amount = support_amount +".$order_info['deal_price']." where (support_count + 1 <= limit_user or limit_user = 0) and id = ".$order_info['fore_item_id']);
+		if($GLOBALS['db']->affected_rows()>0||($order_info['type']==1))
+		{
+			$result['status'] = 3;
+			$order_info['order_status'] = 3;
+
+
+			$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$order_info['fore_id']." and is_effect = 1 and is_delete = 0");
+			//下单项目成功，准备加入准备队列
+			if($deal_info['is_success'] == 0)
+			{
+				//未成功的项止准备生成队列
+				$notify['user_id'] = $GLOBALS['user_info']['id'];
+				$notify['fore_id'] = $deal_info['id'];
+				$notify['create_time'] = get_gmtime();
+				$GLOBALS['db']->autoExecute(DB_PREFIX."user_fore_notify",$notify,"INSERT","","SILENT");
+
+			}
+
+			//更新用户的支持数
+			$GLOBALS['db']->query("update ".DB_PREFIX."user set support_count = support_count + 1 where id = ".$order_info['user_id']);
+			//同步deal_log中的deal_info_cache
+
+			$GLOBALS['db']->query("update ".DB_PREFIX."fore_log set deal_info_cache = '' where fore_id = ".$deal_info['id']);
+			$GLOBALS['db']->query("update ".DB_PREFIX."fore set deal_extra_cache = '' where id = ".$deal_info['id']);
+
+			if($order_info['type']==1){
+				$GLOBALS['db']->query("update ".DB_PREFIX."investment_list set investor_money_status=3 where order_id=".$order_info['id']);
+			}
+			//同步项目状态
+			syn_fore($order_info['deal_id']);
+
+
+
+		}
+		else
+		{
+			$result['status'] = 2;
+			$order_info['order_status'] = 2;
+			$order_info['is_refund'] =1;
+			$GLOBALS['db']->query("update ".DB_PREFIX."fore set support_count = support_count - 1,support_amount = support_amount - ".$order_info['deal_price'].",pay_amount = pay_amount - ".$order_info['total_price'].",delivery_fee_amount = delivery_fee_amount - ".$order_info['kuaidi_jiage']." where id = ".$order_info['fore_id']);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_support_log where id = ".$support_log_id);
+			modify_account(array("money"=>$order_info['total_price']),$order_info['user_id'],$order_info['deal_name']."限额已满，转存入会员帐户");
+		}
+	}
+	else
+	{
+		$result['status'] =1;
+		$order_info['order_status'] =1;
+		$order_info['is_refund'] =1;
+		modify_account(array("money"=>$order_info['total_price']),$order_info['user_id'],$order_info['deal_name']."已过期，转存入会员帐户");
+	}
+	$GLOBALS['db']->query("update ".DB_PREFIX."fore_item_order set order_status = ".intval($order_info['order_status']).",pay_time = ".$order_info['pay_time'].",is_refund = ".$order_info['is_refund']." where id = ".$order_info['id']);
+
+}
+else
+{
+	$result['status'] = 0;
+	$result['money'] = $order_info['total_price'] - $order_info['online_pay'] - $order_info['credit_pay'];
+}
+return $result;
+}
+function pay_xianhuo_order($order_id){
+
+	require_once APP_ROOT_PATH."system/libs/user.php";
+	$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_xianhuo_order where id = ".$order_id);
+	$GLOBALS['db']->query("update ".DB_PREFIX."deal_xianhuo_order set order_status = 4 where id = ".$order_id." and (credit_pay+online_pay>=total_price) and order_status = 0");
+	if($GLOBALS['db']->affected_rows()>0) //订单已成功支付
+	{
+		$order_info['order_status'] = 4;
+		if($order_info['credit_pay']+$order_info['online_pay']>$order_info['total_price'])
+		{
+			$more_money = $order_info['credit_pay']+$order_info['online_pay'] - $order_info['total_price'];
+			modify_account(array("money"=>$more_money),$order_info['user_id'],$order_info['deal_name']."超额支付，转存入会员帐户");
+		}
+	
+		$order_info['pay_time'] = get_gmtime();
+
+			//记录支持日志
+
+	
+			$GLOBALS['db']->query("update ".DB_PREFIX."deal_xianhuo set support_count = support_count + 1,support_amount = support_amount +".$order_info['deal_price']." where (support_count + 1 <= limit_user or limit_user = 0) and id = ".$order_info['deal_xianhuo_id']);
+			if($GLOBALS['db']->affected_rows()>0||($order_info['type']==1))
+			{
+				$result['status'] = 3;
+				$order_info['order_status'] = 3;
+	
+	
+				$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".$order_info['deal_id']." and is_effect = 1 and is_delete = 0");
+				//下单项目成功，准备加入准备队列
+
+	
+				//更新用户的支持数
+				//同步deal_log中的deal_info_cache
+	
+			
+				if($order_info['type']==1){
+					$GLOBALS['db']->query("update ".DB_PREFIX."investment_list set investor_money_status=3 where order_id=".$order_info['id']);
+				}
+				//同步项目状态
+	
+	
+	
+			}
+			else
+			{
+				$result['status'] = 2;
+				$order_info['order_status'] = 2;
+				$order_info['is_refund'] =1;
+				modify_account(array("money"=>$order_info['total_price']),$order_info['user_id'],$order_info['deal_name']."限额已满，转存入会员帐户");
+			}
+
+		$GLOBALS['db']->query("update ".DB_PREFIX."deal_xianhuo_order set order_status = ".intval($order_info['order_status']).",pay_time = ".$order_info['pay_time'].",is_refund = ".$order_info['is_refund']." where id = ".$order_info['id']);
+	
+	}
+	else
+	{
+		$result['status'] = 0;
+		$result['money'] = $order_info['total_price'] - $order_info['online_pay'] - $order_info['credit_pay'];
+	}
+	return $result;
+}
 function syn_deal_status($deal_id)
 {
 	$deal_info=$GLOBALS['db']->getRow("select * from  ".DB_PREFIX."deal where id=$deal_id");
@@ -2236,11 +2456,21 @@ function get_investor($is_investor){
  function  get_type_name($type){
  	switch($type){
  		case 0:
- 		return '产品众筹';
+ 		return '拼地';
  		break;
  		case 1:
  		return '股权众筹';
  		break;
+ 	}
+ }
+ function  get_fore_type_name($type){
+ 	switch($type){
+ 		case 0:
+ 			return '试吃';
+ 			break;
+ 		case 1:
+ 			return '股权众筹';
+ 			break;
  	}
  }
  /*判断股份*/
