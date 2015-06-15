@@ -23,7 +23,7 @@ $this->_var['dcpagejs'][] = "";
 <section class="user_register">
   <form id="user_register_form" name="user_register_form" action="{url_wap r="user#do_register"}">
 	<div class="login tc p10 pl15 pr15">
-		<span class="title pt10">注册{$site_name}会员</span>
+		<span class="title pt10" style="color:#67AD32">会 员 注 册</span>
 		<ul id="register_group">
 			{if app_conf("USER_VERIFY") neq 2}
 			<li class="webkit-box">
@@ -33,7 +33,7 @@ $this->_var['dcpagejs'][] = "";
 			{/if}
 			<li class="webkit-box">
 				<label class="input_lable mr10">会员名称:</label>
-				<input class="input100 sizing webkit-box-flex" type="text" name="user_name" value="" placeholder="会员名">
+				<input class="input100 sizing webkit-box-flex" type="text" name="user_name" value="" placeholder="输入会员名称">
 			</li>
 			<li class="webkit-box">
 				<label class="input_lable mr10">输入密码:</label>
@@ -57,9 +57,8 @@ $this->_var['dcpagejs'][] = "";
 			{/if}
 		</ul>
 		<div class="blank15"></div> 
-		<input class="ui-button theme_color" type="button" name="submit_form"  value="注册" rel="ui-button">
+		<input class="ui-button theme_color" style="background:#67AD32;" type="button" name="submit_form"  value="注 册" rel="ui-button">
 		<input type="hidden" value="1" name="ajax" />
 	</div>
   </form>
 </div>
-{include file="footer.html"}
