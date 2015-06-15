@@ -2,10 +2,11 @@
 <script type="text/javascript" src="{$TMPL}/js/TouchSlide.1.1.js"></script>
 <!--banner 开始 -->
 <style type="text/css">
+	
 </style>
 <section class="index">
     <div class="oComment_height">
-        <nav class="index_nav">
+        <!--<nav class="index_nav">
             <ul class="webkit-box">
                 <li class="curr"><a href="{url_wap r="deals#index"}">产品众筹</a></li>
                 <li><a href="{url_wap r="deals#index" p="type=1"}" class="equity">股权众筹</a></li>
@@ -13,8 +14,8 @@
                 <li class="nav_last"><a>分类</a></li>  
             </ul>
             <i id="nav_line"></i>
-        </nav>
-        <div class="oComment_1" style="padding-top:49px;">
+        </nav>-->
+        <div class="oComment_1" style="padding-top:0px;">
              <!--banner 开始 -->
             {if $adv_list}
             <div id="slideBox" class="banner">
@@ -49,7 +50,7 @@
             {/if}
             <!--banner 结束 -->
             <!-- 首页分类 开始 -->
-            <div class="index_category sizing" id="category_slidebox">
+            <!--<div class="index_category sizing" id="category_slidebox">
                 <div class="bd">
                     <ul>
                     {foreach from=$cate_list item=cate name=cate_list key=k}
@@ -74,7 +75,7 @@
                 <div class="hd">
                     <ul></ul>
                 </div>
-            </div>
+            </div>-->
             <script type="text/javascript">
                 if($("#category_slidebox .bd ul").find('li').length>1){
                     TouchSlide({ 
@@ -92,15 +93,15 @@
             </script>
             <!-- 首页分类 结束 -->
             <!--list 开始 -->
-            <div class="blank10"></div>
-            <h2 class="h2-title bdl sizing">
+            
+            <!--<h2 class="h2-title bdl sizing">
                 精品项目
                 <span class="f_r">
                     <a href="{url_wap r="deals#index"}">查看产品众筹&nbsp;<i class="fa fa-angle-right"></i></a>
                     <a href="{url_wap r="deals#index" p="type=1"}" class="equity">查看股权众筹&nbsp;<i class="fa fa-angle-right"></i></a>
                 </span>
-            </h2>
-            <div class="tabul-box">
+            </h2>-->
+           <!-- <div class="tabul-box">
                 <a name="classify"></a>
                 <div class="tabul-div">
                     <ul class="tab-ul">
@@ -118,22 +119,105 @@
                         </li>
                     </ul>
                 </div>
-            </div>   
+            </div>--> 
         </div>
     </div>
-    {foreach from=$deal_list item=deal key=k}
+    
+    <!-- 左侧菜单 开始 -->
+    <script type="text/javascript">
+    	function xdog(){  	   			
+    			document.getElementById("dog").style.display="block";   		    			  						   				    										
+         }
+
+    </script>
+    
+    <script type="text/javascript">   	
+        $(document).ready(function(){
+			  $("#xdog1").click(function(){
+			  $("#ydog1").slideToggle(500);
+			  
+			  });
+		});
+		
+		$(document).ready(function(){
+			  $("#xdog2").click(function(){
+			  $("#ydog2").slideToggle(500);
+			  
+			  });
+		});				
+    </script>       
+    
+    <div style="width:30%;float:left">
+    <div  id="xdog1" style="height:40px;background:#eee;border-bottom:1px solid #D4D4D4;border-right:1px solid #D4D4D4;">
+    	<a href="#">
+    		<p style="font-size:12px;font-weight:700;color:#6F6F71;padding-top:10px;text-align:center">
+    			<img style="vertical-align:middle;margin:0 5px 0 0;display:inline-block;width:15px;height:15px" src="./tpl/default/images/biao01.png"/>拼地
+    			<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:15px;height:15px" src="./tpl/default/images/biao03.png"/>
+    		</p>
+    	</a>
+    </div>
+    
+    <div id="ydog1" style="display:block">
+		<ul>
+			{foreach from=$cate_list item=cate name=cate_list key=k}
+			{if $cate.pid eq 0}
+			{if $smarty.foreach.cate_list.iteration<7}                       
+			<li style="height:40px;background:#fff;border-bottom:1px solid #D4D4D4;border-right:1px solid #D4D4D4;text-align:center;padding-top:0px">
+				<a href="{url_wap r="deals#index" p="id=$cate.id"}" class=""> 
+					<p style="font-size:12px;font-weight:700;color:#6F6F71;padding-top:10px">{$cate.name}<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:10px;height:10px" src="./tpl/default/images/biao04.png"/></p>					
+				</a>                       
+			</li>
+			 {/if}
+			 {/if}
+			{/foreach}
+		</ul>
+    </div>             
+                     
+                     
+    <div id="xdog2" style="height:40px;background:#eee;border-bottom:1px solid #D4D4D4;border-right:1px solid #D4D4D4;">
+    	<a href="#">
+    		<p style="font-size:12px;font-weight:700;color:#6F6F71;padding-top:10px;text-align:center">
+    			<img style="vertical-align:middle;margin:0 5px 0 0;display:inline-block;width:15px;height:15px" src="./tpl/default/images/biao02.png"/>试吃
+    			<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:15px;height:15px" src="./tpl/default/images/biao03.png"/>
+    		</p>
+    	</a>
+    </div>
+    
+     <div id="ydog2" style="display:block">
+		<ul>
+			{foreach from=$cate_list item=cate name=cate_list key=k}
+			{if $cate.pid eq 0}
+			{if $smarty.foreach.cate_list.iteration<7}                       
+			<li style="height:40px;background:#fff;border-bottom:1px solid #D4D4D4;border-right:1px solid #D4D4D4;text-align:center;padding-top:0px">
+				<a href="{url_wap r="deals#index" p="id=$cate.id"}" class=""> 
+					<p style="font-size:12px;font-weight:700;color:#6F6F71;padding-top:10px">{$cate.name}<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:10px;height:10px" src="./tpl/default/images/biao04.png"/></p>					
+				</a>                       
+			</li>
+			 {/if}
+			 {/if}
+			{/foreach}
+		</ul>
+    </div>
+  </div>
+    <!-- 左侧菜单 结束 -->
+    
+    <!-- 项目列表 开始 -->
+    <div style="width:70%;float:right">
+    {foreach from=$deal_list item=deal key=k name=deal}
+    {if $smarty.foreach.deal.iteration<4}
+    	
     <section class="deal_item_list">
         <a href="{$deal.url}" title="{$deal.name}">
-            <div class="deal_item_box">
+            <div class="deal_item_box" style="margin:5px;padding-bottom:0px">
                 <!--1-->
                 <div class="imgbox">
                     <img src="{$deal.image}" alt="{$deal.name}">
                 </div>
                 <div class="clear"></div>
-                <h3 class="deal_title sizing">{$deal.name}</h3>
+                <h3 class="deal_title sizing" style="text-align:left;font-size:14px">{$deal.name}</h3>
                 <div class="clear"></div>
                 <!--2-->
-                <div class="paiduan">
+                <!--<div class="paiduan">
                     <span class="caption-title">
                         已筹资：<span class="symbol">¥</span><span class="f_money">{function name="round" v=$deal.support_amount e=2}</span>&nbsp;&nbsp; 
                         目标：<span class="symbol" style="color:#333">¥</span><span class="f_money" style="color:#333">{function name="round" v=$deal.limit_price e=2}</span>
@@ -160,20 +244,20 @@
 						{/if}
 					{/if}
                     </span>
-                </div>
-                <div class="clear"></div>
+                </div>-->
+                <!--<div class="clear"></div>-->
                 <!--3-->
                 <div class="deal_content_box pd">
-                    <div class="ui">
+                   <!-- <div class="ui">
                         {if $deal.percent gte 100}
                         <span class="common-success" style="width:100%;"></span>
                         {else}
                         <span class="progress" style="width:{$deal.percent}%;"></span>
                         {/if}
-                    </div>
-                    <div class="blank">
-                    </div>
-                    {if $deal.status==0}
+                    </div>-->
+                    <!--<div class="blank">
+                    </div>->
+                   <!-- {if $deal.status==0}
                     <div class="div_dt">
                         <span class="num">距离开始还有{$deal.left_days}天</span><br />
                         <span class="til"></span>
@@ -182,21 +266,20 @@
                     <div class="div_dt">
                         <span class="num">{$deal.percent}%</span><br />
                         <span class="til">已达</span>
-                    </div>
-                    <div class="div_dt">
+                    </div>-->
+                    <div class="div_dt" style="border:none;float:right;width:50%;margin-top:0px">
                     	
                         {if $deal.remain_days >0}
-                        <span class="num">{$deal.remain_days}天</span><br />
-                        <span class="til">剩余时间</span>
+                        <!--<span class="">{$deal.remain_days}</span>-->
+                        <span class="til">{function name="to_date" v="$deal.end_time" f="Y/m/d"}截止</span>
                         {else}
-                        <span class="num">{$deal.end_time}</span><br />
-                        <span class="til">结束时间</span>
+                        <span class="til">{function name="to_date" v="$deal.end_time" f="Y/m/d"}截止</span>
                         {/if}
                         
                     </div>
-                    <div class="div_dt" style="border:none;">
-                        <span class="num">{$deal.support_count}</span><br />
-                        <span class="til">支持者</span>
+                    <div class="div_dt" style="border:none;float:left;width:30%;margin-top:0px">
+                        <!--<span class="">{$deal.support_count}</span>-->
+                        <span class="til">{$deal.support_count}人支持</span>
                     </div>
                     {/if}
                     <div class="blank"></div>
@@ -204,15 +287,19 @@
             </div>
         </a>
     </section>
-    {/foreach}  
+    {/if}
+    {/foreach} 
+    </div> 
     <!--list 结束 -->
-    <div class="readall">
+    
+    
+    <!--<div class="readall">
         <a href="{url_wap r="deals#index"}"><span class="f_l ck">更多产品众筹</span><span class="f_r jh"><i class="fa fa-angle-right"></i></span></a>
     </div>
 	<div class="readall">
         <a href="{url_wap r="deals#index" p="type=1"}"><span class="f_l ck">更多股权众筹</span><span class="f_r jh"><i class="fa fa-angle-right"></i></span></a>
-    </div>
-    <div class="blank10"></div>
+    </div>-->
+    <!--<div class="blank10"></div>-->
 </section>
 <script type="text/javascript">
     // deal_show_menu();
