@@ -107,10 +107,12 @@ class cartModule extends BaseModule {
 					// 统计所有真实+虚拟（钱）
 					$deal_info1 ['total_virtual_price'] += intval ( $v ['price'] * $v ['virtual_person'] + $v ['support_amount'] );
 				}
+				$nums = $GLOBALS['db']->getOne("select sum(limit_user) from ".DB_PREFIX."fore_item where fore_id = ".$deal_item['fore_id']);
+	 			$deal_info['person']=$deal_info['support_count']+$deal_info['virtual_num'];
 				$deal_info ['support_amount'] = $deal_info1 ['total_virtual_price'];
 				$deal_item ['price_format'] = number_price_format ( $deal_item ['price'] );
 				$deal_item ['delivery_fee_format'] = number_price_format ( $deal_item ['delivery_fee'] );
-				$deal_info ['percent'] = round ( $deal_info ['support_amount'] / $deal_info ['limit_price'] * 100 );
+				$deal_info ['percent'] =round(($deal_info['person']/$nums)*100);
 				$deal_info ['remain_days'] = ceil ( ($deal_info ['end_time'] - NOW_TIME) / (24 * 3600) );
 				
 				$GLOBALS ['tmpl']->assign ( "deal_item", $deal_item );
@@ -211,7 +213,7 @@ class cartModule extends BaseModule {
 		if (! $GLOBALS ['user_info']) {
 			showErr ( "", $ajax, url ( "user#login" ) );
 		}
-		if (! $_REQUEST['kuaidi_id']){
+		if (!  $_REQUEST ['kuaidi']){
 			showErr ( "请选择配送方式", $ajax );
 		}
 		$order_type = intval ( $_REQUEST ['order_type'] );
@@ -524,10 +526,14 @@ class cartModule extends BaseModule {
 				$kuaidi_info = $GLOBALS ['db']->getRow ( "select * from " . DB_PREFIX . "fore_item_shouhuo where id = " . $kuaidi_id );
 				$deal_item ['price_format'] = number_price_format ( $deal_item ['price'] );
 				$deal_item ['delivery_fee_format'] = number_price_format ( $kuaidi_info ['kuaidi_jiage'] );
+				
+				$nums = $GLOBALS['db']->getOne("select sum(limit_user) from ".DB_PREFIX."fore_item where fore_id = ".$deal_item['fore_id']);
+				$deal_info['person']=$deal_info['support_count']+$deal_info['virtual_num'];
+				$deal_info ['percent'] =round(($deal_info['person']/$nums)*100);
+				$deal_info ['remain_days'] = ceil ( ($deal_info ['end_time'] - NOW_TIME) / (24 * 3600) );
+				
 				$deal_item ['total_price'] = $deal_item ['price'] + $kuaidi_info ['kuaidi_jiage'];
 				$deal_item ['total_price_format'] = number_price_format ( $deal_item ['total_price'] );
-				$deal_info ['percent'] = round ( $deal_info ['support_amount'] / $deal_info ['limit_price'] * 100 );
-				$deal_info ['remain_days'] = ceil ( ($deal_info ['end_time'] - NOW_TIME) / (24 * 3600) );
 				
 				$GLOBALS ['tmpl']->assign ( "deal_item", $deal_item );
 				$GLOBALS ['tmpl']->assign ( "deal_info", $deal_info );

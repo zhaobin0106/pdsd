@@ -124,24 +124,24 @@
 	{else}
 	<!--2-->
 	<div class="paiduan" style="height:30px;padding:10px 12px 0 12px ;line-height: 20px;color: #A4A4A4;">
-		<span class="caption-title">目标：<em>{$fore_item.num_days}天</em> <em><i class="font-yen">¥</i>{function name="round" v=$fore_item.limit_price e=2}</em></span>
+		<span class="caption-title">目标：<em>{$fore_item.num_days}天</em> <!-- <em><i class="font-yen">¥</i>{function name="round" v=$fore_item.limit_price e=2}</em> --></span>
 		<span class="f_r ">
 			{if $fore_item.begin_time > $now}
 			<span class="common-begin">即将开始</span>
 			{elseif $fore_item.end_time < $now and $fore_item.end_time neq 0}
-			<span {if $fore_item.percent gte 100}class="common-success"{else}class="common-fail"{/if}>{if $fore_item.percent gte 100}已成功{else $fore_item.percent gt 0}筹资失败{/if}</span> 	 
+			<span {if $fore_item.percent gte 100}class="common-success"{else}class="common-fail"{/if}>{if $fore_item.percent gte 100}已成功{else $fore_item.percent gt 0}活动失败{/if}</span> 	 
 			{else}
 			{if $fore_item.percent gte 100}
-				<span class="common-success">已成功</span>
+				<span class="common-success">已结束</span>
 			{else}
 				<span class="common-sprite">
 					{if $fore_item.end_time eq 0}
-					长期项目
+					长期活动
 					{else}
 						{if $fore_item.type eq 1}
 						融资中
 						{else}
-						筹资中
+						活动中
 						{/if}
  					{/if}
 				</span>
@@ -197,12 +197,12 @@
 			<span class="til">已达</span>
 		</div>
 		<div class="div3">
-			<span class="num"><font>{function name="round" v=$fore_item.support_amount e=2}</font>元</span>
+			<span class="num"><font>{function name="round" v=$fore_item.support_count e=2}</font>人</span>
 			<div class="blank10"></div>
  			{if $fore_item.type eq 1}
 			<span class="til">已预购</span>
 			{else}
-			<span class="til">已筹资</span>
+			<span class="til">已报名</span>
 			{/if}
 		</div>
 		<div class="div3" style="text-align:right;">
@@ -213,7 +213,7 @@
 			{else}
 			<span class="num">
 				{if $fore_item.end_time eq 0}
-				长期项目
+				长期活动
 				{else}
 				<font>{$fore_item.remain_days}</font>天
 				{/if}
@@ -227,7 +227,7 @@
 					结束时间
 				{else}
 					{if $fore_item.end_time eq 0}
-						长期项目
+						长期活动
 					{else}
 						剩余时间
 					{/if}

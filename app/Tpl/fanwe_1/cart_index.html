@@ -58,12 +58,12 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart.js";
 
 				<div id="dizhi" style="display:none">
 					<div class="form_title">
-						<div class="f_l">收件地址</div>
+						<div class="f_l">收货地址</div>
 						{if $consignee_list}
 						<div class="f_r" style="margin-top:7px">
 							<div class="ui-small-button theme_bgcolor" rel="green" id="add_consignee" url="{url r="settings#add_consignee"}">
 								<div>
-									<span class="f14">添加配送地址</span>
+									<span class="f14">添加收货地址</span>
 								</div>
 							</div>
 						</div>	
@@ -188,9 +188,9 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart.js";
 							<span class="til">达到</span>
 						</div>
 						<div class="div3">
-							<span class="num" ><font>{function name="round" v=$deal_info.support_amount e=2}</font>元</span>
+							<span class="num" ><font>{function name="round" v=$deal_info.person e=2}</font>人</span>
 							<div class="blank5"></div>
-							<span class="til">已获支持</span>
+							<span class="til">已有报名</span>
 						</div>
 		
 						<div class="div3"  style="text-align:right">

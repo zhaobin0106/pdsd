@@ -142,7 +142,8 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		
 		$deal_info['tags_arr'] = preg_split("/[ ,]/",$deal_info['tags']);
 	
-	
+		$nums = $GLOBALS['db']->getOne("select sum(limit_user) from ".DB_PREFIX."fore_item where fore_id = ".$deal_info['id']);
+		
 		$deal_info['support_amount_format'] = number_price_format($deal_info['support_amount']);
 		if($deal_info['type']==1){
 			$deal_info['limit_price_format'] = number_price_format(($deal_info['limit_price']/10000));
@@ -165,7 +166,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
  		}else{
 	 		$deal_info['person']=$deal_info['support_count']+$deal_info['virtual_num'];
 			$deal_info['total_virtual_price']=number_price_format($deal_info['support_amount']+$deal_info['virtual_price']);
- 			$deal_info['percent']=round((($deal_info['support_amount']+$deal_info['virtual_price'])/$deal_info['limit_price'])*100);
+ 			$deal_info['percent']=round(($deal_info['person']/$nums)*100);
  		}
  		//项目等级放到项目详细页面模块（对详细页面进行控制）
 		$deal_info['deal_level']=$GLOBALS['db']->getOne("select level from ".DB_PREFIX."deal_level where id=".intval($deal_info['user_level']));

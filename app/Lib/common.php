@@ -1230,6 +1230,7 @@ function get_fore_list($limit="",$conditions="",$orderby=" sort asc ",$deal_type
 		$deal_ids = array();
 		foreach($deal_list as $k=>$v)
 		{
+			$nums = $GLOBALS['db']->getOne("select sum(limit_user) from ".DB_PREFIX."fore_item where fore_id = ".$v['id']);
 			$deal_list[$k]['remain_days'] = ceil(($v['end_time'] - $now_time)/(24*3600));
 			if($v['begin_time'] > $now_time){
 				$deal_list[$k]['left_days'] = intval(($now_time - $v['create_time']) / 24 / 3600);
@@ -1271,7 +1272,7 @@ function get_fore_list($limit="",$conditions="",$orderby=" sort asc ",$deal_type
 				$deal_list[$k]['virtual_person']=$deal_list[$k]['virtual_num'];
 				$deal_list[$k]['support_count'] =$deal_list[$k]['virtual_num']+$deal_list[$k]['support_count'];
 				$deal_list[$k]['support_amount'] =$deal_list[$k]['virtual_price']+$deal_list[$k]['support_amount'];
-				$deal_list[$k]['percent'] = round(($deal_list[$k]['support_amount'])/$v['limit_price']*100);
+				$deal_list[$k]['percent'] = round(($deal_list[$k]['support_count'])/$nums*100);
 			}
 			if($deal_type=='deal_cate'||$deal_type=='deal_cate_preheat'){
 				$deal_list[$k]['user_info']=$GLOBALS['db']->getRowCached("select * from  ".DB_PREFIX."user where id=".$v['user_id']);
