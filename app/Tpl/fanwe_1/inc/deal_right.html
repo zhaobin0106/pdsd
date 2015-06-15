@@ -152,8 +152,8 @@
 	{foreach from=$deal_item_list item=deal_item key=key}
 	<div class="box2 f_l">
 		<div class="box21">
-			<span class="box2_title f_l">支持¥{$deal_item.price_format}</span>
-			<span class="f_r">已有<em class="f18 f_red">{$deal_item.virtual_person_list}</em>位支持者</span>
+			<span class="box2_title f_l">支持 ¥{$deal_item.price_format}</span>
+			<span class="f_r">已有 <em class="f18 f_red">{$deal_item.virtual_person_list}</em> 位支持者</span>
 		</div>
 		<div class="box22">
 			<span class="box22_1 f_l">
@@ -196,14 +196,14 @@
 			{if $deal_item.support_count < $deal_item.limit_user or $deal_item.limit_user eq 0}
 			<a class="box22_3 theme_bgcolor" href="{url r="cart" p="id=$deal_item.id&type=1&lixing=deal"}" target="_blank">
 				<div>
-					<span>支持¥{$deal_item.price_format}</span>
+					<span  style="font-size:18px"><b>支持 ¥{$deal_item.price_format}</b></span>
 				</div>
 			</a>
 			{else}
 			<div class="box22_3 bg_gray" disabled="disabled">已满额</div>
 			{/if}
 			{else}
-			<div class="box22_3 bg_gray" disabled="disabled">支持¥{$deal_item.price_format}</div>
+			<div class="box22_3 bg_gray" disabled="disabled">支持 ¥{$deal_item.price_format}</div>
 			{/if}
 			<div class="blank0"></div>
 		</div>
@@ -211,17 +211,17 @@
 	{/foreach}
 	<!--第二部分end-->	
 		{if $deal_info.description_1 neq null}
-	<div class="blank"></div>
+	<!--<div class="blank"></div>
 	<div class="box3" style="background:#fff9e9;">
 		<div class="box31">付款与退款说明：</div>
 		<div class="box32" style="padding-bottom:0">
 				{$deal_info.description_1}
 		</div>
 	</div>
-	<div class="blank"></div>
+	<div class="blank"></div>-->
 	{/if}
 	<!--第3部分-->		
-	<div class="box3">
+	<!--<div class="box3">
 		<div class="box31">发起人信息</div>
 		<div class="box32">
 			<div class="box_image f_l">
@@ -238,7 +238,7 @@
 			</div>
 			
 		</div>
-	</div>
+	</div>-->
 	<div class="blank"></div>
 	<!--第3部分结束-->	
 </div>
