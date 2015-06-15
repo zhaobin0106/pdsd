@@ -319,6 +319,7 @@ function init_fore_page_wap($deal_info) {
 	$deal_info ['deal_item_count'] = 0;
 	foreach ( $deal_info ['deal_item_list'] as $k => $v ) {
 		// 统计所有真实+虚拟（钱）
+		$nums = $GLOBALS['db']->getOne("select sum(limit_user) from ".DB_PREFIX."fore_item where fore_id = ".$v['fore_id']);
 		$deal_info ['total_virtual_person'] += $v ['virtual_person'];
 		$deal_info ['total_virtual_price'] += $v ['price'] * $v ['virtual_person'] + $v ['support_amount'];
 		// 统计每个子项目真实+虚拟（钱）
@@ -345,7 +346,8 @@ function init_fore_page_wap($deal_info) {
 	
 	// $deal_info['deal_level']=$GLOBALS['db']->getOne("select level from ".DB_PREFIX."deal_level where id=".intval($deal_info['user_level']));
 	$deal_info ['person'] = $deal_info ['total_virtual_person'] + $deal_info ['support_count'];
-	$deal_info ['percent'] = round ( ($deal_info ['total_virtual_price'] / $deal_info ['limit_price']) * 100 );
+	$deal_info ['percent'] = round ( ($deal_info ['person'] / $nums) * 100 );
+	$deal_info ['shengyu_limit'] = $nums - $deal_info['person'];
 	
 	$deal_info ['update_url'] = url_wap ( "fore#update", array (
 			"id" => $deal_info ['id'] 

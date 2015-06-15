@@ -694,6 +694,28 @@ class accountModule{
 		
 		$GLOBALS['tmpl']->display("account_project.html");
 	}
+	public function eat()
+	{
+		$GLOBALS['tmpl']->assign("page_title","我的试吃");
+		if(!$GLOBALS['user_info'])
+			app_redirect(url_wap("user#login"));
+	
+		$page_size = intval($GLOBALS['m_config']['page_size']);;
+		$page = intval($_REQUEST['p']);
+		if($page==0)
+			$page = 1;
+		$limit = (($page-1)*$page_size).",".$page_size;
+	
+		$deal_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore where user_id = ".intval($GLOBALS['user_info']['id'])." and is_delete = 0 order by create_time desc limit ".$limit);
+		$deal_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore where user_id = ".intval($GLOBALS['user_info']['id'])." and is_delete = 0");
+	
+		$page = new Page($deal_count,$page_size);   //初始化分页对象
+		$p  =  $page->show();
+		$GLOBALS['tmpl']->assign('pages',$p);
+		$GLOBALS['tmpl']->assign('deal_list',$deal_list);
+	
+		$GLOBALS['tmpl']->display("account_eat.html");
+	}
 	public function focus()
 	{
  		$GLOBALS['tmpl']->assign("page_title","关注的项目");

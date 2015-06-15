@@ -15,7 +15,62 @@ $this->_var['cpagejs_1'][]='';
 	<div class="closebigimg">点击任意位置关闭</div>
 </div>
 <!-- 点击查看大图 结束 -->
+    	<a href="javascript:void(0);" title="{$deal_info.name}" class="deal_title sizing" >{$deal_info.name}</a>
 
+<div class="deal_box">
+
+    	            <span class="deal_title sizing ">
+        		{if $deal_info.status eq 0}
+                    <span class="common common-fail" style="background-color:#9ed367">即将开始</span>
+                {else}
+	            	{if $deal_info.percent >=100}
+						<span class="common common-success" style="background-color:#9ed367">已结束</span>
+					{else}
+                    	{if $deal_info.status eq 1}
+                            <span class="common common-success" style="background-color:#9ed367">已结束</span>
+                        {/if}
+                        {if $deal_info.status eq 2}
+                            <span class="common common-fail" style="background-color:#9ed367">活动失败</span>
+                        {/if}
+                        {if $deal_info.status eq 3}
+                            <span class="common common-sprite" style="background-color:#9ed367">尝鲜报名中</span>
+                        {/if}
+                        {if $deal_info.status eq 4}
+                            <span class="common common-sprite" style="background-color:#9ed367">长期活动</span>
+                        {/if}
+				 	{/if}
+	  			{/if}
+            </span>
+            </div>
+                	        	        		 	<div style="float:right">
+	 				{foreach from=$deal_info.deal_item_list item=item key=k}
+        		    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:60px;background-color:#9ed367">报名</a>
+        		    {/foreach}
+        		    </div>
+        		    <div style="border-left:1px solid #e1e1e1;width:2px;height:50px;float:right;margin-right:5px"></div>
+    	<div class="paiduan">
+
+        	<span class="caption-title">
+	        	还剩：<span class="symbol">{$deal_info.shengyu_limit}</span>个名额&nbsp;&nbsp;
+	        	已报名：<span class="symbol" style="color:#333">{$deal_info.person}</span>人
+        	</span>		
+</br>
+        		 				报名截止日期：{function name="to_date" v="$deal_info.end_time" f="Y年m月d日"}
+
+	 	</div>
+
+    	<div class="blank5"></div>
+     	<!--3-->
+    	<div class="deal_content_box pd">
+        		<span class="num">{$deal_info.percent}%</span><br />
+     		<div class="ui">
+      			<span class="{if $deal_info.percent gte 100}common-success{/if} progress" style="width:{$deal_info.percent}%;background-color:#9ed367"></span>
+         	</div>             
+
+   
+
+        	<div class="blank"></div>
+    	</div>
 <!-- 中间 开始 -->
 <div class="mod">
 	<section class="deal_box">
@@ -29,90 +84,20 @@ $this->_var['cpagejs_1'][]='';
 				{/if}
  	    	</a>
     	</div>
-    	<a href="javascript:void(0);" title="{$deal_info.name}" class="deal_title sizing">{$deal_info.name}</a>
     	<!--2-->
 	
-    	<div class="paiduan">
     	
-        	<span class="caption-title">
-	        	已筹资：<span class="symbol">¥</span><span class="f_money">{$deal_info.total_virtual_price_format}</span>&nbsp;&nbsp;
-	        	目标：<span class="symbol" style="color:#333">¥</span><span class="f_money" style="color:#333">{$deal_info.limit_price_format}</span>
-        	</span>
-            <span class="f_r ">
-        		{if $deal_info.status eq 0}
-                    <span class="common common-fail">即将开始</span>
-                {else}
-	            	{if $deal_info.percent >=100}
-						<span class="common common-success">已成功</span>
-					{else}
-                    	{if $deal_info.status eq 1}
-                            <span class="common common-success">已成功</span>
-                        {/if}
-                        {if $deal_info.status eq 2}
-                            <span class="common common-fail">筹资失败</span>
-                        {/if}
-                        {if $deal_info.status eq 3}
-                            <span class="common common-sprite">筹资中</span>
-                        {/if}
-                        {if $deal_info.status eq 4}
-                            <span class="common common-sprite">长期项目</span>
-                        {/if}
-				 	{/if}
-	  			{/if}
-            </span>
-	 	</div>
-    	<div class="blank5"></div>
-     	<!--3-->
-    	<div class="deal_content_box pd">             
-     		<div class="ui">
-      			<span class="{if $deal_info.percent gte 100}common-success{/if} progress" style="width:{$deal_info.percent}%;"></span>
-         	</div>             
-        	<div class="blank"></div>
-        	<div class="div_dt">
-        		<span class="num">{$deal_info.percent}%</span><br />
-        		<span class="til">已达</span>
-        	</div>
-        	<div class="div_dt">
-        		{if $deal_info.status==0}
-				<span class="num">
-					{$deal_info.left_days}天
-				</span>
-				<span class="til">距离开始</span>
-				{else}
-	        	<span class="num">
-	        		{if $deal.percent >=100}
-				 	已成功
-					{else}
-						{if $deal_info.status eq 1}
-                   	 		已成功
-	                    {/if}
-	                    {if $deal_info.status eq 2}
-                   			筹资失败
-	                    {/if}
-	                    {if $deal_info.status eq 3}
-	                        {$deal_info.remain_days}天
-	                    {/if}
-	                    {if $deal_info.status eq 4}
-	                       	 长期项目
-	                    {/if}
-					{/if}	
- 				</span><br />
-				<span class="til">剩余时间</span>
-				{/if}
-			</div>
-	        <div class="div_dt" style="border:none;">
-	            <span class="num">{$deal_info.person}</span><br />
-	            <span class="til">报名者</span>               
-	        </div>
-        	<div class="blank"></div>
-    	</div>
+
+
+
+
 	</section>
-	<section class="shit">
+<!-- 	<section class="shit">
 	    <span>发起人：{if $deal_info.user_name}{$deal_info.user_name}{else}{$site_name}{/if}</span>
 	    <a class="orange" href="">{$deal_user_info.user_name}</a>
-<!-- 	    <a class="f_r 	{if $is_focus}qxgz{else}gz{/if} attention_focus_deal" id="{$deal_info.id}" href="javascript:void(0);"><font size="2.5"><i class="fa {if $is_focus}fa-star{else}fa-star-o{/if} "></i></font> {if $is_focus}取消关注{else}关注{/if}</a>
- -->	    <span></span>
-	</section>
+	    <a class="f_r 	{if $is_focus}qxgz{else}gz{/if} attention_focus_deal" id="{$deal_info.id}" href="javascript:void(0);"><font size="2.5"><i class="fa {if $is_focus}fa-star{else}fa-star-o{/if} "></i></font> {if $is_focus}取消关注{else}关注{/if}</a>
+	    <span></span>
+	</section> -->
 	<section class="detailmain">
 	    <p class="detailpd">{function name="msubstr" v=$deal_info.brief p=0 e=60}</p>
 	    <div class="blank10"></div>
@@ -129,56 +114,7 @@ $this->_var['cpagejs_1'][]='';
 	    </div>
 	</section>
 	
-	<section class="detailborder">
-		{foreach from=$deal_info.deal_item_list item=item key=k}
-		{if $k>=3}
-	  	<div class="displayReturn">
-	 	{/if} 	
-	    	<div class="detailReturn">
-	    		<div class="Returntop webkit-box mb10">
-	    			{if $deal_info.remain_days>0}
-					{if ($item.support_count+$item.virtual_person) < $item.limit_user or $item.limit_user eq 0}
-				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
-				        <span class="span2">{$item.person}人已报名</span>
-				    </div>
-				    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:100px;">立即报名</a>
-					{else}
-				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
-				        <span class="span2">已满额</span>
-				    </div>
-				    <a href="javascript:void(0);" disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即报名</a>
-					{/if}
-					{else}
-				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
-				        <span class="span2">{$item.person}人已报名</span>
-				    </div>
-				    <a href="javascript:void(0);"  disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即报名</a>
-					{/if}	
-	    		</div>
-			    <p>{$item.description}</p>
-			    <p>
-			    	{foreach from=$item.images item=image}
-				    <img class="pimg" onclick="showbig();" src="{$image.image}">
-				    {/foreach}
-			    </p>
-		    </div>
-		{if $k>=3}
-	  	</div>
-	 	{/if} 	
-		{/foreach}
-		{if $deal_info.deal_item_count>3}
-    	<div class="moreProject" id="display_item">
-        	<div class="openmore">
-        		查看{$deal_info.deal_item_count}项回报<i class="fa fa-chevron-down"></i>
-        	</div>
-       	 	<div class="closemore">滚回去<i class="fa fa-chevron-up"></i></div>
-    	</div>
-		{/if}   
-    	<div class="blank"></div>
-	</section>
+
 	{if $log_num}
 	<section class="detailborder" onclick="window.location.href='{$deal_info.update_url}';">
 	    <div class="detailmain Dynamic">        

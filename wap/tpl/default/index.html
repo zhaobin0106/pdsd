@@ -160,14 +160,12 @@
     <div id="ydog1" style="display:block">
 		<ul>
 			{foreach from=$cate_list item=cate name=cate_list key=k}
-			{if $cate.pid eq 0}
-			{if $smarty.foreach.cate_list.iteration<7}                       
+			{if $cate.pid eq 40}
 			<li style="height:40px;background:#fff;border-bottom:1px solid #D4D4D4;border-right:1px solid #D4D4D4;text-align:center;padding-top:0px">
 				<a href="{url_wap r="deals#index" p="id=$cate.id"}" class=""> 
 					<p style="font-size:12px;font-weight:700;color:#6F6F71;padding-top:10px">{$cate.name}<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:10px;height:10px" src="./tpl/default/images/biao04.png"/></p>					
 				</a>                       
 			</li>
-			 {/if}
 			 {/if}
 			{/foreach}
 		</ul>
@@ -186,14 +184,12 @@
      <div id="ydog2" style="display:block">
 		<ul>
 			{foreach from=$cate_list item=cate name=cate_list key=k}
-			{if $cate.pid eq 0}
-			{if $smarty.foreach.cate_list.iteration<7}                       
+			{if $cate.pid eq 41}
 			<li style="height:40px;background:#fff;border-bottom:1px solid #D4D4D4;border-right:1px solid #D4D4D4;text-align:center;padding-top:0px">
-				<a href="{url_wap r="deals#index" p="id=$cate.id"}" class=""> 
+				<a href="{url_wap r="fores#index" p="id=$cate.id"}" class=""> 
 					<p style="font-size:12px;font-weight:700;color:#6F6F71;padding-top:10px">{$cate.name}<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:10px;height:10px" src="./tpl/default/images/biao04.png"/></p>					
 				</a>                       
 			</li>
-			 {/if}
 			 {/if}
 			{/foreach}
 		</ul>

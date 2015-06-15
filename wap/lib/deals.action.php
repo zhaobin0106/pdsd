@@ -87,8 +87,8 @@ class dealsModule{
 			set_dynamic_cache("INDEX_CATE_LIST",$cate_list);
 		}
 		
-		$cate_result = array();
- 		foreach($cate_list as $k=>$v){
+//		$cate_result = array();
+/*  		foreach($cate_list as $k=>$v){
 			if($v['pid'] == 0){
 				$temp_param = $param;
 				$cate_result[$v['id']]['id'] = $v['id'];
@@ -104,9 +104,9 @@ class dealsModule{
 			if($v['id']==$id){
  				$GLOBALS['tmpl']->assign("cate_name", $v['name']);
 			}
-		}
+		} */
  		 
-		$GLOBALS['tmpl']->assign("cate_list",$cate_result);
+		$GLOBALS['tmpl']->assign("cate_list",$cate_list);
 		
 		$pid = $id;
 		//获取父类id
