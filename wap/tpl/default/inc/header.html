@@ -32,6 +32,9 @@
   		?>
         <link rel="stylesheet" type="text/css" href="{$APP_ROOT_URL}/css/Font-Awesome-4.2.0/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
+        <!--<link href="./wap/tpl/default/css/bootstrap.min.css" rel="stylesheet">-->	    
+	    <!--<script src="./tpl/default/js/bootstrap.min.js"></script>-->
+        
         <script type="text/javascript">
             var APP_ROOT = '{$APP_URL}';
 			var APP_ROOT_ORA = '{$PC_URL}';
@@ -44,21 +47,24 @@
         <!--百度轻应用-->
         <meta name="baidu-tc-cerfication" content="688cdfaa49f7c8f87fd5883492587d8e">
     </head>
-    <body {if  ACT eq 'index'}  style="background: #f2f2f2;"{/if}>
-        <div class="navbar theme_color1">
-            <div class="nav-wrap-left">
+    <body {if  ACT eq 'index'}  style="background: #fff;"{/if}>
+    	
+        <div class="navbar theme_color1" style="background:#FFFFFF;margin-bottom:0px">
+            <div class="nav-wrap-left" style="top:3px;">
             	{if ( $class neq 'settings' && $class neq 'account' && $class neq 'investor') || ($class eq 'settings' && $act eq 'index')}
-				     <a href="{$APP_URL}" class="logo"><img src="{$site_logo}"></a>
+				     <a href="{$APP_URL}" class="logo" style="width:200px;height:37px"><img src="{$site_logo}"></a>
 				{else}
 				<a href="javascript:return_prepage();" class="back">
 		        	<i class="fa fa-chevron-left"></i>
 		        </a>
 				{/if}
             </div>
-            <div class="nav-wrap-right">
-                <a class="screen" id="screen" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-                <a class="mybtn" href="{url_wap r="settings"}"><i class="fa fa-user"></i></a>
+            <div class="nav-wrap-right" style="top:7px;">
+                <!--<a class="screen" id="screen" href="javascript:void(0);"><i class="fa fa-bars"></i></a>-->
+                <a style="padding:0px" class="mybtn" href="{url_wap r="settings"}"><img style="width:30px;height:30px" src="./tpl/default/images/tou01.png" alt="alt" title="title" /><!--<i class="fa fa-user"></i>--></a>
             </div>
         </div>
+        
     {include file="inc/header_search.html"}
+    
     <div class="wraper">
