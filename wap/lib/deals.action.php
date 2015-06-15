@@ -142,6 +142,25 @@ class dealsModule{
 			}		
 		}
 		
+		/*首页广告*/
+	    $adv_num=intval($GLOBALS['m_config']['adv_num'])?$GLOBALS['m_config']['adv_num']:5;
+		$index_list = $GLOBALS['db']->getAll(" select * from ".DB_PREFIX."m_adv where status = 1 order by sort asc limit 0,$adv_num");
+		$adv_list = array();
+		foreach($index_list as $k=>$v)
+		{
+			if($v['page'] == 'top'){
+				if ($v['img'] != '')
+						$v['img'] = get_abs_img_root_wap(get_spec_image($v['img'],640,240,1));	
+				if($v['type']==1){
+					$v['url']=url_wap("article#index",array("id"=>$v['data']));
+				}elseif($v['type']==2){
+					$v['url']=$v['data'];
+				}
+				$adv_list[] = $v;	
+			}
+		}
+ 		$GLOBALS['tmpl']->assign('adv_list',$adv_list);
+ 		
 		//假如选择了子类 那么使用子类ID  否则使用 父类和其子类
 		if($is_child){
 			$cate_ids[] = $id;
