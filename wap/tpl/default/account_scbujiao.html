@@ -1,0 +1,25 @@
+{include file="inc/header_account.html"} 
+<section class="account_incharge">
+<h1>补交快递费用</h1>
+	<form class="ajax_form" action="{url_wap r="account#do_scbujiao"}">
+		<input type="hidden" name="deal_id" value="{$order_info.fore_id}" />
+										<input type="hidden" name="order_id" value="{$order_info.id}" />
+		<div class="ul_block">
+			<ul>
+				<li class="webkit-box">
+					<label class="input_lable">补交金额</label>
+					<input type="text" class="textbox webkit-box-flex" value="" placeholder="请输入补交金额" name="money" />
+				</li>	
+			</ul>
+		</div>
+		<div class="blank15"></div>
+		<div class="submit_btn_row">
+			<input type="submit" rel="finish" class="ui-button theme_color finish" value="去付款" />
+			<div class="blank15"></div>
+			<a href="{url_wap r="account#shichi"}" class="ui-button bg_red">取消</a>
+			<input type="hidden" value="1" name="ajax" />
+			<div class="blank15"></div>
+		</div>
+	</form>
+</section>
+{include file="inc/footer.html"} 

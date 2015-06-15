@@ -56,17 +56,23 @@ class indexModule{
 		if($index_pro_num>0){
 			$limit="  0,$index_pro_num";
 		}
-		
+		$limit = " 0,3";
 		$GLOBALS['tmpl']->assign("current_page",$page);
  		//权限控制
-		$condition = " d.is_recommend=1 ";
  		$now_time = get_gmtime();
 		$deal_result=get_deal_list($limit,$condition);
+		$fore_result=get_fore_list($limit,$condition);
  		$deal_list = $deal_result['list'];
 		$deal_count =  $deal_result['rs_count'];
+		$fore_list = $fore_result['list'];
+		$fore_count =  $fore_result['rs_count'];
 		//获取当前项目列表下的所有子项目
  		$GLOBALS['tmpl']->assign("deal_count",$deal_count);
 		$GLOBALS['tmpl']->assign("deal_list",$deal_list);
+		$GLOBALS['tmpl']->assign("fore_count",$fore_count);
+		$GLOBALS['tmpl']->assign("fore_list",$fore_list);
+		$GLOBALS['tmpl']->assign("now_time",$now_time);
+		
   		$GLOBALS['tmpl']->display("index.html");
 	}
 }

@@ -6,20 +6,21 @@ $(document).ready(function(){
 
 function bind_pay_form()
 {
-	var max_pay = $(".pay_form").find("input[name='max_pay']").val();
-	var max_credit = $(".pay_form").find("input[name='max_credit']").val();
-	var max_val = parseFloat(max_pay)<parseFloat(max_credit)?parseFloat(max_pay):parseFloat(max_credit);
+	
 	$(".pay_form").find("input[name='credit']").bind("keyup blur",function(){
 		var money = $(this).val();
+		var max_pay = $(".pay_form").find("input[name='max_pay']").val();
+		var max_credit = $(".pay_form").find("input[name='max_credit']").val();
+		var max_real_val = parseFloat(max_pay)<parseFloat(max_credit)?parseFloat(max_pay):parseFloat(max_credit);
 		if(isNaN(money)||parseFloat(money)<=0)
 		{
 			$(".pay_form").find("input[name='credit']").val("0");
 		}
 		else
 		{
-			if(parseFloat(money)>max_val)
+			if(parseFloat(money)>max_real_val)
 			{
-				$(".pay_form").find("input[name='credit']").val(max_val);
+				$(".pay_form").find("input[name='credit']").val(max_real_val);
 			}
 			if(parseFloat(money)>=max_pay)
 			{
@@ -43,7 +44,7 @@ function bind_pay_form()
 		 
 		if(!isNaN(money))
 		{
-			if(parseFloat(money)<max_pay)
+			if(parseFloat(money)<max_val)
 			{
 				if($(this).find("input[name='payment']:checked").length==0)
 				{
@@ -60,7 +61,7 @@ function bind_pay_form()
 					return false;
 				}	
 		}
-		if($("input[name='is_address']").val()==1){
+		if($("input[name='is_kuaidi']").val()==1){
 			var consignee = $(".pay_form").find("input[name='consignee_id']").val();
 			if(!isNaN(consignee))
 			{

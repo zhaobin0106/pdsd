@@ -31,56 +31,7 @@ $this->_var['cpagejs_1'][]='';
     	</div>
     	<a href="javascript:void(0);" title="{$deal_info.name}" class="deal_title sizing">{$deal_info.name}</a>
     	<!--2-->
-	<section class="detailborder" style="text-align:left">
-		{foreach from=$deal_info.deal_xianhuo_list item=item key=k}
-		{if $k>=3}
-	  	<div class="displayReturn">
-	 	{/if} 	
-	    	<div class="detailReturn">
-	    		<div class="Returntop webkit-box mb10">
-	    			{if $deal_info.remain_days>0}
-					{if ($item.support_count+$item.virtual_person) < $item.limit_user or $item.limit_user eq 0}
-				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
-				        <span class="span2">{$item.person}人已购买</span>
-				    </div>
-				    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:100px;">立即购买</a>
-					{else}
-				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
-				        <span class="span2">已售完</span>
-				    </div>
-				    <a href="javascript:void(0);" disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即购买</a>
-					{/if}
-					{else}
-				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
-				        <span class="span2">{$item.person}人已购买</span>
-				    </div>
-				    <a href="javascript:void(0);"  disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即购买</a>
-					{/if}	
-	    		</div>
-			    <p>{$item.description}</p>
-			    <p>
-			    	{foreach from=$item.images item=image}
-				    <img class="pimg" onclick="showbig();" src="{$image.image}">
-				    {/foreach}
-			    </p>
-		    </div>
-		{if $k>=3}
-	  	</div>
-	 	{/if} 	
-		{/foreach}
-		{if $deal_info.deal_xianhuo_count>3}
-    	<div class="moreProject" id="display_item">
-        	<div class="openmore">
-        		查看{$deal_info.deal_xianhuo_count}项回报<i class="fa fa-chevron-down"></i>
-        	</div>
-       	 	<div class="closemore">滚回去<i class="fa fa-chevron-up"></i></div>
-    	</div>
-		{/if}   
-    	<div class="blank"></div>
-	</section>
+	
     	<div class="paiduan">
     	
         	<span class="caption-title">
@@ -151,7 +102,7 @@ $this->_var['cpagejs_1'][]='';
 			</div>
 	        <div class="div_dt" style="border:none;">
 	            <span class="num">{$deal_info.person}</span><br />
-	            <span class="til">支持者</span>               
+	            <span class="til">报名者</span>               
 	        </div>
         	<div class="blank"></div>
     	</div>
@@ -159,8 +110,8 @@ $this->_var['cpagejs_1'][]='';
 	<section class="shit">
 	    <span>发起人：{if $deal_info.user_name}{$deal_info.user_name}{else}{$site_name}{/if}</span>
 	    <a class="orange" href="">{$deal_user_info.user_name}</a>
-	    <a class="f_r 	{if $is_focus}qxgz{else}gz{/if} attention_focus_deal" id="{$deal_info.id}" href="javascript:void(0);"><font size="2.5"><i class="fa {if $is_focus}fa-star{else}fa-star-o{/if} "></i></font> {if $is_focus}取消关注{else}关注{/if}</a>
-	    <span></span>
+<!-- 	    <a class="f_r 	{if $is_focus}qxgz{else}gz{/if} attention_focus_deal" id="{$deal_info.id}" href="javascript:void(0);"><font size="2.5"><i class="fa {if $is_focus}fa-star{else}fa-star-o{/if} "></i></font> {if $is_focus}取消关注{else}关注{/if}</a>
+ -->	    <span></span>
 	</section>
 	<section class="detailmain">
 	    <p class="detailpd">{function name="msubstr" v=$deal_info.brief p=0 e=60}</p>
@@ -189,22 +140,22 @@ $this->_var['cpagejs_1'][]='';
 					{if ($item.support_count+$item.virtual_person) < $item.limit_user or $item.limit_user eq 0}
 				    <div class="Returntitle webkit-box-flex">
 				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
-				        <span class="span2">{$item.person}人已支持</span>
+				        <span class="span2">{$item.person}人已报名</span>
 				    </div>
-				    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:100px;">立即支持</a>
+				    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:100px;">立即报名</a>
 					{else}
 				    <div class="Returntitle webkit-box-flex">
 				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
 				        <span class="span2">已满额</span>
 				    </div>
-				    <a href="javascript:void(0);" disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即支持</a>
+				    <a href="javascript:void(0);" disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即报名</a>
 					{/if}
 					{else}
 				    <div class="Returntitle webkit-box-flex">
 				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
-				        <span class="span2">{$item.person}人已支持</span>
+				        <span class="span2">{$item.person}人已报名</span>
 				    </div>
-				    <a href="javascript:void(0);"  disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即支持</a>
+				    <a href="javascript:void(0);"  disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即报名</a>
 					{/if}	
 	    		</div>
 			    <p>{$item.description}</p>
@@ -312,7 +263,7 @@ $this->_var['cpagejs_1'][]='';
 	}
 	function attention_focus_deal(id)
 	{
-		var ajaxurl = APP_ROOT+"/index.php?ctl=deal&act=focus&id="+id;
+		var ajaxurl = APP_ROOT+"/index.php?ctl=fore&act=focus&id="+id;
 		$.ajax({ 
 			url: ajaxurl,
 			dataType: "json",

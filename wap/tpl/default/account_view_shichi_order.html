@@ -11,16 +11,16 @@ body{ background:#f3f3f3; }
 	<div class="ul_block">
 		<ul>
 			<li class="webkit-box">
-				<label class="input_lable mr10">项目名称</label>
+				<label class="input_lable mr10">试吃名称</label>
 				<div class="list_con webkit-box-flex">
 					{if $deal_info}
-					<a href="{url_wap r="deal#show" p="id=$deal_info.id"}" class="f_blue">{$order_info.deal_name}</a>
+					<a href="{url_wap r="fore#show" p="id=$deal_info.id"}" class="f_blue">{$order_info.deal_name}</a>
 					{else}
 					{$order_info.deal_name}
 					{/if}
 				</div>
 			</li>
-								<li class="webkit-box">
+										<li class="webkit-box">
 				<label class="input_lable mr10">订单号</label>&nbsp&nbsp&nbsp
 				<div class="list_con webkit-box-flex">{$order_info.dingdanhao}
 				</div>
@@ -46,9 +46,9 @@ body{ background:#f3f3f3; }
 			<li class="webkit-box">
 				<label class="input_lable mr10">应付金额</label>
 				<div class="list_con webkit-box-flex">
-					{if $order_info.kuaidi_price gt 0}
+					{if $order_info.kuaidi_jiage gt 0}
 					项目金额:{function name="format_price" v=$order_info.deal_price}
-					运费:{function name="format_price" v=$order_info.kuaidi_price}
+					运费:{function name="format_price" v=$order_info.kuaidi_jiage}
 					总额：{function name="format_price" v=$order_info.total_price}
 					{else}
 					{function name="format_price" v=$order_info.total_price}
@@ -81,36 +81,21 @@ body{ background:#f3f3f3; }
 					{function name="to_date" v=$order_info.pay_time}
 				</div>
 			</li>
-									{if $order_info.is_zhongjiang neq 0}
-			<li class="webkit-box">
-				<label class="input_lable mr10">中奖情况</label>
-				<div class="list_con webkit-box-flex">
-					{if $order_info.is_zhongjiang eq 1}
-								恭喜您成功中奖
-								{/if}
-								{if $order_info.is_zhongjiang eq 2}
-								很遗憾您未中奖
-								{/if}				
-				</div>
-			</li>
-			{/if}
+
 			{if $order_info.order_status eq 3}
 			<li class="webkit-box">
-				<label class="input_lable mr10">回报情况</label>
+				<label class="input_lable mr10">活动情况</label>
 				<div class="list_con webkit-box-flex">
-					{if $order_info.is_success eq 0}
-						{if $order_info.is_refund eq 1}
-						项目失败，金额已退回会员帐户
-						{else}
-						项目未成功
-						{/if}
-					{else}
 						{if $order_info.repay_time eq 0}
-						项目成功，回报未发放
+							{if $order_info.is_refund eq 1}
+							报名失败，金额已退回会员帐户
+							{else}
+							报名成功
+							{/if}
 						{else}
-						{$order_info.repay_memo}
-						{/if}
-					{/if}
+							{$order_info.repay_memo}
+							活动已开始
+							{/if}
 				</div>
 			</li>
 
@@ -119,10 +104,10 @@ body{ background:#f3f3f3; }
 				<label class="input_lable mr10"></label>
 				<div class="list_con webkit-box-flex">
 					{if $order_info.repay_make_time==0}
-						<p>还有 <span id="left_time"></span> 来确认收到回报,超时订单自动确认收到回报</p>
-						<a class=" ui-btn-m" id="J_detail_panel"  href="javascript:void();"  >确认收到</a>
+						<p>还有 <span id="left_time"></span> 来确认以参与,超时订单自动确认以参与</p>
+						<a class=" ui-btn-m" id="J_detail_panel"  href="javascript:void();"  >确认参与</a>
 					{else}
-						确认收到
+						确认参与
 					{/if}
 				</div>
 			</li>
@@ -147,7 +132,7 @@ body{ background:#f3f3f3; }
 			<script>
 				$(function(){
 					$("#J_detail_panel").bind("click",function(){
-						var ajaxurl = APP_ROOT+"/index.php?ctl=ajax&act=set_repay_make";
+						var ajaxurl = APP_ROOT+"/index.php?ctl=ajax&act=set_shichi_repay_make";
 						var query = new Object();
 						query.id = {$order_info.id};
 						$.ajax({ 
@@ -174,7 +159,7 @@ body{ background:#f3f3f3; }
 	</div>
 	{if $order_info.order_status eq 0}
 	<div class="blank"></div>
-	<form class="pay_form" action="{url_wap r="account#go_order_pay"}"  method="post">						{if $user_info.money gt 0}
+	<form class="pay_form" action="{url_wap r="account#go_shichi_order_pay"}"  method="post">						{if $user_info.money gt 0}
         <div class="sbmbj">
             <div class="form_row pt5 pb5 pl15">
             	<div class="mod_1 webkit-box">
@@ -203,7 +188,7 @@ body{ background:#f3f3f3; }
 		<div class="blank15"></div>
 		<div>		 
 			<input class="ui-button theme_color" type="submit" value="付款" rel="ui-button">				
-			<input type="hidden" id="back_url" value="{url_wap r="account#view_order" p="id=$order_info.id"}" />	
+			<input type="hidden" id="back_url" value="{url_wap r="account#view_shi_order" p="id=$order_info.id"}" />	
 			<input type="hidden" value="{$order_info.id}" name="order_id" />	
 			<input type="hidden" value="1" name="ajax" />		
 			<div class="blank15"></div>
@@ -214,7 +199,6 @@ body{ background:#f3f3f3; }
 <script type="text/javascript">
 var left_money=$(".pay_form").find("input[name='max_pay']").val();
 var need_money=Number($(".pay_form").find("input[name='max_credit']").val());
-
      
     $(function(){
         $("input[name='ye_check']").attr("checked","checked");

@@ -55,6 +55,105 @@ class accountModule{
  		
 		$GLOBALS['tmpl']->display("account_index.html");
 	}
+	
+	public function xianhuo()
+	{
+			
+		$GLOBALS['tmpl']->assign("page_title","购买的商品");
+		$page_size = intval($GLOBALS['m_config']['page_size']);;
+		$page = intval($_REQUEST['p']);
+		if($page==0)
+			$page = 1;
+		$limit = (($page-1)*$page_size).",".$page_size;
+	
+		$order_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_xianhuo_order where user_id = ".intval($GLOBALS['user_info']['id'])." and type=0  order by create_time desc limit ".$limit);
+		foreach($order_list as $k=>$v){
+			if($v['repay_make_time']==0&&$v['repay_time']>0){
+				$left_date=intval(app_conf("REPAY_MAKE"))?7:intval(app_conf("REPAY_MAKE"));
+				$repay_make_date=$v['repay_time']+$left_date*24*3600;
+				if($repay_make_date<=get_gmtime()){
+					$GLOBALS['db']->query("update ".DB_PREFIX."deal_xianhuo_order set repay_make_time =  ".get_gmtime()." where id = ".$v['id'] );
+					$order_list[$k]['repay_make_time']=get_gmtime();
+				}
+			}
+		}
+		$order_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_xianhuo_order where user_id = ".intval($GLOBALS['user_info']['id'])." and type=0 ");
+	
+		$page = new Page($order_count,$page_size);   //初始化分页对象
+		$p  =  $page->show();
+		$GLOBALS['tmpl']->assign('pages',$p);
+		$deal_ids=array();
+		foreach($order_list as $k=>$v){
+			$deal_ids[] =  $v['deal_id'];
+		}
+		if($deal_ids!=null){
+			$deal_list_array=$GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where  is_effect = 1 and is_delete = 0 and id in (".implode(',',$deal_ids).")  and type=0 ");
+			$deal_list=array();
+			foreach($deal_list_array as $k=>$v){
+				if($v['id']){
+					$deal_list[$v['id']]=$v;
+				}
+			}
+			foreach($order_list as $k=>$v)
+			{
+				$order_list[$k]['deal_info'] =$deal_list[$v['deal_id']];
+			}
+	
+			$GLOBALS['tmpl']->assign('order_list',$order_list);
+		}
+			
+		$GLOBALS['tmpl']->display("account_xianhuo.html");
+	}
+	
+	
+	public function shichi()
+	{
+			
+		$GLOBALS['tmpl']->assign("page_title","报名的活动");
+		$page_size = intval($GLOBALS['m_config']['page_size']);;
+		$page = intval($_REQUEST['p']);
+		if($page==0)
+			$page = 1;
+		$limit = (($page-1)*$page_size).",".$page_size;
+	
+		$order_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_item_order where user_id = ".intval($GLOBALS['user_info']['id'])." and type=0  order by create_time desc limit ".$limit);
+		foreach($order_list as $k=>$v){
+			if($v['repay_make_time']==0&&$v['repay_time']>0){
+				$left_date=intval(app_conf("REPAY_MAKE"))?7:intval(app_conf("REPAY_MAKE"));
+				$repay_make_date=$v['repay_time']+$left_date*24*3600;
+				if($repay_make_date<=get_gmtime()){
+					$GLOBALS['db']->query("update ".DB_PREFIX."fore_item_order set repay_make_time =  ".get_gmtime()." where id = ".$v['id'] );
+					$order_list[$k]['repay_make_time']=get_gmtime();
+				}
+			}
+		}
+		$order_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_item_order where user_id = ".intval($GLOBALS['user_info']['id'])." and type=0 ");
+	
+		$page = new Page($order_count,$page_size);   //初始化分页对象
+		$p  =  $page->show();
+		$GLOBALS['tmpl']->assign('pages',$p);
+		$deal_ids=array();
+		foreach($order_list as $k=>$v){
+			$deal_ids[] =  $v['fore_id'];
+		}
+		if($deal_ids!=null){
+			$deal_list_array=$GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore where  is_effect = 1 and is_delete = 0 and id in (".implode(',',$deal_ids).")  and type=0 ");
+			$deal_list=array();
+			foreach($deal_list_array as $k=>$v){
+				if($v['id']){
+					$deal_list[$v['id']]=$v;
+				}
+			}
+			foreach($order_list as $k=>$v)
+			{
+				$order_list[$k]['deal_info'] =$deal_list[$v['fore_id']];
+			}
+	
+			$GLOBALS['tmpl']->assign('order_list',$order_list);
+		}
+			
+		$GLOBALS['tmpl']->display("account_shichi.html");
+	}
 	public function view_order()
 	{
 		$id = intval($_REQUEST['id']);
@@ -98,6 +197,91 @@ class accountModule{
 		$GLOBALS['tmpl']->display("account_view_order.html");
 	}
 	
+
+	public function view_shichi_order()
+	{
+		$id = intval($_REQUEST['id']);
+		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_item_order where id = ".$id." and user_id = ".intval($GLOBALS['user_info']['id']));
+		if(!$order_info)
+		{
+			showErr("无效的报名",0,get_gopreview_wap());
+		}
+	
+		//========如果超过系统设置的时间，则自动设置收到回报 start
+		if($order_info['repay_make_time']==0){
+			$left_date=intval(app_conf("REPAY_MAKE"))?7:intval(app_conf("REPAY_MAKE"));
+			$repay_make_date=$order_info['repay_time']+$left_date*24*3600;
+			if($repay_make_date>get_gmtime()&&$order_info['repay_time']>0){
+				$order_info['repay_make_date']=date('Y-m-d H:i:s',$repay_make_date);
+			}else{
+	
+				$GLOBALS['db']->query("update ".DB_PREFIX."fore_item_order set repay_make_time =  ".get_gmtime()." where id = ".$id);
+				$order_info['repay_make_time']=get_gmtime();
+			}
+		}
+		//=============如果超过系统设置的时间，则自动设置收到回报 end
+		$GLOBALS['tmpl']->assign("order_info",$order_info);
+		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$order_info['fore_id']." and is_delete = 0 and is_effect = 1");
+		$GLOBALS['tmpl']->assign("deal_info",$deal_info);
+	
+		if($order_info['order_status'] == 0)
+		{
+			$payment_list = get_payment_list("wap");
+				
+			$GLOBALS['tmpl']->assign("payment_list",$payment_list);
+				
+			$max_pay = $order_info['total_price'] - $order_info['credit_pay'];
+			$GLOBALS['tmpl']->assign("max_pay",$max_pay);
+			$GLOBALS['tmpl']->assign("page_title","订单支付");
+		}else{
+			$GLOBALS['tmpl']->assign("page_title","订单详情");
+		}
+	
+	
+		$GLOBALS['tmpl']->display("account_view_shichi_order.html");
+	}
+	public function view_xianhuo_order()
+	{
+		$id = intval($_REQUEST['id']);
+		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_xianhuo_order where id = ".$id." and user_id = ".intval($GLOBALS['user_info']['id']));
+		if(!$order_info)
+		{
+			showErr("无效的项目支持",0,get_gopreview_wap());
+		}
+	
+		//========如果超过系统设置的时间，则自动设置收到回报 start
+		if($order_info['repay_make_time']==0){
+			$left_date=intval(app_conf("REPAY_MAKE"))?7:intval(app_conf("REPAY_MAKE"));
+			$repay_make_date=$order_info['repay_time']+$left_date*24*3600;
+			if($repay_make_date>get_gmtime()&&$order_info['repay_time']>0){
+				$order_info['repay_make_date']=date('Y-m-d H:i:s',$repay_make_date);
+			}else{
+	
+				$GLOBALS['db']->query("update ".DB_PREFIX."deal_xianhuo_order set repay_make_time =  ".get_gmtime()." where id = ".$id);
+				$order_info['repay_make_time']=get_gmtime();
+			}
+		}
+		//=============如果超过系统设置的时间，则自动设置收到回报 end
+		$GLOBALS['tmpl']->assign("order_info",$order_info);
+		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id = ".$order_info['deal_id']." and is_delete = 0 and is_effect = 1");
+		$GLOBALS['tmpl']->assign("deal_info",$deal_info);
+	
+		if($order_info['order_status'] == 0)
+		{
+			$payment_list = get_payment_list("wap");
+				
+			$GLOBALS['tmpl']->assign("payment_list",$payment_list);
+				
+			$max_pay = $order_info['total_price'] - $order_info['credit_pay'];
+			$GLOBALS['tmpl']->assign("max_pay",$max_pay);
+			$GLOBALS['tmpl']->assign("page_title","订单支付");
+		}else{
+			$GLOBALS['tmpl']->assign("page_title","订单详情");
+		}
+	
+	
+		$GLOBALS['tmpl']->display("account_view_xianhuo_order.html");
+	}
 	public function del_order()
 	{
 		$ajax = intval($_REQUEST['ajax']);
@@ -121,6 +305,64 @@ class accountModule{
 				{
 					require_once APP_ROOT_PATH."system/libs/user.php";
 					modify_account(array("money"=>$money),intval($GLOBALS['user_info']['id']),"删除".$order_info['deal_name']."项目支付，退回支付款。");						
+				}
+			}
+			showSuccess("",$ajax,get_gopreview());
+		}
+	}
+	
+	public function del_shichi_order()
+	{
+		$ajax = intval($_REQUEST['ajax']);
+		if(!$GLOBALS['user_info'])
+		{
+			showErr("",$ajax,url("user#login"));
+		}
+		$order_id = intval($_REQUEST['id']);
+		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_item_order where order_status = 0 and user_id = ".intval($GLOBALS['user_info']['id'])." and id = ".$order_id);
+		if(!$order_info)
+		{
+			showErr("无效的订单",$ajax,"");
+		}
+		else
+		{
+			$money = $order_info['credit_pay'];
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_item_order where id = ".$order_id." and user_id = ".intval($GLOBALS['user_info']['id'])." and order_status = 0");
+			if($GLOBALS['db']->affected_rows()>0)
+			{
+				if($money>0)
+				{
+					require_once APP_ROOT_PATH."system/libs/user.php";
+					modify_account(array("money"=>$money),intval($GLOBALS['user_info']['id']),"删除".$order_info['deal_name']."项目支付，退回支付款。");
+				}
+			}
+			showSuccess("",$ajax,get_gopreview());
+		}
+	}
+
+	public function del_xianhuo_order()
+	{
+		$ajax = intval($_REQUEST['ajax']);
+		if(!$GLOBALS['user_info'])
+		{
+			showErr("",$ajax,url("user#login"));
+		}
+		$order_id = intval($_REQUEST['id']);
+		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_xianhuo_order where order_status = 0 and user_id = ".intval($GLOBALS['user_info']['id'])." and id = ".$order_id);
+		if(!$order_info)
+		{
+			showErr("无效的订单",$ajax,"");
+		}
+		else
+		{
+			$money = $order_info['credit_pay'];
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_xianhuo_order where id = ".$order_id." and user_id = ".intval($GLOBALS['user_info']['id'])." and order_status = 0");
+			if($GLOBALS['db']->affected_rows()>0)
+			{
+				if($money>0)
+				{
+					require_once APP_ROOT_PATH."system/libs/user.php";
+					modify_account(array("money"=>$money),intval($GLOBALS['user_info']['id']),"删除".$order_info['deal_name']."商品支付，退回支付款。");
 				}
 			}
 			showSuccess("",$ajax,get_gopreview());
@@ -182,7 +424,254 @@ class accountModule{
 			}
 		}
 	}
+	public function go_shichi_order_pay(){
+		$id = intval($_REQUEST['order_id']);
+		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_item_order where id = ".$id." and user_id = ".intval($GLOBALS['user_info']['id'])." and order_status = 0");
+		if(!$order_info)
+		{
+	showErr("试吃报名已支付",0,get_gopreview_wap());
+	}
+	else
+	{
+		$credit = doubleval($_REQUEST['credit']);
+		$payment_id = intval($_REQUEST['payment']);
+			
+		if($credit>0)
+		{
+			$max_pay = $order_info['total_price'] - $order_info['credit_pay'];
+			$max_credit= $max_pay<$GLOBALS['user_info']['money']?$max_pay:$GLOBALS['user_info']['money'];
+			$credit = $credit>$max_credit?$max_credit:$credit;
+			if($credit>0)
+			{
+				$GLOBALS['db']->query("update ".DB_PREFIX."fore_item_order set credit_pay = credit_pay + ".$credit." where id = ".$order_info['id']);//追加使用余额支付
 	
+				require_once APP_ROOT_PATH."system/libs/user.php";
+				modify_account(array("money"=>"-".$credit),intval($GLOBALS['user_info']['id']),"报名".$order_info['deal_name']."项目支付");
+			}
+		}
+		$result = pay_fore_order($order_info['id']);
+	
+		if($result['status']==0)
+		{
+			$money = $result['money'];
+			$payment_notice['create_time'] = NOW_TIME;
+			$payment_notice['user_id'] = intval($GLOBALS['user_info']['id']);
+			$payment_notice['payment_id'] = $payment_id;
+			$payment_notice['money'] = $money;
+			$payment_notice['bank_id'] = strim($_REQUEST['bank_id']);
+			$payment_notice['order_id'] = $order_info['id'];
+			$payment_notice['memo'] = $order_info['support_memo'];
+			$payment_notice['fore_id'] = $order_info['fore_id'];
+			$payment_notice['fore_item_id'] = $order_info['fore_item_id'];
+			$payment_notice['deal_name'] = $order_info['deal_name'];
+	
+			do{
+				$payment_notice['notice_sn'] = to_date(NOW_TIME,"Ymd").rand(100,999);
+				$GLOBALS['db']->autoExecute(DB_PREFIX."payment_notice",$payment_notice,"INSERT","","SILENT");
+				$notice_id = $GLOBALS['db']->insert_id();
+			}while($notice_id==0);
+	
+	
+			app_redirect(url_wap("cart#jump",array("id"=>$notice_id)));
+		}
+		else
+		{
+			app_redirect(url_wap("account#view_shichi_order",array("id"=>$order_info['id'])));
+		}
+	}
+	}
+	
+	public function go_xianhuo_order_pay(){
+		$id = intval($_REQUEST['order_id']);
+		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_xianhuo_order where id = ".$id." and user_id = ".intval($GLOBALS['user_info']['id'])." and order_status = 0");
+		if(!$order_info)
+		{
+			showErr("商品购买已支付",0,get_gopreview_wap());
+		}
+		else
+		{
+			$credit = doubleval($_REQUEST['credit']);
+			$payment_id = intval($_REQUEST['payment']);
+				
+			if($credit>0)
+			{
+				$max_pay = $order_info['total_price'] - $order_info['credit_pay'];
+				$max_credit= $max_pay<$GLOBALS['user_info']['money']?$max_pay:$GLOBALS['user_info']['money'];
+				$credit = $credit>$max_credit?$max_credit:$credit;
+				if($credit>0)
+				{
+					$GLOBALS['db']->query("update ".DB_PREFIX."deal_xianhuo_order set credit_pay = credit_pay + ".$credit." where id = ".$order_info['id']);//追加使用余额支付
+	
+					require_once APP_ROOT_PATH."system/libs/user.php";
+					modify_account(array("money"=>"-".$credit),intval($GLOBALS['user_info']['id']),"购买".$order_info['deal_name']."商品支付");
+				}
+			}
+			$result = pay_xianhuo_order($order_info['id']);
+	
+			if($result['status']==0)
+			{
+				$money = $result['money'];
+				$payment_notice['create_time'] = NOW_TIME;
+				$payment_notice['user_id'] = intval($GLOBALS['user_info']['id']);
+				$payment_notice['payment_id'] = $payment_id;
+				$payment_notice['money'] = $money;
+				$payment_notice['bank_id'] = strim($_REQUEST['bank_id']);
+				$payment_notice['order_id'] = $order_info['id'];
+				$payment_notice['memo'] = $order_info['support_memo'];
+				$payment_notice['deal_id'] = $order_info['deal_id'];
+				$payment_notice['deal_item_id'] = $order_info['deal_xianhuo_id'];
+				$payment_notice['deal_name'] = $order_info['deal_name'];
+	
+				do{
+					$payment_notice['notice_sn'] = to_date(NOW_TIME,"Ymd").rand(100,999);
+					$GLOBALS['db']->autoExecute(DB_PREFIX."payment_notice",$payment_notice,"INSERT","","SILENT");
+					$notice_id = $GLOBALS['db']->insert_id();
+				}while($notice_id==0);
+	
+				
+				app_redirect(url_wap("cart#jump",array("id"=>$notice_id)));
+			}
+			else
+			{
+				app_redirect(url_wap("account#view_xianhuo_order",array("id"=>$order_info['id'])));
+			}
+		}
+	}
+	
+	public function bujiao()
+	{
+		if(!$GLOBALS['user_info']){
+		app_redirect(url_wap("user#login"));
+		}	
+					$id=intval($_REQUEST['id']);
+		$order_info = $GLOBALS['db']->getRow("SELECT * FROM ".DB_PREFIX."deal_order WHERE user_id = ".intval($GLOBALS['user_info']['id'])." and id =".$id);
+		$GLOBALS['tmpl']->assign("order_info",$order_info);
+	
+		$GLOBALS['tmpl']->display("account_bujiao.html");
+	}
+	
+	public function do_bujiao()
+	{
+		$ajax = intval($_REQUEST['ajax']);
+		if(!$GLOBALS['user_info'])
+		{
+		app_redirect(url_wap("user#login"));	
+		}
+		$money = doubleval($_REQUEST['money']);
+		if($money<=0)
+		{
+			showErr("充值的金额不正确",$ajax,"");
+		}
+		$deal_id=intval($_REQUEST['deal_id']);
+		$deal_list_array=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where  is_effect = 1 and type=0 and is_delete = 0 and id =".$deal_id);
+		if(!$deal_list_array)
+		{
+			showErr('该项目已不存在',$ajax,"");
+		}
+		$order_id=intval($_REQUEST['order_id']);
+		$order_info = $GLOBALS['db']->getRow("SELECT * FROM ".DB_PREFIX."deal_order WHERE user_id = ".intval($GLOBALS['user_info']['id'])." and id =".$order_id);
+		if(!$order_info)
+		{
+			showErr('该订单已不存在',$ajax,"");
+		}
+		if($GLOBALS['user_info']['money'] < $money)
+		{
+			showErr('余额不足，请先充值',$ajax,"");
+		}else {
+			$GLOBALS['db']->query("update ".DB_PREFIX."deal_order set total_price =  total_price + ".$money.",credit_pay = credit_pay + ".$money.",kuaidi_price = kuaidi_price + ".$money."  where id = ".$order_id);
+			$GLOBALS['db']->query("update ".DB_PREFIX."deal set pay_amount = pay_amount + ".$money.",delivery_fee_amount = delivery_fee_amount + ".$money." where id = ".$deal_id." and is_effect = 1 and is_delete = 0");
+			require_once APP_ROOT_PATH."system/libs/user.php";
+			$re=modify_account(array("money"=>"-".$money),intval($GLOBALS['user_info']['id']),"补交".$order_info['deal_name']."项目快递费用");
+	
+		}
+		showSuccess("",$ajax,get_gopreview());
+	}
+	public function sbujiao()
+	{
+		if(!$GLOBALS['user_info'])
+			app_redirect(url("user#login"));
+		$id=intval($_REQUEST['id']);
+		$order_info = $GLOBALS['db']->getRow("SELECT * FROM ".DB_PREFIX."deal_xianhuo_order WHERE user_id = ".intval($GLOBALS['user_info']['id'])." and id =".$id);
+		$GLOBALS['tmpl']->assign("order_info",$order_info);
+		 
+		$GLOBALS['tmpl']->display("account_sbujiao.html");
+	}
+	public function scbujiao()
+	{
+		if(!$GLOBALS['user_info'])
+			app_redirect(url("user#login"));
+		$id=intval($_REQUEST['id']);
+		$order_info = $GLOBALS['db']->getRow("SELECT * FROM ".DB_PREFIX."fore_item_order WHERE user_id = ".intval($GLOBALS['user_info']['id'])." and id =".$id);
+		$GLOBALS['tmpl']->assign("order_info",$order_info);
+			
+		$GLOBALS['tmpl']->display("account_scbujiao.html");
+	}
+	public function do_sbujiao()
+	{
+		$ajax = intval($_REQUEST['ajax']);
+		if(!$GLOBALS['user_info'])
+		{
+			showErr("",$ajax,url_wap("user#login"));
+		}
+		$money = doubleval($_REQUEST['money']);
+		if($money<=0)
+		{
+			showErr("充值的金额不正确",$ajax,"");
+		}
+		$order_id=intval($_REQUEST['order_id']);
+		$order_info = $GLOBALS['db']->getRow("SELECT * FROM ".DB_PREFIX."deal_xianhuo_order WHERE user_id = ".intval($GLOBALS['user_info']['id'])." and id =".$order_id);
+		if(!$order_info)
+		{
+			showErr('该订单已不存在',$ajax,"");
+		}
+		if($GLOBALS['user_info']['money'] < $money)
+		{
+			showErr('余额不足，请先充值',$ajax,"");
+		}else {
+			$GLOBALS['db']->query("update ".DB_PREFIX."deal_xianhuo_order set total_price =  total_price + ".$money.",credit_pay = credit_pay + ".$money.",kuaidi_jiage = kuaidi_jiage + ".$money."  where id = ".$order_id);
+			require_once APP_ROOT_PATH."system/libs/user.php";
+			$re=modify_account(array("money"=>"-".$money),intval($GLOBALS['user_info']['id']),"补交".$order_info['deal_name']."商品快递费用");
+				
+		}
+		showSuccess("",$ajax,get_gopreview());
+	}
+	
+	public function do_scbujiao()
+	{
+		$ajax = intval($_REQUEST['ajax']);
+		if(!$GLOBALS['user_info'])
+		{
+			app_redirect(url_wap("user#login"));
+		}
+		$money = doubleval($_REQUEST['money']);
+		if($money<=0)
+		{
+			showErr("充值的金额不正确",$ajax,"");
+		}
+		$deal_id=intval($_REQUEST['deal_id']);
+		$deal_list_array=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where  is_effect = 1 and type=0 and is_delete = 0 and id =".$deal_id);
+		if(!$deal_list_array)
+		{
+			showErr('该项目已不存在',$ajax,"");
+		}
+		$order_id=intval($_REQUEST['order_id']);
+		$order_info = $GLOBALS['db']->getRow("SELECT * FROM ".DB_PREFIX."fore_item_order WHERE user_id = ".intval($GLOBALS['user_info']['id'])." and id =".$order_id);
+		if(!$order_info)
+		{
+			showErr('该订单已不存在',$ajax,"");
+		}
+		if($GLOBALS['user_info']['money'] < $money)
+		{
+			showErr('余额不足，请先充值',$ajax,"");
+		}else {
+			$GLOBALS['db']->query("update ".DB_PREFIX."fore_item_order set total_price =  total_price + ".$money.",credit_pay = credit_pay + ".$money.",kuaidi_jiage = kuaidi_jiage + ".$money."  where id = ".$order_id);
+			$GLOBALS['db']->query("update ".DB_PREFIX."deal set pay_amount = pay_amount + ".$money.",delivery_fee_amount = delivery_fee_amount + ".$money." where id = ".$deal_id." and is_effect = 1 and is_delete = 0");
+			require_once APP_ROOT_PATH."system/libs/user.php";
+			$re=modify_account(array("money"=>"-".$money),intval($GLOBALS['user_info']['id']),"补交".$order_info['deal_name']."项目快递费用");
+	
+		}
+		showSuccess("",$ajax,get_gopreview());
+	}
 	public function project()
 	{
  		$GLOBALS['tmpl']->assign("page_title","我的项目");

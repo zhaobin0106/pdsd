@@ -42,13 +42,29 @@
                 </div>
                 <a href="#" class="go_see"><i class="fa fa-chevron-right"></i></a>
             </li>
-            <li onclick="window.location.href='{url_wap r="account#mine_investor_status"}'">
+                        <li onclick="window.location.href='{url_wap r="account#xianhuo"}'">
+                <div class="project_ico" style=" background:#9bcd46;"><i class="fa fa-gavel"></i></div>
+                <div class="specific_items">
+                    <h5>购买的商品</h5>
+                </div>
+                <a href="#" class="go_see"><i class="fa fa-chevron-right"></i></a>
+            </li>
+                                    <li onclick="window.location.href='{url_wap r="account#shichi"}'">
+                <div class="project_ico" style=" background:#9bcd46;"><i class="fa fa-check-circle"></i></div>
+                <div class="specific_items">
+                    <h5>报名的试吃</h5>
+                </div>
+                <a href="#" class="go_see"><i class="fa fa-chevron-right"></i></a>
+            </li>
+ <!--            <li onclick="window.location.href='{url_wap r="account#mine_investor_status"}'">
                 <div class="project_ico" style=" background:#9bcd46;"><i class="fa fa-check-circle"></i></div>
                 <div class="specific_items">
                     <h5>投资的项目</h5>
                 </div>
                 <a href="#" class="go_see"><i class="fa fa-chevron-right"></i></a>
-            </li>
+            </li> -->
+            		{if $user_info.user_level eq 14}
+            
             <li onclick="window.location.href='{url_wap r="account#project"}'">
                 <div class="project_ico" style=" background:#41c8cd;"><i class="fa fa-tags"></i></div>
                 <div class="specific_items">
@@ -56,6 +72,7 @@
                 </div>
                 <a href="#" class="go_see"><i class="fa fa-chevron-right"></i></a>
             </li>
+            {/if}
             <li onclick="window.location.href='{url_wap r="account#focus"}'">
                 <div class="project_ico" style=" background:#41c8cd;"><i class="fa fa-heart"></i></div>
                 <div class="specific_items">

@@ -922,20 +922,70 @@ function cache_deal_extra($deal_info)
 		$deal_extra_cache = array();
 		$deal_info['deal_faq_list'] = $deal_extra_cache['deal_faq_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_faq where deal_id = ".$deal_info['id']." order by sort asc");		
 		$deal_info['deal_item_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_item where deal_id = ".$deal_info['id']." order by price asc");
+		$deal_info['deal_xianhuo_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_xianhuo where deal_id = ".$deal_info['id']." and is_open = 1 order by price asc");
+		
 		foreach($deal_info['deal_item_list'] as $k=>$v)
 		{
 			$deal_info['deal_item_list'][$k]['images'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_item_image where deal_id=".$deal_info['id']." and deal_item_id = ".$v['id']);
 			$deal_info['deal_item_list'][$k]['price_format'] = number_price_format($v['price']);				
 		
 		}
+		foreach($deal_info['deal_xianhuo_list'] as $k=>$v)
+		{
+			$deal_info['deal_xianhuo_list'][$k]['images'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_xianhuo_image where deal_id=".$deal_info['id']." and deal_xianhuo_id = ".$v['id']);
+			$deal_info['deal_xianhuo_list'][$k]['price_format'] = number_price_format($v['price']);
+		
+		}
 		$deal_extra_cache['deal_item_list'] = $deal_info['deal_item_list'];
+		$deal_extra_cache['deal_xianhuo_list'] = $deal_info['deal_xianhuo_list'];
+		
 		$GLOBALS['db']->query("update ".DB_PREFIX."deal set deal_extra_cache  = '".serialize($deal_extra_cache)."' where id = ".$deal_info['id']);
+		
 	}
 	else
 	{
 		$deal_extra_cache = unserialize($deal_info['deal_extra_cache']);
 		$deal_info['deal_faq_list'] = $deal_extra_cache['deal_faq_list'];
 		$deal_info['deal_item_list'] = $deal_extra_cache['deal_item_list'];
+		$deal_info['deal_xianhuo_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_xianhuo where deal_id = ".$deal_info['id']." and is_open = 1 order by price asc");
+		foreach($deal_info['deal_xianhuo_list'] as $k=>$v)
+		{
+			$deal_info['deal_xianhuo_list'][$k]['images'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_xianhuo_image where deal_id=".$deal_info['id']." and deal_xianhuo_id = ".$v['id']);
+			$deal_info['deal_xianhuo_list'][$k]['price_format'] = number_price_format($v['price']);
+		
+		}
+		$deal_extra_cache['deal_xianhuo_list'] = $deal_info['deal_xianhuo_list'];
+		
+	}
+	return $deal_info;
+}
+
+function cache_fore_extra($deal_info)
+{
+	if($deal_info['deal_extra_cache']=="")
+	{
+		$deal_extra_cache = array();
+		$deal_info['deal_faq_list'] = $deal_extra_cache['deal_faq_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_faq where fore_id = ".$deal_info['id']." order by sort asc");
+		$deal_info['deal_item_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_item where fore_id = ".$deal_info['id']." order by price asc");
+
+		foreach($deal_info['deal_item_list'] as $k=>$v)
+		{
+			$deal_info['deal_item_list'][$k]['images'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_item_image where fore_id=".$deal_info['id']." and fore_item_id = ".$v['id']);
+			$deal_info['deal_item_list'][$k]['price_format'] = number_price_format($v['price']);
+
+		}
+
+		$deal_extra_cache['deal_item_list'] = $deal_info['deal_item_list'];
+
+		$GLOBALS['db']->query("update ".DB_PREFIX."fore set deal_extra_cache  = '".serialize($deal_extra_cache)."' where id = ".$deal_info['id']);
+
+	}
+	else
+	{
+		$deal_extra_cache = unserialize($deal_info['deal_extra_cache']);
+		$deal_info['deal_faq_list'] = $deal_extra_cache['deal_faq_list'];
+		$deal_info['deal_item_list'] = $deal_extra_cache['deal_item_list'];
+
 	}
 	return $deal_info;
 }
@@ -1070,6 +1120,123 @@ function get_deal_list($limit="",$conditions="",$orderby=" sort asc "){
 	
 	return array("rs_count"=>$deal_count,"list"=>$deal_list);
 }
+
+function get_fore_list($limit="",$conditions="",$orderby=" sort asc "){
+	
+	if($limit!=""){
+		$limit = " LIMIT ".$limit;
+	}
+
+	if($orderby!=""){
+		$orderby = " ORDER BY ".$orderby;
+	}
+
+	if(app_conf("INVEST_STATUS")==0)
+	{
+		$condition = " 1=1 AND d.is_delete = 0 AND d.is_effect = 1 ";
+	}
+	elseif(app_conf("INVEST_STATUS")==1)
+	{
+		$condition = " 1=1 AND d.is_delete = 0 AND d.is_effect = 1 and d.type=0 ";
+	}
+	elseif(app_conf("INVEST_STATUS")==2)
+	{
+		$condition = " 1=1 AND d.is_delete = 0 AND d.is_effect = 1 and d.type=1 ";
+	}
+
+	if($conditions!=""){
+		$condition.=" AND ".$conditions;
+	}
+
+	//权限浏览控制
+	
+	if($GLOBALS['user_info']['user_level']!=0){
+		$level=$GLOBALS['db']->getOne("SELECT level from ".DB_PREFIX."user_level where id=".$GLOBALS['user_info']['user_level']);
+		$condition .=" AND (d.user_level ='' or d.user_level=0 or d.user_level <=$level)   ";
+	}
+	else{
+		$condition.=" AND (d.user_level =0 or d.user_level =1 or d.user_level ='')  ";
+	}
+	$deal_count = $GLOBALS['db']->getOne("select count(*)  from ".DB_PREFIX."fore as d  where ".$condition);
+	/*（所需项目）准备虚拟数据 start*/
+	$deal_list = array();
+	$level_list=$GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_level ");
+	$level_list_array=array();
+	foreach($level_list_array as $k=>$v){
+		if($v['id']){
+			$level_list_array[$v['id']]=$v['level'];
+		}
+	}
+	if($deal_count > 0){
+		$now_time = NOW_TIME;
+		$deal_list = $GLOBALS['db']->getAll("select d.* from ".DB_PREFIX."fore  as d   where ".$condition.$orderby.$limit);
+		$deal_ids = array();
+		foreach($deal_list as $k=>$v)
+		{
+			$deal_list[$k]['remain_days'] = ceil(($v['end_time'] - $now_time)/(24*3600));
+			if($v['begin_time'] > $now_time){
+				$deal_list[$k]['left_days'] = intval(($now_time - $v['create_time']) / 24 / 3600);
+			}
+			$deal_list[$k]['num_days'] = ceil(($v['end_time'] - $v['begin_time'])/(24*3600));
+			$deal_ids[] =  $v['id'];
+			//查询出对应项目id的user_level
+			$deal_list[$k]['deal_level']=$level_list_array[intval($deal_list[$k]['user_level'])];
+			if($v['begin_time'] > $now_time){
+				$deal_list[$k]['left_begin_days'] = intval(($v['begin_time']  - $now_time) / 24 / 3600);
+			}
+			if($v['begin_time'] > $now_time){
+				$deal_list[$k]['status']= '0';
+			}
+			elseif($v['end_time'] < $now_time && $v['end_time']>0){
+				if($deal_list[$k]['percent'] >=100){
+					$deal_list[$k]['status']= '1';
+				}
+				else{
+					$deal_list[$k]['status']= '2';
+				}
+			}
+			else{
+				if ($v['end_time'] > 0) {
+					$deal_list[$k]['status']= '3';
+				}
+				else
+					$deal_list[$k]['status']= '4';
+			}
+		}
+		//获取当前项目列表下的所有子项目
+		//$temp_virtual_person_list = $GLOBALS['db']->getAll("select deal_id,virtual_person,price,support_count from ".DB_PREFIX."deal_item where deal_id in(".implode(",",$deal_ids).") ");
+		//$virtual_person_list  = array();
+		//重新组装一个以项目ID为KEY的 统计所有的虚拟人数和虚拟价格
+		//		foreach($temp_virtual_person_list as $k=>$v){
+		//			$virtual_person_list[$v['deal_id']]['total_virtual_person'] += $v['virtual_person'];
+		//			$virtual_person_list[$v['deal_id']]['total_support_person'] += $v['support_count'];
+		//			$virtual_person_list[$v['deal_id']]['total_virtual_price'] += $v['price'] * $v['virtual_person'];
+		//			$virtual_person_list[$v['deal_id']]['total_support_price'] += $v['price'] * $v['support_count'];
+		//		}
+		//unset($temp_virtual_person_list);
+		//将获取到的虚拟人数和虚拟价格拿到项目列表里面进行统计
+		foreach($deal_list as $k=>$v)
+		{
+			$deal_list[$k]['url']=url_wap("fore#show",array("id"=>$v['id']));
+			if($v['type']==1){
+				$deal_list[$k]['virtual_person']=$deal_list[$k]['invote_num'];
+				$deal_list[$k]['support_count'] =$deal_list[$k]['invote_num'];
+				$deal_list[$k]['support_amount'] =$deal_list[$k]['invote_money'];
+				$deal_list[$k]['percent'] = round(($deal_list[$k]['support_amount'])/$v['limit_price']*100);
+				$deal_list[$k]['limit_price_w']=round(($deal_list[$k]['limit_price'])/10000);
+				$deal_list[$k]['invote_mini_money_w']=round(($deal_list[$k]['invote_mini_money'])/10000);
+			}else{
+				$deal_list[$k]['virtual_person']=$deal_list[$k]['virtual_num'];
+				$deal_list[$k]['support_count'] =$deal_list[$k]['virtual_num']+$deal_list[$k]['support_count'];
+				$deal_list[$k]['support_amount'] =$deal_list[$k]['virtual_price']+$deal_list[$k]['support_amount'];
+				$deal_list[$k]['percent'] = round(($deal_list[$k]['support_amount'])/$v['limit_price']*100);
+			}
+
+		}
+	}
+	
+	return array("rs_count"=>$deal_count,"list"=>$deal_list);
+	}
 
 function show_empty_avatar($u_id,$type="middle")
 {

@@ -765,6 +765,32 @@ public function send_mobile_verify_code()
 			}
 		}
 	}
+	public function set_xianhuo_repay_make(){
+		$id = intval($_REQUEST['id']);
+		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_xianhuo_order where id = ".$id." and repay_time>0 and user_id = ".intval($GLOBALS['user_info']['id']));
+		if(!$order_info)
+		{
+			showErr("无效的项目支持",1);
+		}else{
+			if($order_info['repay_make_time']==0){
+				$GLOBALS['db']->query("update ".DB_PREFIX."deal_xianhuo_order set repay_make_time =  ".get_gmtime()." where id = ".$order_info['id']." and user_id = ".intval($GLOBALS['user_info']['id']));
+				showSuccess("设置成功",1);
+			}
+		}
+	}
+	public function set_shichi_repay_make(){
+		$id = intval($_REQUEST['id']);
+		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_item_order where id = ".$id." and repay_time>0 and user_id = ".intval($GLOBALS['user_info']['id']));
+		if(!$order_info)
+		{
+			showErr("无效的项目支持",1);
+		}else{
+			if($order_info['repay_make_time']==0){
+				$GLOBALS['db']->query("update ".DB_PREFIX."fore_item_order set repay_make_time =  ".get_gmtime()." where id = ".$order_info['id']." and user_id = ".intval($GLOBALS['user_info']['id']));
+				showSuccess("设置成功",1);
+			}
+		}
+	}
 	//投资人详细信息
 	function investor_detailed_information(){
 		$id=intval($_REQUEST['id']);

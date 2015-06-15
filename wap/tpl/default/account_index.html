@@ -59,6 +59,8 @@
                 <a class="pay del_deal ml5 bg_gray" href="{url_wap r="account#del_order" p="id=$order_item.id"}">删除</a>
                 {else}
                  <div class="pay theme_color" onclick="window.location.href='{url_wap r="account#view_order" p="id=$order_item.id"}';">查看详情</div>
+                                  <div class="pay theme_color" onclick="window.location.href='{url_wap r="account#bujiao" p="id=$order_item.id"}';">补交快递</div>
+                 
                 {/if} 
             </div>
         </li>
