@@ -65,8 +65,8 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 <div class="head_1 z100" id="J_head">
 	<div class="head_cont" style="background:#fff">
 		<div class="wrap1000 constr clearfix">
-			<div class="logo_1 f_l">
-				<a class="link" href="{$APP_ROOT}/">
+			<div class="logo_1 f_l" style="height:80px">
+				<a class="link" href="{$APP_ROOT}/" style="height:65px">
 					<?php
 						$this->_var['logo_image'] = app_conf("SITE_LOGO");
 					?>
@@ -74,7 +74,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 				</a>
 			</div>
 			<!--{if $MODULE_NAME == 'user'}-->
-			<div class="f_yahei no-nav-text">{if $ACTION_NAME == 'login'}登录{elseif $ACTION_NAME eq 'register'}注册{/if}</div>
+			<div class="f_yahei no-nav-text" style="margin-top:25px">{if $ACTION_NAME == 'login'}登录{elseif $ACTION_NAME eq 'register'}注册{/if}</div>
 			<!--{/if}-->
 		</div>
 	</div>

@@ -46,7 +46,7 @@ textarea { font-family:inherit; font-size:inherit; font-weight:inherit; resize:n
 .invester .invester_bd .r2 .tit ,
 .pages span.current ,
 .btn_select.cur ,
-.switch_nav ul li.current a{ background:#0099ff; }
+.switch_nav ul li.current a{ background:#9ED367; }
 
 .theme_fcolor ,
 .hd31 ul li.select a ,
@@ -61,7 +61,7 @@ textarea { font-family:inherit; font-size:inherit; font-weight:inherit; resize:n
 .list_title .cur ,
 .list_title .cur a ,
 .invester_all .con9 .text a:hover ,
-.drop_box span a:hover {color:#0099ff;}
+.drop_box span a:hover {color:#65AD33;}
 
 .tab li.on{
 	border-right:4px solid #0099ff;
@@ -69,7 +69,7 @@ textarea { font-family:inherit; font-size:inherit; font-weight:inherit; resize:n
 .hd31 ul li.select ,
 .tab_title ul li.on ,
 .project_agencyAdd .hd31 ul li.select ,
-.list_title .cur {border-top:3px solid #0099ff;}
+.list_title .cur {border-top:3px solid #65AD33;}
 .tab_title ,
 .main_nav li.current a ,
 .main_nav li a:hover ,
@@ -96,7 +96,7 @@ textarea { font-family:inherit; font-size:inherit; font-weight:inherit; resize:n
 
 .f_money{color:#71b900;}
 .f_blue{color:#00b0f5;}
-.f_red{color:#ff5500;}
+.f_red{color:#ffb226;}
 .f_gray{color:#c0c0c0;}
 .f_green{color:#44c621;}
 .f_orange{ background-color:#ffb226; }

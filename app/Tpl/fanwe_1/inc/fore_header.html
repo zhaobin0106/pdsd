@@ -4,9 +4,10 @@
 	.li_hover { display:block; }
 </style>
 <div class="hd">
-	<div class="hd1">
+	<div class="hd1" style="padding-left:20px">
 		<span class="title f_l">{$deal_info.name}</span>
-<!-- 		<span class="f_r bt1">
+	
+		<!--<span class="f_r bt1">
 			<div class="ui-button theme_bgcolor fx f_l f12" id="fx_show" style="float:left;position:relative;">
 				<i></i>分享
 				<span id="nc" class="f_r nc" style="position:absolute;right:0;top:30px">
@@ -25,9 +26,9 @@
 				</div>	
 				{/if}
 			{/if}
-		</span> -->
+		</span>-->
 	</div>
-	<div class="hd2">
+	<!--<div class="hd2">
 		<span class="theme_bgcolor" style="padding:3px 5px;color:#fff">发起人</span>
 		{if $deal_info.user_id neq 0}
 		<span><a href="{url r="home" p="id=$deal_info.user_id"}" class="mf">{$deal_info.user_name}</a></span><span style="color:#dadada">|</span>
@@ -36,15 +37,88 @@
 		{else}
 		<span>{function name="app_conf" v="SITE_NAME"}</span>
 		{/if}
+	</div>-->
+	
+	<div style="height:80px;border:1px solid #e1e1e1;padding:20px 15px;margin:0 20px;padding-right:100px;">
+	{foreach from=$deal_item_list item=deal_item key=key}
+	
+	<div style="float:left">
+	{if $deal_item.is_limit_user eq 1}
+		{if $deal_item.limit_user gt 0}
+			<!--<span>限额：{$deal_item.limit_user}位&nbsp;&nbsp;&nbsp;</span>-->
+			<span style="font-size:20px;font-weight:700;margin-right:40px;margin-left:10px">还剩 <b style="color:#65AD33;font-size:20px">{$deal_item.remain_person}</b> 个名额</span>
+		{/if}
+	{/if}
+	<span style="font-size:15px;margin-right:40px;">已有 <em class="f18 f_red" style="font-size:15px">{$deal_item.virtual_person_list}</em> 位报名者</span>
+	<span style="font-size:15px">报名截止时间：<em class="f18 f_red" style="font-size:15px">{function name="to_date" v=$deal_info.end_time f="Y年m月d日"}</em></span>
 	</div>
+	
+	<div class="jd" style="float:left;margin-top:15px;border-top:none;border-bottom:none;">
+			<div class="f_l" style="width:540px;*width:538px;margin-top:5px;">
+			{if $deal_info.begin_time > $now}
+				<div class="ui-progress" style="width:540px;*width:538px;height:15px;border-radius:5px;">
+					<span style="width:{$deal_info.percent}%;background:#ffae00;height:15px;border-radius:5px;"></span>
+				</div>
+			{elseif $deal_info.end_time < $now and $deal_info.end_time neq 0}
+				{if $deal_info.percent gte 100}				
+				<div class="ui-success" style="width:540px;*width:538px;height:15px;border-radius:5px;">
+					<span class="theme_bgcolor" style="width:100%;height:15px;border-radius:5px;"></span>
+				</div>
+				{else $deal_info.percent gt 0}
+				<div class="ui-progress" style="width:540px;*width:538px;height:15px;border-radius:5px;">
+					<span style="width:{$deal_info.percent}%;background:#4d4d4f;height:15px;border-radius:5px;"></span>
+				</div>
+				{/if}
+			{else}
+				{if $deal_info.percent gte 100}
+				<div class="ui-success" style="width:540px;*width:538px;height:15px;border-radius:5px;">
+					<span style="width:100%;height:15px;border-radius:5px;"></span>
+				</div>
+				{else}
+					{if $deal_info.end_time eq 0}
+				<div class="ui-progress" style="width:540px;*width:538px;height:15px;border-radius:5px;">
+					<span class="theme_bgcolor" style="width:{$deal_info.percent}%;height:15px;border-radius:5px;"></span>
+				</div>
+					{else}
+				<div class="ui-progress" style="width:540px;*width:538px;height:15px;border-radius:5px;">
+					<span class="theme_bgcolor" style="width:{$deal_info.percent}%;height:15px;border-radius:5px;"></span>
+				</div>
+					{/if}	
+				{/if}
+			{/if}
+			</div>
+	        <div class="f_r" style="float:left;margin-left:10px;font-size:14px">{$deal_info.percent}%</div>
+		</div>
+		
+			{if ($deal_info.end_time > $now or $deal_info.end_time eq 0) and $deal_info.begin_time < $now and $deal_info.is_effect eq 1 }
+			{if $deal_item.support_count < $deal_item.limit_user or $deal_item.limit_user eq 0}
+			
+			<a class="box22_3 theme_bgcolor" href="{url r="cart" p="id=$deal_item.id&type=1&lixing=fore"}" target="_blank" style="float:right;width:200px;margin-top:-5px;margin-left:0px;">
+				
+					<span>报名</span>
+				
+			</a>
+			
+			{else}
+			<div class="box22_3 bg_gray" disabled="disabled" style="float:right;width:200px;margin-top:-5px;margin-left:0px;">已满额</div>
+			{/if}
+			{else}
+			<div class="box22_3 bg_gray" disabled="disabled" style="float:right;width:200px;margin-top:-5px;margin-left:0px;">报名</div>
+			{/if}
+	<div style="float:right;height:90px;border-left:2px solid #eee;margin-right:100px;margin-top:-30px"></div>
+	{/foreach}
+	</div>
+	
+	
+	
 	<div class="hd3">
 		<div class="hd31 f_l">
 			<ul class="clearfix">
-				<li {if ACTION_NAME eq 'show'}class="select"{/if}><a href="{url r="fore#show" p="id=$deal_info.id"}">项目主页</a></li>
+				<li {if ACTION_NAME eq 'show'}class="select"{/if}><a href="{url r="fore#show" p="id=$deal_info.id"}">了解详情</a></li>
 				{if $deal_info.is_support_print eq 1 && $deal_info.type neq 1}
-				<li {if ACTION_NAME eq 'support'}class="select"{/if}><a href="{url r="fore#support" p="id=$deal_info.id"}">支持者({$deal_info.person})</a></li>
+				<!--<li {if ACTION_NAME eq 'support'}class="select"{/if}><a href="{url r="fore#support" p="id=$deal_info.id"}">支持者({$deal_info.person})</a></li>-->
 				{/if}
-				<li {if ACTION_NAME eq 'comment'}class="select"{/if}><a href="{url r="fore#comment" p="id=$deal_info.id"}">评论({$comment_count})</a></li>				
+				<li {if ACTION_NAME eq 'comment'}class="select"{/if}><a href="{url r="fore#comment" p="id=$deal_info.id"}">参与者评价({$comment_count})</a></li>				
 			</ul>
 		</div>
 	</div>

@@ -2050,27 +2050,28 @@ i,em {
 	border-radius:3px;
 }
 .box2 {
-	width:302px;
+	width:320px;
 	background:#fff;
-	border:#eff8f7 solid 10px;
+	border:#e1e1e1 solid 1px;
 	display:inline-block;
 	margin-top:10px;
 	border-radius:2px;
 	font-size:14px;
 }
 .box2:hover{
-	border:10px solid #daf0ff;
+	border:1px solid #e1e1e1;
 }
 .box21 {
-	padding:20px 15px;
+	padding:10px 15px;
 	height:25px;
 	color:#555555;
 	font-size:12px;
-	border-bottom:#e5e5e5 dashed 1px;
+	border-bottom:#e1e1e1 solid 1px;
+	border-left:#65AD33 solid 5px;
 }
 .box2_title {
 	font-size:18px;
-	color:#0099ff;
+	color:#555555;
 	font-weight:bold;
 }
 .box22 {
@@ -2097,7 +2098,7 @@ i,em {
 	text-align:center;
 	font-size:22px;
 	color:#FFF;
-	margin-left:0;
+	margin-left:90px;
 	padding:0 15px;
 	-moz-border-radius:3px;
 	-khtml-border-radius:3px;

@@ -57,8 +57,8 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 <div class="head_1 z100" id="J_head">
 	<div class="head_cont" style="background:#fff">
 		<div class="wrap1000 constr clearfix">
-			<div class="logo_1 f_l">
-				<a class="link" href="{$APP_ROOT}/">
+			<div class="logo_1 f_l" style="height:80px">
+				<a class="link" href="{$APP_ROOT}/" style="height:65px">
 					<?php
 						$this->_var['logo_image'] = app_conf("SITE_LOGO");
 					?>
@@ -66,7 +66,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 				</a>
 			</div>
 			<!--{if $MODULE_NAME == 'user'}-->
-			<div class="f_yahei no-nav-text">{if $ACTION_NAME == 'login'}登录{elseif $ACTION_NAME eq 'register'}注册{/if}</div>
+			<div class="f_yahei no-nav-text" style="margin-top:25px">{if $ACTION_NAME == 'login'}登录{elseif $ACTION_NAME eq 'register'}注册{/if}</div>
 			<!--{/if}-->
 		</div>
 	</div>
@@ -94,14 +94,14 @@ $this->_var['cpagejs'][] = array();
 <div class="my_shadow_bg">
 	<div class="blank"></div>
 	<div class="dlmain" style="overflow:hidden">
-		<div class="left f_l dlr" style="width:594px;_width:580px">
-			<div class="link_dash f25 dlr1">
+		<div class="left f_l dlr" style="width:950px;_width:950px;text-align:center">
+			<div class="link_dash f25 dlr1" style="width:900px">
 				<ul class="nav myLine">
-					<li class="nav_item n_1 " data="1" >
+					<li class="nav_item n_1 " data="1" style="color:#65AD33">
 						用户注册
 					</li>
 				</ul>
-				<span class="f_r" style="font-size:14px;color:#8c8c8c;line-height:14px; margin-top:16px;" >已是我们的会员！  <a href="{url r="user#login"}" style="color:#0196db;"> 登录</a> </span>
+				<span class="f_r" style="font-size:14px;color:#8c8c8c;line-height:14px; margin-top:16px;" >已是我们的会员！  <a href="{url r="user#login"}" style="color:#FFA500;"> 登录</a> </span>
 			</div>
 			<div class="item c_1 hidden">
 				<form id="user_register_form" name="user_register_form" action="{url r="user#do_register"}">
@@ -178,7 +178,7 @@ $this->_var['cpagejs'][] = array();
 				</form>
 			</div>
 		</div>	
-		<div class="f_r dl" style="overflow:hidden">
+		<div class="f_r dl" style="overflow:hidden;display:none">
 			<div class="dl1">使用其他账号直接登录:</div>
 			{insert name="api_login"}
 			<!--<a href="{url r="user#login"}" class="btn_go_login" title="立即登录"></a>-->

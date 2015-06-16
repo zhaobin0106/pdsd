@@ -18,13 +18,13 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
         <div class="deal_banner" {if $deal_info.deal_background_image neq null}style="background:url({$deal_info.deal_background_image}) top center no-repeat;padding-top:405px;"{/if}>
              <div class="blank"></div>
             <!--中间开始-->
-            <div class="xqmain">
+            <div class="xqmain" >
                 <!--中间页面头部start-->
                 {include file="inc/fore_header.html"}
                 <!--中间页面头部end-->    
                 <div class="xqmain_main">
                     <!--中间页面左边start-->
-                    <div class="xqmain_left">
+                    <div class="xqmain_left" style="float:none;">
                         <div class="l_hd">
                             {if $deal_info.source_vedio eq ''}
                             <img src="{function name="get_spec_image" v=$deal_info.image w=800 h=600}" alt="{$deal_info.name}" />
@@ -68,7 +68,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
                         </div>
                     </div>
                     <!--中间页面左边end-->
-                    {include file="inc/fore_right.html"}
+                   
                     <div class="blank"></div>
                 </div>
             </div>
