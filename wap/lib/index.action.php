@@ -56,7 +56,7 @@ class indexModule{
 		if($index_pro_num>0){
 			$limit="  0,$index_pro_num";
 		}
-		$limit = " 0,3";
+		$limit = " 0,10";
 		$GLOBALS['tmpl']->assign("current_page",$page);
  		//权限控制
  		$now_time = get_gmtime();
