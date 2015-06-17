@@ -25,6 +25,11 @@ class cartModule {
 						"id" => $deal_item ['fore_id'] 
 				) ) );
 			}
+			$count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_item_order where  fore_id = " . $deal_item ['fore_id']." and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ));
+			if($count > $deal_item['enroll']){
+				showErr ( "已达到报名上限", 0, get_gopreview_wap () );
+									
+			}
 			$deal_info = $GLOBALS ['db']->getRow ( "select * from " . DB_PREFIX . "fore where is_delete = 0 and is_effect = 1 and id = " . $deal_item ['fore_id'] );
 			$deal_info = cache_fore_extra ( $deal_info );
 			init_fore_page_wap ( $deal_info );
