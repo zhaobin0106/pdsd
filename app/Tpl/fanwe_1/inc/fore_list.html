@@ -17,13 +17,15 @@
 	font-family:'Microsoft YaHei';
 }
 </style>
+
+<div style="width:78%;float:right;">
 {foreach from=$fore_list item=fore_item key=key name="fore_items"}
-<div class="deal_item_box f_l {if $smarty.foreach.deal_items.iteration mod 4 eq 1}first{/if}">
+<div class="deal_item_box f_l {if $smarty.foreach.deal_items.iteration mod 4 eq 1}first{/if}" style="width:48%;float:left;margin-right:0px;margin-left:16.5px">
     <!--1-->
     
 	<div class="deal_content_box">
 		<a href="{url r="fore#show" p="id=$fore_item.id"}" title="{$fore_item.name}" target="_blank" style="display:block;overflow:hidden">
-			<img src="{if $fore_item.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$fore_item.image w="282" h="220" g="1"}{/if}" alt="{$fore_item.name}" alt="{$fore_item.name}">
+			<img style="width:100%;" src="{if $fore_item.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$fore_item.image w="" h="" g="1"}{/if}" alt="{$fore_item.name}" alt="{$fore_item.name}">
 		</a>
 		<div class="blank"></div>
 		<a href="{url r="fore#show" p="id=$fore_item.id"}" title="{$fore_item.name}" class="deal_title" target="_blank">{function name="msubstr" v=$fore_item.name b=0 e=25}</a>
@@ -241,3 +243,4 @@
 	{/if}
 </div>
 {/foreach}
+</div>

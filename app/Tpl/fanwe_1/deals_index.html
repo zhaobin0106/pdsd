@@ -314,18 +314,19 @@ border-radius:2px;
 				</div>
 			<div class="blank"></div>	
 			</div>
-			<!-- 项目分类 开始-->		
+			
+			<!-- 拼地分类 开始-->		
 			<div class="ui_deals_filter_item" style="width:20%;float:left;background:#F2F2F2;padding:0px">
 				
 				<div class="ui_deals_filter_l f_r">
 					<ul>
-						<li style="text-align:center;float:none;background:#eee;border-radius:0px;border:1px solid #e1e1e1;margin:0 0;">							
-							<span href="#" title="" style="border-radius:0px;padding:10px 10px;border:0px solid #e1e1e1;margin:0px 0;height:50px;line-height:50px;font-size:25px;font-weight:100;">拼 地</span>							
+						<li style="text-align:center;float:none;background:#e9e9e9;border-radius:0px;border:1px solid #e1e1e1;margin:0 0;">							
+							<span href="#" title="" style="border-radius:0px;padding:10px 10px;border:0px solid #e1e1e1;margin:0px 0;height:50px;line-height:50px;font-size:25px;font-weight:100;">拼 &nbsp; &nbsp;&nbsp; 地</span>							
 						</li>
 						{foreach from=$cate_list item=cate_item}
 						<li {if $pid eq $cate_item.id}class="current"{/if} style="text-align:center;float:none;background:#fff;border-radius:0px;border:1px solid #e1e1e1;margin:0 0;">
 							{if $cate_item.pid eq 0}
-							<a href="{$cate_item.url}" title="{$cate_item.name}" style="border-radius:0px;padding:5px 10px;border:0px solid #e1e1e1;margin:0px 0;height:50px;line-height:50px;font-size:25px;font-weight:100;">{$cate_item.name}<img src="./app/Tpl/fanwe_1/images/jian01.png" alt="" title="" style="vertical-align:middle;margin-left:30px;" /></a>
+							<a href="{$cate_item.url}" title="{$cate_item.name}" style="border-radius:0px;padding:5px 10px;border:0px solid #e1e1e1;margin:0px 0;height:50px;line-height:50px;font-size:25px;font-weight:100;">{$cate_item.name} &nbsp;&nbsp;&nbsp;></a>
 							{/if}
 						</li>
 						{/foreach}
@@ -347,17 +348,19 @@ border-radius:2px;
 				<div class="blank5"></div>-->
 				{/if}
 				</div>		
-		<!-- 项目分类 结束-->
+		<!-- 拼地分类 结束-->
+		
+		
+		
+		
+		
 			{if $p_type eq 1}
 				{include file="inc/deal_list_invest.html"}
 			{else}
 				{include file="inc/deal_list.html"}
 			{/if}					
 		</div>	
-		
-		
-		
-		
+								
 		<div class="blank"></div>
 		<div id="pin_loading" rel="{url r="ajax#deals" p="r=$p_r&id=$p_id&loc=$p_loc&tag=$p_tag&k=$p_k&p=$current_page&state=$p_state&type=$p_type"}">正在努力加载</div>	
 		<div class="pages">{$pages}</div>

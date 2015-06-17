@@ -66,7 +66,7 @@
 	<div class="box f_l">
 		<div>
 			<span class="box_title f_l">目前累计金额</span>
-			<span class="zcz f_r">
+			<div class="zcz f_r" style="margin-top:-57px;margin-right:70px;width:170px;height:35px">
 			{if $deal_info.begin_time > $now}
 			即将开始
 			{elseif $deal_info.end_time < $now and $deal_info.end_time neq 0}
@@ -84,7 +84,7 @@
 			拼地进行中
 				{/if}
 			{/if}
-			</span>	
+			</div>	
 		</div>
 		<div class="blank0"></div>
 		<span class="box_nu theme_fcolor f_l"><em class="f20">¥</em>{$deal_info.total_virtual_price}</span>
