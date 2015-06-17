@@ -4,7 +4,7 @@
 <div style="margin-bottom:10px">用户名：{$info['user_name']}</div>
 <div style="margin-bottom:10px">邮箱：{$info['email']}</div>
 <div style="margin-bottom:10px">手机号：{$info['iphone']}</div>
-<div style="margin-bottom:10px">应付总额：{$info['total_status']}</div>
+<div style="margin-bottom:10px">应付总额：{$info['total_price']}</div>
 <div style="color:red;margin-bottom:10px">是否退款：<if condition="$info['is_refund'] eq 0">否<else/>是</if></div>
 <div style="margin-bottom:10px">是否领取：	<if condition="$deal['repay_time']">已领取<else/>未领取</if></div>
 <if condition="$info['is_refund'] eq 0">
