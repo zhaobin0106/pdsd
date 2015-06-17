@@ -86,8 +86,8 @@ function edit_investor_index(id)
 <div class="main_title">上线项目</div>
 <div class="blank5"></div>
 <div class="button_row">
-	<input type="button" class="button" value="新增产品众筹" onclick="add();" />
-	<input type="button" class="button" value="新增股权众筹" onclick="add_investor();" >
+	<input type="button" class="button" value="新增拼地项目" onclick="add();" />
+	<!-- <input type="button" class="button" value="新增股权众筹" onclick="add_investor();" > -->
 	<input type="button" class="button" value="移到回收站" onclick="del();" />
 </div>
 <div class="blank5"></div>
@@ -108,8 +108,8 @@ function edit_investor_index(id)
 			</select>
 		类型:<select name="type">
 			<option value="NULL" <if condition="$_REQUEST['type'] eq 'NULL'">selected="selected"</if> >请选择</option>
-			<option value="0" <if condition="$_REQUEST['type'] eq '0'">selected="selected"</if> >产品众筹</option>
-			<option value="1" <if condition="$_REQUEST['type'] eq '1'">selected="selected"</if> >股权众筹</option>
+			<option value="0" <if condition="$_REQUEST['type'] eq '0'">selected="selected"</if> >拼地项目</option>
+			<option value="1" <if condition="$_REQUEST['type'] eq '1'">selected="selected"</if> >其它众筹</option>
 			</select>
 		发起人ID: <input type="text" class="textbox" name="user_id" value="{:trim($_REQUEST['user_id'])}" style="width:30px;" />
 		<br/>
