@@ -168,6 +168,21 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 			$deal_info['total_virtual_price']=number_price_format($deal_info['support_amount']+$deal_info['virtual_price']);
  			$deal_info['percent']=round(($deal_info['person']/$nums)*100);
  		}
+ 		if ($deal_info ['begin_time'] > NOW_TIME) {
+ 			$deal_info ['status'] = '0';
+ 			$deal_info ['left_days'] = ceil ( ($deal_info ['begin_time'] - NOW_TIME) / (24 * 3600) );
+ 		} elseif ($deal_info ['end_time'] < NOW_TIME && $deal_info ['end_time'] > 0) {
+ 			if ($deal_info ['percent'] >= 100) {
+ 				$deal_info ['status'] = '1';
+ 			} else {
+ 				$deal_info ['status'] = '2';
+ 			}
+ 		} else {
+ 			if ($deal_info ['end_time'] > 0) {
+ 				$deal_info ['status'] = '3';
+ 			} else
+ 				$deal_info ['status'] = '4';
+ 		}
  		//项目等级放到项目详细页面模块（对详细页面进行控制）
 		$deal_info['deal_level']=$GLOBALS['db']->getOne("select level from ".DB_PREFIX."deal_level where id=".intval($deal_info['user_level']));
 		$deal_info['virtual_person']=$GLOBALS['db']->getOne("select sum(virtual_person) from ".DB_PREFIX."fore_item where deal_id=".$deal_info['id']);
