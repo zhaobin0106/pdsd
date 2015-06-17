@@ -605,8 +605,7 @@ class accountModule extends BaseModule {
 			showErr ( "无效的项目支持", 0, get_gopreview () );
 		}
 		// ========如果超过系统设置的时间，则自动设置收到回报 start
-		if($order_info['repay_time']){
-		if ($order_info ['repay_make_time'] == 0) {
+		if ($order_info ['repay_make_time'] == 0 && $order_info ['repay_time']>0) {
 			$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
 			$repay_make_date = $order_info ['repay_time'] + $left_date * 24 * 3600;
 			if ($repay_make_date > get_gmtime () && $order_info ['repay_time'] > 0) {
@@ -615,7 +614,6 @@ class accountModule extends BaseModule {
 				$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_order set repay_make_time =  " . get_gmtime () . " where id = " . $id );
 				$order_info ['repay_make_time'] = get_gmtime ();
 			}
-		}
 		}
 		// =============如果超过系统设置的时间，则自动设置收到回报 end
 		$GLOBALS ['tmpl']->assign ( "order_info", $order_info );
@@ -652,8 +650,8 @@ class accountModule extends BaseModule {
 		showErr ( "无效的项目支持", 0, get_gopreview () );
 	}
 	// ========如果超过系统设置的时间，则自动设置收到回报 start
-	if ($order_info ['repay_make_time'] == 0) {
-		$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
+		if($order_info['repay_make_time']==0 && $order_info['repay_time'] > 0){
+			$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
 		$repay_make_date = $order_info ['repay_time'] + $left_date * 24 * 3600;
 		if ($repay_make_date > get_gmtime () && $order_info ['repay_time'] > 0) {
 			$order_info ['repay_make_date'] = date ( 'Y-m-d H:i:s', $repay_make_date );
@@ -698,8 +696,8 @@ class accountModule extends BaseModule {
 			showErr ( "无效的商品购买", 0, get_gopreview () );
 		}
 		// ========如果超过系统设置的时间，则自动设置收到回报 start
-		if ($order_info ['repay_make_time'] == 0) {
-			$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
+		if($order_info['repay_make_time']==0 && $order_info['repay_time'] > 0){
+					$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
 			$repay_make_date = $order_info ['repay_time'] + $left_date * 24 * 3600;
 			if ($repay_make_date > get_gmtime () && $order_info ['repay_time'] > 0) {
 				$order_info ['repay_make_date'] = date ( 'Y-m-d H:i:s', $repay_make_date );
