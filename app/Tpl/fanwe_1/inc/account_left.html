@@ -37,7 +37,7 @@
 			</a>
 		</li>
 		{/if}
-		<li {if $module eq 'account'&& $action eq 'focus'}class="select"{/if}>
+		<!-- <li {if $module eq 'account'&& $action eq 'focus'}class="select"{/if}>
 			<a href="{url r="account#focus"}" class="a3">
 				<i></i>关注的项目
 			</a>
@@ -46,7 +46,7 @@
 			<a href="{url r="account#recommend"}" class="a3">
 				<i></i>推荐的项目
 			</a>
-		</li>
+		</li> -->
 		<li {if $module eq 'account' && $action eq 'money_index' || $action eq 'money_inchange' || $action eq 'pay' || $action eq 'refund' || $action eq 'money_inchange_log' || $action eq 'money_carry_bank' || $action eq 'money_carry_log' || $action eq 'money_carry_addbank' || $action eq 'addbank' || $action eq 'money_carry_addbank' || $action eq 'money_carry'|| $action eq 'record'|| $action eq 'credit'}class="select"{/if}>
 			<a href="{url r="account#money_index"}">
 				<i></i>资金管理
@@ -70,11 +70,11 @@
 				<i></i>收件地址管理
 			</a>
 			</li>
-		<li {if $module eq 'settings'&& $action eq 'bind'}class="select"{/if}>
+		<!-- <li {if $module eq 'settings'&& $action eq 'bind'}class="select"{/if}>
 			<a href="{url r="settings#bind"}" class="a7">
 				<i></i>绑定设置
 			</a>
-		</li>
+		</li> -->
 
 	</ul>
 </div>
