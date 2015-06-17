@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 
 class IndexImageAction extends CommonAction{
-	var $type_list=array('0'=>'首页','1'=>'产品众筹','2'=>'股权众筹');
+	var $type_list=array('0'=>'首页','1'=>'拼地','2'=>'试吃');
 	public function index()
 	{
 		parent::index();

@@ -327,10 +327,10 @@ function get_send_type($send_type)
 function get_indeximage_type($type=0){
 	switch($type){
 		case 1:
-		return "产品众筹";
+		return "拼地";
 		break;
 		case 2:
-		return "股权众筹";
+		return "试吃";
 		break;
 		default:
 		return "首页";
