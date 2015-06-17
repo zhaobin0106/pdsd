@@ -20,6 +20,14 @@ class foresModule extends BaseModule
 		{
 			showErr("产品众筹已经关闭");
 		}
+		
+		$image_list = load_dynamic_cache("FORESIMAGE_LIST");
+		if($image_list===false)
+		{
+			$image_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."index_image where type = 2 order by sort asc");
+			set_dynamic_cache("FORES_IMAGE_LIST",$image_list);
+		}
+		$GLOBALS['tmpl']->assign("image_list",$image_list);
          //links
         $g_links =get_link_by_id(14);
         

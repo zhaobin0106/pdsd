@@ -790,7 +790,7 @@ class cartModule extends BaseModule {
 					} elseif ($result ['status'] == 1 || $result ['status'] == 2) {
 						app_redirect ( url ( "account#credit" ) );
 					} else {
-						app_redirect ( url ( "account" ) );
+						app_redirect ( url ( "account#shichi" ) );
 					}
 				} else {
 					showErr ( "下单失败", 0, get_gopreview () );

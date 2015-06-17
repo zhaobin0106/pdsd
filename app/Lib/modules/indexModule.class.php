@@ -18,7 +18,7 @@ class indexModule extends BaseModule
 		$image_list = load_dynamic_cache("INDEX_IMAGE_LIST");
 		if($image_list===false)
 		{
-			$image_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."index_image order by sort asc");
+			$image_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."index_image where type = 0 order by sort asc");
 			set_dynamic_cache("INDEX_IMAGE_LIST",$image_list);
 		}
 		$GLOBALS['tmpl']->assign("image_list",$image_list); 		
