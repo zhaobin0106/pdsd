@@ -93,6 +93,11 @@ class cartModule extends BaseModule {
 							"id" => $deal_item ['fore_id'] 
 					) ) );
 				}
+				$count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_item_order where  fore_id = " . $deal_item ['fore_id']." and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ));
+				if($count > $deal_item['enroll']){
+												showErr ( "你已达到报名上限", $ajax );
+					
+				}
 				$deal_info = $GLOBALS ['db']->getRow ( "select * from " . DB_PREFIX . "fore where is_delete = 0 and is_effect = 1 and id = " . $deal_item ['fore_id'] );
 				
 				if (! $deal_info) {

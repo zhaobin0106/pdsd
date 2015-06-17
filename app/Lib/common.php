@@ -1023,7 +1023,7 @@ function cache_fore_extra($deal_info)
 	{
 		$deal_extra_cache = array();
 		$deal_info['deal_faq_list'] = $deal_extra_cache['deal_faq_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_faq where fore_id = ".$deal_info['id']." order by sort asc");
-		$deal_info['deal_item_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_item where fore_id = ".$deal_info['id']." order by price asc");
+		$deal_info['deal_item_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_item where fore_id = ".$deal_info['id']." order by price asc limit 0,1");
 		foreach($deal_info['deal_item_list'] as $k=>$v)
 		{
 			$deal_info['deal_item_list'][$k]['images'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_item_image where fore_id=".$deal_info['id']." and fore_item_id = ".$v['id']);
@@ -1039,8 +1039,8 @@ function cache_fore_extra($deal_info)
 	{
 		$deal_extra_cache = unserialize($deal_info['deal_extra_cache']);
 		$deal_info['deal_faq_list'] = $deal_extra_cache['deal_faq_list'];
-		$deal_info['deal_item_list'] = $deal_extra_cache['deal_item_list'];
-
+		$deal_info['deal_item_list'] = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."fore_item where fore_id = ".$deal_info['id']." order by price asc limit 0,1");
+		
 	}
 	return $deal_info;
 }

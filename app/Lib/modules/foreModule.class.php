@@ -183,6 +183,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
  			} else
  				$deal_info ['status'] = '4';
  		}
+ 			
  		//项目等级放到项目详细页面模块（对详细页面进行控制）
 		$deal_info['deal_level']=$GLOBALS['db']->getOne("select level from ".DB_PREFIX."deal_level where id=".intval($deal_info['user_level']));
 		$deal_info['virtual_person']=$GLOBALS['db']->getOne("select sum(virtual_person) from ".DB_PREFIX."fore_item where deal_id=".$deal_info['id']);
@@ -198,8 +199,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		//开启限购后剩余几位
 		foreach ($deal_item_list as $k=>$v){
 			if($v['limit_user']>0){
-				$deal_item_list[$k]['remain_person']=$v['limit_user']-$v['virtual_person']-$v['support_count'];
-			}
+				$deal_item_list[$k]['remain_person']=$v['limit_user']-$v['virtual_person']-$v['support_count'];			}
 		}
 
 		$GLOBALS['tmpl']->assign("deal_item_list",$deal_item_list);

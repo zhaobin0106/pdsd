@@ -18,7 +18,6 @@ class accountModule extends BaseModule {
 		if (! $GLOBALS ['user_info'])
 			app_redirect ( url ( "user#login" ) );
 		$GLOBALS ['tmpl']->assign ( "page_title", "支持的项目" );
-		
 		$page_size = ACCOUNT_PAGE_SIZE;
 		$page = intval ( $_REQUEST ['p'] );
 		if ($page == 0)
@@ -38,12 +37,14 @@ class accountModule extends BaseModule {
 			if ($v ['repay_make_time'] == 0 && $v ['repay_time'] > 0) {
 				$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
 				$repay_make_date = $v ['repay_time'] + $left_date * 24 * 3600;
+				
 				if ($repay_make_date <= get_gmtime ()) {
 					$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_order set repay_make_time =  " . get_gmtime () . " where id = " . $v ['id'] );
 					$order_list [$k] ['repay_make_time'] = get_gmtime ();
 				}
 			}
 		}
+		
 		$order_count = $GLOBALS ['db']->getOne ( "select count(*) from " . DB_PREFIX . "deal_order as do left join " . DB_PREFIX . "deal as de on de.id=do.deal_id where $condition and do.user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) . " and do.type=0" );
 		
 		$page = new Page ( $order_count, $page_size ); // 初始化分页对象
@@ -604,6 +605,7 @@ class accountModule extends BaseModule {
 			showErr ( "无效的项目支持", 0, get_gopreview () );
 		}
 		// ========如果超过系统设置的时间，则自动设置收到回报 start
+		if($order_info['repay_time']){
 		if ($order_info ['repay_make_time'] == 0) {
 			$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
 			$repay_make_date = $order_info ['repay_time'] + $left_date * 24 * 3600;
@@ -613,6 +615,7 @@ class accountModule extends BaseModule {
 				$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_order set repay_make_time =  " . get_gmtime () . " where id = " . $id );
 				$order_info ['repay_make_time'] = get_gmtime ();
 			}
+		}
 		}
 		// =============如果超过系统设置的时间，则自动设置收到回报 end
 		$GLOBALS ['tmpl']->assign ( "order_info", $order_info );
