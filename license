@@ -1,4 +1,4 @@
-<?php $fd93bb7bba3arr=array("localhost","127.0.0.1","*.maipiaoqu.com","*.demo.com","127.0.0.1");$fd93bb7bba3host=$_SERVER["HTTP_HOST"];$fd93bb7bba3host=explode(":",$fd93bb7bba3host);$fd93bb7bba3host=$fd93bb7bba3host[0];$fd93bb7bba3bln=false;foreach($fd93bb7bba3arr as $fd93bb7bba3val){if(substr($fd93bb7bba3val,0,2)==="*."){if(preg_match("/".preg_quote(substr($fd93bb7bba3val,2))."$/",$fd93bb7bba3host)>0){$fd93bb7bba3bln=true;break;}}}if(!$fd93bb7bba3bln&&!in_array($fd93bb7bba3host,$fd93bb7bba3arr)){echo "domain not authorized";exit;}if (PHP_VERSION >= '5.0.0')
+<?php $fd93bb7bba3arr=array("localhost","127.0.0.1","*.buguyuan.cn","*.demo.com","127.0.0.1");$fd93bb7bba3host=$_SERVER["HTTP_HOST"];$fd93bb7bba3host=explode(":",$fd93bb7bba3host);$fd93bb7bba3host=$fd93bb7bba3host[0];$fd93bb7bba3bln=false;foreach($fd93bb7bba3arr as $fd93bb7bba3val){if(substr($fd93bb7bba3val,0,2)==="*."){if(preg_match("/".preg_quote(substr($fd93bb7bba3val,2))."$/",$fd93bb7bba3host)>0){$fd93bb7bba3bln=true;break;}}}if(!$fd93bb7bba3bln&&!in_array($fd93bb7bba3host,$fd93bb7bba3arr)){echo "domain not authorized";exit;}if (PHP_VERSION >= '5.0.0')
 {
     $begin_run_time = @microtime(true);
 }
