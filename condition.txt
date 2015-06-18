@@ -1,1 +1,1 @@
-select d.* from fanwe_deal  as d   where  1=1 AND d.is_delete = 0 AND d.is_effect = 1 and d.type=0  AND type=0 ORDER BY  sort asc  LIMIT 0,8
+select d.* from fanwe_fore  as d   where  1=1 AND d.is_delete = 0 AND d.is_effect = 1 and d.type=0  AND  d.is_delete = 0 and d.is_effect = 1  and d.cate_id in (0,40,5,8,1,43,2,44,45,3,46,4,47,6,7,14,17,21,25,24,26,27,28,32,36,39,41,42) and type=0  ORDER BY  sort asc  LIMIT 12,12
