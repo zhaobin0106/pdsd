@@ -49,8 +49,13 @@
     </head>
     <body {if  ACT eq 'index'}  style="background: #fff;"{/if}>
     	
-        <div class="navbar theme_color1" style="background:#FFFFFF;margin-bottom:0px">
-            <div class="nav-wrap-left" style="top:3px;">
+        <div class="navbar theme_color1" style="background:#FFFFFF;margin-bottom:0px;border-bottom:1px solid #eee">
+        	
+        	<div class="nav-wrap-right" style="top:7px;position:absolute;left:10px">                
+                <a style="padding:0px;display:inline-block;vertical-align:middle;" class="" href="{$APP_URL}"><img style="width:30px;height:30px" src="./tpl/default/images/tou02.png" alt="alt" title="title" /><!--<i class="fa fa-user"></i>--></a>
+            </div>
+            
+            <div class="nav-wrap-left" style="top:3px;left:20%;">
             	{if ( $class neq 'settings' && $class neq 'account' && $class neq 'investor') || ($class eq 'settings' && $act eq 'index')}
 				     <a href="{$APP_URL}" class="logo" style="width:200px;height:37px"><img src="{$site_logo}"></a>
 				{else}
@@ -59,10 +64,12 @@
 		        </a>
 				{/if}
             </div>
+            
             <div class="nav-wrap-right" style="top:7px;">
                 <!--<a class="screen" id="screen" href="javascript:void(0);"><i class="fa fa-bars"></i></a>-->
                 <a style="padding:0px;display:inline-block;vertical-align:middle;" class="" href="{url_wap r="settings"}"><img style="width:30px;height:30px" src="./tpl/default/images/tou01.png" alt="alt" title="title" /><!--<i class="fa fa-user"></i>--></a>
             </div>
+            
         </div>
         
     {include file="inc/header_search.html"}
