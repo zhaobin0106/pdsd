@@ -1,4 +1,4 @@
-{include file="inc/header.html"} 
+{include file="inc/header1.html"} 
 <?php
 $this->_var['pagejs_1'][] = $this->_var['TMPL_REAL']."/js/deal_attention.js";
 $this->_var['cpagejs_1'][]='';
@@ -15,11 +15,13 @@ $this->_var['cpagejs_1'][]='';
 	<div class="closebigimg">点击任意位置关闭</div>
 </div>
 <!-- 点击查看大图 结束 -->
-    	<a href="javascript:void(0);" title="{$deal_info.name}" class="deal_title sizing" >{$deal_info.name}</a>
+    	
 
-<div class="deal_box">
+			<div class="deal_box" style="padding-bottom:5px">
 
-    	            <span class="deal_title sizing ">
+				<a href="javascript:void(0);" title="{$deal_info.name}" class="deal_title sizing" style="float:left;width:auto;font-size:20px">{$deal_info.name}</a>
+				<div style="float:left">
+    	        <span class="deal_title sizing" style="font-weight:100" >
         		{if $deal_info.status eq 0}
                     <span class="common common-fail" style="background-color:#9ed367">即将开始</span>
                 {else}
@@ -40,22 +42,23 @@ $this->_var['cpagejs_1'][]='';
                         {/if}
 				 	{/if}
 	  			{/if}
-            </span>
+            	</span>
+            	</div>
             </div>
                 	        	        		 	<div style="float:right">
 	 				{foreach from=$deal_info.deal_item_list item=item key=k}
-        		    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:60px;background-color:#9ed367">报名</a>
+        		    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:60px;background-color:#9ed367;font-size:14px;font-weight:700">报名</a>
         		    {/foreach}
         		    </div>
-        		    <div style="border-left:1px solid #e1e1e1;width:2px;height:50px;float:right;margin-right:5px"></div>
+        		    
     	<div class="paiduan">
 
-        	<span class="caption-title">
-	        	还剩：<span class="symbol">{$deal_info.shengyu_limit}</span>个名额&nbsp;&nbsp;
-	        	已报名：<span class="symbol" style="color:#333">{$deal_info.person}</span>人
+        	<span class="caption-title" style="float:none;font-size:14px;font-weight:600;color:#555">
+	        	还剩<span class="symbol">&nbsp;{$deal_info.shengyu_limit}</span>&nbsp;个名额 &nbsp;&nbsp;&nbsp;
+	        	已报名<span class="symbol" style="color:#FFAC0E">&nbsp;{$deal_info.person}&nbsp;</span>人
         	</span>		
-</br>
-        		 				报名截止日期：{function name="to_date" v="$deal_info.end_time" f="Y年m月d日"}
+			</br>
+        	<span style="float:none;font-size:14px;font-weight:600;color:#555">报名截止日期：{function name="to_date" v="$deal_info.end_time" f="Y年m月d日"}</span>
 
 	 	</div>
 

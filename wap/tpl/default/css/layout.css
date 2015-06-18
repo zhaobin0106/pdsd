@@ -173,8 +173,8 @@ input.mt[type=radio]:checked:after, input.mt[type=checkbox]:checked:after {
 .ui-button_hover ,
 .ui_button {
 	width:100%;
-	height:38px;
-	line-height:38px;
+	height:30px;
+	line-height:30px;
 	color: #fff !important;
 	cursor:pointer;
 	display:block;
@@ -317,11 +317,11 @@ hr{border:none;border-top:1px solid #eaeaea;}
 
 /* 主题色系 开始 */
 .theme_color ,
-.index_nav i{ background:#4dbdf5; }
-.theme_color1 { background:#468cd4; }
+.index_nav i{ background:#9ED367; }
+.theme_color1 { background:#9ED367; }
 .theme_fcolor ,
-.index_nav li.curr a { color:#4dbdf5; }
-.theme_fcolor1 { color:#468cd4; }
+.index_nav li.curr a { color:#9ED367; }
+.theme_fcolor1 { color:#9ED367; }
 
 .bg_red { background:#ff4800; }
 .bg_gray { background:#b9b9b9; }

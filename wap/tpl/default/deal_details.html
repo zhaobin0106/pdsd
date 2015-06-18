@@ -1,4 +1,4 @@
-{include file="inc/header.html"} 
+{include file="inc/header1.html"} 
 <?php
 $this->_var['pagejs_1'][] = $this->_var['TMPL_REAL']."/js/deal_attention.js";
 $this->_var['cpagejs_1'][]='';
@@ -20,6 +20,7 @@ $this->_var['cpagejs_1'][]='';
 <div class="mod">
 	<section class="deal_box">
 		<!--1-->
+		<a href="javascript:void(0);" title="{$deal_info.name}" class="deal_title sizing">{$deal_info.name}</a>
     	<div class="imgboxdt">
 		    <a class="" href="#" title="{$deal_info.name}">
 		    	{if $deal_info.source_vedio eq ''}
@@ -28,8 +29,7 @@ $this->_var['cpagejs_1'][]='';
   				<iframe height=250 width=320 src="{$deal_info.source_vedio}" frameborder=0 allowfullscreen></iframe>
 				{/if}
  	    	</a>
-    	</div>
-    	<a href="javascript:void(0);" title="{$deal_info.name}" class="deal_title sizing">{$deal_info.name}</a>
+    	</div>    	
     	<!--2-->
 	<section class="detailborder" style="text-align:left">
 		{foreach from=$deal_info.deal_xianhuo_list item=item key=k}
@@ -41,20 +41,20 @@ $this->_var['cpagejs_1'][]='';
 	    			{if $deal_info.remain_days>0}
 					{if ($item.support_count+$item.virtual_person) < $item.limit_user or $item.limit_user eq 0}
 				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
+				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
 				        <span class="span2">{$item.person}人已购买</span>
 				    </div>
 				    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:100px;">立即购买</a>
 					{else}
 				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
+				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
 				        <span class="span2">已售完</span>
 				    </div>
 				    <a href="javascript:void(0);" disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即购买</a>
 					{/if}
 					{else}
 				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
+				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
 				        <span class="span2">{$item.person}人已购买</span>
 				    </div>
 				    <a href="javascript:void(0);"  disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即购买</a>
@@ -84,10 +84,10 @@ $this->_var['cpagejs_1'][]='';
     	<div class="paiduan">
     	
         	<span class="caption-title">
-	        	已筹资：<span class="symbol">¥</span><span class="f_money">{$deal_info.total_virtual_price_format}</span>&nbsp;&nbsp;
-	        	目标：<span class="symbol" style="color:#333">¥</span><span class="f_money" style="color:#333">{$deal_info.limit_price_format}</span>
+	        	已筹资：<span class="symbol">¥&nbsp;</span><span class="f_money">{$deal_info.total_virtual_price_format}</span>&nbsp;&nbsp;&nbsp;
+	        	目标：<span class="symbol" style="color:#333">¥&nbsp;</span><span class="f_money" style="color:#333">{$deal_info.limit_price_format}</span>
         	</span>
-            <span class="f_r ">
+            <span class="f_r " style="">
         		{if $deal_info.status eq 0}
                     <span class="common common-fail">即将开始</span>
                 {else}
@@ -188,20 +188,20 @@ $this->_var['cpagejs_1'][]='';
 	    			{if $deal_info.remain_days>0}
 					{if ($item.support_count+$item.virtual_person) < $item.limit_user or $item.limit_user eq 0}
 				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
+				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
 				        <span class="span2">{$item.person}人已支持</span>
 				    </div>
 				    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:100px;">立即支持</a>
 					{else}
 				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
+				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
 				        <span class="span2">已满额</span>
 				    </div>
 				    <a href="javascript:void(0);" disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即支持</a>
 					{/if}
 					{else}
 				    <div class="Returntitle webkit-box-flex">
-				        <span class="span1"><i class="font-yen support-yen">¥</i>{$item.price_format}</span>
+				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
 				        <span class="span2">{$item.person}人已支持</span>
 				    </div>
 				    <a href="javascript:void(0);"  disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即支持</a>

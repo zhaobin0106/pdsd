@@ -52,12 +52,14 @@
 }
 /* v_lea 结束 */
 .symbol{
-	font-size:1.3rem;
-	color:#f60;
+	font-size:1.5rem;
+	color:#9ED367;
+	font-weight:700;
 }
 .f_money{
 	font-size:1.5rem;
-	color:#f60;
+	color:#9ED367;
+	font-weight:700;
 }
 
 /* 表格tab2 开始 */
@@ -138,9 +140,9 @@
 	padding: 0px 5px;
 	color: #FFF;
 }
-.progress{background: #6baaea;}
-.common-success{background:#34da8e;}
-.common-sprite{background:#4dbdf5;}
+.progress{background: #9ED367;}
+.common-success{background:#9ED367;}
+.common-sprite{background:#9ED367;}
 .common-fail{background:#c2c2c2;}
 /* 筹资状态 结束 */
 
@@ -267,7 +269,7 @@
 	text-align: center;
 }
 .foot a{
-	color:#a2a2a2 !important;
+	color:#a2a2a2;
 	display:block;	
 	text-align: center;
 	border-right: #a2a2a2 solid 1px;
@@ -354,7 +356,7 @@
 }
 .success { background: #34da8e; }
 .success span {background: #34da8e; }
-.progress span {background: #6baaea;} 
+.progress span {background: #9ED367;} 
 .div3 {
 	float: left;
 	width: 33%;
@@ -638,7 +640,7 @@
 .detailmain_a {
 	display:block;
 	float:right;
-	color:#74afeb;
+	color:#9ED367;
 	height:22px;
 	line-height:22px;
 	padding-bottom:5px;
@@ -686,12 +688,12 @@
 }
 .Returntitle .span1 {
 	font-size:2rem;
-	color:#6baaea;
+	color:#9ED367;
 }
 .Returntitle .span2 {
 	margin-left:10px;
 	font-size:1.3rem;
-	color:#ff7510;
+	color:#FFA100;
 }
 .span3 {
 	position:absolute;

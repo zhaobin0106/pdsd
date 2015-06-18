@@ -79,7 +79,7 @@
     	<a href="#">
     		<p style="font-size:12px;font-weight:700;color:#6F6F71;padding-top:10px;text-align:center">
     			<img style="vertical-align:middle;margin:0 5px 0 0;display:inline-block;width:15px;height:15px" src="./tpl/default/images/biao01.png"/>拼地
-    			<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:15px;height:15px" src="./tpl/default/images/biao03.png"/>
+    			<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:12px;height:9px" src="./tpl/default/images/biao03.png"/>
     		</p>
     	</a>
     </div>
@@ -103,7 +103,7 @@
     	<a href="#">
     		<p style="font-size:12px;font-weight:700;color:#6F6F71;padding-top:10px;text-align:center">
     			<img style="vertical-align:middle;margin:0 5px 0 0;display:inline-block;width:15px;height:15px" src="./tpl/default/images/biao02.png"/>试吃
-    			<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:15px;height:15px" src="./tpl/default/images/biao03.png"/>
+    			<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:12px;height:9px" src="./tpl/default/images/biao03.png"/>
     		</p>
     	</a>
     </div>
@@ -167,7 +167,7 @@
 	        </div>
 	        <div class="clear"></div>-->
 	        <!--3-->
-	        <div class="deal_content_box pd">
+	        <div class="deal_content_box pd" style="margin:0 5px">
          		<!--<div class="ui">
 	      			{if $deal.percent gte 100}
                     <span class="common-success" style="width:100%;"></span>
@@ -187,19 +187,19 @@
 	                <span class="num">{$deal.percent}%</span><br />
 	                <span class="til">已达</span>
 	            </div>-->
-	             <div class="div_dt" style="border:none;float:right;width:50%;margin-top:0px">
+	             <div class="div_dt" style="border:none;float:right;width:auto;margin-top:0px;color:#eee"">
                     	
                         {if $deal.remain_days >0}
                         <!--<span class="">{$deal.remain_days}</span>-->
-                        <span class="til">{function name="to_date" v="$deal.end_time" f="Y/m/d"}截止</span>
+                        <span class="til" style="color:#8A8A8A"><img src="./tpl/default/images/biao06.png" style="vertical-align:middle;margin:0 1px 3px 0;display:inline-block;width:14px;height:14px" title="头像" />{function name="to_date" v="$deal.end_time" f="Y-m-d"}截止</span>
                         {else}
-                        <span class="til">{function name="to_date" v="$deal.end_time" f="Y/m/d"}截止</span>
+                        <span class="til" style="color:#8A8A8A"><img src="./tpl/default/images/biao06.png" style="vertical-align:middle;margin:0 1px 3px 0;display:inline-block;width:14px;height:14px" title="头像" />{function name="to_date" v="$deal.end_time" f="Y-m-d"}截止</span>
                         {/if}
                         
                     </div>
-	            	<div class="div_dt" style="border:none;float:left;width:30%;margin-top:0px">
+	            	<div class="div_dt" style="border:none;float:left;width:auto;margin-top:0px">
                         <!--<span class="">{$deal.support_count}</span>-->
-                        <span class="til">{$deal.support_count}人支持</span>
+                        <span class="til" style="color:#8A8A8A"><img src="./tpl/default/images/biao05.png" style="vertical-align:middle;margin:0 0 5px 0px;display:inline-block;width:15px;height:15px" title="头像" />{$deal.support_count}人支持</span>
                     </div>
 	            {/if}
 	           
@@ -269,3 +269,4 @@
 		})
 	})
 </script>
+{include file="inc/footer.html"}
