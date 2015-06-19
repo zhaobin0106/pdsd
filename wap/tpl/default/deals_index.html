@@ -1,4 +1,9 @@
 {include file="inc/header.html"} 
+<style>
+	#xy a p{color:#8FDC47}	
+	
+	.yx a p{color:#6F6F71}
+</style>
 <script type="text/javascript" src="{$TMPL}/js/TouchSlide.1.1.js"></script>
 <div class="deals_index">
 	
@@ -62,14 +67,14 @@
         $(document).ready(function(){
 			  $("#xdog1").click(function(){
 			  $("#ydog1").slideToggle(500);
-			  			  
+			  $("#ydog2").slideToggle(500); 	  
 			  });
 		});		
 		
 		$(document).ready(function(){
 			  $("#xdog2").click(function(){
 			  $("#ydog2").slideToggle(500);
-			  			  
+			  $("#ydog1").slideToggle(500);		  
 			  });
 		});				
     </script>       
@@ -88,9 +93,9 @@
 		<ul>
 			{foreach from=$cate_list item=cate name=cate_list key=k}
 			{if $cate.pid eq 40}
-			<li style="height:40px;background:#fff;border-bottom:1px solid #D4D4D4;border-right:1px solid #D4D4D4;text-align:center;padding-top:0px">
+			<li {if $p_id eq $cate.id}id="xy"{/if} class="yx" style="height:40px;background:#fff;border-bottom:1px solid #D4D4D4;border-right:1px solid #D4D4D4;text-align:center;padding-top:0px">
 				<a href="{url_wap r="deals#index" p="id=$cate.id"}" class="zdog1"> 
-					<p style="font-size:12px;font-weight:700;color:#6F6F71;padding-top:10px">{$cate.name}<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:10px;height:10px" src="./tpl/default/images/biao04.png"/></p>					
+					<p  style="font-size:12px;font-weight:700;padding-top:10px">{$cate.name}&nbsp;&nbsp;&nbsp;&nbsp;></p>					
 				</a>                       
 			</li>
 			 {/if}
@@ -108,13 +113,13 @@
     	</a>
     </div>
     
-     <div id="ydog2" style="display:block;">
+     <div id="ydog2" style="display:none;">
 		<ul>
 			{foreach from=$cate_list item=cate name=cate_list key=k}
 			{if $cate.pid eq 41}
 			<li style="height:40px;background:#fff;border-bottom:1px solid #D4D4D4;border-right:1px solid #D4D4D4;text-align:center;padding-top:0px">
 				<a href="{url_wap r="fores#index" p="id=$cate.id"}" class="zdog2"> 
-					<p style="font-size:12px;font-weight:700;color:#6F6F71;padding-top:10px">{$cate.name}<img style="vertical-align:middle;margin:0 0 0 10px;display:inline-block;width:10px;height:10px" src="./tpl/default/images/biao04.png"/></p>					
+					<p style="font-size:12px;font-weight:700;color:#6F6F71;padding-top:10px">{$cate.name}&nbsp;&nbsp;&nbsp;&nbsp;></p>					
 				</a>                       
 			</li>
 			 {/if}
