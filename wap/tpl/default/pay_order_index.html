@@ -21,7 +21,13 @@
 	{/if}
 	<div class="pay_info">
 	 	<p class="h tc red"><i {if $data.pay_status eq 0}class="fa fa-times-circle"{/if}{if $data.pay_status eq 1}class="fa fa-check-circle"{/if}></i>&nbsp;{$data.pay_info}</p>
-	 	<a href="{url_wap r="account"}" class="ui-button theme_color mt10">查看支持的项目</a>
+	 	{if $type == 'shichi'}
+	 	<a href="{url_wap r="account#shichi"}" class="ui-button theme_color mt10">查看项目</a>
+	 	{elseif $type == 'xianhuo'}
+	 		 	<a href="{url_wap r="account#xianhuo"}" class="ui-button theme_color mt10">查看项目</a>
+	 	{else}
+	 		 		 	<a href="{url_wap r="account"}" class="ui-button theme_color mt10">查看项目</a>
+	 	{/if}
 	</div>
  {if $data.show_pay_btn eq 1}
  	<form id="form" method="post" action="{$data.pay_wap}">

@@ -272,18 +272,23 @@ class cartModule {
 					$data ['pay_info'] = '订单过期.';
 					$data ['show_pay_btn'] = 0;
 					$GLOBALS ['tmpl']->assign ( 'data', $data );
+					$GLOBALS ['tmpl']->assign ( 'type', 'shichi' );
 					$GLOBALS ['tmpl']->display ( 'pay_order_index.html' );
 				} elseif ($result ['status'] == 2) {
 					$data ['pay_status'] = 0;
 					$data ['pay_info'] = '订单无库存.';
 					$data ['show_pay_btn'] = 0;
 					$GLOBALS ['tmpl']->assign ( 'data', $data );
+					$GLOBALS ['tmpl']->assign ( 'type', 'shichi' );
+						
 					$GLOBALS ['tmpl']->display ( 'pay_order_index.html' );
 				} else {
 					$data ['pay_status'] = 1;
 					$data ['pay_info'] = '订单支付成功.';
 					$data ['show_pay_btn'] = 0;
 					$GLOBALS ['tmpl']->assign ( 'data', $data );
+					$GLOBALS ['tmpl']->assign ( 'type', 'shichi' );
+						
 					$GLOBALS ['tmpl']->display ( 'pay_order_index.html' );
 				}
 				
@@ -425,18 +430,38 @@ class cartModule {
 					$data ['pay_info'] = '订单过期.';
 					$data ['show_pay_btn'] = 0;
 					$GLOBALS ['tmpl']->assign ( 'data', $data );
+					if ($type == 2) {
+					$GLOBALS ['tmpl']->assign ( 'type', 'xianhuo' );
+					}else{
+						$GLOBALS ['tmpl']->assign ( 'type', '' );
+						
+					}
+						
 					$GLOBALS ['tmpl']->display ( 'pay_order_index.html' );
 				} elseif ($result ['status'] == 2) {
 					$data ['pay_status'] = 0;
 					$data ['pay_info'] = '订单无库存.';
 					$data ['show_pay_btn'] = 0;
 					$GLOBALS ['tmpl']->assign ( 'data', $data );
+					
+									if ($type == 2) {
+					$GLOBALS ['tmpl']->assign ( 'type', 'xianhuo' );
+					}else{
+						$GLOBALS ['tmpl']->assign ( 'type', '' );
+						
+					}											
 					$GLOBALS ['tmpl']->display ( 'pay_order_index.html' );
 				} else {
 					$data ['pay_status'] = 1;
 					$data ['pay_info'] = '订单支付成功.';
 					$data ['show_pay_btn'] = 0;
 					$GLOBALS ['tmpl']->assign ( 'data', $data );
+									if ($type == 2) {
+					$GLOBALS ['tmpl']->assign ( 'type', 'xianhuo' );
+					}else{
+						$GLOBALS ['tmpl']->assign ( 'type', '' );
+						
+					}											
 					$GLOBALS ['tmpl']->display ( 'pay_order_index.html' );
 				}
 				
