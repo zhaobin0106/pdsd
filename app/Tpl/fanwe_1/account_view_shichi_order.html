@@ -181,9 +181,9 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 							$(function(){
 								$("#J_detail_panel").bind("click",function(){
 									var ajaxurl = APP_ROOT+"/index.php?ctl=ajax&act=set_sc_repay_make";
-				   
 									var query = new Object();
 									query.id = {$order_info.id};
+									alert(ajaxurl);
 									$.ajax({ 
 										url: ajaxurl,
 										data:query,

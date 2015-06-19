@@ -83,7 +83,7 @@
 	        <div class="f_r">{$deal_info.percent}%</div>
 		</div>
 			{if $deal_item.is_limit_user eq 1}
-				{if $deal_item.limit_user gt 0}
+				{if $deal_item.limit_user gte 0}
 				限额：{$deal_item.limit_user}位&nbsp;&nbsp;&nbsp;
 				剩余：{$deal_item.remain_person}位
 				{/if}

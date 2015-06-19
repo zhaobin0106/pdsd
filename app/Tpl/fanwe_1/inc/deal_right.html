@@ -23,7 +23,7 @@
 				&nbsp;&nbsp;
 			{/if} -->
 			{if $deal_xianhuo.is_limit_user eq 1}
-				{if $deal_xianhuo.limit_user gt 0}
+				{if $deal_xianhuo.limit_user >= 0}
 				限额：{$deal_xianhuo.limit_user}份&nbsp;&nbsp;&nbsp;
 				剩余：{$deal_xianhuo.remain_person}份
 				{/if}
@@ -44,8 +44,7 @@
 				</div>
 			{/if}
 			</span>
-<!-- 			{if ($deal_info.end_time > $now or $deal_info.end_time eq 0) and $deal_info.begin_time < $now and $deal_info.is_effect eq 1 }
- -->			{if $deal_item.support_count < $deal_xianhuo.limit_user or $deal_xianhuo.limit_user eq 0}
+		{if $deal_xianhuo.support_count < $deal_xianhuo.limit_user or $deal_xianhuo.limit_user eq 0}
 			<a class="box22_3 theme_bgcolor" href="{url r="cart" p="id=$deal_xianhuo.id&type=2&lixing=deal"}" target="_blank">
 				<div>
 					<span>购买¥{$deal_xianhuo.price_format}</span>
@@ -54,15 +53,14 @@
 			{else}
 			<div class="box22_3 bg_gray" disabled="disabled">已售完</div>
 			{/if}
-	<!-- 		{else}
-			<div class="box22_3 bg_gray" disabled="disabled">支持¥{$deal_item.price_format}</div>
-			{/if} -->
+
 			<div class="blank0"></div>
 		</div>
 	</div>
 	{/foreach}
 	{/if}
 	<!--第一部分start-->
+	{if $deal_item_list}
 	<div class="box f_l">
 		<div>
 			<span class="box_title f_l">目前累计金额</span>
@@ -171,7 +169,7 @@
 				&nbsp;&nbsp;
 			{/if} -->
 			{if $deal_item.is_limit_user eq 1}
-				{if $deal_item.limit_user gt 0}
+				{if $deal_item.limit_user >= 0}
 				限额：{$deal_item.limit_user}位&nbsp;&nbsp;&nbsp;
 				剩余：{$deal_item.remain_person}位
 				{/if}
@@ -209,6 +207,7 @@
 		</div>
 	</div>
 	{/foreach}
+	{/if}
 	<!--第二部分end-->	
 		{if $deal_info.description_1 neq null}
 	<!--<div class="blank"></div>
