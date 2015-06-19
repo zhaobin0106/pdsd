@@ -14,8 +14,8 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
             </div>
             <div class="rtimglist">
                 <h1>{$deal_info.name}</h1>
-                <label>发起人：</label>
-                <a>{$deal_info.user_info.user_name}</a>
+               <!--  <label>发起人：</label>
+                <a>{$deal_info.user_info.user_name}</a> -->
             </div>
             <div class="blank"></div>
         </div>
@@ -153,7 +153,7 @@ onfocus="window.activeobj=this;this.clock=setInterval(function(){activeobj.style
             </div>
             <div class="blank"></div>
         </div>
-        {if $user_info.money gt 0}
+        {if $user_info.money >= 0}
         <div class="sbmbj">
             <div class="form_row pt5 pb5 pl15 pr15">
                 <div class="mod_1 webkit-box">
