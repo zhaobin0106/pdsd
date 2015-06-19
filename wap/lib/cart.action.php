@@ -5,11 +5,11 @@ class cartModule {
 			app_redirect ( url_wap ( "user#login" ) );
 		}
 		// (普通众筹)支持之前需要用户绑定手机号
-		if (! $GLOBALS ['user_info'] ['mobile']) {
+/* 		if (! $GLOBALS ['user_info'] ['mobile']) {
 			app_redirect ( url_wap ( "user#user_bind_mobile", array (
 					"cid" => intval ( $_REQUEST ['id'] ) 
 			) ) );
-		}
+		} */
 		$GLOBALS ['tmpl']->assign ( "user_info", $GLOBALS ['user_info'] );
 		
 		$id = intval ( $_REQUEST ['id'] );
