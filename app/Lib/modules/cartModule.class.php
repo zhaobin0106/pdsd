@@ -18,13 +18,13 @@ class cartModule extends BaseModule {
 			app_redirect ( url ( "user#login" ) );
 		}
 		// (普通众筹)支持之前需要用户绑定手机号
-		if (! $GLOBALS ['user_info'] ['mobile']) {
+/* 		if (! $GLOBALS ['user_info'] ['mobile']) {
 			showErr ( "您未绑定手机,无法进行众筹", 0, url ( "settings#security", array (
 					'method' => 'setting-mobile-box' 
-			) ) );
+			) ) ); */
 			// app_redirect(url("user#user_bind_mobile",array("cid"=>intval($_REQUEST['id']))));
 			// app_redirect(url("settings#security",array('method'=>'setting-mobile-box')));
-		}
+		//}
 		
 		$id = intval ( $_REQUEST ['id'] );
 		$type = intval ( $_REQUEST ['type'] );
