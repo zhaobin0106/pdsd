@@ -94,7 +94,7 @@ class cartModule extends BaseModule {
 					) ) );
 				}
 				$count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_item_order where  fore_id = " . $deal_item ['fore_id']." and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ));
-				if($count > $deal_item['enroll']){
+				if($count >= $deal_item['enroll']){
 												showErr ( "你已达到报名上限", $ajax );
 					
 				}

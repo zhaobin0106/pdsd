@@ -44,7 +44,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 		<div class="blank10"></div>
 		<div class="public_left">
 			<form class="pay_form" action="{url r="cart#go_pay"}" target="_blank" method="post">
-				{if $user_info.money gt 0}
+				{if $user_info.money >= 0}
 					<div class="form_row">
 						<div class="f_l f14 mt10">
 							<span class="ui_check ui_checked " type="radio" rel="ye_check">
