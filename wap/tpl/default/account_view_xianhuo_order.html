@@ -9,6 +9,10 @@ body{ background:#f3f3f3; }
 #left_time{ color:red;}
 .ui-btn-m a {
 text-decoration: none;
+}
+.ul_block ul li{
+	height: auto;
+}
 </style>
 <section class="account_view_order">
 	<div class="ul_block">
@@ -35,8 +39,8 @@ text-decoration: none;
 			</li>
 			{if $order_info.consignee neq ''}
 			<li class="webkit-box">
-				<label class="input_lable mr10" style="line-height:15px">收货信息</label>
-				<div class="list_con webkit-box-flex" style="line-height:15px">地址:{$order_info.province}{$order_info.city}{$order_info.address} 邮编:{$order_info.zip} 收件人:{$order_info.consignee} 电话:{$order_info.mobile}
+				<label class="input_lable mr10">收货信息</label>
+				<div class="list_con webkit-box-flex">地址:{$order_info.province}{$order_info.city}{$order_info.address} 邮编:{$order_info.zip} 收件人:{$order_info.consignee} 电话:{$order_info.mobile}
 				</div>
 			</li>
 			{/if}
@@ -47,8 +51,8 @@ text-decoration: none;
 			</li>
 			{/if}
 			<li class="webkit-box">
-				<label class="input_lable mr10" style="line-height:15px">应付金额</label>
-				<div class="list_con webkit-box-flex" style="line-height:15px">
+				<label class="input_lable mr10">应付金额</label>
+				<div class="list_con webkit-box-flex">
 					{if $order_info.kuaidi_jiage gt 0}
 					项目金额:{function name="format_price" v=$order_info.deal_price}
 					运费:{function name="format_price" v=$order_info.kuaidi_jiage}
@@ -102,8 +106,8 @@ text-decoration: none;
 
 			{if $order_info.repay_memo }
 			<li class="webkit-box">
-				<label class="input_lable mr10" style="line-height:15px"></label>
-				<div class="list_con webkit-box-flex" style="line-height:15px">
+				<label class="input_lable mr10"></label>
+				<div class="list_con webkit-box-flex">
 					{if $order_info.repay_make_time==0}
 						<p>还有 <span id="left_time"></span> 来确认收到回报,超时订单自动确认收到回报</p>
 						<a class=" ui-btn-m" id="J_detail_panel"  href="javascript:void();"  >确认收到</a>
