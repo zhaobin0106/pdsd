@@ -153,6 +153,7 @@ onfocus="window.activeobj=this;this.clock=setInterval(function(){activeobj.style
             </div>
             <div class="blank"></div>
         </div>
+        {if $lixing == 2}
         {if $user_info.money >= 0}
         <div class="sbmbj">
             <div class="form_row pt5 pb5 pl15 pr15">
@@ -168,6 +169,24 @@ onfocus="window.activeobj=this;this.clock=setInterval(function(){activeobj.style
                 </div>
             </div>
         </div>
+        {/if}
+        {else}
+               {if $user_info.money > 0}
+        <div class="sbmbj">
+            <div class="form_row pt5 pb5 pl15 pr15">
+                <div class="mod_1 webkit-box">
+                    <input name="ye_check" type="checkbox" class="mt mt10 mr5" />
+                    <label class="input_lable mr10" style="color:#333">使用余额支付:</label>
+                    <input type="text" class="textbox webkit-box-flex" value="0" name="credit" style="font-size:2rem;border:1px solid #e3e3e3;padding:12px 10px;" />   
+                </div>
+                <div class="mod_2 webkit-box-flex tr">
+                    <label class="title" style="display:block;padding-left:10px;margin-top:10px;">可用余额：{function name="format_price" v=$user_info.money}</label>
+                    <input type="hidden" name="max_credit" value="{$user_info.money}" />
+                    <input type="hidden"  id="jiansuan" name="max_pay" value="{$deal_item.total_price}" />
+                </div>
+            </div>
+        </div>
+        {/if}
         {/if}
         <div class="sbmbj">
             <div class="blocktitle">选择支付方式</div>
