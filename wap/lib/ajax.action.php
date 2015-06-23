@@ -780,8 +780,7 @@ public function send_mobile_verify_code()
 	}
 	public function set_shichi_repay_make(){
 		$id = intval($_REQUEST['id']);
-		ajax_return($id);return;
-		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_item_order where id = ".$id." and repay_time>0 and user_id = ".intval($GLOBALS['user_info']['id']));
+		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_item_order where id = ".$id." and repay_time > 0 and user_id = ".intval($GLOBALS['user_info']['id']));
 		if(!$order_info)
 		{
 			showErr("无效的项目支持",1);

@@ -21,12 +21,13 @@
     	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/js.js";
     	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.bgiframe.js";
     	$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.weebox.js";
+        $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
     	$this->_var['cpagejs'][]='';
   		?>
         <link rel="stylesheet" type="text/css" href="{$APP_ROOT_URL}/css/Font-Awesome-4.2.0/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
         <script type="text/javascript">
-            var APP_ROOT = '{$APP_ROOT}';
+        var APP_ROOT = '{$APP_URL}';
         </script>
         <script type="text/javascript" src="{function name="parse_script" v="$pagejs" c="$cpagejs"}">
         </script>
