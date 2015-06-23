@@ -150,7 +150,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 							<td class="deal_name"> </td>
 							<td>
 								{if $order_info.repay_make_time==0}
-									<p>还有 <span id="left_time"></span> 来确认收到回报,超时订单自动确认收到回报</p>
+									<p>还有 <span id="left_time"></span> 来确认收到回报,</br>超时订单自动确认收到回报</p>
 									<a class=" ui-btn-m" id="J_detail_panel"  href="javascript:void();"  >确认收到</a>
 								{else}
 									确认收到
@@ -160,6 +160,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 						</tr>
 						<script>
 							var interval = 1000; 
+
 							function ShowCountDown(divname) 
 							{ 
 								var now = new Date(); 

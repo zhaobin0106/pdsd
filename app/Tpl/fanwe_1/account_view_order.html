@@ -177,6 +177,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 							var interval = 1000; 
 							function ShowCountDown(divname) 
 							{ 
+								
 								var now = new Date(); 
 								var endDate =   new   Date('{$order_info.repay_make_date}'); 
 								var leftTime=endDate.getTime()-now.getTime(); 
