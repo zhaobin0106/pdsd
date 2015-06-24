@@ -21,14 +21,53 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 		<div class="form_row control-group control-group1">
 			<label class="f_l mr15">相关图片:</label>
 			<div class="f_l tl">
-				<label class="fileupload f_l" onclick="upd_file(this,'image_file');" style="height:39px; margin-top:0;cursor:pointer">
+				<label class="fileupload f_l" onclick="upd_file(this,'image_file','fv','lv','image','sv');" style="height:39px; margin-top:0;cursor:pointer">
 					<input type="file" class="filebox" name="image_file" id="image_file"/>
 				</label>
-				<label class="fileuploading hide"></label>						
+				<label class="fileuploading fv hide"></label>						
 			</div>
-			<div class="log_image_upd">
-				<img width="50" height="50" src="" />
+			<div class="log_image_upd lv">
+				<img width="50" height="50" src="" class="sv"/>
 				<input type="hidden" name="image" value="" />
+			</div>
+		</div>
+				<div class="form_row control-group control-group1">
+			<label class="f_l mr15">相关图片:</label>
+			<div class="f_l tl">
+				<label class="fileupload f_l" onclick="upd_file(this,'image_file1','fv1','lv1','image1','sv1');" style="height:39px; margin-top:0;cursor:pointer">
+					<input type="file" class="filebox" name="image_file1" id="image_file1"/>
+				</label>
+				<label class="fileuploading fv1 hide"></label>						
+			</div>
+			<div class="log_image_upd lv1">
+				<img width="50" height="50" src="" class="sv1" />
+				<input type="hidden" name="image1" value="" />
+			</div>
+		</div>
+<div class="form_row control-group control-group1">
+			<label class="f_l mr15">相关图片:</label>
+			<div class="f_l tl">
+				<label class="fileupload f_l" onclick="upd_file(this,'image_file2','fv2','lv2','image2','sv2');" style="height:39px; margin-top:0;cursor:pointer">
+					<input type="file" class="filebox" name="image_file2" id="image_file2"/>
+				</label>
+				<label class="fileuploading fv2 hide"></label>						
+			</div>
+			<div class="log_image_upd lv2">
+				<img width="50" height="50" src="" class="sv2" />
+				<input type="hidden" name="image2" value="" />
+			</div>
+		</div>
+<div class="form_row control-group control-group1">
+			<label class="f_l mr15">相关图片:</label>
+			<div class="f_l tl">
+				<label class="fileupload f_l" onclick="upd_file(this,'image_file3','fv3','lv3','image3','sv3');" style="height:39px; margin-top:0;cursor:pointer">
+					<input type="file" class="filebox" name="image_file3" id="image_file3"/>
+				</label>
+				<label class="fileuploading fv3 hide"></label>						
+			</div>
+			<div class="log_image_upd lv3">
+				<img width="50" height="50" src="" class="sv3" />
+				<input type="hidden" name="image3" value="" />
 			</div>
 		</div>
 		<div class="blank0"></div>

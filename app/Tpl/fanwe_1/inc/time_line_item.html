@@ -52,6 +52,18 @@
 	<img src="{function name="get_spec_image" v=$log_item.image w=520 h=400}" />
 	{/if}
 	
+		{if $log_item.image1 neq ''}
+	<img src="{function name="get_spec_image" v=$log_item.image1 w=520 h=400}" />
+	{/if}
+	
+		{if $log_item.image2 neq ''}
+	<img src="{function name="get_spec_image" v=$log_item.image2 w=520 h=400}" />
+	{/if}
+	
+		{if $log_item.image3 neq ''}
+	<img src="{function name="get_spec_image" v=$log_item.image3 w=520 h=400}" />
+	{/if}
+	
 	{if $log_item.user_id gt 0}
 	<div class="blank20"></div>
 	<div class="comment_tip_row">
