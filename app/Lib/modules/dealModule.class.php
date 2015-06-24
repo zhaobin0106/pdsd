@@ -527,6 +527,10 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 				showErr("请输入更新的内容",$ajax,"");
 			}
 			$data['image'] = strim($_REQUEST['image'])!=""?replace_public($_REQUEST['image']):"";
+			$data['image1'] = strim($_REQUEST['image1'])!=""?replace_public($_REQUEST['image1']):"";		
+			$data['image2'] = strim($_REQUEST['image2'])!=""?replace_public($_REQUEST['image2']):"";
+			$data['image3'] = strim($_REQUEST['image3'])!=""?replace_public($_REQUEST['image3']):"";
+				
 			$data['vedio'] = strim($_REQUEST['vedio']);
 			if($data['vedio']!="")
 			{
