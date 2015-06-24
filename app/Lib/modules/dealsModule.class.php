@@ -183,15 +183,15 @@ class dealsModule extends BaseModule
 		//=================region_conf==============
 		if($type==1){
 			$state_list = array(
-				1=>array("name"=>"筹资成功"),
-				2=>array("name"=>"筹资失败"),
-				3=>array("name"=>"融资中"),
+				1=>array("name"=>"拼地成功"),
+				2=>array("name"=>"拼地失败"),
+				3=>array("name"=>"拼地中"),
 			);
 		}else{
 			$state_list = array(
-				1=>array("name"=>"筹资成功"),
-				2=>array("name"=>"筹资失败"),
-				3=>array("name"=>"筹资中"),
+				1=>array("name"=>"拼地成功"),
+				2=>array("name"=>"拼地失败"),
+				3=>array("name"=>"拼地中"),
 			);
 		}
 		
@@ -254,17 +254,17 @@ class dealsModule extends BaseModule
 			//筹资成功
 			case 1 : 
 				$condition.=" and d.is_success=1  "; 
-				$GLOBALS['tmpl']->assign("page_title","筹资成功");
+				$GLOBALS['tmpl']->assign("page_title","拼地成功");
 				break;
 			//筹资失败
 			case 2 : 
 				$condition.=" and d.end_time < ".NOW_TIME." and d.end_time!=0  and d.is_success=0  "; 
-				$GLOBALS['tmpl']->assign("page_title","筹资失败");
+				$GLOBALS['tmpl']->assign("page_title","拼地失败");
 				break;
 			//筹资中
 			case 3 : 
 				$condition.=" and (d.end_time > ".NOW_TIME." or d.end_time=0 ) and d.begin_time < ".NOW_TIME." and d.is_success=0  ";  
-				$GLOBALS['tmpl']->assign("page_title","筹资中");
+				$GLOBALS['tmpl']->assign("page_title","拼地中");
 			break;
 		}
 		if(count($cate_ids)>0)
