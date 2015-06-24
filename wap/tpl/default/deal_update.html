@@ -57,7 +57,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/discover.js";
 							<i class="fa fa-envelope"></i>
 						</span>	
 					</div>
-					<span class="f_r" style="padding-top:15px;">{$log_item.pass_time}</span>
+					<span class="f_r" style="padding-top:15px;float:none">{$log_item.pass_time}</span>
 					<div class="blank1"></div>
 				</div>
 				{else}
@@ -84,6 +84,18 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/discover.js";
 				{if $log_item.image neq ''}
 				<div class="blank10"></div>
 				<img src="{function name="get_spec_image" v=$log_item.image w=520 h=400}" />
+				{/if}
+								{if $log_item.image1 neq ''}
+				<div class="blank10"></div>
+				<img src="{function name="get_spec_image" v=$log_item.image1 w=520 h=400}" />
+				{/if}
+								{if $log_item.image2 neq ''}
+				<div class="blank10"></div>
+				<img src="{function name="get_spec_image" v=$log_item.image2 w=520 h=400}" />
+				{/if}
+								{if $log_item.image3 neq ''}
+				<div class="blank10"></div>
+				<img src="{function name="get_spec_image" v=$log_item.image3 w=520 h=400}" />
 				{/if}
 			</div>
 			{/foreach}
