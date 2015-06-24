@@ -1,30 +1,31 @@
 
-function upd_file(obj,file_id)
+function upd_file(obj,file_id,uploading,image_upd,image,img)
 {	
 
 	$("input[name='"+file_id+"']").bind("change",function(){	
 		$(obj).hide();
-		$(obj).parent().find(".fileuploading").removeClass("hide");
-		$(obj).parent().find(".fileuploading").removeClass("show");
-		$(obj).parent().find(".fileuploading").addClass("show");
+		$(obj).parent().find("."+uploading+"").removeClass("hide");
+		$(obj).parent().find("."+uploading+"").removeClass("show");
+		$(obj).parent().find("."+uploading+"").addClass("show");
 		  $.ajaxFileUpload
 		   (
 			   {
-				    url:APP_ROOT+'/upload_item.php',
+				    url:APP_ROOT+'/xinupload_item.php?key='+file_id,
+				    type:'GET',
 				    secureuri:false,
 				    fileElementId:file_id,
 				    dataType: 'json',
 				    success: function (data, status)
 				    {
 				   		$(obj).show();
-				   		$(obj).parent().find(".fileuploading").removeClass("hide");
-						$(obj).parent().find(".fileuploading").removeClass("show");
-						$(obj).parent().find(".fileuploading").addClass("hide");
+				   		$(obj).parent().find("."+uploading+"").removeClass("hide");
+						$(obj).parent().find("."+uploading+"").removeClass("show");
+						$(obj).parent().find("."+uploading+"").addClass("hide");
 				   		if(data.status==1)
 				   		{
-				   			$(".log_image_upd").find("img").attr("src",data.url);
-				   			$(".log_image_upd").find("input[name='image']").val(data.url);
-				   			$(".log_image_upd").show();				 
+				   			$("."+image_upd+"").find("."+img+"").attr("src",data.url);
+				   			$("."+image_upd+"").find("input[name='"+image+"']").val(data.url);
+				   			$("."+image_upd+"").show();				 
 				   		}
 				   		else
 				   		{
@@ -36,9 +37,9 @@ function upd_file(obj,file_id)
 				    {
 						$.showErr(data.responseText);;
 				    	$(obj).show();
-				    	$(obj).parent().find(".fileuploading").removeClass("hide");
-						$(obj).parent().find(".fileuploading").removeClass("show");
-						$(obj).parent().find(".fileuploading").addClass("hide");
+				    	$(obj).parent().find("."+uploading+"").removeClass("hide");
+						$(obj).parent().find("."+uploading+"").removeClass("show");
+						$(obj).parent().find("."+uploading+"").addClass("hide");
 				    }
 			   }
 		   );
