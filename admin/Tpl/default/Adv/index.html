@@ -10,7 +10,7 @@
 	<else />
 	<input type="button" class="button" value="{%ADD}" onclick="add();" />
 	</if>
-	<input type="button" class="button" value="{%FOREVERDEL}" onclick="foreverdel();" />
+	<!-- <input type="button" class="button" value="{%FOREVERDEL}" onclick="foreverdel();" /> -->
 </div>
 <div class="blank5"></div>
 <html:list 
@@ -25,7 +25,8 @@
 	,is_effect|get_is_effect=$adv['id']:{%IS_EFFECT}
 	,tmpl:模板
 	,adv_id:广告ID" 
-	actionlist="edit:{%EDIT}, foreverdel:{%FOREVERDEL}" /> 
+	actionlist="edit:{%EDIT}" /> 
+	<!-- actionlist="edit:{%EDIT}, foreverdel:{%FOREVERDEL}" />  -->
 
 <div class="blank5"></div>
 <div class="page">{$page}</div>
