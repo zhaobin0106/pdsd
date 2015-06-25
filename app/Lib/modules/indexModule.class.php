@@ -21,6 +21,8 @@ class indexModule extends BaseModule
 			$image_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."index_image where type = 0 order by sort asc");
 			set_dynamic_cache("INDEX_IMAGE_LIST",$image_list);
 		}
+		$adv = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."adv where is_effect = 1 and adv_id = 'index_top8'");
+		$GLOBALS['tmpl']->assign("adv_num",$adv);
 		$GLOBALS['tmpl']->assign("image_list",$image_list); 		
 		$cate_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_cate where is_delete=0 order by sort asc");
 		$cate_result= array();
