@@ -15,13 +15,30 @@ class PaymentNoticeAction extends CommonAction{
 		//追加默认参数
 		if($this->get("default_map"))
 		$map = array_merge($map,$this->get("default_map"));
-		if($_REQUEST['payment_id']>0)
+		if($_REQUEST['deal_id']>0)
 		{
-			$map['is_paid'] = 1;
+			$map['deal_id'] = intval($_REQUEST['deal_id']);
 		}
+		if($_REQUEST['deal_name'] != ''){
+			$map['deal_name'] = array('like','%'.trim($_REQUEST['deal_name']).'%');
+		}
+		if($_REQUEST['user_name'] != ''){
+			$user_id = M("User")->where("user_name= '".$_REQUEST['user_name']."'")->getField("id");
+			$map['user_id'] = intval($user_id);
+		}
+		if($_REQUEST['payment_id']!= NULL){
+			$map['payment_id']=intval($_REQUEST['payment_id']);
+		}
+		if($_REQUEST['payment_id']=='NULL'){
+			unset($map['payment_id']);
+		}
+
+		
 		if (method_exists ( $this, '_filter' )) {
 			$this->_filter ( $map );
 		}
+		$payment = M("Payment")->findAll();
+		$this->assign('payment',$payment);
 		$name=$this->getActionName();
 		$model = D ($name);
 		if (! empty ( $model )) {

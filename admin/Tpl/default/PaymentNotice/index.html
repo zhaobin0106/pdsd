@@ -50,7 +50,18 @@
 <div class="blank5"></div>
 <div class="search_row">
 	<form name="search" action="__APP__" method="get">	
-		项目ID: <input type="text" class="textbox" name="deal_id" value="{:trim($_REQUEST['deal_id'])}" style="width:30px;" />	
+		项目ID: <input type="text" class="textbox" name="deal_id" value="{:trim($_REQUEST['deal_id'])}" style="width:30px;" />
+		项目名称：<input type="text" class="textbox" name="deal_name" value="{:trim($_REQUEST['deal_name'])}" style="width:100px;" />
+		会员名：<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
+		
+		支付方式:<select name="payment_id">
+			<option value="NULL" <if condition="$_REQUEST['payment_id'] eq 'NULL' ">selected="selected"</if>>请选择</option>
+				<foreach name="payment" item="item">
+				<option value="{$item.id}" <if condition="$_REQUEST['payment_id'] eq $item['id']">selected="selected"</if>>{$item.name}</option>
+		</foreach>
+				<option value="0" <if condition = "$_REQUEST['payment_id'] eq '0'">selected="selected"</if>>管理员收款</option>
+		
+		</select>		
 		<input type="hidden" value="PaymentNotice" name="m" />
 		<input type="hidden" value="index" name="a" />
 		<input type="submit" class="button" value="{%SEARCH}" />

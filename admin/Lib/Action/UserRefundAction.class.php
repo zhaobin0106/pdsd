@@ -15,6 +15,10 @@ class UserRefundAction extends CommonAction{
 		//追加默认参数
 		if($this->get("default_map"))
 		$map = array_merge($map,$this->get("default_map"));
+		if($_REQUEST['user_name'] != ''){
+			$user_id = M("User")->where("user_name= '".$_REQUEST['user_name']."'")->getField("id");
+			$map['user_id'] = intval($user_id);
+		}
 		if (method_exists ( $this, '_filter' )) {
 			$this->_filter ( $map );
 		}

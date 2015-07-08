@@ -44,6 +44,8 @@ function refund_not_allow(id){
 <div class="search_row">
 	<form name="search" action="__APP__" method="get">	
 		会员ID: <input type="text" class="textbox" name="user_id" value="{:trim($_REQUEST['user_id'])}" style="width:30px;" />	
+		会员名：<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
+		
 		状态: 
 		<select name="is_pay">	
 			<option value="0" <if condition="$_REQUEST['is_pay'] eq '0'">selected="selected"</if> >待审核</option>

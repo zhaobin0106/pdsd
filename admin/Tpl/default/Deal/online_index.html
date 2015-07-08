@@ -20,12 +20,12 @@
 		if($deal['type']==1){
 			return "<a href=\"javascript:get_pay_list('".$id."')\">投资列表</a>";
 		}else{
-			return "<a href=\"javascript:get_pay_list('".$id."')\">支持列表</a>";
+			return "<a href=\"javascript:get_pay_list('".$id."')\">拼地列表</a>";
 		}
 	}
 		function get_goumai_list($id,$deal){
 
-			return "<a href=\"javascript:get_goumai_list('".$id."')\">购买列表</a>";
+			return "<a href=\"javascript:get_goumai_list('".$id."')\">现货列表</a>";
 	}
 	function get_item($id,$deal){
  		if($deal['type']==1){
@@ -44,6 +44,10 @@
 	function get_level($level){
 		$user_level = $GLOBALS['db']->getOne("select `name` from ".DB_PREFIX."deal_level where id = '".intval($level)."'");
 		return $user_level;
+	}
+	function get_cate_name($cate_id){
+		$name = $GLOBALS['db']->getOne("select name from ".DB_PREFIX."deal_cate where id = '".intval($cate_id)."'");
+		return $name;
 	}
 	function edit_new($name,$id){
 		$deal=$GLOBALS['db']->getOne("select type from ".DB_PREFIX."deal where id=$id ");
@@ -83,7 +87,7 @@ function edit_investor_index(id)
 <load href='__TMPL__Common/js/calendar/calendar.css' />
 <load href='__TMPL__Common/js/calendar/calendar.js' />
 <div class="main">
-<div class="main_title">上线项目</div>
+<div class="main_title">上线拼地</div>
 <div class="blank5"></div>
 <div class="button_row">
 	<input type="button" class="button" value="新增拼地项目" onclick="add();" />
@@ -105,11 +109,6 @@ function edit_investor_index(id)
 				<foreach name="cate_list" item="cate_item">
 					<option value="{$cate_item.id}" <if condition="$_REQUEST['cate_id'] eq $cate_item['id']">selected="selected"</if>>{$cate_item.name}</option>
 				</foreach>
-			</select>
-		类型:<select name="type">
-			<option value="NULL" <if condition="$_REQUEST['type'] eq 'NULL'">selected="selected"</if> >请选择</option>
-			<option value="0" <if condition="$_REQUEST['type'] eq '0'">selected="selected"</if> >拼地项目</option>
-			<option value="1" <if condition="$_REQUEST['type'] eq '1'">selected="selected"</if> >其它众筹</option>
 			</select>
 		发起人ID: <input type="text" class="textbox" name="user_id" value="{:trim($_REQUEST['user_id'])}" style="width:30px;" />
 		<br/>
@@ -133,7 +132,7 @@ function edit_investor_index(id)
 	datasource="list" 
 	show="id:{%ID}|50px
 		,name|edit_new=$deal['id']:项目名称
-		,type|get_type_name:类型|100px
+		,cate_id|get_cate_name=$deal['cate_id']:分类|100px
 		,user_level|get_level=$deal['user_level']:项目等级
 		,user_id|get_deal_user:发起人|50px
 		,support_amount|format_price:已筹金额
@@ -146,7 +145,7 @@ function edit_investor_index(id)
 		,is_recommend|get_toogle_status=$deal['id']#is_recommend:推荐
 		,is_classic|get_toogle_status=$deal['id']#is_classic:经典
 		,is_hot|get_toogle_status=$deal['id']#is_hot:热门" 
-	actionlist="id|get_edit=$deal, del:移到回收站,id|get_item=$deal,id|get_xianhuo=$deal,pay_log:发放筹款, deal_log:项目日志,id|get_refund=$deal,id|get_pay_list=$deal,id|get_goumai_list=$deal" /> 
+	actionlist="id|get_edit=$deal, del:移到回收站,id|get_item=$deal,deal_log:项目日志,id|get_refund=$deal,id|get_pay_list=$deal,id|get_goumai_list=$deal" /> 
 
 <div class="blank5"></div>
 <div class="page">{$page}</div>

@@ -6,7 +6,7 @@
 <load href='__TMPL__Common/js/deal.js' />
 <load href='__TMPL__Common/style/weebox.css' />
 <div class="main">
-<div class="main_title">回收站</div>
+<div class="main_title">拼地回收站</div>
 <div class="blank5"></div>
 <div class="button_row">
 	<input type="button" class="button" value="彻底删除" onclick="foreverdel();" />
@@ -24,7 +24,7 @@
 			</select>
 		发起人ID: <input type="text" class="textbox" name="user_id" value="{:trim($_REQUEST['user_id'])}" style="width:30px;" />
 		<input type="hidden" value="Deal" name="m" />
-		<input type="hidden" value="submit_index" name="a" />
+		<input type="hidden" value="delete_index" name="a" />
 		<input type="submit" class="button" value="{%SEARCH}" />
 	</form>
 </div>
