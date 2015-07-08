@@ -33,6 +33,12 @@ $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/plupload/plupload.full.m
 $this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/plupload/plupload.full.min.js";
 ?>
 <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
+
+<style>
+.xing{padding-bottom:5px;border-bottom:6px solid #5EAF2E;}
+
+</style>
+
 <script type="text/javascript">
 var APP_ROOT = '{$APP_ROOT}';
 var LOADER_IMG = '{$TMPL}/images/lazy_loading.gif';
@@ -67,12 +73,17 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 		</div>
 		
 		
-		<ul class="main_nav f_l" style="margin-left:120px;">		
-			<li  class="" style="padding-top:3px"><a  style="border-bottom:0px solid #eee;" href="{$APP_ROOT}/"  target=""><img src="./app/Tpl/fanwe_1/images/cate01.png" alt="" title="" /></a></li>			
-			<li  class="" style="margin-left:20px;padding-top:3px"><a  style="border-bottom:0px solid #eee;" href="{$APP_ROOT}/index.php?ctl=deals"  target=""><img src="./app/Tpl/fanwe_1/images/cate02.png" alt="" title="" /></a></li>
-			<li  class="" style="margin-left:20px;padding-top:3px"><a  style="border-bottom:0px solid #eee;" href="{$APP_ROOT}/index.php?ctl=fores"  target=""><img src="./app/Tpl/fanwe_1/images/cate03.png" alt="" title="" /></a></li>
-			<li  class="" style="margin-left:20px;padding-top:3px"><a  style="border-bottom:0px solid #eee;" href="{$APP_ROOT}/index.php?ctl=article_cate&id=25"  target=""><img src="./app/Tpl/fanwe_1/images/cate04.png" alt="" title="" /></a></li>
-			<li  class="" style="margin-left:20px;padding-top:3px"><a  style="border-bottom:0px solid #eee;" href="{$APP_ROOT}/index.php?ctl=article_cate&id=30"  target=""><img src="./app/Tpl/fanwe_1/images/cate05.png" alt="" title="" /></a></li>
+		<ul class="main_nav f_l" style="margin-left:70px;padding-top:20px;width:550px">		
+			<li  class="" style="padding-top:3px;"><a  style="border-bottom:0px solid #eee;" href="{$APP_ROOT}/"  target="">
+				<img {if $xdog eq 1}class="xing"{/if} src="./app/Tpl/fanwe_1/images/cate01.png" alt="首页" title="首页"/></a></li>			
+			<li  class="" style="margin-left:20px;padding-top:3px"><a  style="border-bottom:0px solid #eee;" href="{$APP_ROOT}/index.php?ctl=deals"  target="">
+				<img {if $xdog eq 2}class="xing"{/if} src="./app/Tpl/fanwe_1/images/cate02.png" alt="" title="" /></a></li>
+			<li  class="" style="margin-left:20px;padding-top:3px"><a  style="border-bottom:0px solid #eee;" href="{$APP_ROOT}/index.php?ctl=fores"  target="">
+				<img {if $xdog eq 3}class="xing"{/if} src="./app/Tpl/fanwe_1/images/cate03.png" alt="" title="" /></a></li>
+			<li  class="" style="margin-left:20px;padding-top:3px"><a  style="border-bottom:0px solid #eee;" href="{$APP_ROOT}/index.php?ctl=article_cate&id=25"  target="">
+				<img  {if $xid eq 25}class="xing"{/if} src="./app/Tpl/fanwe_1/images/cate04.png" alt="" title="" /></a></li>
+			<li  class="" style="margin-left:20px;padding-top:3px"><a  style="border-bottom:0px solid #eee;" href="{$APP_ROOT}/index.php?ctl=article_cate&id=30"  target="">
+				<img  {if $xid eq 30}class="xing"{/if} src="./app/Tpl/fanwe_1/images/cate05.png" alt="" title="" /></a></li>
 		
 		</ul>
 		
