@@ -31,6 +31,23 @@ $this->_var['cpagejs_1'][]='';
  	    	</a>
     	</div>    	
     	<!--2-->
+    		<section class="detailmain">
+	
+	    <p class="detailpd" style="text-align:left">
+	    {function name="nl2br" v=$deal_info.brief}</p>
+	    <div class="blank10"></div>
+	    <a class="detailmain_a" href="javascript:void(0);" id="detailmain_a">
+	    	<span id="view_details">展开详情</span><i class="fa fa-angle-right"></i>
+	    </a>
+	    <div class="blank10"></div>
+	    <div class="deal_info_box pb15" id="deal_info_box" style="display:none">
+	    	{include file="deal_info.html"} 
+	    	<div class="blank15"></div>
+	    	<a class="detailmain_aa tc" href="javascript:void(0);" id="detailmain_aa" style="width:130px;display:block;margin:0 auto">
+				<span class="theme_fcolor" id="view_detailss">收起详情</span><i class="fa fa-angle-up theme_fcolor"></i>
+		    </a>
+	    </div>
+	</section>
     	{if $deal_info.deal_xianhuo_list}
 	<section class="detailborder" style="text-align:left">
 		{foreach from=$deal_info.deal_xianhuo_list item=item key=k}
@@ -155,7 +172,7 @@ $this->_var['cpagejs_1'][]='';
 			</div>
 	        <div class="div_dt" style="border:none;">
 	            <span class="num">{$deal_info.person}</span><br />
-	            <span class="til">支持者</span>               
+	            <span class="til">拼地者</span>               
 	        </div>
         	<div class="blank"></div>
     	</div>
@@ -166,23 +183,7 @@ $this->_var['cpagejs_1'][]='';
 <!-- 	    <a class="f_r 	{if $is_focus}qxgz{else}gz{/if} attention_focus_deal" id="{$deal_info.id}" href="javascript:void(0);"><font size="2.5"><i class="fa {if $is_focus}fa-star{else}fa-star-o{/if} "></i></font> {if $is_focus}取消关注{else}关注{/if}</a>
  -->	    <span></span>
 	</section>
-	<section class="detailmain">
-	
-	    <p class="detailpd">
-	    {function name="nl2br" v=$deal_info.brief}
-	    <div class="blank10"></div>
-	    <a class="detailmain_a" href="javascript:void(0);" id="detailmain_a">
-	    	<span id="view_details">展开详情</span><i class="fa fa-angle-right"></i>
-	    </a>
-	    <div class="blank10"></div>
-	    <div class="deal_info_box pb15" id="deal_info_box" style="display:none">
-	    	{include file="deal_info.html"} 
-	    	<div class="blank15"></div>
-	    	<a class="detailmain_aa tc" href="javascript:void(0);" id="detailmain_aa" style="width:130px;display:block;margin:0 auto">
-				<span class="theme_fcolor" id="view_detailss">收起详情</span><i class="fa fa-angle-up theme_fcolor"></i>
-		    </a>
-	    </div>
-	</section>
+
 	
 	<section class="detailborder">
 		{foreach from=$deal_info.deal_item_list item=item key=k}
@@ -195,22 +196,22 @@ $this->_var['cpagejs_1'][]='';
 					{if $item.support_count < $item.limit_user or $item.limit_user eq 0}
 				    <div class="Returntitle webkit-box-flex">
 				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
-				        <span class="span2">{$item.person}人已支持</span>
+				        <span class="span2">{$item.person}人已拼地</span>
 				    </div>
-				    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:100px;">立即支持</a>
+				    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:100px;">立即拼地</a>
 					{else}
 				    <div class="Returntitle webkit-box-flex">
 				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
 				        <span class="span2">已满额</span>
 				    </div>
-				    <a href="javascript:void(0);" disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即支持</a>
+				    <a href="javascript:void(0);" disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即拼地</a>
 					{/if}
 					{else}
 				    <div class="Returntitle webkit-box-flex">
 				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
-				        <span class="span2">{$item.person}人已支持</span>
+				        <span class="span2">{$item.person}人已拼地</span>
 				    </div>
-				    <a href="javascript:void(0);"  disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即支持</a>
+				    <a href="javascript:void(0);"  disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即拼地</a>
 					{/if}	
 	    		</div>
 	    		   				<p>	{if $item.is_limit_user eq 1}
