@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 require APP_ROOT_PATH.'app/Lib/page.php';
+
 class indexModule extends BaseModule
 {
 	public function index()
@@ -32,6 +33,7 @@ class indexModule extends BaseModule
 		}
 	 
 		$GLOBALS['tmpl']->assign("cate_list",$cate_result);
+		$GLOBALS['tmpl']->assign("xdog",1);
 		send_deal_success_1();
 		send_deal_fail_1();
 		

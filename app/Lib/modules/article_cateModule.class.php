@@ -14,11 +14,13 @@ class article_cateModule extends BaseModule
 	public function index()
 	{	
 		$id=intval($_REQUEST['id']);
+		$xid=$id;
 		$GLOBALS['tmpl']->assign("page_title","文章列表");
 		//改写
         $g_links =get_link_by_id(14);
         $GLOBALS['tmpl']->assign("g_links",$g_links);
 		$GLOBALS['tmpl']->caching = true;
+		$GLOBALS['tmpl']->assign("xid",$xid);
 		$artilce_cate = load_auto_cache("article_cates"); 
 		$type_id=0;
 		$cate_name='';

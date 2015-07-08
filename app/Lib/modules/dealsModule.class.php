@@ -34,7 +34,7 @@ class dealsModule extends BaseModule
         
         $GLOBALS['tmpl']->assign("g_links",$g_links);
         $GLOBALS['tmpl']->assign("page_title","最新动态");
-        
+        $GLOBALS['tmpl']->assign("xdog",2);
          $param = array();//参数集合
            
          //数据来源参数

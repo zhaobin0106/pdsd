@@ -28,6 +28,7 @@ class foresModule extends BaseModule
 			set_dynamic_cache("FORES_IMAGE_LIST",$image_list);
 		}
 		$GLOBALS['tmpl']->assign("image_list",$image_list);
+		$GLOBALS['tmpl']->assign("xdog",3);
          //links
         $g_links =get_link_by_id(14);
         
