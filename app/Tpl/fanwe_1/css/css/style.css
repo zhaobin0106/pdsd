@@ -1200,7 +1200,7 @@ i,em {
 
 .deal_item_box {
 	width:282px;
-	height:382px;
+	height:472px;
 	background:#fff;
 	border:1px solid #ddd;
 	display:inline-block;
@@ -1220,7 +1220,7 @@ i,em {
 }
 .deal_content_box a img {
 	width:282px;
-	height:220px;
+	height:310px;
 	-webkit-transition: all 0.3s ease-out;
 	-ms-transition: all 0.3s ease-out;
 	-moz-transition: all 0.3s ease-out;
