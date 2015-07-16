@@ -35,6 +35,10 @@ class UserAction extends CommonAction{
 		{
 			$map[DB_PREFIX.'user.create_time'] = array('between',array(to_timespan($_REQUEST['create_time_1']),$create_time_2));
 		}
+		if(trim($_REQUEST['create_time_1'])=='')
+		{
+			$map[DB_PREFIX.'user.create_time'] = array('between',array(0,$create_time_2));
+		}
 		if(intval($_REQUEST['id'])>0)
 		{
 			$map[DB_PREFIX.'user.id'] = intval($_REQUEST['id']);

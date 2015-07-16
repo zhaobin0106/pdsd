@@ -52,7 +52,10 @@ class ForeAction extends CommonAction{
 		{
 			$map[DB_PREFIX.'fore.create_time'] = array('between',array(to_timespan($_REQUEST['create_time_1']),$create_time_2));
 		}
-		
+		if(trim($_REQUEST['create_time_1'])=='')
+		{
+			$map[DB_PREFIX.'fore.create_time'] = array('between',array(0,$create_time_2));
+		}
 		$map['is_effect'] = 1;		
 		$map['is_delete'] = 0;		
 		if (method_exists ( $this, '_filter' )) {
