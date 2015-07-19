@@ -90,27 +90,27 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 			$res['data'] = $field_item;
 			return $res;
 		}
-//		if($update_status!=1){
-//			if(app_conf("USER_VERIFY")==2){
-//				if(trim($user_data['verify_coder'])=='')
-//				{
-//					$field_item['field_name'] = 'verify_coder';
-//					$field_item['error']	=	EMPTY_ERROR;
-//					$res['status'] = 0;
-//					$res['data'] = $field_item;
-//					return $res;
-//				}
-//				
-//				if($GLOBALS['db']->getOne("SELECT count(*) FROM ".DB_PREFIX."mobile_verify_code WHERE mobile=".trim($user_data['mobile'])." AND verify_code='".trim($user_data['verify_coder'])."'")==0)
-//				{
-//					$field_item['field_name'] = 'verify_coder';
-//					$field_item['error']	=	FORMAT_ERROR;
-//					$res['status'] = 0;
-//					$res['data'] = $field_item;
-//					return $res;
-//				}
-//			}
-//		}
+		if($update_status!=1){
+			if(app_conf("USER_VERIFY")==2){
+				if(trim($user_data['verify_coder'])=='')
+				{
+					$field_item['field_name'] = 'verify_coder';
+					$field_item['error']	=	EMPTY_ERROR;
+					$res['status'] = 0;
+					$res['data'] = $field_item;
+					return $res;
+				}
+				
+				if($GLOBALS['db']->getOne("SELECT count(*) FROM ".DB_PREFIX."mobile_verify_code WHERE mobile=".trim($user_data['mobile'])." AND verify_code='".trim($user_data['verify_coder'])."'")==0)
+				{
+					$field_item['field_name'] = 'verify_coder';
+					$field_item['error']	=	FORMAT_ERROR;
+					$res['status'] = 0;
+					$res['data'] = $field_item;
+					return $res;
+				}
+			}
+	}
 		$source_url=es_session::get("source_url");
 		if($source_url){
 			$user['source_url']=$source_url;
@@ -790,7 +790,7 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 			return $res;
 		}		
 		
-		if($field_name=='verify_coder'&&!check_verify_coder(trim($user_data['verify_coder'])))
+		if($field_name=='verify_coder'&&check_verify_coder(trim($user_data['verify_coder'])))
 		{
 			$field_item['field_name'] = 'verify_coder';
 			$field_item['error']	=	FORMAT_ERROR;

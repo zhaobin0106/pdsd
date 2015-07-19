@@ -1,0 +1,196 @@
+@charset "utf-8";
+.money_box{ border:#d8d8d8 solid 1px; margin:10px; padding:20px; background:#fafafa;}
+.money_box .recharge , .money_box .withdraw { margin-right:5px; color:#fff; background:#00b0f5; height:32px; line-height:32px; padding:0 20px; display:inline-block; -moz-border-radius:4px; -khtml-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; }
+.money_box .recharge:hover , .money_box .withdraw:hover { color:#fff; }
+.money_box .withdraw { background:#3bc737; }
+.credit_box{ font-size:20px; font-family:"微软雅黑"; }
+.price{ color:#ED5F59; }
+.incharge_tip{ font-size:14px; color:#666; overflow:hidden; }
+.incharge_tip a{ color:#12ADFF; font-weight:bolder; text-decoration:none;}
+.incharge_tip a:hover{ color:#12ADFF; font-weight:bolder; text-decoration:none; }
+.cancel_incharge{ line-height:40px; padding-left:10px; float:left;  font-size:12px; color:#12adff; text-decoration:none;}
+
+.pay_tip_box{ font-size:14px; padding:5px 10px;}
+.choose{ font-size:12px; }
+.deal_name_title{ font-size:16px; font-weight:bolder; padding: 10px 0px; color:#12ADFF;}
+
+.data-table .data-title{ width:80px; background:#f5f5f5; font-weight:bolder;  text-align:right; }
+.data-table .data-split{ height:1px; _height:2px; *height:2px; background:#12adff; font-size:0px; line-height:0px; padding:0px; }
+.data-table .tl{ text-align:left;}
+
+.repay_memo{ width:670px; min-width:670px; max-width:670px; float:left;  border:#ccc solid 1px; height:60px; padding:5px; color:#666; font-size:14px; line-height:18px; border-radius:3px; min-height:60px; max-height:60px; }
+.set_repay{ float:left; margin-left:10px; display:inline-block; margin-top:32px; }
+.repay_tip{ color:#ccc;}
+
+.order_table td,.order_table th{ padding:10px 10px;}
+
+#left_time{ color:red;}
+.ui-btn-m a {
+text-decoration: none;
+}
+.ui-btn-m {
+padding: 0 10px;
+display: inline-block;
+height: 20px;
+background:url(../images/btn_miao.png)   repeat-x;
+color: #fff;
+font-size: 12px;
+border: 0 none;
+border-left: 1px solid #950b00;
+border-right: 1px solid #950b00;
+cursor: pointer;
+outline: 0;
+overflow: visible;
+-moz-border-radius: 2px;
+-khtml-border-radius: 2px;
+-webkit-border-radius: 2px;
+border-radius: 2px;
+}
+.ui-btn-m {
+background-color: #ccc;
+border-color: #ccc;
+color: #333;
+}
+.ui-btn-m {
+height: 25px;
+line-height: 25px;
+font-size: 12px;
+font-weight: 700;
+}
+.ui-btn-m {
+background-position: 0 -380px;
+}
+#J_detail_panel  {
+color: #333;
+font-family: 'Lucida Grande',tahoma,arial,\5b8b\4f53;
+ }
+#J_detail_panel {
+font: 12px/1.5 Tahoma,Helvetica,Arial,sans-serif;
+}
+.btn_creat{ height:30px; font-size:14px; line-height:30px; padding:0 15px; background:#12adff; color:#fff; display:inline-block; -moz-border-radius:3px; -khtml-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;  }
+.btn_creat:hover{ color:#fff; }
+.empty_tip{
+	padding:20px 0;
+	text-align:center;
+	font-size:14px;
+}
+
+/* 切换标题栏 开始 */
+.list_title {
+	border-bottom: 1px solid #e3e3e3;
+	border-left: 1px solid #e3e3e3;
+	color: #494949;
+	font-size: 12px;
+	font-family: "Microsoft YaHei";
+	height: 49px;
+	line-height: 48px;
+	margin-bottom:20px;
+}
+.list_title div {
+	background-color: #fff;
+	border-right: 1px solid #e3e3e3;
+	border-top:1px solid #e3e3e3;
+	float: left;
+	font-size: 16px;
+	padding: 0 25px;
+	cursor: pointer;
+}
+.list_title div a {color: #555;}
+.list_title .cur {
+	font-weight: bold;
+	height: 45px;
+	line-height: 42px;
+}
+/* 切换标题栏 结束 */
+
+/* account_money 开始 */
+.account_money .money_box{
+	margin:0;
+}
+.account_money .t_name {
+	color: #666;
+	font-size: 14px;
+	font-weight: bold;
+}
+.account_money .item_group {
+	height: 30px;
+	line-height: 30px;
+	margin: 0 auto;
+}
+.account_money .item_bank {
+	width: 224px;
+	height: 130px;
+	text-align: left;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	float: left;
+	margin: 10px 7px 20px 20px;
+	margin-right: 7px;
+	display: inline;
+	cursor: pointer;
+	overflow: hidden;
+	position: relative;
+	box-shadow: 3px 3px 3px #ebebed;
+}
+.account_money .item_bank .tip {
+	padding: 5px 10px;
+	text-align: center;
+	border-bottom: 1px dashed #ccc;
+}
+.account_money .item_bank .edit_card {
+	text-align: center;
+	padding-top: 5px;
+}
+.account_money .add_bank {margin-right: 0;}
+.account_money .add_bank p {font: 16px/24px "simsun";}
+/* account_money 结束 */
+
+/* 添加银行卡 开始 */
+.#Jbank_From .field {
+	line-height: 30px;
+	font-size: 12px;
+	margin: 5px auto 5px;
+}
+#Jbank_From .field label {
+width: 130px;
+}
+#Jbank_From .field input.f-input {
+height: 20px;
+line-height: 20px;
+padding: 5px;
+}
+.field .f-input {
+float: left;
+}
+.readonly {
+background: #f1f1f1;
+}
+/* 添加银行卡 结束 */
+
+/* 提现 开始 */
+.account_money_carry .control-group{margin-left:0;}
+.account_money_carry .form_lable{
+	width:200px;
+}
+.account_money_carry .total{border-bottom:1px dashed #e3e3e3;}
+.account_money_carry .prompt {
+	width:auto;
+	border-bottom: 1px dashed #e3e3e3;
+}
+.account_money_carry p {
+	color: #666;
+	font-size: 14px;
+	line-height:24px;
+	padding:6px 0;
+}
+.account_money_carry i {
+	background: url(../images/prompt.gif) no-repeat;
+	display: inline-block;
+	height: 5px;
+	margin: 9px 10px 0 0;
+	_margin-top: 4px;
+	vertical-align: top;
+	width: 5px;
+}
+.account_money_carry p.f_red {color:#ff5500;}
+/* 提现 结束 */

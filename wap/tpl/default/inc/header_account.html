@@ -12,6 +12,8 @@
         <meta name="keywords" content="{$seo_keyword}" />
         <meta name="description" content="{$seo_description}" />
         <?php
+        		$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
+        
         $this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/layout.css";
         $this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/style.css";
 		$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/weebox.css";

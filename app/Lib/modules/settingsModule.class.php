@@ -892,25 +892,40 @@ class settingsModule extends BaseModule
 	public function email_binding(){
 		$ajax = intval($_REQUEST['ajax']);
 		$email=strim($_REQUEST["email"]);
+		$password=md5(strim($_REQUEST["user_pwd"]));
 		$verify=strim($_REQUEST["verify_coder"]);
 		$step=intval($_REQUEST["step"]);
+		if($step==1){
 		if(strlen($verify)< 0 || strlen($verify)== 0){
 			showErr("请输入邮件验证号码",$ajax,"");
+		}
 		}
 		if($step==2){
  			if($email==$GLOBALS['user_info']['email']){
  				showErr("新邮箱和旧邮箱一样，请重新输入",$ajax,"");
  			}
+ 			if($password!=$GLOBALS['user_info']['user_pwd']){
+ 				showErr("密码错误",$ajax,"");
+ 			}
 		} 
 		check_registor_email($email);
 		if($step==2){
-			$condition="email = '".$GLOBALS['user_info']['email']."'  and verify_code='".$verify."' ";
+			$condition="email = '".$GLOBALS['user_info']['email']."'  and user_pwd='".$password."' ";
+			$num=$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."user where $condition  ORDER BY id DESC");
+				
 		}else{
 			$condition="email = '".$email."'  and verify_code='".$verify."' ";
+			$num=$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."mobile_verify_code where $condition  ORDER BY id DESC");
+				
 		}
-		$num=$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."mobile_verify_code where $condition  ORDER BY id DESC");
 		if($num<=0){
-			showErr("验证码错误",$ajax,"");
+			if($step==2){
+				showErr("密码错误",$ajax,"");
+				
+			}else{
+				showErr("验证码错误",$ajax,"");
+				
+			}
 		}else{
 				$GLOBALS['db']->query("update ".DB_PREFIX."user set email='".$email."' where id=".$GLOBALS['user_info']['id']);
 				showSuccess("保存成功",$ajax,url("settings#security"));	

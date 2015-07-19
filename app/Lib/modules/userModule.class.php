@@ -425,6 +425,7 @@ class userModule extends BaseModule
 			$confirm_user_pwd = strim($_REQUEST['confirm_user_pwd']);
 			$data = array();
 			require_once APP_ROOT_PATH."system/libs/user.php";
+			$return = array('status'=>1,"info"=>"");
 				
 			$user_name_result = check_user("user_name",$user_name);
 			if($user_name_result['status']==0)
