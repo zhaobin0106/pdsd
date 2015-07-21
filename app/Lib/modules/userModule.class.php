@@ -1155,9 +1155,13 @@ class userModule extends BaseModule
 		if($user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where mobile =".$mobile))
 		{
 			$user_info['user_pwd']=$user_pwd;
+			$user_info['verify_coder']=$settings_mobile_code1;
  			$res=save_user($user_info,"UPDATE");
+ 			if($res['status'] == 1){
   			showSuccess("密码修改成功",$ajax,url("user#login"));
-			
+ 			}else{
+ 				showErr( "密码修改失败",$ajax);
+ 			}
 		}
 		else{
  			showErr( "没有该手机账户",$ajax);
@@ -1195,8 +1199,12 @@ class userModule extends BaseModule
 		if($user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where email ='$email'"))
 		{
 			$user_info['user_pwd']=$user_pwd;
- 			$res=save_user($user_info,"UPDATE");
+ 			$res=save_user($user_info,"UPDATE",1);
+ 			if($res['status'] == 1){
  			showSuccess("密码修改成功",$ajax,url("user#login"));
+ 			}else{
+ 				showErr( '密码修改失败',$ajax);
+ 			}
 		}
 		else{
  			showErr( "没有该邮箱账户",$ajax);

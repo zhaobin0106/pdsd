@@ -151,7 +151,7 @@
 		</tr>
 	</table> 
 <div class="blank5"></div>
-	<table class="form" cellspacing=0  cellpadding=0>
+	<table class="form" cellspacing=0  cellpadding=0 style="display:none">
 		<tr><td colspan=2 class="topTd"></td></tr>
 		<tr>
 			<td class="item_title">投资类型审核：</td>
@@ -175,7 +175,7 @@
 <table class="form identify_info" id="identify_info_0"  <if condition="$vo.is_investor neq 0">style="display:0"</if>>
 	<tr></tr>
 </table>
-<table class="form identify_info" cellspacing=0 cellpadding=0 id="identify_info_1" <if condition="$vo.is_investor eq 0">style="display:0"</if>>
+<table class="form identify_info" cellspacing=0 cellpadding=0 id="identify_info_1" <if condition="$vo.is_investor eq 0">style="display:none"</if>>
 	<tr>
 		<td class="item_title">身份证姓名：</td>
 		<td class="item_input"><input type="text" name="identify_name" value="{$vo.identify_name}" ></td>
