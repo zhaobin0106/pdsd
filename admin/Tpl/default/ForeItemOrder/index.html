@@ -47,19 +47,18 @@
 		项目名称：<input type="text" class="textbox" name="deal_name" value="{:trim($_REQUEST['deal_name'])}" style="width:100px;" />		
 		
 		报名者名称: <input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
-		退款:
-		<select name="is_refund">
-		<option value="NULL" <if condition="$_REQUEST['is_refund'] eq NULL">selected="selected"</if> >请选择</option>
-			<option value="0" <if condition="$_REQUEST['is_refund'] eq '0'">selected="selected"</if> >否</option>
-			<option value="1" <if condition="$_REQUEST['is_refund'] eq 1">selected="selected"</if> >是</option>
-		</select>
+		退款:<select name="is_refund">
+				<option value="0" <if condition="$_REQUEST['is_refund'] eq 0">selected="selected"</if>>全部</option>
+				<option value="1" <if condition="$_REQUEST['is_refund'] eq 1">selected="selected"</if>>否</option>
+				<option value="2" <if condition="$_REQUEST['is_refund'] eq 2">selected="selected"</if>>是</option>
+			</select>
 		支付状态: 
 		<select name="order_status">
-		<option value="NULL" <if condition="$_REQUEST['order_status'] eq NULL">selected="selected"</if> >请选择</option>
-			<option value="0" <if condition="$_REQUEST['order_status'] eq '0'">selected="selected"</if> >未支付</option>
-			<option value="1" <if condition="$_REQUEST['order_status'] eq 1">selected="selected"</if> >已支付(过期)</option>
-			<option value="2" <if condition="$_REQUEST['order_status'] eq 2">selected="selected"</if> >已支付(无库存)</option>
-			<option value="3" <if condition="$_REQUEST['order_status'] eq 3">selected="selected"</if> >支付成功</option>
+		<option value="0" <if condition="$_REQUEST['order_status'] eq 0">selected="selected"</if> >请选择</option>
+			<option value="1" <if condition="$_REQUEST['order_status'] eq 1">selected="selected"</if> >未支付</option>
+			<option value="2" <if condition="$_REQUEST['order_status'] eq 2">selected="selected"</if> >已支付(过期)</option>
+			<option value="3" <if condition="$_REQUEST['order_status'] eq 3">selected="selected"</if> >已支付(无库存)</option>
+			<option value="4" <if condition="$_REQUEST['order_status'] eq 4">selected="selected"</if> >支付成功</option>
 		</select>
 		<input type="hidden" value="ForeItemOrder" name="m" />
 		<input type="hidden" value="index" name="a" />

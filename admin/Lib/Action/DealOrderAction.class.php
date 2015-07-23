@@ -22,17 +22,80 @@ class DealOrderAction extends CommonAction{
 				}
  		}
 		//列表过滤器，生成查询Map对象
-		$map = $this->_search ();
+		//$map = $this->_search ();
 		//追加默认参数
 		if($this->get("default_map"))
 		$map = array_merge($map,$this->get("default_map"));
+		
 		if(trim($_REQUEST['deal_name'])!='')
 		{
 			$map['deal_name'] = array('like','%'.trim($_REQUEST['deal_name']).'%');
 		}
+		if(trim($_REQUEST['deal_id'] != ''))
+		{
+			$map['deal_id'] = intval($_REQUEST['deal_id']);
+		}
+		if(trim($_REQUEST['user_name'])!='')
+		{
+			$map['user_name'] = array('like','%'.trim($_REQUEST['user_name']).'%');
+		}
+		
+		if(intval($_REQUEST['is_refund'])==1)
+		{
+			$map['is_refund'] = 0;
+		}
+		
+		if(intval($_REQUEST['is_refund'])==2)
+		{
+			$map['is_refund'] = 1;
+		}
+		if(intval($_REQUEST['order_status'])==1)
+		{
+			$map['order_status'] = 0;
+		}
+		
+		if(intval($_REQUEST['order_status'])==2)
+		{
+			$map['order_status'] = 1;
+		}
+		if(intval($_REQUEST['order_status'])==3)
+		{
+			$map['order_status'] = 2;
+		}
+		
+		if(intval($_REQUEST['order_status'])==4)
+		{
+			$map['order_status'] = 3;
+		}
+		
+		
+		if(intval($_REQUEST['make_type'])==1)
+		{
+			$map['is_success'] = 0;
+		}
+		
+		if(intval($_REQUEST['make_type'])==2)
+		{
+			$map['is_success'] = 1;
+			$map['repay_make_time']=0;
+			$map['repay_time'] = 0;
+		}
+		if(intval($_REQUEST['make_type'])==3)
+		{
+			$map['is_success'] = 1;
+			$map['repay_make_time']=0;
+			$map['repay_time'] = array('gt',1);
+		}
+		
+		if(intval($_REQUEST['make_type'])==4)
+		{
+			$map['is_success'] = 1;
+			$map['repay_make_time']=array('gt',1);
+		}
 		if (method_exists ( $this, '_filter' )) {
 			$this->_filter ( $map );
 		}
+		
 		$name=$this->getActionName();
 		$model = D ($name);
 		if (! empty ( $model )) {
@@ -308,23 +371,76 @@ class DealOrderAction extends CommonAction{
 		$limit = (($page - 1)*intval($pagesize)).",".(intval($pagesize));
 	//	$limit=((0).",".(10));
 		//echo $limit;exit;
-		$where = " 1=1 ";
+		//$where = " 1=1 ";
 		//定义条件
-		if(trim($_REQUEST['deal_id'])!='')
-		{
-			$where.= " and ".DB_PREFIX."deal_order.deal_id = ".intval($_REQUEST['deal_id']);
-		}
 		if(trim($_REQUEST['deal_name'])!='')
 		{
-			$where.= " and ".DB_PREFIX."deal_order.deal_name = ".intval($_REQUEST['deal_name']);
+			$where['deal_name'] = array('like','%'.trim($_REQUEST['deal_name']).'%');
+		}
+		if(trim($_REQUEST['deal_id'] != ''))
+		{
+			$where['deal_id'] = intval($_REQUEST['deal_id']);
 		}
 		if(trim($_REQUEST['user_name'])!='')
 		{
-			$where.= " and ".DB_PREFIX."deal_order.user_name = ".intval($_REQUEST['user_name']);
+			$where['user_name'] = array('like','%'.trim($_REQUEST['user_name']).'%');
 		}
-		if(trim($_REQUEST['type'])!='')
+		
+		if(intval($_REQUEST['is_refund'])==1)
 		{
-			$where.= " and ".DB_PREFIX."deal_order.type = ".intval($_REQUEST['type']);
+			$where['is_refund'] = 0;
+		}
+		
+		if(intval($_REQUEST['is_refund'])==2)
+		{
+			$where['is_refund'] = 1;
+		}
+		if(intval($_REQUEST['order_status'])==1)
+		{
+			$where['order_status'] = 0;
+		}
+		
+		if(intval($_REQUEST['order_status'])==2)
+		{
+			$where['order_status'] = 1;
+		}
+		if(intval($_REQUEST['order_status'])==3)
+		{
+			$where['order_status'] = 2;
+		}
+		
+		if(intval($_REQUEST['order_status'])==4)
+		{
+			$where['order_status'] = 3;
+		}
+		
+		
+		if(intval($_REQUEST['make_type'])==1)
+		{
+			$where['is_success'] = 0;
+		}
+		
+		if(intval($_REQUEST['make_type'])==2)
+		{
+			$where['is_success'] = 1;
+			$where['repay_make_time']=0;
+			$where['repay_time'] = 0;
+		}
+		if(intval($_REQUEST['make_type'])==3)
+		{
+			$where['is_success'] = 1;
+			$where['repay_make_time']=0;
+			$where['repay_time'] = array('gt',1);
+		}
+		
+		if(intval($_REQUEST['make_type'])==4)
+		{
+			$where['is_success'] = 1;
+			$where['repay_make_time']=array('gt',1);
+		}
+		if(trim($_REQUEST['deal_item_id'])!='')
+		{
+			$where['deal_item_id'] = intval($_REQUEST['deal_item_id']);
 		}
 		$list = M("DealOrder")
 				->where($where)
@@ -335,10 +451,10 @@ class DealOrderAction extends CommonAction{
 		{
 			register_shutdown_function(array(&$this, 'export_csv'), $page+1);
 			
-			$order_value = array( 'user_name'=>'""', 'deal_name'=>'""', 'total_price'=>'""','zip'=>'""','mobile'=>'""','province'=>'""','consignee'=>'""','city'=>'""','address'=>'""');
+			$order_value = array( 'user_name'=>'""', 'deal_name'=>'""', 'total_price'=>'""','zip'=>'""','mobile'=>'""','province'=>'""','consignee'=>'""','support_memo'=>'""');
 	    	if($page == 1)
 	    	{
-		    	$content = iconv("utf-8","gbk","参与者,项目名称,应付总额,邮编,手机,配送地址,收货人");	    		    	
+		    	$content = iconv("utf-8","gbk","参与者,项目名称,应付总额,邮编,手机,配送地址,收货人,报名者备注");	    		    	
 		    	$content = $content . "\n";
 	    	}
 	    	
@@ -352,6 +468,7 @@ class DealOrderAction extends CommonAction{
 				$order_value['mobile'] = '"' . iconv('utf-8','gbk',$v['mobile']) . '"';
 				$order_value['province'] = '"' . iconv('utf-8','gbk',$v['province']) . '"'. iconv('utf-8','gbk',$v['city']) . iconv('utf-8','gbk',$v['address']);
 				$order_value['consignee'] = '"' . iconv('utf-8','gbk',$v['consignee']). '"' ;
+				$order_value['support_memo'] = '"'.iconv('utf-8','gbk',$v['support_memo']) . '"';
 				$content .= implode(",", $order_value) . "\n";
 			}	
 			
@@ -374,23 +491,46 @@ class DealOrderAction extends CommonAction{
 		$limit = (($page - 1)*intval($pagesize)).",".(intval($pagesize));
 		//	$limit=((0).",".(10));
 		//echo $limit;exit;
-		$where = " 1=1 ";
+		//$where = " 1=1 ";
 		//定义条件
-		if(trim($_REQUEST['deal_id'])!='')
+		if(trim($_REQUEST['deal_id'] != ''))
 		{
-			$where.= " and ".DB_PREFIX."deal_xianhuo_order.deal_id = ".intval($_REQUEST['deal_id']);
-		}
-		if(trim($_REQUEST['deal_name'])!='')
-		{
-			$where.= " and ".DB_PREFIX."deal_xianhuo_order.deal_name = ".intval($_REQUEST['deal_name']);
+			$where['deal_id'] = intval($_REQUEST['deal_id']);
 		}
 		if(trim($_REQUEST['user_name'])!='')
 		{
-			$where.= " and ".DB_PREFIX."deal_xianhuo_order.user_name = ".intval($_REQUEST['user_name']);
+			$where['user_name'] = array('like','%'.trim($_REQUEST['user_name']).'%');
 		}
-		if(trim($_REQUEST['type'])!='')
+		if(intval($_REQUEST['is_refund'])==1)
 		{
-			$where.= " and ".DB_PREFIX."deal_xianhuo_order.type = ".intval($_REQUEST['type']);
+			$where['is_refund'] = 0;
+		}
+		
+		if(intval($_REQUEST['is_refund'])==2)
+		{
+			$where['is_refund'] = 1;
+		}
+		if(intval($_REQUEST['order_status'])==1)
+		{
+			$where['order_status'] = 0;
+		}
+		
+		if(intval($_REQUEST['order_status'])==2)
+		{
+			$where['order_status'] = 1;
+		}
+		if(intval($_REQUEST['order_status'])==3)
+		{
+			$where['order_status'] = 2;
+		}
+		
+		if(intval($_REQUEST['order_status'])==4)
+		{
+			$where['order_status'] = 3;
+		}
+		if(trim($_REQUEST['deal_xianhuo_id'])!='')
+		{
+			$where['deal_xianhuo_id'] = intval($_REQUEST['deal_xianhuo_id']);
 		}
 		$list = M("DealXianhuoOrder")
 		->where($where)
@@ -401,10 +541,10 @@ class DealOrderAction extends CommonAction{
 		{
 			register_shutdown_function(array(&$this, 'export_csvs'), $page+1);
 				
-			$order_value = array( 'user_name'=>'""', 'deal_name'=>'""', 'total_price'=>'""','zip'=>'""','mobile'=>'""','province'=>'""','consignee'=>'""','city'=>'""','address'=>'""');
+			$order_value = array( 'user_name'=>'""', 'deal_name'=>'""', 'total_price'=>'""','zip'=>'""','mobile'=>'""','province'=>'""','consignee'=>'""','support_memo'=>'""');
 			if($page == 1)
 			{
-				$content = iconv("utf-8","gbk","购买者,项目名称,应付总额,邮编,手机,配送地址,收货人");
+				$content = iconv("utf-8","gbk","购买者,项目名称,应付总额,邮编,手机,配送地址,收货人,购买者备注");
 				$content = $content . "\n";
 			}
 	
@@ -416,11 +556,14 @@ class DealOrderAction extends CommonAction{
 				$order_value['total_price'] = '"' . iconv('utf-8','gbk',$v['total_price']) . '"';
 				$order_value['zip'] = '"' . iconv('utf-8','gbk',$v['zip']) . '"';
 				$order_value['mobile'] = '"' . iconv('utf-8','gbk',$v['mobile']) . '"';
-				$order_value['province'] = '"' . iconv('utf-8','gbk',$v['province']) . '"'. iconv('utf-8','gbk',$v['city']) . iconv('utf-8','gbk',$v['address']);
+				$order_value['province'] = '"' . iconv('utf-8','gbk',$v['province']) . iconv('utf-8','gbk',$v['city']) . iconv('utf-8','gbk',$v['address']). '"';
 				$order_value['consignee'] = '"' . iconv('utf-8','gbk',$v['consignee']). '"' ;
+				$order_value['support_memo'] = '"' . iconv('utf-8','gbk',trim($v['support_memo'])). '"' ;
+				//var_dump(implode(",", $order_value));
 				$content .= implode(",", $order_value) . "\n";
 			}
-				
+			//var_dump('saas121as'.$content);
+			//exit;	
 			//
 			header("Content-Disposition: attachment; filename=order_list.csv");
 			echo $content ;
@@ -447,13 +590,45 @@ class DealOrderAction extends CommonAction{
 				}
  		}
 		//列表过滤器，生成查询Map对象
-		$map = $this->_search ();
+		//$map = $this->_search ();
 		//追加默认参数
+		$map['deal_id']=intval($_REQUEST['deal_id']);
 		if($this->get("default_map"))
 		$map = array_merge($map,$this->get("default_map"));
-		if(trim($_REQUEST['deal_name'])!='')
+		if(trim($_REQUEST['user_name'])!='')
 		{
-			$map['deal_name'] = array('like','%'.trim($_REQUEST['deal_name']).'%');
+			$map['user_name'] = array('like','%'.trim($_REQUEST['user_name']).'%');
+		}
+		if(intval($_REQUEST['is_refund'])==1)
+		{
+			$map['is_refund'] = 0;
+		}
+		
+		if(intval($_REQUEST['is_refund'])==2)
+		{
+			$map['is_refund'] = 1;
+		}
+		if(intval($_REQUEST['order_status'])==1)
+		{
+			$map['order_status'] = 0;
+		}
+		
+		if(intval($_REQUEST['order_status'])==2)
+		{
+			$map['order_status'] = 1;
+		}
+		if(intval($_REQUEST['order_status'])==3)
+		{
+			$map['order_status'] = 2;
+		}
+		
+		if(intval($_REQUEST['order_status'])==4)
+		{
+			$map['order_status'] = 3;
+		}
+		if(trim($_REQUEST['deal_item_id'])!='')
+		{
+			$map['deal_item_id'] = intval($_REQUEST['deal_item_id']);
 		}
 		if (method_exists ( $this, '_filter' )) {
 			$this->_filter ( $map );
@@ -481,13 +656,46 @@ class DealOrderAction extends CommonAction{
 			}
 		}
 		//列表过滤器，生成查询Map对象
-		$map = $this->_search ("DealXianhuoOrder");
+		//$map = $this->_search ("DealXianhuoOrder");
 		//追加默认参数
+		
+		$map['deal_id']=intval($_REQUEST['deal_id']);
 		if($this->get("default_map"))
-			$map = array_merge($map,$this->get("default_map"));
-		if(trim($_REQUEST['deal_name'])!='')
+		$map = array_merge($map,$this->get("default_map"));
+		if(trim($_REQUEST['user_name'])!='')
 		{
-			$map['deal_name'] = array('like','%'.trim($_REQUEST['deal_name']).'%');
+			$map['user_name'] = array('like','%'.trim($_REQUEST['user_name']).'%');
+		}
+		if(intval($_REQUEST['is_refund'])==1)
+		{
+			$map['is_refund'] = 0;
+		}
+		
+		if(intval($_REQUEST['is_refund'])==2)
+		{
+			$map['is_refund'] = 1;
+		}
+		if(intval($_REQUEST['order_status'])==1)
+		{
+			$map['order_status'] = 0;
+		}
+		
+		if(intval($_REQUEST['order_status'])==2)
+		{
+			$map['order_status'] = 1;
+		}
+		if(intval($_REQUEST['order_status'])==3)
+		{
+			$map['order_status'] = 2;
+		}
+		
+		if(intval($_REQUEST['order_status'])==4)
+		{
+			$map['order_status'] = 3;
+		}
+		if(trim($_REQUEST['deal_xianhuo_id'])!='')
+		{
+			$map['deal_xianhuo_id'] = intval($_REQUEST['deal_xianhuo_id']);
 		}
 		if (method_exists ( $this, '_filter' )) {
 			$this->_filter ( $map );

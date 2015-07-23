@@ -39,6 +39,13 @@
 	}
 </script>
 <load href='__TMPL__Common/style/weebox.css' />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/calendar/calendar.js' />
 <div class="main">
 	<if condition="$deal_info.type eq 1">
 		<div class="main_title">{$deal_info.name}-投资列表</div>
@@ -58,9 +65,21 @@
 <div class="search_row">
 	<form name="search" action="__APP__" method="get">	
  		支持者: <input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
-		退款:<input type="text" class="textbox" name="is_refund" value="{:trim($_REQUEST['is_refund'])}" style="width:30px;" />
-		支付状态:<input type="text" class="textbox" name="order_status" value="{:trim($_REQUEST['order_status'])}" style="width:100px;" />
-		预计回报时间:<input type="text" class="textbox" name="repay_time" value="{:trim($_REQUEST['repay_time'])}" style="width:100px;" />
+				退款:<select name="is_refund">
+				<option value="0" <if condition="$_REQUEST['is_refund'] eq 0">selected="selected"</if>>全部</option>
+				<option value="1" <if condition="$_REQUEST['is_refund'] eq 1">selected="selected"</if>>否</option>
+				<option value="2" <if condition="$_REQUEST['is_refund'] eq 2">selected="selected"</if>>是</option>
+			</select>
+		支付状态:<select name="order_status">
+				<option value="0" <if condition="$_REQUEST['order_status'] eq 0">selected="selected"</if>>全部</option>
+				<option value="1" <if condition="$_REQUEST['order_status'] eq 1">selected="selected"</if>>未支付</option>
+				<option value="2" <if condition="$_REQUEST['order_status'] eq 2">selected="selected"</if>>过期支付</option>
+				<option value="3" <if condition="$_REQUEST['order_status'] eq 3">selected="selected"</if>>限额已满</option>
+				<option value="4" <if condition="$_REQUEST['order_status'] eq 4">selected="selected"</if>>已支付</option>
+			</select>
+	
+		
+		
 		子项目ID:<input type="text" class="textbox"name="deal_item_id" value="{:trim($_REQUEST['deal_item_id'])}" style="width:50px"/>
 		<input type="hidden" value="DealOrder" name="m" />
 		<input type="hidden" value="get_pay_list" name="a" />

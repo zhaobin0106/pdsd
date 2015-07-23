@@ -53,10 +53,21 @@
 <div class="search_row">
 	<form name="search" action="__APP__" method="get">	
  		报名者: <input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
-		退款:<input type="text" class="textbox" name="is_refund" value="{:trim($_REQUEST['is_refund'])}" style="width:30px;" />
-		支付状态:<input type="text" class="textbox" name="order_status" value="{:trim($_REQUEST['order_status'])}" style="width:100px;" />
-		预计回报时间:<input type="text" class="textbox" name="repay_time" value="{:trim($_REQUEST['repay_time'])}" style="width:100px;" />
-		子项目ID:<input type="text" class="textbox"name="fore_item_id" value="{:trim($_REQUEST['deal_item_id'])}" style="width:50px"/>
+				退款:<select name="is_refund">
+				<option value="0" <if condition="$_REQUEST['is_refund'] eq 0">selected="selected"</if>>全部</option>
+				<option value="1" <if condition="$_REQUEST['is_refund'] eq 1">selected="selected"</if>>否</option>
+				<option value="2" <if condition="$_REQUEST['is_refund'] eq 2">selected="selected"</if>>是</option>
+			</select>
+		支付状态:<select name="order_status">
+				<option value="0" <if condition="$_REQUEST['order_status'] eq 0">selected="selected"</if>>全部</option>
+				<option value="1" <if condition="$_REQUEST['order_status'] eq 1">selected="selected"</if>>未支付</option>
+				<option value="2" <if condition="$_REQUEST['order_status'] eq 2">selected="selected"</if>>过期支付</option>
+				<option value="3" <if condition="$_REQUEST['order_status'] eq 3">selected="selected"</if>>限额已满</option>
+				<option value="4" <if condition="$_REQUEST['order_status'] eq 4">selected="selected"</if>>已支付</option>
+			</select>
+	
+		
+		子项目ID:<input type="text" class="textbox"name="fore_item_id" value="{:trim($_REQUEST['fore_item_id'])}" style="width:50px"/>
 		<input type="hidden" value="ForeItemOrder" name="m" />
 		<input type="hidden" value="get_pay_list" name="a" />
 		<input type="hidden" value="{$_REQUEST['fore_id']}" name="fore_id" />
