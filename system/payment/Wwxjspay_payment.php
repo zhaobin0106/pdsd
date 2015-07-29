@@ -85,6 +85,10 @@ class Wwxjspay_payment implements payment {
 						  "from ".DB_PREFIX."deal ".					
 						  "where id =". intval($payment_notice['deal_id']);
  		$title_name =$GLOBALS['db']->getOne($sql);
+ 		
+ 		if (empty($title_name)){
+ 			$title_name = "在线支付";
+ 		}
  		$subject = $order_sn;
  		include(APP_ROOT_PATH."system/payment/Wxjspay/WxPayPubHelper.php");
   		
