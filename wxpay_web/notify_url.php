@@ -31,10 +31,10 @@
   		if($notify->checkSign() == FALSE){
 			$notify->setReturnParameter("return_code","FAIL");//返回状态码
 			$notify->setReturnParameter("return_msg","签名失败");//返回信息
-			//$log_->log_result($log_name,"【签名失败】:\n".$xml."\n");
+			$log_->log_result($log_name,"【签名失败】:\n".$xml."\n");
   		}else{
 			$notify->setReturnParameter("return_code","SUCCESS");//设置返回码
-			//$log_->log_result($log_name,"【支付成功】:\n".$xml."\n");
+			$log_->log_result($log_name,"【支付成功】:\n".$xml."\n");
 			$info=$notify->xmlToArray($xml);
  			$order_id = intval($info['order_id']);
 			$payment_notice_sn = trim($info['out_trade_no']);
