@@ -1018,7 +1018,10 @@ class JsApi_pub extends Common_util_pub
  	    	$this->parameters ='{timestamp:'. $jsApiObj["timeStamp"].',nonceStr:"'. $jsApiObj["nonceStr"].'",package:"'.$jsApiObj["package"].'",signType:"'.$jsApiObj["signType"].'",paySign:"'.$jsApiObj["paySign"].'",  success: function (res) { if(res.errMsg=="chooseWXPay:ok"){$.showSuccess("恭喜您支付成功",function(){location.href="deal_url";});}}}';
   	    }
  	    
-	   
+  	    include_once("../../../wxpay_web/log_.php");
+  	    $log_ = new Log_();
+  	    $log_name="./wxpay.log";//log文件路径
+  	    $log_->log_result($log_name,"【支付参数】:\n".$this->parameters."\n");;
  	    
  		return $this->parameters;
 	}
