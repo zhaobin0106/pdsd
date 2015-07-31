@@ -918,8 +918,8 @@ class accountModule{
 			$GLOBALS['db']->autoExecute(DB_PREFIX."payment_notice",$payment_notice,"INSERT","","SILENT");
 			$notice_id = $GLOBALS['db']->insert_id();
 		}while($notice_id==0);
- 		app_redirect(url_wap("account#jump",array("id"=>$notice_id)));
-		
+ 		app_redirect(url_wap("account#jump",array("id"=>$notice_id,"from"=>strim($_REQUEST['from']))));	
+
 	}
 	public function jump()
 	{

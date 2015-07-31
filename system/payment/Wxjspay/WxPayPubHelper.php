@@ -44,6 +44,7 @@ class Common_util_pub
 	var $signtype='sha1';
 	var $sslcert="";
 	var $sslkey="";
+	var $app_type="";
  	function __construct() {
  		 
 	}
@@ -999,8 +1000,11 @@ class JsApi_pub extends Common_util_pub
 	/**
 	 * 	作用：设置jsapi的参数
 	 */
-	public function getParameters()
+	public function getParameters($type)
 	{
+		if(!$type){
+			$type='V3';
+		}
  		$jsApiObj["appId"] = $this->appid;
 		$timeStamp = time();
  	    $jsApiObj["timeStamp"] = "$timeStamp";
@@ -1008,7 +1012,14 @@ class JsApi_pub extends Common_util_pub
  		$jsApiObj["package"] = "prepay_id=$this->prepay_id";
 	    $jsApiObj["signType"] = "MD5";
  	    $jsApiObj["paySign"] = $this->getSign($jsApiObj);
- 	    $this->parameters = json_encode($jsApiObj);
+ 	    if($type=='V3'){
+ 	    	$this->parameters = json_encode($jsApiObj);
+ 	    }elseif($type=='V4'){
+ 	    	$this->parameters ='{timestamp:'. $jsApiObj["timeStamp"].',nonceStr:"'. $jsApiObj["nonceStr"].'",package:"'.$jsApiObj["package"].'",signType:"'.$jsApiObj["signType"].'",paySign:"'.$jsApiObj["paySign"].'",  success: function (res) { if(res.errMsg=="chooseWXPay:ok"){$.showSuccess("恭喜您支付成功",function(){location.href="deal_url";});}}}';
+  	    }
+ 	    
+	   
+ 	    
  		return $this->parameters;
 	}
 }
