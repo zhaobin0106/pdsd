@@ -124,6 +124,9 @@ class Common_util_pub
 	 */
 	public function getSign($Obj)
 	{
+		include_once("log_.php");
+	  $log_ = new Log_();
+	  $log_name="./wxpay.log";//log文件路径
 		 
 		foreach ($Obj as $k => $v)
 		{
@@ -135,6 +138,9 @@ class Common_util_pub
 		//echo '【string1】'.$String.'</br>';
 		//签名步骤二：在string后加入KEY
 		$String = $String."&key=".$this->key;
+		
+	  $log_->log_result($log_name,"【签名 字符】:".$String."\n");
+	  
  		//echo "【string2】".$String."</br>";
 		//签名步骤三：MD5加密
 		$String = md5($String);
@@ -142,6 +148,9 @@ class Common_util_pub
 		//签名步骤四：所有字符转为大写
 		$result_ = strtoupper($String);
 		//echo "【result】 ".$result_."</br>";
+		
+	  $log_->log_result($log_name,"【签名 MD5】:".$result_."\n");
+	  
 		return $result_;
 	}
 	
@@ -493,6 +502,12 @@ class UnifiedOrder_pub extends Wxpay_client_pub
  		$this->postXml();
  		$this->result = $this->xmlToArray($this->response);
   		$prepay_id = $this->result["prepay_id"];
+		
+		include_once("log_.php");
+	  $log_ = new Log_();
+	  $log_name="./wxpay.log";//log文件路径
+	  $log_->log_result($log_name,"【prepay_id】:".$prepay_id."\n【统一参数】:\n".json_encode($this->parameters)."\n");
+
 		return $prepay_id;
 	}
 	
@@ -757,11 +772,19 @@ class Wxpay_server_pub extends Common_util_pub
 	 */
 	function saveData($xml)
 	{
+		include_once("log_.php");
+	  $log_ = new Log_();
+	  $log_name="./wxpay.log";//log文件路径
+
+	  $log_->log_result($log_name,"【saveData xml】\n:".$xml."\n");
+	  
 		$info = $this->xmlToArray($xml);
-		if($info['order_id']){
+		if(array_key_exists('order_id',$info)){
 			unset($info['order_id']);
 		}
 		$this->data=$info;
+		
+	  $log_->log_result($log_name,"【saveData info】\n:".json_encode($info)."\n");
 	}
 	//测试用
 	function setData($info){
@@ -770,9 +793,16 @@ class Wxpay_server_pub extends Common_util_pub
 	
 	function checkSign()
 	{
+		include_once("log_.php");
+	  $log_ = new Log_();
+	  $log_name="./wxpay.log";//log文件路径
+
 		$tmpData = $this->data;
  		unset($tmpData['sign']);
  		$sign = $this->getSign($tmpData);//本地签名
+ 		
+	  $log_->log_result($log_name,"【xml sign】:".$this->data['sign']."\n【local Sign】:".$sign."\n");
+
  		if ($this->data['sign'] == $sign) {
 			return TRUE;
 		}
@@ -1018,10 +1048,10 @@ class JsApi_pub extends Common_util_pub
  	    	$this->parameters ='{timestamp:'. $jsApiObj["timeStamp"].',nonceStr:"'. $jsApiObj["nonceStr"].'",package:"'.$jsApiObj["package"].'",signType:"'.$jsApiObj["signType"].'",paySign:"'.$jsApiObj["paySign"].'",  success: function (res) { if(res.errMsg=="chooseWXPay:ok"){$.showSuccess("恭喜您支付成功",function(){location.href="deal_url";});}}}';
   	    }
  	    
-		include_once("./log_.php");
+		include_once("log_.php");
   	    $log_ = new Log_();
   	    $log_name="./wxpay.log";//log文件路径
-  	    $log_->log_result($log_name,"【支付参数】:\n".$this->parameters."\n");;
+  	    $log_->log_result($log_name,"【支付参数】:\n".$this->parameters."\n");
  	    
  		return $this->parameters;
 	}

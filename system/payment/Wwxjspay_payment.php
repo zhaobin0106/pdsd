@@ -81,10 +81,13 @@ class Wwxjspay_payment implements payment {
 		 
 		$wx_config=$payment_info['config'];
 		 
+		$title_name = $payment_notice['deal_name'];
+ 		/*
  		$sql = "select name ".
 						  "from ".DB_PREFIX."deal ".					
 						  "where id =". intval($payment_notice['deal_id']);
  		$title_name =$GLOBALS['db']->getOne($sql);
+ 		*/
  		if(!$payment_notice['order_id']){
  			$title_name='充值';
  		}
