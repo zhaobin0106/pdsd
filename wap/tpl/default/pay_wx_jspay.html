@@ -4,12 +4,25 @@
 		$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/youhui_comment_list.css";
 		$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/user_addr_list.css";
 		$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/pay_order_index.css";	
+		
+		//打印输出数组信息
+function printf_info($data)
+{
+	
+    foreach($data as $key=>$value){
+        echo "<font color='#00ff55;'>$key</font> : $value <br/>";
+    }
+}
+//echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
+//printf_info($jsApiParameters);
+
 ?>
 <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
 <script type="text/javascript">
  		//调用微信JS api 支付
 		function jsApiCall()
 		{
+			//alert("jsApiCall");
 			WeixinJSBridge.invoke(
 				'getBrandWCPayRequest',
 				{$jsApiParameters},
@@ -31,7 +44,7 @@
 							location.href="{url_wap r="deal#index" p="id=$data.deal_id"}";
 						});
 					}else{
-						//$.showSuccess(res.err_msg);
+						$.showSuccess(res.err_msg);
 					}
  				}
 			);
@@ -39,6 +52,7 @@
 
 		function callpay()
 		{
+			//alert("callpay");
 			if (typeof WeixinJSBridge == "undefined"){
 			    if( document.addEventListener ){
 			        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
@@ -58,8 +72,7 @@
 	{if $data.notice_sn}
  	<div class="pay_info">
 		<div class="h font-fc8">订单编号：{$data.notice_sn}</div>
-		<div> {$jsApiParameters}</div>
- 	</div>
+	</div>
 	{/if}
  
 	<div class="pay_info">
