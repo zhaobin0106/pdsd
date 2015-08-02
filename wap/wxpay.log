@@ -1,0 +1,432 @@
+执行日期：2015-08-02 17:41:29
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=充值&mch_id=1228480802&nonce_str=pramfg04iiie6bzg8nfnn8m2s8cct9kc&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=0&out_trade_no=20150802745&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802745&spbill_create_ip=125.39.210.31&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:41:29
+【签名 MD5】:E9F088C560B768E43E0498438563A8D4
+
+
+执行日期：2015-08-02 17:41:31
+【prepay_id】:wx2015080217413141933ee6880067480751
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u5145\u503c","out_trade_no":"20150802745","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=0&out_trade_no=20150802745","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"125.39.210.31","nonce_str":"pramfg04iiie6bzg8nfnn8m2s8cct9kc","sign":"E9F088C560B768E43E0498438563A8D4"}
+
+
+执行日期：2015-08-02 17:41:31
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=krs9akrxq3dyxa7v3gs68xqwx6b7ibpr&package=prepay_id=wx2015080217413141933ee6880067480751&signType=MD5&timeStamp=1438508491&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:41:31
+【签名 MD5】:8B29976B53CA5A5809350F7152C952B9
+
+
+执行日期：2015-08-02 17:41:31
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438508491","nonceStr":"krs9akrxq3dyxa7v3gs68xqwx6b7ibpr","package":"prepay_id=wx2015080217413141933ee6880067480751","signType":"MD5","paySign":"8B29976B53CA5A5809350F7152C952B9"}
+
+
+执行日期：2015-08-02 17:41:31
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=充值&mch_id=1228480802&nonce_str=bsiqqr86s891s9bgee13urjz4xlv32yk&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=0&out_trade_no=20150802745&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802745&spbill_create_ip=123.151.139.156&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:41:31
+【签名 MD5】:99F9D7C9B9E27580DC82E3C3078A6947
+
+
+执行日期：2015-08-02 17:41:32
+【prepay_id】:wx2015080217413141933ee6880225765949
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u5145\u503c","out_trade_no":"20150802745","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=0&out_trade_no=20150802745","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.151.139.156","nonce_str":"bsiqqr86s891s9bgee13urjz4xlv32yk","sign":"99F9D7C9B9E27580DC82E3C3078A6947"}
+
+
+执行日期：2015-08-02 17:41:32
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=g5n6zqufaweyq9zhcevdiwy1qmvmn12d&package=prepay_id=wx2015080217413141933ee6880225765949&signType=MD5&timeStamp=1438508492&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:41:32
+【签名 MD5】:D3B8B072C969E0CFEBCE9E13493BA88E
+
+
+执行日期：2015-08-02 17:41:32
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438508492","nonceStr":"g5n6zqufaweyq9zhcevdiwy1qmvmn12d","package":"prepay_id=wx2015080217413141933ee6880225765949","signType":"MD5","paySign":"D3B8B072C969E0CFEBCE9E13493BA88E"}
+
+
+执行日期：2015-08-02 17:43:13
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=香蕉拼地&mch_id=1228480802&nonce_str=awpbpytl4mtfg3tca3o6uq1slfjx3kcc&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=601&out_trade_no=20150802739&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802739&spbill_create_ip=123.151.139.156&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:43:13
+【签名 MD5】:9687BA2F242F4748B55F681CFD2A151F
+
+
+执行日期：2015-08-02 17:43:14
+【prepay_id】:wx2015080217431495ecabea1c0661678505
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u9999\u8549\u62fc\u5730","out_trade_no":"20150802739","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=601&out_trade_no=20150802739","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.151.139.156","nonce_str":"awpbpytl4mtfg3tca3o6uq1slfjx3kcc","sign":"9687BA2F242F4748B55F681CFD2A151F"}
+
+
+执行日期：2015-08-02 17:43:14
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=247s2t76lqfgr2xckofu5557obot6jw9&package=prepay_id=wx2015080217431495ecabea1c0661678505&signType=MD5&timeStamp=1438508594&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:43:14
+【签名 MD5】:F6D9CC8A13160ED3CF3AE5978E8FDB1C
+
+
+执行日期：2015-08-02 17:43:14
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438508594","nonceStr":"247s2t76lqfgr2xckofu5557obot6jw9","package":"prepay_id=wx2015080217431495ecabea1c0661678505","signType":"MD5","paySign":"F6D9CC8A13160ED3CF3AE5978E8FDB1C"}
+
+
+执行日期：2015-08-02 17:43:14
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=香蕉拼地&mch_id=1228480802&nonce_str=786i78ajw3p4no30k6td0j888oac3lcq&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=601&out_trade_no=20150802739&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802739&spbill_create_ip=123.151.139.156&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:43:14
+【签名 MD5】:4CD105CF0E0890C109053283C796377C
+
+
+执行日期：2015-08-02 17:43:14
+【prepay_id】:wx2015080217431495ecabea1c0507820919
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u9999\u8549\u62fc\u5730","out_trade_no":"20150802739","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=601&out_trade_no=20150802739","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.151.139.156","nonce_str":"786i78ajw3p4no30k6td0j888oac3lcq","sign":"4CD105CF0E0890C109053283C796377C"}
+
+
+执行日期：2015-08-02 17:43:14
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=6nh5wtug3awdzs15nth93t08bg7cl21k&package=prepay_id=wx2015080217431495ecabea1c0507820919&signType=MD5&timeStamp=1438508594&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:43:14
+【签名 MD5】:1648EEF1073EEEFFCF1A6D9146734578
+
+
+执行日期：2015-08-02 17:43:14
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438508594","nonceStr":"6nh5wtug3awdzs15nth93t08bg7cl21k","package":"prepay_id=wx2015080217431495ecabea1c0507820919","signType":"MD5","paySign":"1648EEF1073EEEFFCF1A6D9146734578"}
+
+
+执行日期：2015-08-02 17:44:15
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=香蕉拼地&mch_id=1228480802&nonce_str=x479he2gkqu905w6pqoqu5orkp8s9939&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=600&out_trade_no=20150802533&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802533&spbill_create_ip=123.151.139.156&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:44:15
+【签名 MD5】:A67A70218A53968A6DF1B72F71833A46
+
+
+执行日期：2015-08-02 17:44:17
+【prepay_id】:wx20150802174416e468abd5220872445258
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u9999\u8549\u62fc\u5730","out_trade_no":"20150802533","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=600&out_trade_no=20150802533","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.151.139.156","nonce_str":"x479he2gkqu905w6pqoqu5orkp8s9939","sign":"A67A70218A53968A6DF1B72F71833A46"}
+
+
+执行日期：2015-08-02 17:44:17
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=jn5m89rjqsaphv0dzfpwwk3tjwmf7y9u&package=prepay_id=wx20150802174416e468abd5220872445258&signType=MD5&timeStamp=1438508657&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:44:17
+【签名 MD5】:79BA3EB020C917338F66BE5237A8A54B
+
+
+执行日期：2015-08-02 17:44:17
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438508657","nonceStr":"jn5m89rjqsaphv0dzfpwwk3tjwmf7y9u","package":"prepay_id=wx20150802174416e468abd5220872445258","signType":"MD5","paySign":"79BA3EB020C917338F66BE5237A8A54B"}
+
+
+执行日期：2015-08-02 17:44:17
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=香蕉拼地&mch_id=1228480802&nonce_str=lajxsz3j397h9ame6yj82zmweudc91ci&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=600&out_trade_no=20150802533&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802533&spbill_create_ip=123.151.139.156&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:44:17
+【签名 MD5】:14AB9145D1FFC594C63776D2095E0BD8
+
+
+执行日期：2015-08-02 17:44:17
+【prepay_id】:wx20150802174417638cf86ad40472233753
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u9999\u8549\u62fc\u5730","out_trade_no":"20150802533","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=600&out_trade_no=20150802533","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.151.139.156","nonce_str":"lajxsz3j397h9ame6yj82zmweudc91ci","sign":"14AB9145D1FFC594C63776D2095E0BD8"}
+
+
+执行日期：2015-08-02 17:44:17
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=x635b11ojynbt5q6f2skksigjym2vsry&package=prepay_id=wx20150802174417638cf86ad40472233753&signType=MD5&timeStamp=1438508657&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:44:17
+【签名 MD5】:B4A5BB8B8B0B64FFD06CD5A67B875502
+
+
+执行日期：2015-08-02 17:44:17
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438508657","nonceStr":"x635b11ojynbt5q6f2skksigjym2vsry","package":"prepay_id=wx20150802174417638cf86ad40472233753","signType":"MD5","paySign":"B4A5BB8B8B0B64FFD06CD5A67B875502"}
+
+
+执行日期：2015-08-02 17:49:25
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=香蕉现货&mch_id=1228480802&nonce_str=r0mkpp077g2na8bhr9dypxlv55ghbs28&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=32&out_trade_no=20150802154&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802154&spbill_create_ip=123.151.139.156&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:49:25
+【签名 MD5】:1F5EC011C5F17C89B11076AB3C44CD2B
+
+
+执行日期：2015-08-02 17:49:27
+【prepay_id】:wx2015080217492791a58cc0b30264740519
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u9999\u8549\u73b0\u8d27","out_trade_no":"20150802154","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=32&out_trade_no=20150802154","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.151.139.156","nonce_str":"r0mkpp077g2na8bhr9dypxlv55ghbs28","sign":"1F5EC011C5F17C89B11076AB3C44CD2B"}
+
+
+执行日期：2015-08-02 17:49:27
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=m8c318o1y73kzdntl0xhw7gpvfl0moww&package=prepay_id=wx2015080217492791a58cc0b30264740519&signType=MD5&timeStamp=1438508967&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:49:27
+【签名 MD5】:6FE7314A00569B32BC595F2DCB3839CC
+
+
+执行日期：2015-08-02 17:49:27
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438508967","nonceStr":"m8c318o1y73kzdntl0xhw7gpvfl0moww","package":"prepay_id=wx2015080217492791a58cc0b30264740519","signType":"MD5","paySign":"6FE7314A00569B32BC595F2DCB3839CC"}
+
+
+执行日期：2015-08-02 17:49:27
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=香蕉现货&mch_id=1228480802&nonce_str=gufff0pmc1qjlblbainy6oau4p2xtiz2&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=32&out_trade_no=20150802154&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802154&spbill_create_ip=123.151.139.156&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:49:27
+【签名 MD5】:09CFE47D0B9E4188E3B792311F6D9967
+
+
+执行日期：2015-08-02 17:49:28
+【prepay_id】:wx2015080217492791a58cc0b30800846663
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u9999\u8549\u73b0\u8d27","out_trade_no":"20150802154","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=32&out_trade_no=20150802154","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.151.139.156","nonce_str":"gufff0pmc1qjlblbainy6oau4p2xtiz2","sign":"09CFE47D0B9E4188E3B792311F6D9967"}
+
+
+执行日期：2015-08-02 17:49:28
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=cmnp80hyyt760gwqq12v6lv6rbmp4ls1&package=prepay_id=wx2015080217492791a58cc0b30800846663&signType=MD5&timeStamp=1438508968&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 17:49:28
+【签名 MD5】:65B95FB25A9C9E576C3B0BF966737BD4
+
+
+执行日期：2015-08-02 17:49:28
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438508968","nonceStr":"cmnp80hyyt760gwqq12v6lv6rbmp4ls1","package":"prepay_id=wx2015080217492791a58cc0b30800846663","signType":"MD5","paySign":"65B95FB25A9C9E576C3B0BF966737BD4"}
+
+
+执行日期：2015-08-02 22:52:18
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=大米02&mch_id=1228480802&nonce_str=behuwjwkqq87hd385bsleblvy2k8bztm&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=58&out_trade_no=20150802332&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802332&spbill_create_ip=123.116.43.29&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:52:18
+【签名 MD5】:550AE3C620100E0B8E15509227755403
+
+
+执行日期：2015-08-02 22:52:20
+【prepay_id】:wx201508022252207ecc2a9cea0959653077
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u5927\u7c7302","out_trade_no":"20150802332","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=58&out_trade_no=20150802332","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.116.43.29","nonce_str":"behuwjwkqq87hd385bsleblvy2k8bztm","sign":"550AE3C620100E0B8E15509227755403"}
+
+
+执行日期：2015-08-02 22:52:20
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=yxp1hsgn1guicsc1rpeskhyvxmcwc9yp&package=prepay_id=wx201508022252207ecc2a9cea0959653077&signType=MD5&timeStamp=1438527140&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:52:20
+【签名 MD5】:70652F72B828AE06E6D818AED4BB69C0
+
+
+执行日期：2015-08-02 22:52:20
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438527140","nonceStr":"yxp1hsgn1guicsc1rpeskhyvxmcwc9yp","package":"prepay_id=wx201508022252207ecc2a9cea0959653077","signType":"MD5","paySign":"70652F72B828AE06E6D818AED4BB69C0"}
+
+
+执行日期：2015-08-02 22:52:20
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=大米02&mch_id=1228480802&nonce_str=r5y7zczpg1mxvpdmvm4da1yh41dxfptr&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=58&out_trade_no=20150802332&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802332&spbill_create_ip=123.116.43.29&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:52:20
+【签名 MD5】:6B0BB76766FDA3ED36DF670212BF707D
+
+
+执行日期：2015-08-02 22:52:21
+【prepay_id】:wx20150802225221d24235befb0491016509
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u5927\u7c7302","out_trade_no":"20150802332","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=58&out_trade_no=20150802332","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.116.43.29","nonce_str":"r5y7zczpg1mxvpdmvm4da1yh41dxfptr","sign":"6B0BB76766FDA3ED36DF670212BF707D"}
+
+
+执行日期：2015-08-02 22:52:21
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=cwgfyacp45md0qi1zlhahr2wxz0yn9t5&package=prepay_id=wx20150802225221d24235befb0491016509&signType=MD5&timeStamp=1438527141&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:52:21
+【签名 MD5】:A1EA3B519F6CF4B7A5B6FD96E6D478E7
+
+
+执行日期：2015-08-02 22:52:21
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438527141","nonceStr":"cwgfyacp45md0qi1zlhahr2wxz0yn9t5","package":"prepay_id=wx20150802225221d24235befb0491016509","signType":"MD5","paySign":"A1EA3B519F6CF4B7A5B6FD96E6D478E7"}
+
+
+执行日期：2015-08-02 22:55:26
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=充值&mch_id=1228480802&nonce_str=vjzundruhy2ijc7v7fk2bzwtne4gqfbs&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=0&out_trade_no=20150802512&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802512&spbill_create_ip=123.116.43.29&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:55:26
+【签名 MD5】:4E532D4F6BC0B4F51BA2D984693AFD76
+
+
+执行日期：2015-08-02 22:55:30
+【prepay_id】:wx20150802225530c79fddadbe0549401913
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u5145\u503c","out_trade_no":"20150802512","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=0&out_trade_no=20150802512","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.116.43.29","nonce_str":"vjzundruhy2ijc7v7fk2bzwtne4gqfbs","sign":"4E532D4F6BC0B4F51BA2D984693AFD76"}
+
+
+执行日期：2015-08-02 22:55:30
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=rvjds2snz9twdls61wuv5sktnt2syb1x&package=prepay_id=wx20150802225530c79fddadbe0549401913&signType=MD5&timeStamp=1438527330&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:55:30
+【签名 MD5】:D63007C78F3474DC1179A14A842D4EE4
+
+
+执行日期：2015-08-02 22:55:30
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438527330","nonceStr":"rvjds2snz9twdls61wuv5sktnt2syb1x","package":"prepay_id=wx20150802225530c79fddadbe0549401913","signType":"MD5","paySign":"D63007C78F3474DC1179A14A842D4EE4"}
+
+
+执行日期：2015-08-02 22:55:31
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=充值&mch_id=1228480802&nonce_str=mdwui3g5yl0s3aornkmhqfxktjyg7fg2&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=0&out_trade_no=20150802512&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802512&spbill_create_ip=123.116.43.29&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:55:31
+【签名 MD5】:E2DB7E27B26074A05D2784B0B82499F9
+
+
+执行日期：2015-08-02 22:55:31
+【prepay_id】:wx20150802225531dc948944040210581979
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u5145\u503c","out_trade_no":"20150802512","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=0&out_trade_no=20150802512","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.116.43.29","nonce_str":"mdwui3g5yl0s3aornkmhqfxktjyg7fg2","sign":"E2DB7E27B26074A05D2784B0B82499F9"}
+
+
+执行日期：2015-08-02 22:55:31
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=dpzic3vzxvzredm7u4bwmkg8hc7ih13e&package=prepay_id=wx20150802225531dc948944040210581979&signType=MD5&timeStamp=1438527331&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:55:31
+【签名 MD5】:745182E73A28DC1B0F4C775A31571806
+
+
+执行日期：2015-08-02 22:55:31
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438527331","nonceStr":"dpzic3vzxvzredm7u4bwmkg8hc7ih13e","package":"prepay_id=wx20150802225531dc948944040210581979","signType":"MD5","paySign":"745182E73A28DC1B0F4C775A31571806"}
+
+
+执行日期：2015-08-02 22:57:53
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=充值&mch_id=1228480802&nonce_str=7ul7oofb225p3ohi8sduypdexta5oz4p&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=0&out_trade_no=20150802114&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802114&spbill_create_ip=123.116.43.29&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:57:53
+【签名 MD5】:9144CA4C6020C39E62B941FE0D860A54
+
+
+执行日期：2015-08-02 22:57:58
+【prepay_id】:wx201508022257588bce28b39d0220657397
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u5145\u503c","out_trade_no":"20150802114","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=0&out_trade_no=20150802114","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.116.43.29","nonce_str":"7ul7oofb225p3ohi8sduypdexta5oz4p","sign":"9144CA4C6020C39E62B941FE0D860A54"}
+
+
+执行日期：2015-08-02 22:57:58
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=qc4m7r7dkm9b22khlj7f842v9qjwaf69&package=prepay_id=wx201508022257588bce28b39d0220657397&signType=MD5&timeStamp=1438527478&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:57:58
+【签名 MD5】:45E4E7A62365B4D3D53EE12247816DD1
+
+
+执行日期：2015-08-02 22:57:58
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438527478","nonceStr":"qc4m7r7dkm9b22khlj7f842v9qjwaf69","package":"prepay_id=wx201508022257588bce28b39d0220657397","signType":"MD5","paySign":"45E4E7A62365B4D3D53EE12247816DD1"}
+
+
+执行日期：2015-08-02 22:57:58
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=充值&mch_id=1228480802&nonce_str=gleso5m9nr50128dzyk6oupog8s8m274&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=0&out_trade_no=20150802114&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802114&spbill_create_ip=123.116.43.29&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:57:58
+【签名 MD5】:BD4E1B557C123B9F7B2930AD7CEBE3F6
+
+
+执行日期：2015-08-02 22:57:59
+【prepay_id】:wx20150802225759768e69452f0017706359
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u5145\u503c","out_trade_no":"20150802114","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=0&out_trade_no=20150802114","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.116.43.29","nonce_str":"gleso5m9nr50128dzyk6oupog8s8m274","sign":"BD4E1B557C123B9F7B2930AD7CEBE3F6"}
+
+
+执行日期：2015-08-02 22:57:59
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=zhwvys3oqwxpmkse4ic1am5i1b7feqis&package=prepay_id=wx20150802225759768e69452f0017706359&signType=MD5&timeStamp=1438527479&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:57:59
+【签名 MD5】:BF19B01C530044147514111CF48DC8DE
+
+
+执行日期：2015-08-02 22:57:59
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438527479","nonceStr":"zhwvys3oqwxpmkse4ic1am5i1b7feqis","package":"prepay_id=wx20150802225759768e69452f0017706359","signType":"MD5","paySign":"BF19B01C530044147514111CF48DC8DE"}
+
+
+执行日期：2015-08-02 22:58:20
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=充值&mch_id=1228480802&nonce_str=w1icjyy9v895umcrdt5ud6ns42gkam7w&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=0&out_trade_no=20150802664&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802664&spbill_create_ip=123.116.43.29&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:58:20
+【签名 MD5】:E30E4F0B7915EEE3B82F11FEE89E9352
+
+
+执行日期：2015-08-02 22:58:20
+【prepay_id】:wx2015080222582031a120cc1f0226089979
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u5145\u503c","out_trade_no":"20150802664","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=0&out_trade_no=20150802664","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.116.43.29","nonce_str":"w1icjyy9v895umcrdt5ud6ns42gkam7w","sign":"E30E4F0B7915EEE3B82F11FEE89E9352"}
+
+
+执行日期：2015-08-02 22:58:20
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=gvuu2wat2yd994kfp4nlkx0sfkorpyic&package=prepay_id=wx2015080222582031a120cc1f0226089979&signType=MD5&timeStamp=1438527500&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:58:20
+【签名 MD5】:4CF3CCCB69668B2B53CD56349AA96F93
+
+
+执行日期：2015-08-02 22:58:20
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438527500","nonceStr":"gvuu2wat2yd994kfp4nlkx0sfkorpyic","package":"prepay_id=wx2015080222582031a120cc1f0226089979","signType":"MD5","paySign":"4CF3CCCB69668B2B53CD56349AA96F93"}
+
+
+执行日期：2015-08-02 22:58:20
+【签名 字符】:appid=wx89fa50cfbf52f6d5&body=充值&mch_id=1228480802&nonce_str=pwmjg48g18ih3ua3awdbhsbwmmaxowre&notify_url=http://pdsd.buguyuan.cn/wxpay_web/notify_url.php?order_id=0&out_trade_no=20150802664&openid=onXnrjiA-U2fb-WldkLOyaMg_Zv4&out_trade_no=20150802664&spbill_create_ip=123.116.43.29&total_fee=1&trade_type=JSAPI&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:58:20
+【签名 MD5】:A2DC1303B3B92FE8019ABD97E69B41D3
+
+
+执行日期：2015-08-02 22:58:21
+【prepay_id】:wx2015080222582031a120cc1f0691860366
+【统一参数】:
+{"openid":"onXnrjiA-U2fb-WldkLOyaMg_Zv4","body":"\u5145\u503c","out_trade_no":"20150802664","total_fee":1,"notify_url":"http:\/\/pdsd.buguyuan.cn\/wxpay_web\/notify_url.php?order_id=0&out_trade_no=20150802664","trade_type":"JSAPI","appid":"wx89fa50cfbf52f6d5","mch_id":"1228480802","spbill_create_ip":"123.116.43.29","nonce_str":"pwmjg48g18ih3ua3awdbhsbwmmaxowre","sign":"A2DC1303B3B92FE8019ABD97E69B41D3"}
+
+
+执行日期：2015-08-02 22:58:21
+【签名 字符】:appId=wx89fa50cfbf52f6d5&nonceStr=pbolxnzlh0s19cyueyve83l71okefenj&package=prepay_id=wx2015080222582031a120cc1f0691860366&signType=MD5&timeStamp=1438527501&key=UQX5U5HKvBkBHC3KR5vVzSBHc2HhqHHU
+
+
+执行日期：2015-08-02 22:58:21
+【签名 MD5】:60B5F069B09255C06EABE34C3CEA2CD1
+
+
+执行日期：2015-08-02 22:58:21
+【支付参数】:
+{"appId":"wx89fa50cfbf52f6d5","timeStamp":"1438527501","nonceStr":"pbolxnzlh0s19cyueyve83l71okefenj","package":"prepay_id=wx2015080222582031a120cc1f0691860366","signType":"MD5","paySign":"60B5F069B09255C06EABE34C3CEA2CD1"}
+
+

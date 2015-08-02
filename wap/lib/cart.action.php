@@ -259,7 +259,7 @@ class cartModule {
 					$payment_notice ['deal_name'] = $order_info ['deal_name'];
 					
 					do {
-						$payment_notice ['notice_sn'] = to_date ( NOW_TIME, "Ymd" ) . rand ( 100, 999 );
+						$payment_notice ['notice_sn'] = to_date ( NOW_TIME, "YmdHis" ) . rand ( 100, 999 );
 						$GLOBALS ['db']->autoExecute ( DB_PREFIX . "payment_notice", $payment_notice, "INSERT", "", "SILENT" );
 						$notice_id = $GLOBALS ['db']->insert_id ();
 					} while ( $notice_id == 0 );
@@ -417,7 +417,7 @@ class cartModule {
 					$payment_notice ['deal_name'] = $order_info ['deal_name'];
 					
 					do {
-						$payment_notice ['notice_sn'] = to_date ( NOW_TIME, "Ymd" ) . rand ( 100, 999 );
+						$payment_notice ['notice_sn'] = to_date ( NOW_TIME, "YmdHis" ) . rand ( 100, 999 );
 						$GLOBALS ['db']->autoExecute ( DB_PREFIX . "payment_notice", $payment_notice, "INSERT", "", "SILENT" );
 						$notice_id = $GLOBALS ['db']->insert_id ();
 					} while ( $notice_id == 0 );

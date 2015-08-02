@@ -1,4 +1,4 @@
-<?php
+<?php 
 // +----------------------------------------------------------------------
 // | EaseTHINK 易想团购系统 mapi 插件
 // +----------------------------------------------------------------------
@@ -29,6 +29,7 @@ $GLOBALS['tmpl']->assign("APP_ROOT",APP_ROOT);
 $GLOBALS['tmpl']->assign("APP_URL",get_domain().APP_ROOT."/wap");
 $GLOBALS['tmpl']->assign("PC_URL",get_domain().APP_ROOT);
 
+
 define('REAL_APP_ROOT',str_replace('/wap',"",APP_ROOT));
 define('REAL_APP_ROOT_PATH',str_replace('/wap',"",APP_ROOT));
 
@@ -52,8 +53,46 @@ $GLOBALS['tmpl']->template_dir   = APP_ROOT_PATH . 'wap/tpl/default';
 $tmpl_path = get_domain().APP_ROOT."/wap/tpl/";
 $GLOBALS['tmpl']->assign("TMPL",$tmpl_path."default");
 $GLOBALS['tmpl']->assign("APP_ROOT_URL",get_domain().APP_ROOT);
+ 
+$GLOBALS['tmpl']->assign("TMPL_REAL",APP_ROOT_PATH."wap/tpl/default"); 
 
-$GLOBALS['tmpl']->assign("TMPL_REAL",APP_ROOT_PATH."wap/tpl/default");
+$GLOBALS['tmpl']->assign("font_url",get_domain().APP_ROOT."/public/script/Font-Awesome-4.2.0/css/font-awesome.min.css");
+
+//初始化session
+global $sess_id;
+global $define_sess_id;
+$sess_id = strim($_REQUEST['session_id']);
+if($sess_id)
+{
+	$sess_verify = strim($_REQUEST['sess_verify']);
+	//开始为session获取一个新分配的id
+	$alloc_sess_id = es_session::id();
+	
+	//再用指定sess_id打开
+	$define_sess_id = true;
+	es_session::set_sessid($sess_id);
+	es_session::restart();
+	unset($_REQUEST['session_id']);
+	
+	if(es_session::get("sess_verify")==$sess_verify&&es_session::get("sess_verify")!="")
+	{
+		$define_sess_id = true;
+		es_session::delete("sess_verify");
+	}
+	else
+	{
+		es_session::set_sessid($alloc_sess_id);
+		es_session::restart();		
+		$define_sess_id = false;
+		$sess_id= $alloc_sess_id;
+	}
+}
+else
+{
+	$define_sess_id = false;
+	$sess_id= es_session::id();
+}
+
 //用户信息
 $user_info = es_session::get('user_info');
 if($module!="ajax")
@@ -68,24 +107,24 @@ if($module!="ajax")
 		$GLOBALS['tmpl']->assign("user_level",$user_level);
 		$GLOBALS['tmpl']->assign("user_info",$user_info);
 	}
-
-
+	
+	 
 	//输出SEO元素
 	//$GLOBALS['tmpl']->assign("site_name",app_conf("SITE_NAME"));
 	$GLOBALS['tmpl']->assign("seo_title",app_conf("SEO_TITLE"));
 	$GLOBALS['tmpl']->assign("seo_keyword",app_conf("SEO_KEYWORD"));
 	$GLOBALS['tmpl']->assign("seo_description",app_conf("SEO_DESCRIPTION"));
-
+	
 	$helps = load_auto_cache("helps");
 	$GLOBALS['tmpl']->assign("helps",$helps);
-
+	
 	//删除超过三天的订单
 	$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_order where order_status = 0 and credit_pay = 0 and  ".NOW_TIME." - create_time > ".(24*3600*3));
-
-
+	
+	
 	$has_deal_notify = intval($GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_notify"));
 	define("HAS_DEAL_NOTIFY",$has_deal_notify); //存在待发的项目通知
-
+	 
 }
 //
 define('MAPI_DATA_CACHE_DIR',APP_ROOT_PATH.'public/runtime/mapi/data_caches');
@@ -111,11 +150,13 @@ $city_id = intval($request['city_id']);
 define('ACT',$class); //act常量
 define('ACT_2',$act2);
 
+$se_url=es_session::get("gopreview"); 
+
 $GLOBALS['tmpl']->assign("class",$class);
 $GLOBALS['tmpl']->assign("act",$act2);
 get_pre_wap();
 $cate_list = load_dynamic_cache("INDEX_CATE_LIST");
-
+		
 if(!$cate_list)
 {
 	$cate_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_cate order by sort asc");
@@ -123,65 +164,77 @@ if(!$cate_list)
 }
 $is_weixin=isWeixin();
 $GLOBALS['tmpl']->assign("is_weixin",$is_weixin);
+if($se_url){
+	$current_url =$se_url;
+}else{ 
+	if($_REQUEST['id']){
+		$current_url =  url_wap($_REQUEST['ctl']."#".$_REQUEST['act'],array('id'=>$_REQUEST['id']));
+	}else{
+		$current_url =  url_wap($_REQUEST['ctl']."#".$_REQUEST['act']);
+	}
+	
+}
+
 
 $GLOBALS['tmpl']->assign("cate_list",$cate_list);
- if($_REQUEST['code']&&$_REQUEST['state']==1&&$m_config['wx_appid']&&$m_config['wx_secrit']&&!$user_info){
-	//file_put_contents('./t.txt',var_export($_REQUEST,TRUE)."\n",FILE_APPEND);
-	//require '../system/utils/weixin.php';
-	$weixin=new weixin($m_config['wx_appid'],$m_config['wx_secrit'],get_domain().APP_ROOT."/wap");
-	$wx_info=$weixin->scope_get_userinfo($_REQUEST['code']);
-
-  	if($wx_info['openid']){
-		$wx_user_info=get_user_has('wx_openid',$wx_info['openid']);
-  		if($wx_user_info){
- 			require_once APP_ROOT_PATH."system/libs/user.php";
-			//如果会员存在，直接登录
-
-			do_login_user($wx_user_info['mobile'],$wx_user_info['user_pwd']);
- 		}else{
-			//会员不存在进入登录流程
-			$class='user';
-			$act2='wx_register';
- 		}
-	}
-}else{
-	if($is_weixin&&!$user_info&&$m_config['wx_appid']&&$m_config['wx_secrit']&&$class!='ajax'&&$class!='user'){
-		$weixin_2=new weixin($m_config['wx_appid'],$m_config['wx_secrit'],get_domain().$_SERVER["REQUEST_URI"]);
-		$wx_url=$weixin_2->scope_get_code();
-		app_redirect($wx_url);
-	}
+if(!$user_info){	
+	if($_REQUEST['code']&&$_REQUEST['state']==1&&$m_config['wx_appid']&&$m_config['wx_secrit']){
+		//file_put_contents('./t.txt',var_export($_REQUEST,TRUE)."==1\n",FILE_APPEND);
+		//require '../system/utils/weixin.php';
+		$weixin=new weixin($m_config['wx_appid'],$m_config['wx_secrit'],get_domain().$current_url);
+		$wx_info=$weixin->scope_get_userinfo($_REQUEST['code']);
+	  	if($wx_info['openid']){
+			$wx_user_info=get_user_has('wx_openid',$wx_info['openid']);
+	  		if($wx_user_info){
+	 			require_once APP_ROOT_PATH."system/libs/user.php";
+				//如果会员存在，直接登录
+	 			do_login_user($wx_user_info['mobile'],$wx_user_info['user_pwd']);
+	 		}else{
+				//会员不存在进入登录流程
+				$class='user';
+				$act2='wx_register';
+	 		}
+		}
+	}else{
+ 			if($is_weixin&&!$user_info&&$m_config['wx_appid']&&$m_config['wx_secrit']&&$m_config['wx_controll']==1&&$class!='ajax'&&$class=='user'&&$act2=='login'){
+				$weixin_2=new weixin($m_config['wx_appid'],$m_config['wx_secrit'],get_domain().$current_url);
+				$wx_url=$weixin_2->scope_get_code();
+				app_redirect($wx_url);
+			}else{
+				if($is_weixin&&!$user_info&&$m_config['wx_appid']&&$m_config['wx_secrit']&&$class!='ajax'&&$class!='user'&&$m_config['wx_controll']==0){
+					$weixin_2=new weixin($m_config['wx_appid'],$m_config['wx_secrit'],get_domain().$current_url);
+					$wx_url=$weixin_2->scope_get_code();
+					//file_put_contents('./t.txt',var_export($_REQUEST,TRUE)."==2\n",FILE_APPEND);
+ 					app_redirect($wx_url);
+				}
+			}
+ 	}
 }
-if($m_config['wx_appid']&&$m_config['wx_secrit']){
+if($m_config['wx_appid']&&$m_config['wx_secrit']&&$class!='cart'){
 	require_once APP_ROOT_PATH."system/utils/jssdk.php";
 	$jssdk = new JSSDK($m_config['wx_appid'],$m_config['wx_secrit']);
-	$signPackage = $jssdk->GetSignPackage();
+	$signPackage = $jssdk->GetSignPackage();	
 	$GLOBALS['tmpl']->assign("signPackage",$signPackage);
-
-	$weixin_1=new weixin($m_config['wx_appid'],$m_config['wx_secrit'],get_domain().$_SERVER["REQUEST_URI"]);
-	//$weixin_1->redirect_url=get_domain().$_SERVER["REQUEST_URI"];
-	$wx_url=$weixin_1->scope_get_code();
+  	$wx_url=get_domain().$current_url;
   	$GLOBALS['tmpl']->assign("wx_url",$wx_url);
 }
 
-//if(!empty($_GET['code'])&&$_GET['state']=='STATE'&&$_GET['id']>0){
-//	 $class='cart';
-//	 $act2='wx_jspay';
-// }
+ 
   //公共初始化
 if(file_exists("./lib/".$class.".action.php"))
-{
-
-	require_once "./lib/".$class.".action.php";
+{	
+	
+	require_once "./lib/".$class.".action.php";	
 	//if($class=='index'){
 		$class=$class.'Module';
 	//}
  	if(class_exists($class))
 	{
- 		$obj = new $class;
-
+ 		$obj = new $class;		
+		 
 		if(method_exists($obj,$act2))
 		{
-
+			
 			$obj->$act2();
 		}
 		else
