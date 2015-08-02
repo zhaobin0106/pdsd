@@ -15,6 +15,7 @@
  	
 	$order_id = intval($_REQUEST['order_id']);
 	$payment_notice_sn = trim($_REQUEST['out_trade_no']);
+	$log_->log_result($log_name,"【参数】:\n order_id：".$order_id."   payment_notice_sn:".$payment_notice_sn."\n");
 	//获取配置信息
 	$payment_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment where class_name='Wwxjspay'");
  	$payment_info['config'] = unserialize($payment_info['config']);
@@ -27,6 +28,7 @@
 		//存储微信的回调
 		
  		$xml = $GLOBALS['HTTP_RAW_POST_DATA'];	
+		$log_->log_result($log_name,"【原始XML】:\n".$xml."\n");
  		$notify->saveData($xml);
   		if($notify->checkSign() == FALSE){
 			$notify->setReturnParameter("return_code","FAIL");//返回状态码
