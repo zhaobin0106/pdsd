@@ -64,7 +64,7 @@ return array(
 'EDM_ON'=>'0',
 'EDM_USERNAME'=>'',
 'EDM_PASSWORD'=>'',
-'NETWORK_FOR_RECORD'=>'闽ICP备10206706号-7',
+'NETWORK_FOR_RECORD'=>'京ICP备14039157号-3',
 'MOBILE_OPEN'=>'1',
 'QR_CODE'=>'./public/attachment/201501/30/17/54cb554ab3af1.png',
 'REPAY_MAKE'=>'7',
