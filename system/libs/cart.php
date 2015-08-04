@@ -364,7 +364,7 @@ function payment_fore_paid($notice_sn,$outer_sn)
 						}
 						if($result['status']==3)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account"));
+							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account"));
 						}
 						if($result['status']==0)
 						{
