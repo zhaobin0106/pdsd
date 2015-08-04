@@ -41,7 +41,7 @@ function printf_info($data)
 					}
 					if(res.err_msg=='get_brand_wcpay_request:ok'){
 						$.showSuccess('恭喜您支付成功',function(){
-							location.href="{url_wap r="account" p="id=$data.deal_id"}";
+							location.href="{url_wap r="settings" p="id=$data.deal_id"}";
 						});
 					}else{
 						$.showSuccess(res.err_msg);
