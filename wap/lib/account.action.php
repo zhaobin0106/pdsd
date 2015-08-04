@@ -416,7 +416,7 @@ class accountModule{
 				}while($notice_id==0);
 				
 		
-				app_redirect(url_wap("cart#jump",array("id"=>$notice_id)));
+				app_redirect(url_wap("account#jump",array("id"=>$notice_id)));
 			}
 			else
 			{
@@ -472,7 +472,7 @@ class accountModule{
 			}while($notice_id==0);
 	
 	
-			app_redirect(url_wap("cart#jump",array("id"=>$notice_id)));
+			app_redirect(url_wap("account#jump",array("id"=>$notice_id)));
 		}
 		else
 		{
