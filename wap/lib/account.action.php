@@ -410,7 +410,7 @@ class accountModule{
 				$payment_notice['deal_name'] = $order_info['deal_name'];
 				
 				do{
-					$payment_notice['notice_sn'] = to_date(NOW_TIME,"Ymd").rand(100,999);
+					$payment_notice['notice_sn'] = to_date(NOW_TIME,"YmdHis").rand(100,999);
 					$GLOBALS['db']->autoExecute(DB_PREFIX."payment_notice",$payment_notice,"INSERT","","SILENT");
 					$notice_id = $GLOBALS['db']->insert_id();
 				}while($notice_id==0);
@@ -466,7 +466,7 @@ class accountModule{
 			$payment_notice['deal_name'] = $order_info['deal_name'];
 	
 			do{
-				$payment_notice['notice_sn'] = to_date(NOW_TIME,"Ymd").rand(100,999);
+				$payment_notice['notice_sn'] = to_date(NOW_TIME,"YmdHis").rand(100,999);
 				$GLOBALS['db']->autoExecute(DB_PREFIX."payment_notice",$payment_notice,"INSERT","","SILENT");
 				$notice_id = $GLOBALS['db']->insert_id();
 			}while($notice_id==0);
@@ -519,11 +519,11 @@ class accountModule{
 				$payment_notice['order_id'] = $order_info['id'];
 				$payment_notice['memo'] = $order_info['support_memo'];
 				$payment_notice['deal_id'] = $order_info['deal_id'];
-				$payment_notice['deal_item_id'] = $order_info['deal_xianhuo_id'];
+				$payment_notice['deal_xianhuo_id'] = $order_info['deal_xianhuo_id'];
 				$payment_notice['deal_name'] = $order_info['deal_name'];
 	
 				do{
-					$payment_notice['notice_sn'] = to_date(NOW_TIME,"Ymd").rand(100,999);
+					$payment_notice['notice_sn'] = to_date(NOW_TIME,"YmdHis").rand(100,999);
 					$GLOBALS['db']->autoExecute(DB_PREFIX."payment_notice",$payment_notice,"INSERT","","SILENT");
 					$notice_id = $GLOBALS['db']->insert_id();
 				}while($notice_id==0);
@@ -578,11 +578,12 @@ class accountModule{
 		{
 			showErr('余额不足，请先充值',$ajax,"");
 		}else {
-			$GLOBALS['db']->query("update ".DB_PREFIX."deal_order set total_price =  total_price + ".$money.",credit_pay = credit_pay + ".$money.",kuaidi_price = kuaidi_price + ".$money."  where id = ".$order_id);
-			$GLOBALS['db']->query("update ".DB_PREFIX."deal set pay_amount = pay_amount + ".$money.",delivery_fee_amount = delivery_fee_amount + ".$money." where id = ".$deal_id." and is_effect = 1 and is_delete = 0");
-			require_once APP_ROOT_PATH."system/libs/user.php";
-			$re=modify_account(array("money"=>"-".$money),intval($GLOBALS['user_info']['id']),"补交".$order_info['deal_name']."项目快递费用");
-	
+		$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_order set total_price =  total_price + " . $money . ",credit_pay = credit_pay + " . $money . ",kuaidi_price = kuaidi_price + " . $money . "  where id = " . $order_id );
+			$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal set pay_amount = pay_amount + " . $money . ",delivery_fee_amount = delivery_fee_amount + " . $money . " where id = " . $deal_id . " and is_effect = 1 and is_delete = 0" );
+			require_once APP_ROOT_PATH . "system/libs/user.php";
+			$re = modify_account ( array (
+					"money" => "-" . $money 
+			), intval ( $GLOBALS ['user_info'] ['id'] ), "补交" . $order_info ['deal_name'] . "项目快递费用" );
 		}
 		showSuccess("",$ajax,get_gopreview());
 	}
