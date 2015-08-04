@@ -1,7 +1,7 @@
 {include file="inc/header_account.html"} 
 <section class="account_incharge">
 <h1>补交快递费用</h1>
-	<form class="ajax_form" action="{url_wap r="account#do_bujiao"}">
+	<form class="ajax_form" method="post" action="{url_wap r="account#do_bujiao"}">
 		<input type="hidden" name="deal_id" value="{$order_info.deal_id}" />
 										<input type="hidden" name="order_id" value="{$order_info.id}" />
 		<div class="ul_block">
