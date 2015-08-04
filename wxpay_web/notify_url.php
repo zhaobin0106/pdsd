@@ -51,8 +51,8 @@
 			require_once APP_ROOT_PATH."system/libs/cart.php";
 			if(!empty($payment_notice['deal_xianhuo_id']) && isset($payment_notice['deal_xianhuo_id'])){
 				$rs = payment_goumai_paid($out_trade_no,$trade_no);
-			}elseif(!empty($payment_notice['deal_xianhuo_id']) && isset($payment_notice['deal_xianhuo_id'])){
-				$rs = payment_paid($out_trade_no,$trade_no);
+			}elseif(!empty($payment_notice['fore_item_id']) && isset($payment_notice['fore_item_id'])){
+				$rs = payment_fore_paid($out_trade_no,$trade_no);
 			}else{		
 		   $rs = payment_paid($out_trade_no,$trade_no);	
 		 }	
