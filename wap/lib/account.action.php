@@ -287,7 +287,7 @@ class accountModule{
 		$ajax = intval($_REQUEST['ajax']);
 		if(!$GLOBALS['user_info'])
 		{
-			showErr("",$ajax,url("user#login"));
+			showErr("",$ajax,url_wap("user#login"));
 		}
 		$order_id = intval($_REQUEST['id']);
 		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_order where order_status = 0 and user_id = ".intval($GLOBALS['user_info']['id'])." and id = ".$order_id);
@@ -316,7 +316,7 @@ class accountModule{
 		$ajax = intval($_REQUEST['ajax']);
 		if(!$GLOBALS['user_info'])
 		{
-			showErr("",$ajax,url("user#login"));
+			showErr("",$ajax,url_wap("user#login"));
 		}
 		$order_id = intval($_REQUEST['id']);
 		$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore_item_order where order_status = 0 and user_id = ".intval($GLOBALS['user_info']['id'])." and id = ".$order_id);
@@ -578,14 +578,14 @@ class accountModule{
 		{
 			showErr('余额不足，请先充值',$ajax,"");
 		}else {
-		$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_order set total_price =  total_price + " . $money . ",credit_pay = credit_pay + " . $money . ",kuaidi_price = kuaidi_price + " . $money . "  where id = " . $order_id );
+			$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_order set total_price =  total_price + " . $money . ",credit_pay = credit_pay + " . $money . ",kuaidi_price = kuaidi_price + " . $money . "  where id = " . $order_id );
 			$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal set pay_amount = pay_amount + " . $money . ",delivery_fee_amount = delivery_fee_amount + " . $money . " where id = " . $deal_id . " and is_effect = 1 and is_delete = 0" );
 			require_once APP_ROOT_PATH . "system/libs/user.php";
 			$re = modify_account ( array (
 					"money" => "-" . $money 
 			), intval ( $GLOBALS ['user_info'] ['id'] ), "补交" . $order_info ['deal_name'] . "项目快递费用" );
 		}
-		showSuccess("",$ajax,get_gopreview());
+		showSuccess("",$ajax,url_wap('account'));
 	}
 	public function sbujiao()
 	{
@@ -634,7 +634,7 @@ class accountModule{
 			$re=modify_account(array("money"=>"-".$money),intval($GLOBALS['user_info']['id']),"补交".$order_info['deal_name']."商品快递费用");
 				
 		}
-		showSuccess("",$ajax,get_gopreview());
+		showSuccess("",$ajax,url_wap('account#xianhuo'));
 	}
 	
 	public function do_scbujiao()
@@ -671,7 +671,7 @@ class accountModule{
 			$re=modify_account(array("money"=>"-".$money),intval($GLOBALS['user_info']['id']),"补交".$order_info['deal_name']."项目快递费用");
 	
 		}
-		showSuccess("",$ajax,get_gopreview());
+		showSuccess("",$ajax,url_wap('account#shichi'));
 	}
 	public function project()
 	{
