@@ -49,7 +49,13 @@
 			$trade_no=$info['transaction_id'];
 			$out_trade_no=$payment_notice['notice_sn'];
 			require_once APP_ROOT_PATH."system/libs/cart.php";
-		   $rs = payment_paid($out_trade_no,$trade_no);		
+			if(!empty($payment_notice['deal_xianhuo_id']) && isset($payment_notice['deal_xianhuo_id'])){
+				$rs = payment_goumai_paid($out_trade_no,$trade_no);
+			}elseif(!empty($payment_notice['deal_xianhuo_id']) && isset($payment_notice['deal_xianhuo_id'])){
+				$rs = payment_paid($out_trade_no,$trade_no);
+			}else{		
+		   $rs = payment_paid($out_trade_no,$trade_no);	
+		 }	
 		    if ($rs)
 		   {
 			   	$GLOBALS['db']->query("update ".DB_PREFIX."payment_notice set outer_notice_sn = '".$trade_no."' where id = ".$payment_notice['id']);				
