@@ -220,11 +220,11 @@ border-radius:2px;
 					<span class="cur-select">请选择</span> 
 					<select name="deal_sort" class="deal_sort">
 						<option {if !$p_r}selected="selected"{/if}  value="{url r="deals" p="type=$p_type"}">请选择</option>
-						<option {if $p_r eq 'rec'}selected="selected"{/if} value="{url r="deals" p="r=rec&type=$p_type"}">推荐项目</option>
+						<option {if $p_r eq 'rec'}selected="selected"{/if} value="{url r="deals" p="r=rec&type=$p_type"}">推荐拼地</option>
 						<option {if $p_r eq 'yure'}selected="selected"{/if} value="{url r="deals" p="r=yure&type=$p_type"}">正在预热</option>
 						<option {if $p_r eq 'new'}selected="selected"{/if} value="{url r="deals" p="r=new&type=$p_type"}">最新上线</option>
 						<option {if $p_r eq 'nend'}selected="selected"{/if} value="{url r="deals" p="r=nend&type=$p_type"}">即将结束</option>
-						<option {if $p_r eq 'classic'}selected="selected"{/if} value="{url r="deals" p="r=classic&type=$p_type"}">经典项目</option>
+						<option {if $p_r eq 'classic'}selected="selected"{/if} value="{url r="deals" p="r=classic&type=$p_type"}">经典拼地</option>
 					</select>
 				</a>
 				</div>	

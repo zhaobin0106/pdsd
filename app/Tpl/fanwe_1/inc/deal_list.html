@@ -37,7 +37,7 @@
 			{if $deal_item.begin_time > $now}
 			<span class="common-begin">即将开始</span>
 			{elseif $deal_item.end_time < $now and $deal_item.end_time neq 0}
-			<span {if $deal_item.percent gte 100}class="common-success"{else}class="common-fail"{/if}>{if $deal_item.percent gte 100}已成功{else $deal_item.percent gt 0}筹资失败{/if}</span> 	 
+			<span {if $deal_item.percent gte 100}class="common-success"{else}class="common-fail"{/if}>{if $deal_item.percent gte 100}已成功{else $deal_item.percent gt 0}拼地失败{/if}</span> 	 
 			{else}
 			{if $deal_item.percent gte 100}
 				<span class="common-success">已成功</span>
@@ -49,7 +49,7 @@
 						{if $deal_item.type eq 1}
 						融资中
 						{else}
-						筹资中
+						拼地中
 						{/if}
  					{/if}
 				</span>
@@ -129,7 +129,7 @@
 			{if $deal_item.begin_time > $now}
 			<span class="common-begin">即将开始</span>
 			{elseif $deal_item.end_time < $now and $deal_item.end_time neq 0}
-			<span {if $deal_item.percent gte 100}class="common-success"{else}class="common-fail"{/if}>{if $deal_item.percent gte 100}已成功{else $deal_item.percent gt 0}筹资失败{/if}</span> 	 
+			<span {if $deal_item.percent gte 100}class="common-success"{else}class="common-fail"{/if}>{if $deal_item.percent gte 100}已成功{else $deal_item.percent gt 0}拼地失败{/if}</span> 	 
 			{else}
 			{if $deal_item.percent gte 100}
 				<span class="common-success">已成功</span>
@@ -141,7 +141,7 @@
 						{if $deal_item.type eq 1}
 						融资中
 						{else}
-						筹资中
+						拼地中
 						{/if}
  					{/if}
 				</span>
@@ -202,7 +202,7 @@
  			{if $deal_item.type eq 1}
 			<span class="til">已预购</span>
 			{else}
-			<span class="til">已筹资</span>
+			<span class="til">已拼地</span>
 			{/if}
 		</div>
 		<div class="div3" style="text-align:right;">
