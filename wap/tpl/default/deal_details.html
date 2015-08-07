@@ -105,7 +105,7 @@ $this->_var['cpagejs_1'][]='';
     	<div class="paiduan">
     	
         	<span class="caption-title">
-	        	已筹资：<span class="symbol">¥&nbsp;</span><span class="f_money">{$deal_info.total_virtual_price_format}</span>&nbsp;&nbsp;&nbsp;
+	        	已拼地：<span class="symbol">¥&nbsp;</span><span class="f_money">{$deal_info.total_virtual_price_format}</span>&nbsp;&nbsp;&nbsp;
 	        	目标：<span class="symbol" style="color:#333">¥&nbsp;</span><span class="f_money" style="color:#333">{$deal_info.limit_price_format}</span>
         	</span>
             <span class="f_r " style="">
@@ -119,10 +119,10 @@ $this->_var['cpagejs_1'][]='';
                             <span class="common common-success">已成功</span>
                         {/if}
                         {if $deal_info.status eq 2}
-                            <span class="common common-fail">筹资失败</span>
+                            <span class="common common-fail">拼地失败</span>
                         {/if}
                         {if $deal_info.status eq 3}
-                            <span class="common common-sprite">筹资中</span>
+                            <span class="common common-sprite">拼地中</span>
                         {/if}
                         {if $deal_info.status eq 4}
                             <span class="common common-sprite">长期项目</span>
@@ -157,7 +157,7 @@ $this->_var['cpagejs_1'][]='';
                    	 		已成功
 	                    {/if}
 	                    {if $deal_info.status eq 2}
-                   			筹资失败
+                   			拼地失败
 	                    {/if}
 	                    {if $deal_info.status eq 3}
 	                        {$deal_info.remain_days}天
