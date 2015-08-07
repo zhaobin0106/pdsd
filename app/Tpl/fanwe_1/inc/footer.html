@@ -37,7 +37,7 @@
 						<dl style="float:none;width:600px;margin-bottom:20px">
 							<dt style="color:#333;font-size:15px;"><b>{$help_item.title}</b></dt>
 							{foreach from=$help_item.article item=article_list name="article_list"}
-							<dd style="color:#333;display:inline-block;font-size:15px"><a href="{$article_list.url}"  style="color:#333;" ><b>{$article_list.title}</b></a>&nbsp;&nbsp;<span {if $smarty.foreach.article_list.last}style="display:none"{/if}>|</span>&nbsp;&nbsp;</dd>
+							<dd style="color:#333;display:inline;font-size:15px"><a href="{$article_list.url}"  style="color:#333;" ><b>{$article_list.title}</b></a>&nbsp;&nbsp;<span {if $smarty.foreach.article_list.last}style="display:none"{/if}>|</span>&nbsp;&nbsp;</dd>
 							{/foreach}
 						</dl>
 					{/if}
