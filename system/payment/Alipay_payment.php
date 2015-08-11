@@ -162,8 +162,16 @@ class Alipay_payment implements payment {
 		
 		if ($request['trade_status'] == 'TRADE_SUCCESS' || $request['trade_status'] == 'TRADE_FINISHED' || $request['trade_status'] == 'WAIT_SELLER_SEND_GOODS'|| $request['trade_status'] == 'WAIT_BUYER_CONFIRM_GOODS'){
 			
+					$payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where notice_sn = '".$payment_notice_sn."'");
+				
 			require_once APP_ROOT_PATH."system/libs/cart.php";
-			$rs = payment_paid($payment_notice_sn,$outer_notice_sn);						
+		if(!empty($payment_notice['deal_xianhuo_id']) && isset($payment_notice['deal_xianhuo_id'])){
+				$rs = payment_goumai_paid($payment_notice_sn,$outer_notice_sn);
+			}elseif(!empty($payment_notice['fore_item_id']) && isset($payment_notice['fore_item_id'])){
+				$rs = payment_fore_paid($payment_notice_sn,$outer_notice_sn);
+			}else{		
+		   $rs = payment_paid($payment_notice_sn,$outer_notice_sn);	
+		 }
 			showSuccess($rs['info'],0,$rs['jump'],0);
 		}else{
 		    showErr("支付失败",0,url("index"),1);
@@ -205,10 +213,17 @@ class Alipay_payment implements payment {
 		$outer_notice_sn = $request['trade_no'];
 
 		if ($request['trade_status'] == 'TRADE_SUCCESS' || $request['trade_status'] == 'TRADE_FINISHED' || $request['trade_status'] == 'WAIT_SELLER_SEND_GOODS' || $request['trade_status'] == 'WAIT_BUYER_CONFIRM_GOODS'){
-			
+			$payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where notice_sn = '".$payment_notice_sn."'");
+				
 			require_once APP_ROOT_PATH."system/libs/cart.php";
-			$rs = payment_paid($payment_notice_sn,$outer_notice_sn);							
-			echo "success";
+		if(!empty($payment_notice['deal_xianhuo_id']) && isset($payment_notice['deal_xianhuo_id'])){
+				$rs = payment_goumai_paid($payment_notice_sn,$outer_notice_sn);
+			}elseif(!empty($payment_notice['fore_item_id']) && isset($payment_notice['fore_item_id'])){
+				$rs = payment_fore_paid($payment_notice_sn,$outer_notice_sn);
+			}else{		
+		   $rs = payment_paid($payment_notice_sn,$outer_notice_sn);	
+		 }
+		 				echo "success";
 			
 		}else{
 		   echo "fail";
