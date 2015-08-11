@@ -31,8 +31,8 @@ if ($order_id == 0){
  	$payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where notice_sn = '".$payment_notice_sn."'");
 	$order_id = intval($payment_notice['order_id']);
 }else{
-	$payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where order_id = ".$order_id);
-}
+ 	$payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where notice_sn = '".$payment_notice_sn."'");
+	}
 
  if (empty($payment_notice)){
 	echo "订单不存在";

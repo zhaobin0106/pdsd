@@ -62,8 +62,14 @@ if($verify_result) {//验证成功
    //file_put_contents(APP_ROOT_PATH."/alipaylog/payment_notice_sn_3.txt",$payment_notice_sn);
    
    require_once APP_ROOT_PATH."system/libs/cart.php";
-   $rs = payment_paid($out_trade_no,$trade_no);		
-    if ($rs)
+		if(!empty($payment_notice['deal_xianhuo_id']) && isset($payment_notice['deal_xianhuo_id'])){
+				$rs = payment_goumai_paid($out_trade_no,$trade_no);
+			}elseif(!empty($payment_notice['fore_item_id']) && isset($payment_notice['fore_item_id'])){
+				$rs = payment_fore_paid($out_trade_no,$trade_no);
+			}else{		
+		   $rs = payment_paid($out_trade_no,$trade_no);	
+		 }						
+		     if ($rs)
    {
    		//file_put_contents(APP_ROOT_PATH."/alipaylog/1.txt","");
 	   	$GLOBALS['db']->query("update ".DB_PREFIX."payment_notice set outer_notice_sn = '".$trade_no."' where id = ".$payment_notice['id']);				
