@@ -44,8 +44,8 @@
 			 	$payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where notice_sn = '".$payment_notice_sn."'");
 				$order_id = intval($payment_notice['order_id']);
 			}else{
-				$payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where order_id = ".$order_id);
-			}
+			 	$payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where notice_sn = '".$payment_notice_sn."'");
+							}
 			$trade_no=$info['transaction_id'];
 			$out_trade_no=$payment_notice['notice_sn'];
 			require_once APP_ROOT_PATH."system/libs/cart.php";
