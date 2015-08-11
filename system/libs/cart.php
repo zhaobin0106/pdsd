@@ -57,7 +57,7 @@ function payment_paid($notice_sn,$outer_sn)
 						require_once APP_ROOT_PATH."system/payment/".$payment_info['class_name']."_payment.php";				
 						$log_info = "通过".$payment_info['name'].$payment_lang[$payment_notice['bank_id']]."支付，单号".$outer_sn."，订单已支付过，转存入会员帐户";				
 						modify_account(array("money"=>$payment_notice['money']),$payment_notice['user_id'],$log_info);
-						return array("info"=>$log_info,"jump"=>url("account#credit")); 
+						return array("info"=>$log_info,"jump"=>url("account")); 
 					}
 					else
 					{
@@ -66,11 +66,11 @@ function payment_paid($notice_sn,$outer_sn)
 						$result = pay_order($order_info['id']);
 						if($result['status']==1)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>已过期，金额已退回帐户","jump"=>url("account#credit")); 
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>已过期，金额已退回帐户","jump"=>url("account")); 
 						}
 						if($result['status']==2)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>限额已满，金额已退回帐户","jump"=>url("account#credit")); 
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>限额已满，金额已退回帐户","jump"=>url("account")); 
 						}
 						if($result['status']==3)
 						{
@@ -89,7 +89,7 @@ function payment_paid($notice_sn,$outer_sn)
 					require_once APP_ROOT_PATH."system/payment/".$payment_info['class_name']."_payment.php";				
 					$log_info = "通过".$payment_info['name'].$payment_lang[$payment_notice['bank_id']]."支付，单号".$outer_sn."，支付的订单已失效，转存入会员帐户";				
 					modify_account(array("money"=>$payment_notice['money']),$payment_notice['user_id'],$log_info);
-					return array("info"=>$log_info,"jump"=>url("account#credit")); 
+					return array("info"=>$log_info,"jump"=>url("account")); 
 				}
 				
 			}
@@ -104,11 +104,11 @@ function payment_paid($notice_sn,$outer_sn)
 						//已支付
 						if($order_info['order_status']==1)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>已过期，金额已退回帐户","jump"=>url("account#credit")); 
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>已过期，金额已退回帐户","jump"=>url("account")); 
 						}
 						if($order_info['order_status']==2)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>限额已满，金额已退回帐户","jump"=>url("account#credit")); 
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>限额已满，金额已退回帐户","jump"=>url("account")); 
 						}
 						if($order_info['order_status']==3)
 						{
@@ -126,11 +126,11 @@ function payment_paid($notice_sn,$outer_sn)
 						$result = pay_order($order_info['id']);
 						if($result['status']==1)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>已过期，金额已退回帐户","jump"=>url("account#credit")); 
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>已过期，金额已退回帐户","jump"=>url("account")); 
 						}
 						if($result['status']==2)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>限额已满，金额已退回帐户","jump"=>url("account#credit")); 
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>限额已满，金额已退回帐户","jump"=>url("account")); 
 						}
 						if($result['status']==3)
 						{
@@ -147,7 +147,7 @@ function payment_paid($notice_sn,$outer_sn)
 					$payment_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment where id = ".$payment_notice['payment_id']);
 					require_once APP_ROOT_PATH."system/payment/".$payment_info['class_name']."_payment.php";				
 					$log_info = "通过".$payment_info['name'].$payment_lang[$payment_notice['bank_id']]."支付，单号".$outer_sn."，支付的订单已失效，转存入会员帐户";				
-					return array("info"=>$log_info,"jump"=>url("account#credit")); 
+					return array("info"=>$log_info,"jump"=>url("account")); 
 				}
 			}			
 
@@ -221,11 +221,11 @@ function payment_goumai_paid($notice_sn,$outer_sn)
 						}
 						if($result['status']==3)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account"));
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account#xianhuo"));
 						}
 						if($result['status']==0)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account"));
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account#xianhuo"));
 						}
 					}
 				}
@@ -259,11 +259,11 @@ function payment_goumai_paid($notice_sn,$outer_sn)
 						}
 						if($order_info['order_status']==3)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account"));
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account#xianhuo"));
 						}
 						if($order_info['order_status']==0)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account"));
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account#xianhuo"));
 						}
 					}
 					else
@@ -281,11 +281,11 @@ function payment_goumai_paid($notice_sn,$outer_sn)
 						}
 						if($result['status']==3)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account"));
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account#xianhuo"));
 						}
 						if($result['status']==0)
 						{
-							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account"));
+							return array("info"=>"<a href='".url("deal#show",array("id"=>$order_info['deal_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account#xianhuo"));
 						}
 					}
 				}
@@ -364,11 +364,11 @@ function payment_fore_paid($notice_sn,$outer_sn)
 						}
 						if($result['status']==3)
 						{
-							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account"));
+							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account#shichi"));
 						}
 						if($result['status']==0)
 						{
-							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account"));
+							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account#shichi"));
 						}
 					}
 				}
@@ -402,11 +402,11 @@ function payment_fore_paid($notice_sn,$outer_sn)
 						}
 						if($order_info['order_status']==3)
 						{
-							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account"));
+							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account#shichi"));
 						}
 						if($order_info['order_status']==0)
 						{
-							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account"));
+							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account#shichi"));
 						}
 					}
 					else
@@ -424,11 +424,11 @@ function payment_fore_paid($notice_sn,$outer_sn)
 						}
 						if($result['status']==3)
 						{
-							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account"));
+							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>支付成功","jump"=>url("account#shichi"));
 						}
 						if($result['status']==0)
 						{
-							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account"));
+							return array("info"=>"<a href='".url("fore#show",array("id"=>$order_info['fore_id']))."'>".$order_info['deal_name']."</a>订单被篡改，支付失败","jump"=>url("account#shichi"));
 						}
 					}
 				}
