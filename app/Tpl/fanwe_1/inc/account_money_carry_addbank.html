@@ -106,7 +106,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/add_consignee.js";
 <form name="Jbank_From" class="ajax_form" id="Jbank_From" action="{url r="account#savebank"}" method="post">
 	<div class="form_row control-group">
 	    <label class="small_control_label">开户名：</label>
-	    <input type="text" readonly="readonly" name="real_name" id="Jbank_real_name" class="small_textbox readonly" style="width:100px;" value="{$user_info.identify_name}">
+	    <input type="text" name="real_name" id="Jbank_real_name" class="small_textbox " style="width:100px;" value="{$user_info.identify_name}">
 	    <div class="blank0"></div>
 	</div>
  	<div class="form_row control-group">
