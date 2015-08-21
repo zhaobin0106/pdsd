@@ -825,13 +825,13 @@ class accountModule{
 			$page = 1;
 		$limit = (($page-1)*$page_size).",".$page_size;
  		
-		$record_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."payment_notice where user_id = ".intval($GLOBALS['user_info']['id'])." and order_id=0 AND deal_id=0 AND deal_item_id=0 AND deal_name='' order by create_time desc limit ".$limit);
+		$record_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."payment_notice where user_id = ".intval($GLOBALS['user_info']['id'])." and order_id=0 AND deal_id=0 AND deal_item_id is NULL AND deal_name='' order by create_time desc limit ".$limit);
 		foreach($record_list as $k=>$v){
 			if($v['is_paid']==0){
 				$record_list[$k]['pay_url']=url_wap("account#record_pay",array("notice_id"=>$v['id']));
 			}
 		}
-		$record_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."payment_notice where user_id = ".intval($GLOBALS['user_info']['id'])." and order_id=0 AND deal_id=0 AND deal_item_id=0 AND deal_name=''");
+		$record_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."payment_notice where user_id = ".intval($GLOBALS['user_info']['id'])." and order_id=0 AND deal_id=0 AND deal_item_id is NULL AND deal_name=''");
 		$page = new Page($record_count,$page_size);   //初始化分页对象
 		$p  =  $page->show();
 		$GLOBALS['tmpl']->assign('pages',$p);
