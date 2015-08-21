@@ -17,7 +17,7 @@ body{ background:#f3f3f3; }
 				{if $user_info.ex_account_bank}
 				<li class="webkit-box">
 					<label class="input_lable">卡号</label>
-					<input type="text" value="{$user_info.ex_account_info}" class="textbox webkit-box-flex" name="bank_number" />
+					<input type="text" readonly="readonly" value="{$user_info.ex_account_info}" class="textbox webkit-box-flex " name="bank_number" />
 				</li>
 				<li class="webkit-box">
 					<label class="input_lable mr10">银行</label>
