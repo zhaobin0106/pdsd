@@ -45,22 +45,22 @@
 				 <a href="{:u("User/index",array("is_effect"=>0))}">{$info.user_num}个</a>
 			</td>
 		</tr>
-		<tr>
+<!-- 		<tr>
 			<td class="item_title" style="width:200px;">
 				项目待审核
 			</td>
 			<td class="item_input">
 				 <a href="{:u("Deal/submit_index")}">{$info.project_none_num}个</a>
 			</td>
-		</tr>
-		<tr>
+		</tr> -->
+<!-- 		<tr>
 			<td class="item_title" style="width:200px;">
 				投资人待审核
 			</td>
 			<td class="item_input">
 				  <a href="{:u("UserInvestor/index")}">{$info.user_invest_num}个</a>
 			</td>
-		</tr>
+		</tr> -->
 		<tr>
 			<td class="item_title" style="width:200px;">
 				待审核提现申请
@@ -71,7 +71,7 @@
 		</tr>
 		<tr>
 			<td class="item_title" style="width:200px;">
-				项目订单成功数
+				拼地订单成功数
 			</td>
 			<td class="item_input">
 				 <a href="{:u("DealOrder/index",array("order_status"=>3))}">{$info.deal_order.num}个</a>
@@ -79,10 +79,18 @@
 		</tr>
 				<tr>
 			<td class="item_title" style="width:200px;">
-				活动订单成功数
+				试吃订单成功数
 			</td>
 			<td class="item_input">
 				 <a href="{:u("ForeItemOrder/index",array("order_status"=>3))}">{$info.fore_order.num}个</a>
+			</td>
+		</tr>
+				<tr>
+			<td class="item_title" style="width:200px;">
+				现货订单成功数
+			</td>
+			<td class="item_input">
+				 <a href="{:u("DealOrder/index",array("order_status"=>3))}">{$info.xianhuo_order.num}个</a>
 			</td>
 		</tr>
 		<tr>
