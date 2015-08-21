@@ -1239,8 +1239,8 @@ class accountModule extends BaseModule {
 		$limit = (($page - 1) * $page_size) . "," . $page_size;
 		// SELECT * FROM fanwe_payment_notice n WHERE n.order_id='0' AND n.deal_id='0' AND n.deal_item_id='0' AND deal_name='';
 		
-		$record_list = $GLOBALS ['db']->getAll ( "select * from " . DB_PREFIX . "payment_notice where user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) . " and order_id=0 AND deal_id=0 AND deal_item_id=0 AND deal_name='' order by create_time desc limit " . $limit );
-		$record_count = $GLOBALS ['db']->getOne ( "select count(*) from " . DB_PREFIX . "payment_notice where user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) . " and order_id=0 AND deal_id=0 AND deal_item_id=0 AND deal_name=''" );
+		$record_list = $GLOBALS ['db']->getAll ( "select * from " . DB_PREFIX . "payment_notice where user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) . " and order_id=0 AND deal_id=0 AND deal_item_id is NULL AND deal_name='' order by create_time desc limit " . $limit );
+		$record_count = $GLOBALS ['db']->getOne ( "select count(*) from " . DB_PREFIX . "payment_notice where user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) . " and order_id=0 AND deal_id=0 AND deal_item_id is NULL AND deal_name=''" );
 		foreach ( $record_list as $k => $v ) {
 			if (! $v ['is_paid']) {
 				$record_list [$k] ['url'] = url ( "account#record_pay", array (
