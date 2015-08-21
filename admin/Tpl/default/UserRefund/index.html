@@ -74,7 +74,7 @@ function refund_not_allow(id){
 		,user_id|get_refund_user_name:会员名
 		,create_time|to_date:申请时间
 		,memo|get_title:申请备注
-		,user_bank_id|get_carray_info:提现信息
+		,user_bank_id|get_carray_info=$deal['user_id']:提现信息
 		,is_pay|get_status:是否审核
 		,pay_time|to_date:确认支付时间
 		,reply|get_title:操作备注
