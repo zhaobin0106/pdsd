@@ -1193,10 +1193,10 @@ class accountModule extends BaseModule {
 		if ($money <= 0) {
 			showErr ( "提现金额出错", $ajax );
 		}
-		$paypassword = strim ( $_REQUEST ['paypassword'] );
-		if ($GLOBALS ['user_info'] ['paypassword'] != md5 ( $paypassword )) {
-			showErr ( "支付密码错误", $ajax );
-		}
+// 		$paypassword = strim ( $_REQUEST ['paypassword'] );
+// 		if ($GLOBALS ['user_info'] ['paypassword'] != md5 ( $paypassword )) {
+// 			showErr ( "支付密码错误", $ajax );
+// 		}
 		
 		$ready_refund_money = doubleval ( $GLOBALS ['db']->getOne ( "select sum(money) from " . DB_PREFIX . "user_refund where user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) . " and is_pay = 0" ) );
 		if ($ready_refund_money + $money > $GLOBALS ['user_info'] ['money']) {
@@ -1218,7 +1218,7 @@ class accountModule extends BaseModule {
 		}
 		
 		$id = intval ( $_REQUEST ['id'] );
-		$GLOBALS ['db']->query ( "delete from " . DB_PREFIX . "user_refund where id = " . $id . " and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) );
+		$GLOBALS ['db']->query ( "delete from " . DB_PREFIX . "user_refund where id = " . $id . " and is_pay = 0 and  user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) );
 		if ($GLOBALS ['db']->affected_rows () > 0) {
 			showSuccess ( "删除成功", $ajax );
 		} else {
@@ -1780,9 +1780,9 @@ class accountModule extends BaseModule {
 		if (! $GLOBALS ['user_info'])
 			app_redirect ( url ( "user#login" ) );
 		$ajax = intval ( $_REQUEST ['ajax'] );
-		if (empty ( $GLOBALS ['user_info'] ['identify_name'] )) {
-			showErr ( '请进行完成身份认证，才可以添加银行卡', $ajax );
-		}
+// 		if (empty ( $GLOBALS ['user_info'] ['identify_name'] )) {
+// 			showErr ( '请进行完成身份认证，才可以添加银行卡', $ajax );
+// 		}
 		$bank_id = strim ( $_REQUEST ['bank_id'] );
 		$otherbank = intval ( $_REQUEST ['otherbank'] );
 		$data = array ();
@@ -1826,7 +1826,8 @@ class accountModule extends BaseModule {
 		$data ['reBankcard'] = $reBankcard;
 		$data ['user_id'] = $GLOBALS ['user_info'] ['id'];
 		
-		$data ['real_name'] = $GLOBALS ['user_info'] ['identify_name'];
+		$data ['real_name'] = strim ( $_REQUEST ['real_name'] );
+		//$data ['real_name'] = $GLOBALS ['user_info'] ['identify_name'];
 		$data ['bank_name'] = $GLOBALS ['db']->getOneCached ( "select name from " . DB_PREFIX . "bank where id=" . $data ['bank_id'] );
 		$re = $GLOBALS ['db']->autoExecute ( DB_PREFIX . "user_bank", $data, "INSERT", "", "SILENT" );
 		if ($re) {

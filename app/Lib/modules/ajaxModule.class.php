@@ -1438,9 +1438,9 @@ class ajaxModule extends BaseModule
 	public function add_bank(){
 		$bank_list=get_bank_list();
 		$user_info=$GLOBALS['user_info'];
-		if($user_info['identify_name']==''){
-			showErr('您的身份认证未完成,请点击确定去实名认证!',1,url("settings#security"));
-		}
+// 		if($user_info['identify_name']==''){
+// 			showErr('您的身份认证未完成,请点击确定去实名认证!',1,url("settings#security"));
+// 		}
 		$GLOBALS['tmpl']->assign('user_info',$GLOBALS['user_info']);
 		
 		$GLOBALS['tmpl']->caching = true;
