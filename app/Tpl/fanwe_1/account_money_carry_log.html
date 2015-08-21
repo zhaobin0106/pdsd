@@ -42,9 +42,9 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 							</td>
 							<td>{function name="to_date" v=$refund_item.pay_time}</td>
 							<td>
-					
+								{if $refund_item.is_pay lt 1}
 								<a href="{url r="account#delrefund" p="id=$refund_item.id"}" class="delrefund linkgreen">删除</a>
-					
+								{/if}
 							</td>
 						</tr>
 						{/foreach}

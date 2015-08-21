@@ -23,7 +23,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 						<i></i>请输入您要提现的金额，以及正确无误的银行帐号信息。
 					</p>
 					<p>
-						<i></i>我们将在3个工作日（双休日和法定节假日除外）之内，将钱转入您指定的银行帐号 。
+						<i></i>我们将在10个工作日（双休日和法定节假日除外）之内，将钱转入您指定的银行帐号 。
 					</p>
 					<p>
 						<i></i>在双休日和法定节假日期间，用户可申请取现，但{function name="app_conf" v="SHOP_TITLE"}暂不处理，需要等恢复正常上班之后才进行处理。不便之处，请多多谅解！
@@ -98,13 +98,15 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 		            </div>
 		           	<div class="form_row control-group small-control-group">
 		              	<label class="form_lable"></label>
-		               	<span class="form_cont f_gray" id="Jcarry_bankSuggestNote">提现时间约为3个工作日。</span>
+		               	<span class="form_cont f_gray" id="Jcarry_bankSuggestNote">提现时间约为10个工作日。</span>
 		               <div class="blank0"></div>
 		           	</div>
+		           	<!-- 
 				  	<div class="form_row control-group small-control-group">
 						<label class="form_lable small_form_lable">支付密码：</label>
 						<input type="password" autocomplete="off" class="small_textbox w100" name="paypassword" id="J_PAYPASSWORD" />&nbsp;&nbsp;{if $user_info.paypassword eq ''}还未设置！{else}忘记了？{/if}<a href="{url  r="settings#security" p="method=setting-pass-box"}" target="_blank" class='f_blue'>点这里</a>
  					</div>
+ 					 -->
 				</div>	
  				<div class="blank20"></div>
 				<div class="f14 f_red tc">警告：禁止信用卡套现、虚假交易等行为，一经确认，将终止该账户的使用。
