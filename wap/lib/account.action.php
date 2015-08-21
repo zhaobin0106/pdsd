@@ -1003,7 +1003,8 @@ class accountModule{
 		$refund_data['memo'] = $memo;
 		$GLOBALS['db']->autoExecute(DB_PREFIX."user_refund",$refund_data);
 		
-		showSuccess("提交成功",$ajax,get_gopreview_wap());
+		showSuccess("提交成功",$ajax,url_wap('account#refund_list'));
+		//showSuccess("提交成功",$ajax,get_gopreview_wap());
  	}
  	public function delrefund()
 	{
