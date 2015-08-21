@@ -3476,11 +3476,13 @@ function isCreditNo($vStr)
     return true;
 }
 
-function get_carray_info($user_bank_id){
+function get_carray_info($user_bank_id,$user_id=''){
 	$bank_info=$GLOBALS['db']->getRow("select * from  ".DB_PREFIX."user_bank where id=$user_bank_id");
 	if(empty($bank_info)){
-
-		return "开户名:".$GLOBALS['user_info']['ex_real_name']." ".$bank_info['ex_account_bank']." 卡号:".$bank_info['ex_account_info'];
+		$user_info=$GLOBALS['db']->getRow("select * from  ".DB_PREFIX."user where id=$user_id");
+		return "开户名:".$user_info['ex_real_name']." ".$user_info['ex_account_bank']." 卡号:".$user_info['ex_account_info'];
+		
+		//return "开户名:".$GLOBALS['user_info']['ex_real_name']." ".$bank_info['ex_account_bank']." 卡号:".$bank_info['ex_account_info'];
 	}else{
 		return "开户名:".$bank_info['real_name']." ".$bank_info['bank_name']." 卡号:".$bank_info['bankcard']." 开户地点:".$bank_info['region_lv2'].$bank_info['region_lv3'].$bank_info['bankzone'];
 	}
