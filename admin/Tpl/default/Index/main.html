@@ -37,7 +37,7 @@
 				{%CURRENT_TIME}：<PHP> echo to_date(get_gmtime());</PHP>
 			</td>
 		</tr>
-		<tr>
+<!--		<tr>
 			<td class="item_title" style="width:200px;">
 				注册待验证
 			</td>
@@ -45,7 +45,7 @@
 				 <a href="{:u("User/index",array("is_effect"=>0))}">{$info.user_num}个</a>
 			</td>
 		</tr>
-<!-- 		<tr>
+ 		<tr>
 			<td class="item_title" style="width:200px;">
 				项目待审核
 			</td>
@@ -74,7 +74,7 @@
 				拼地订单成功数
 			</td>
 			<td class="item_input">
-				 <a href="{:u("DealOrder/index",array("order_status"=>3))}">{$info.deal_order.num}个</a>
+				 <a href="{:u("DealOrder/index",array("order_status"=>4))}">{$info.deal_order.num}个</a>
 			</td>
 		</tr>
 				<tr>
@@ -82,18 +82,19 @@
 				试吃订单成功数
 			</td>
 			<td class="item_input">
-				 <a href="{:u("ForeItemOrder/index",array("order_status"=>3))}">{$info.fore_order.num}个</a>
+				 <a href="{:u("ForeItemOrder/index",array("order_status"=>4))}">{$info.fore_order.num}个</a>
 			</td>
 		</tr>
-				<tr>
+<!-- 				<tr>
 			<td class="item_title" style="width:200px;">
 				现货订单成功数
 			</td>
 			<td class="item_input">
-				 <a href="{:u("DealOrder/index",array("order_status"=>3))}">{$info.xianhuo_order.num}个</a>
+				 <a href="{:u("DealOrder/index",array("order_status"=>4))}">{$info.xianhuo_order.num}个</a>
 			</td>
 		</tr>
-		<tr>
+ -->
+ 		<tr>
 			<td class="item_title" style="width:200px;">
 				成交金额
 			</td>
