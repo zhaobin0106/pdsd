@@ -16,8 +16,18 @@ class UserRefundAction extends CommonAction{
 		if($this->get("default_map"))
 		$map = array_merge($map,$this->get("default_map"));
 		if($_REQUEST['user_name'] != ''){
-			$user_id = M("User")->where("user_name= '".$_REQUEST['user_name']."'")->getField("id");
-			$map['user_id'] = intval($user_id);
+			$user_id = M("User")->where("user_name like '%".$_REQUEST['user_name']."%'")->field("id")->select();
+			foreach ($user_id as $u) {
+				$userids .= $u['id'].',';
+			}
+			//
+			$userids=rtrim($userids,',');
+			//var_dump($userids);exit;
+			$map['user_id'] = array('in',$userids);
+		}
+		if($_REQUEST['is_pay'] == '100'){
+			$key = array_search(100, $map);
+			array_splice($map, $key, 1);
 		}
 		if (method_exists ( $this, '_filter' )) {
 			$this->_filter ( $map );

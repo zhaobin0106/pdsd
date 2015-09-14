@@ -178,7 +178,7 @@ class ForeItemOrderAction extends CommonAction{
 		$order_info = M("ForeItemOrder")->getById(intval($_REQUEST['id']));
 		if(!$order_info)$this->error("没有该项目的报名");
 		
-		$payment_notice_list = M("PaymentNotice")->where("order_id=".$order_info['id']." and is_paid = 1")->findAll();
+		$payment_notice_list = M("PaymentNotice")->where("order_id=".$order_info['id']." and is_paid = 1 and fore_item_id = ".$order_info['fore_item_id'])->findAll();
 		$this->assign("payment_notice_list",$payment_notice_list);
 		
 		$this->assign("order_info",$order_info);		

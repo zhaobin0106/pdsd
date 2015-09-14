@@ -23,8 +23,14 @@ class PaymentNoticeAction extends CommonAction{
 			$map['deal_name'] = array('like','%'.trim($_REQUEST['deal_name']).'%');
 		}
 		if($_REQUEST['user_name'] != ''){
-			$user_id = M("User")->where("user_name= '".$_REQUEST['user_name']."'")->getField("id");
-			$map['user_id'] = intval($user_id);
+			$user_id = M("User")->where("user_name like '%".$_REQUEST['user_name']."%'")->field("id")->select();
+			foreach ($user_id as $u) {
+				$userids .= $u['id'].',';
+			}
+			//
+			$userids=rtrim($userids,',');
+			//var_dump($userids);exit;
+			$map['user_id'] = array('in',$userids);
 		}
 		if($_REQUEST['payment_id']!= NULL){
 			$map['payment_id']=intval($_REQUEST['payment_id']);

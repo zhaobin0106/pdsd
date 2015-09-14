@@ -47,7 +47,8 @@ function refund_not_allow(id){
 		会员名：<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
 		
 		状态: 
-		<select name="is_pay">	
+		<select name="is_pay">
+			<option value="100"<if condition="$_REQUEST['is_pay'] eq '100'">selected="selected"</if> >全部</option>
 			<option value="0" <if condition="$_REQUEST['is_pay'] eq '0'">selected="selected"</if> >待审核</option>
 			<option value="1" <if condition="$_REQUEST['is_pay'] eq 1">selected="selected"</if> >确认支付</option>
 			<option value="2" <if condition="$_REQUEST['is_pay'] eq 2">selected="selected"</if> >未允许支付</option>

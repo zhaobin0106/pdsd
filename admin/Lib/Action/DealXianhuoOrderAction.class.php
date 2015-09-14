@@ -7,18 +7,18 @@
 // | Author: 云淡风轻(97139915@qq.com)
 // +----------------------------------------------------------------------
 
-class DealOrderAction extends CommonAction{
+class DealXianhuoOrderAction extends CommonAction{
 	public function index()
 	{
 		if($_REQUEST['type']=='NULL'){
 			unset($_REQUEST['type']);
 		}
-		$order_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_order where repay_make_time=0 and repay_time>0  ");
+		$order_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_xianhuo_order where repay_make_time=0 and repay_time>0  ");
 		foreach($order_list as $k=>$v){
 				$left_date=intval(app_conf("REPAY_MAKE"))?7:intval(app_conf("REPAY_MAKE"));
 				$repay_make_date=$v['repay_time']+$left_date*24*3600;
 				if($repay_make_date<=get_gmtime()){
- 					$GLOBALS['db']->query("update ".DB_PREFIX."deal_order set repay_make_time =  ".get_gmtime()." where id = ".$v['id'] );
+ 					$GLOBALS['db']->query("update ".DB_PREFIX."deal_xianhuo_order set repay_make_time =  ".get_gmtime()." where id = ".$v['id'] );
 				}
  		}
 		//列表过滤器，生成查询Map对象
@@ -202,11 +202,11 @@ class DealOrderAction extends CommonAction{
 	}
 	public function view()
 	{
-		$order_info = M("DealOrder")->getById(intval($_REQUEST['id']));
+		$order_info = M("DealXianhuoOrder")->getById(intval($_REQUEST['id']));
 		if(!$order_info)$this->error("没有该项目的支持");
 		
 		
-		$payment_notice_list = M("PaymentNotice")->where("order_id=".$order_info['id']." and is_paid = 1 and deal_item_id = ".$order_info['deal_item_id'])->findAll();
+		$payment_notice_list = M("PaymentNotice")->where("order_id=".$order_info['id']." and is_paid = 1 and deal_xianhuo_id =".$order_info['deal_xianhuo_id'])->findAll();
 		$this->assign("payment_notice_list",$payment_notice_list);
 		
 		$this->assign("order_info",$order_info);		
@@ -227,12 +227,12 @@ class DealOrderAction extends CommonAction{
 	public function refund()
 	{
 		$id = intval($_REQUEST['id']);
-		$order_info = M("DealOrder")->getById($id);
+		$order_info = M("DealXianhuoOrder")->getById($id);
 		if($order_info)
 		{
 			if($order_info['is_refund']==0)
 			{
-				$GLOBALS['db']->query("update ".DB_PREFIX."deal_order set is_refund = 1 where id = ".$id." and is_refund = 0");
+				$GLOBALS['db']->query("update ".DB_PREFIX."deal_xianhuo_order set is_refund = 1 where id = ".$id." and is_refund = 0");
 				if($GLOBALS['db']->affected_rows()>0)
 				{
 					require_once APP_ROOT_PATH."system/libs/user.php";				
@@ -283,7 +283,7 @@ class DealOrderAction extends CommonAction{
 	public function incharge()
 	{
 		$id = intval($_REQUEST['id']);
-		$order_info = M("DealOrder")->getById($id);
+		$order_info = M("DealXianhuoOrder")->getById($id);
 		if($order_info)
 		{
 			if($order_info['order_status']==0)
@@ -298,7 +298,7 @@ class DealOrderAction extends CommonAction{
 				$payment_notice['order_id'] = $order_info['id'];
 				$payment_notice['memo'] = "管理员收款";
 				$payment_notice['deal_id'] = $order_info['deal_id'];
-				$payment_notice['deal_item_id'] = $order_info['deal_item_id'];
+				$payment_notice['deal_xianhuo_id'] = $order_info['deal_xianhuo_id'];
 				$payment_notice['deal_name'] = $order_info['deal_name'];
 				
 				do{
@@ -438,13 +438,13 @@ class DealOrderAction extends CommonAction{
 			$where['is_success'] = 1;
 			$where['repay_make_time']=array('gt',1);
 		}
-		if(trim($_REQUEST['deal_item_id'])!='')
+		if(trim($_REQUEST['deal_xianhuo_id'])!='')
 		{
-			$where['deal_item_id'] = intval($_REQUEST['deal_item_id']);
+			$where['deal_xianhuo_id'] = intval($_REQUEST['deal_xianhuo_id']);
 		}
-		$list = M("DealOrder")
+		$list = M("DealXianhuoOrder")
 				->where($where)
-				->field(DB_PREFIX.'deal_order.*')
+				->field(DB_PREFIX.'deal_xianhuo_order.*')
 				->limit($limit)->findAll();
 		
 		if($list)
@@ -581,7 +581,7 @@ class DealOrderAction extends CommonAction{
 		$deal_id=$_REQUEST['deal_id'];
 		$deal_info=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal where id=$deal_id ");
 		$this->assign("deal_info",$deal_info);
-		$order_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_order where repay_make_time=0 and repay_time>0 and deal_id=$deal_id  ");		
+		$order_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_xianhuo_order where repay_make_time=0 and repay_time>0 and deal_id=$deal_id  ");		
 		foreach($order_list as $k=>$v){
 				$left_date=intval(app_conf("REPAY_MAKE"))?7:intval(app_conf("REPAY_MAKE"));
 				$repay_make_date=$v['repay_time']+$left_date*24*3600;
@@ -626,9 +626,9 @@ class DealOrderAction extends CommonAction{
 		{
 			$map['order_status'] = 3;
 		}
-		if(trim($_REQUEST['deal_item_id'])!='')
+		if(trim($_REQUEST['deal_xianhuo_id'])!='')
 		{
-			$map['deal_item_id'] = intval($_REQUEST['deal_item_id']);
+			$map['deal_xianhuo_id'] = intval($_REQUEST['deal_xianhuo_id']);
 		}
 		if (method_exists ( $this, '_filter' )) {
 			$this->_filter ( $map );

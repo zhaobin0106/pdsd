@@ -19,6 +19,10 @@ class DealCommentAction extends CommonAction{
 		{
 			$map['deal_name'] = array('like','%'.trim($_REQUEST['deal_name']).'%');
 		}
+		if(trim($_REQUEST['user_name'])!='')
+		{
+			$map['user_name'] = array('like','%'.trim($_REQUEST['user_name']).'%');
+		}
 		if (method_exists ( $this, '_filter' )) {
 			$this->_filter ( $map );
 		}
