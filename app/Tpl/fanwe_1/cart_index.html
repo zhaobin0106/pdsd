@@ -44,14 +44,16 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart.js";
 			{if $shouhuolist}
 			配送列表
 			{foreach from=$shouhuolist item=kuaidi key=k}
-			<div class="consignee_radio_row">
-			<div class="cbo">
-			<input type="radio" name="kuaidi" value="{$kuaidi.id}"  onClick="ShowAdmin({$kuaidi.id})"/>
-			</div>
-			<div class="cnt">
+			<table class="consignee_radio_row">
+			<tr>
+			<td class="cbo" style="vertical-align:top;float:none">
+			<input type="radio" name="kuaidi" value="{$kuaidi.id}"  onClick="ShowAdmin({$kuaidi.id})"/></td>
+			<td class="cnt" style="float:none">
 			名称：{$kuaidi.kuaidi_name} 简介：{$kuaidi.kuaidi_desc} {if $kuaidi.is_kuaidi eq 1}使用快递{else}不使用快递{/if} 费用：{$kuaidi.kuaidi_jiage}
-						</div>
-			</div>
+						</td>
+			</tr>
+			
+			</table>
 			{/foreach}
 			{/if}
 			</div>	
@@ -132,7 +134,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart.js";
 					</div>
 				<div class="blank10"></div>
 				<div class="form_title">
-					回报内容
+					内容介绍
 				</div>
 				<div class="form_content">
 					{function name="nl2br" v=$deal_item.description}
@@ -178,7 +180,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart.js";
 					</div>
 					<div class="deal_item_dash"></div>
 					<div class="deal_content_box" style="padding:0 12px">
-						<div class="ui-progress">
+						<div class="ui-progress" style="width:auto">
 							<span class="theme_bgcolor" style="width:{$deal_info.percent}%;"></span>
 						</div>
 						<div class="blank"></div>
@@ -257,14 +259,17 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart.js";
 			{if $shouhuolist}
 			配送列表
 			{foreach from=$shouhuolist item=kuaidi key=k}
-			<div class="consignee_radio_row">
-			<div class="cbo">
+			<table class="consignee_radio_row">
+			<tr>
+			<td class="cbo" style="vertical-align:top;float:none">
 			<input type="radio" name="kuaidi" value="{$kuaidi.id}"  onClick="ShowAdmin({$kuaidi.id})"/>
-			</div>
-			<div class="cnt">
+			</td>
+			<td class="cnt" style="float:none">
 			名称：{$kuaidi.kuaidi_name} 简介：{$kuaidi.kuaidi_desc} {if $kuaidi.is_kuaidi eq 1}使用快递{else}不使用快递{/if} 费用：{$kuaidi.kuaidi_price}
-						</div>
-			</div>
+						</td>
+			</tr>
+			
+			</table>
 			{/foreach}
 			{/if}
 			</div>	
@@ -345,7 +350,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart.js";
 					</div>
 				<div class="blank10"></div>
 				<div class="form_title">
-					回报内容
+					内容介绍
 				</div>
 				<div class="form_content">
 					{function name="nl2br" v=$deal_item.description}
@@ -393,7 +398,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart.js";
 					</div>
 					<div class="deal_item_dash"></div>
 					<div class="deal_content_box" style="padding:0 12px">
-						<div class="ui-progress">
+						<div class="ui-progress" style="width:auto">
 							<span class="theme_bgcolor" style="width:{$deal_info.percent}%;"></span>
 						</div>
 						<div class="blank"></div>
@@ -473,14 +478,16 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart.js";
 			{if $shouhuolist}
 			配送列表
 			{foreach from=$shouhuolist item=kuaidi key=k}
-			<div class="consignee_radio_row">
-			<div class="cbo">
+			<table class="consignee_radio_row">
+			<tr>
+			<td class="cbo" style="vertical-align:top;float:none">
 			<input type="radio" name="kuaidi" value="{$kuaidi.id}"  onClick="ShowAdmin({$kuaidi.id})"/>
-			</div>
-			<div class="cnt">
+			</td>
+			<td class="cnt" style="float:none">
 			名称：{$kuaidi.kuaidi_name} 简介：{$kuaidi.kuaidi_desc} {if $kuaidi.is_kuaidi eq 1}使用快递{else}不使用快递{/if} 费用：{$kuaidi.kuaidi_jiage}
-						</div>
-			</div>
+						</td>
+			</tr>
+			</table>
 			{/foreach}
 			{/if}
 			</div>	
@@ -561,7 +568,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart.js";
 					</div>
 				<div class="blank10"></div>
 				<div class="form_title">
-					回报内容
+					内容介绍
 				</div>
 				<div class="form_content">
 					{function name="nl2br" v=$deal_xianhuo.description}
