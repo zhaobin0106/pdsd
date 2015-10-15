@@ -47,7 +47,7 @@ $this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/user_register.css";
 							<label class="form_lable">电子邮箱:</label>
 							<input type="text" value="{$user_info.email}" class="textbox" {if $user_info.email}disabled="true"{/if} />
 							{if $user_info.email}
-								<a href="{url r="settings#mail_change"}">修改</a>
+								<a style="display:none" href="{url r="settings#mail_change"}">修改</a>
 							{/if}
 						</div>
 						<div class="blank0"></div>

@@ -52,7 +52,10 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 								<td>			
 									{if $order_item.order_status eq 0}
 									<span class="f_money">已用余额支付：{function name="format_price" v=$order_item.credit_pay}</span><br />剩余支付未完成
-									{else}		
+									{else}
+									                               {if $order_item.is_refund eq 1}
+                                已退款
+                                {else}		
 									{if $order_item.deal_info}
 								
 											{if $order_item.deal_info.is_success eq 1}
@@ -72,6 +75,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 										{else}
 										已成功&nbsp;{if $order_item.is_refund eq 1}已退款{else}等待退款{/if}
 										{/if}
+									{/if}
 									{/if}
 									{/if}
 								</td>

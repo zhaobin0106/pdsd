@@ -609,7 +609,7 @@ class accountModule extends BaseModule {
 			$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
 			$repay_make_date = $order_info ['repay_time'] + $left_date * 24 * 3600;
 			if ($repay_make_date > get_gmtime () && $order_info ['repay_time'] > 0) {
-				$order_info ['repay_make_date'] = date ( 'Y-m-d H:i:s', $repay_make_date );
+				$order_info ['repay_make_date'] = local_date ( 'Y-m-d H:i:s', $repay_make_date+8*3600 );
 			} else {
 				$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_order set repay_make_time =  " . get_gmtime () . " where id = " . $id );
 				$order_info ['repay_make_time'] = get_gmtime ();
@@ -654,7 +654,7 @@ class accountModule extends BaseModule {
 			$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
 		$repay_make_date = $order_info ['repay_time'] + $left_date * 24 * 3600;
 		if ($repay_make_date > get_gmtime () && $order_info ['repay_time'] > 0) {
-			$order_info ['repay_make_date'] = date ( 'Y/m/d H:i:s', $repay_make_date );
+			$order_info ['repay_make_date'] = date ( 'Y/m/d H:i:s', $repay_make_date+8*3600 );
 		} else {
 			$GLOBALS ['db']->query ( "update " . DB_PREFIX . "fore_item_order set repay_make_time =  " . get_gmtime () . " where id = " . $id );
 			$order_info ['repay_make_time'] = get_gmtime ();
@@ -701,7 +701,7 @@ class accountModule extends BaseModule {
 					$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
 			$repay_make_date = $order_info ['repay_time'] + $left_date * 24 * 3600;
 			if ($repay_make_date > get_gmtime () && $order_info ['repay_time'] > 0) {
-				$order_info ['repay_make_date'] = date ( 'Y-m-d H:i:s', $repay_make_date );
+				$order_info ['repay_make_date'] = date ( 'Y-m-d H:i:s', $repay_make_date+8*3600 );
 			} else {
 				$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_xianhuo_order set repay_make_time =  " . get_gmtime () . " where id = " . $id );
 				$order_info ['repay_make_time'] = get_gmtime ();
@@ -1114,7 +1114,7 @@ class accountModule extends BaseModule {
 		
 		$GLOBALS ['db']->autoExecute ( DB_PREFIX . "deal_xianhuo_order", $order_info, "UPDATE", "id=" . $order_info ['id'] );
 		
-		send_notify ( $order_info ['user_id'], "您购买的商品" . $order_info ['deal_name'] . "已发货", "account#view_order", "id=" . $order_info ['id'] );
+		send_notify ( $order_info ['user_id'], "您购买的商品" . $order_info ['deal_name'] . "已发货", "account#view_xianhuo_order", "id=" . $order_info ['id'] );
 		showSuccess ( "回报设置成功", $ajax );
 	}
 	// 我的项目
