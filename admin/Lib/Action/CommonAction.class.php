@@ -106,7 +106,7 @@ class CommonAction extends AuthAction{
 			
 //			echo $model->getlastsql();
 			//分页跳转的时候保证查询条件
-			foreach ( $map as $key => $val ) {
+			foreach ( $_REQUEST as $key => $val ) {
 				if (! is_array ( $val )) {
 					$p->parameter .= "$key=" . urlencode ( $val ) . "&";
 				}
@@ -166,7 +166,7 @@ class CommonAction extends AuthAction{
 			}	
 			//			echo $model->getlastsql();
 			//分页跳转的时候保证查询条件
-			foreach ( $map as $key => $val ) {
+			foreach ( $_REQUEST as $key => $val ) {
 				if (! is_array ( $val )) {
 					$p->parameter .= "$key=" . urlencode ( $val ) . "&";
 				}

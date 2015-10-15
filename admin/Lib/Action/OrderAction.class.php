@@ -77,14 +77,17 @@ class OrderAction extends CommonAction{
 		}
 		if($info['type'] == 1){
 		$GLOBALS ['db']->autoExecute ( DB_PREFIX . "deal_order", $order_info, "UPDATE", "id=" . $order_info ['id'] );
+		send_notify ( $order_info ['user_id'], "您报名的项目" . $order_info ['deal_name'] . "回报已发放", "account#view_order", "id=" . $order_info ['id'] );
 		}elseif($info['type'] == 2){
 		$GLOBALS ['db']->autoExecute ( DB_PREFIX . "fore_item_order", $order_info, "UPDATE", "id=" . $order_info ['id'] );
+		send_notify ( $order_info ['user_id'], "您报名的项目" . $order_info ['deal_name'] . "回报已发放", "account#view_shichi_order", "id=" . $order_info ['id'] );
 		}elseif($info['type'] == 3){
 		$GLOBALS ['db']->autoExecute ( DB_PREFIX . "deal_xianhuo_order", $order_info, "UPDATE", "id=" . $order_info ['id'] );
+		send_notify ( $order_info ['user_id'], "您报名的项目" . $order_info ['deal_name'] . "回报已发放", "account#view_xianhuo_order", "id=" . $order_info ['id'] );
 											
 		}
 		
-		send_notify ( $order_info ['user_id'], "您报名的项目" . $order_info ['deal_name'] . "回报已发放", "account#view_shichi_order", "id=" . $order_info ['id'] );
+		
 		$this->success ('确认成功');
 	}
 	public function delete() {

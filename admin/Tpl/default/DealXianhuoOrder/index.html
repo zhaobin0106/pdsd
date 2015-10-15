@@ -11,7 +11,6 @@
 	 
 	function get_order_make_status($status,$deal)
 	{
-		if($deal['is_success']==1){
 			if($status==0)
 			{
 				if($deal['repay_time']){
@@ -21,10 +20,7 @@
 				}
 			};
 			if($status>1)return "收到";
-		}else{
-			return "未成功";
-		} 
-			
+		
 		 
 	}
 </PHP>
@@ -88,7 +84,7 @@
 		,online_pay|format_price:在线支付
 		,pay_time|to_date:支付时间
 		,order_status|get_order_status:状态
-		,repay_make_time|get_order_make_status=$deal:确认收到回报
+		,repay_make_time|get_order_make_status=$deal:确认收到货物
 		,is_refund|get_status:退款
 		,repay_time|to_date:回报日期
 		,create_time|to_date:下单日期" 
