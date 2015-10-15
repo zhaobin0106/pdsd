@@ -27,24 +27,69 @@
                             <label class="label_l">状态:</label>&nbsp;
                             <span class="label_r">
                                 {if $order_item.order_status eq 0}
-                                已用余额支付{function name="format_price" v=$order_item.credit_pay}&nbsp;剩余支付未完成
+                                    已用余额支付{function name="format_price" v=$order_item.credit_pay}&nbsp;剩余支付未完成
+                                {else}
+                                {if $order_item.is_refund eq 1}
+                                已退款
                                 {else}      
                                     {if $order_item.deal_info}
-                                    {if $order_item.deal_info.is_success eq 1}
-                                        {if $order_item.deal_info.begin_time > $now}未开始{/if}
-                                        {if $order_item.deal_info.end_time < $now and $order_item.deal_info.end_time neq 0}已成功&nbsp;{if $order_item.repay_time gt 0}回报已发放{if $order_item.repay_make_time gt 0} &nbsp;  确认收到{else} &nbsp; 未确认收到{/if} {else}等待发放回报{/if}{/if}
-                                        {if $order_item.deal_info.begin_time < $now and ($order_item.deal_info.end_time > $now or $order_item.deal_info.end_time eq 0)}已成功&nbsp;{if $order_item.repay_time gt 0}回报已发放{if $order_item.repay_make_time gt 0} 确认收到{else} 未确认收到{/if}{else}等待发放回报{/if}{/if}
+                                        {if $order_item.deal_info.is_success eq 1}
+                                            {if $order_item.deal_info.begin_time > $now}未开始{/if}
+                                            {if $order_item.deal_info.end_time < $now and $order_item.deal_info.end_time neq 0}
+                                                已成功&nbsp;
+                                                {if $order_item.repay_time gt 0}
+                                                回报已发放
+                                                    {if $order_item.repay_make_time gt 0} &nbsp;  确认收到
+                                                    {else} &nbsp; 未确认收到
+                                                    {/if}
+                                                {else}等待发放回报{/if}
+                                            {/if}
+                                            {if $order_item.deal_info.begin_time < $now and ($order_item.deal_info.end_time > $now or $order_item.deal_info.end_time eq 0)}
+                                                已成功&nbsp;
+                                                {if $order_item.repay_time gt 0}
+                                                    回报已发放
+                                                    {if $order_item.repay_make_time gt 0}
+                                                        确认收到
+                                                    {else} 
+                                                    未确认收到
+                                                    {/if}
+                                                {else}等待发放回报
+                                                {/if}
+                                            {/if}
                                         {else}
-                                        {if $order_item.deal_info.begin_time > $now}未开始{/if}
-                                        {if $order_item.deal_info.end_time < $now and $order_item.deal_info.end_time neq 0}未成功&nbsp;{if $order_item.is_refund eq 1}已退款{else}等待退款{/if}{/if}
-                                        {if $order_item.deal_info.begin_time < $now and ($order_item.deal_info.end_time > $now or $order_item.deal_info.end_time eq 0)}未结束{/if}
-                                    {/if}
+                                            {if $order_item.deal_info.begin_time > $now}
+                                            未开始
+                                            {/if}
+                                            {if $order_item.deal_info.end_time < $now and $order_item.deal_info.end_time neq 0}
+                                                未成功&nbsp;
+                                                {if $order_item.is_refund eq 1}
+                                                    已退款
+                                                {else}
+                                                    等待退款
+                                                {/if}
+                                            {/if}
+                                            {if $order_item.deal_info.begin_time < $now and ($order_item.deal_info.end_time > $now or $order_item.deal_info.end_time eq 0)}
+                                                未结束
+                                            {/if}
+                                        {/if}
                                     {else}
                                         {if $order_item.is_success eq 0}
-                                        未成功&nbsp;{if $order_item.repay_time gt 0}回报已发放{if $order_item.repay_make_time gt 0}<br /> 确认收到{else} <br /> 未确认收到{/if}{else}等待发放回报{/if}
+                                            未成功&nbsp;
+                                            {if $order_item.repay_time gt 0}
+                                                回报已发放
+                                                    {if $order_item.repay_make_time gt 0}
+                                                        <br />
+                                                        确认收到
+                                                    {else}
+                                                         <br /> 未确认收到
+                                                    {/if}
+                                            {else}
+                                                等待发放回报
+                                            {/if}
                                         {else}
-                                        已成功&nbsp;{if $order_item.is_refund eq 1}已退款{else}等待退款{/if}
+                                            已成功&nbsp;{if $order_item.is_refund eq 1}已退款{else}等待退款{/if}
                                         {/if}
+                                    {/if}
                                     {/if}
                                 {/if}
                             </span>

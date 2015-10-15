@@ -114,10 +114,14 @@ text-decoration: none;
 						项目未成功
 						{/if}
 					{else}
+						{if $order_info.is_refund eq 1}
+						项目失败，金额已退回会员帐户
+						{else}
 						{if $order_info.repay_time eq 0}
 						项目成功，回报未发放
 						{else}
 						{$order_info.repay_memo}
+						{/if}
 						{/if}
 					{/if}
 				</div>
