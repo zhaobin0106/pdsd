@@ -1059,7 +1059,7 @@ function cache_deal_comment($comment)
 	return $comment;
 }
 
-function get_deal_list($limit="",$conditions="",$orderby=" sort asc ",$deal_type='deal'){
+function get_deal_list($limit="",$conditions="",$orderby=" sort desc ",$deal_type='deal'){
 	
 	
 	if($limit!=""){
@@ -1175,7 +1175,7 @@ function get_deal_list($limit="",$conditions="",$orderby=" sort asc ",$deal_type
 }
 
 
-function get_fore_list($limit="",$conditions="",$orderby=" sort asc ",$deal_type="fore"){
+function get_fore_list($limit="",$conditions="",$orderby=" sort desc ",$deal_type="fore"){
 
 
 
