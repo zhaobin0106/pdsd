@@ -522,10 +522,16 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_log where user_id = ".$id);
 			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_msg_list where user_id = ".$id);
 			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_order where user_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_xianhuo_order where user_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_item_order where user_id = ".$id);
 			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_log where user_id = ".$id);
 			$GLOBALS['db']->query("delete from ".DB_PREFIX."deal_support_log where user_id = ".$id);
 			$GLOBALS['db']->query("delete from ".DB_PREFIX."payment_notice where user_id = ".$id);
-			
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_comment where user_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_focus_log where user_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_log where user_id = ".$id);
+			$GLOBALS['db']->query("delete from ".DB_PREFIX."fore_support_log where user_id = ".$id);
+				
 			$GLOBALS['db']->query("delete from ".DB_PREFIX."user where id =".$id); //删除会员			
 		}
 	}
