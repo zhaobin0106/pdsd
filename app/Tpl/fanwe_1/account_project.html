@@ -143,7 +143,7 @@ input{border:solid 1px rgb(169, 169, 169);}
  										<a href="{url r="project#del" p="id=$deal_item.id"}" class="del_deal">删除</a>
 									{else}
 										<a href="{url r="deal#update" p="id=$deal_item.id"}">项目日志</a><br />
-										<a href="{url r="account#goumai" p="id=$deal_item.id"}">购买记录</a><br />
+										<a href="{url r="account#goumai" p="id=$deal_item.id"}">现货记录</a><br />
 										{if $deal_item.type eq 1}<a href="{url r="account#get_leader_list" p="id=$deal_item.id"}">领投资格列表</a><br />{/if}
 										{if $deal_item.is_success eq 1}
 											{if $deal_item.type eq 1}
@@ -151,7 +151,7 @@ input{border:solid 1px rgb(169, 169, 169);}
 												<a href="{url r="account#support" p="id=$deal_item.id&type=1"}">投资列表</a><br />
 												<a href="{url r="account#paid" p="id=$deal_item.id"}">放款记录</a>
   											{else}
-												<a href="{url r="account#support" p="id=$deal_item.id"}">支持记录</a><br />
+												<a href="{url r="account#support" p="id=$deal_item.id"}">拼地记录</a><br />
 												<a href="{url r="account#paid" p="id=$deal_item.id"}">放款记录</a>
 											{/if}
 											

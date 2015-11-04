@@ -20,6 +20,10 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 		<table class="data-table">
 			{foreach from=$support_list item=support_item}
 			<tr>
+			<td class="data-title">订单号</td>
+			<td colspan="5"  class="tl">{$support_item.dingdanhao}</td>>
+			</tr>
+			<tr>
 				<td class="data-title">支持者</td>
 				<td width=193 class="tl"><a href="{url r="home" p="id=$support_item.user_id"}" class="linkgreen" target="_blank">{$support_item.user_name}</a></td>
 				<td class="data-title">支持金额</td>
@@ -68,18 +72,18 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 			</tr>
 			{/if}
 			<tr>
-				<td class="data-title">回报设置</td>
+				<td class="data-title">发货信息</td>
 				<td colspan="5" class="tl">
 					<form id="repay_form_{$support_item.id}" class="repay_form" action="{url r="account#save_repay" p="id=$support_item.id"}">
 					<input type="hidden" name="ajax" value="1" />
 					<textarea class="repay_memo" name="repay_memo">{$support_item.repay_memo}</textarea>
 					<div class="ui-button theme_bgcolor set_repay" rel="green" id="{$support_item.id}">
 						<div>
-							<span>立即设置回报</span>
+							<span>填写发货信息</span>
 						</div>
 					</div>	
 					<div class="blank1"></div>
-					<span class="repay_tip">请设置回报内容，如需配送的请输入相应的配送信息与单号。</span>
+					<span class="repay_tip">请设置发货内容，如需配送的请输入相应的配送信息与单号。</span>
 					</form>
 				</td>				
 			</tr>
