@@ -223,7 +223,7 @@ function init_deal_page_wap($deal_info) {
 	foreach ( $deal_info ['deal_item_list'] as $k => $v ) {
 		// 统计所有真实+虚拟（钱）
 		$deal_info ['total_virtual_person'] += $v ['virtual_person'];
-		$deal_info ['total_virtual_price'] += $v ['price'] * $v ['virtual_person'] + $v ['support_amount'];
+		//$deal_info ['total_virtual_price'] += $v ['price'] * $v ['virtual_person'] + $v ['support_amount'];
 		// 统计每个子项目真实+虚拟（钱）
 		$deal_info ['deal_item_list'] [$k] ['person'] = $v ['virtual_person'] + $v ['support_count'];
 		$deal_info ['deal_item_list'] [$k] ['money'] = $v ['price'] * $v ['virtual_person'] + $v ['support_amount'];
@@ -255,13 +255,14 @@ function init_deal_page_wap($deal_info) {
 	
 	$deal_info ['support_amount_format'] = number_price_format ( $deal_info ['support_amount'] );
 	$deal_info ['limit_price_format'] = number_price_format ( $deal_info ['limit_price'] );
-	$deal_info ['total_virtual_price_format'] = number_price_format ( intval ( $deal_info ['total_virtual_price'] ) );
+	// $deal_info ['total_virtual_price_format'] = number_price_format ( intval ( $deal_info ['total_virtual_price'] ) );
+	$deal_info ['total_virtual_price_format'] =number_price_format($deal_info['support_amount']+$deal_info['virtual_price']);
 	$deal_info ['remain_days'] = ceil ( ($deal_info ['end_time'] - NOW_TIME) / (24 * 3600) );
-	$deal_info ['percent'] = round ( $deal_info ['support_amount'] / $deal_info ['limit_price'] * 100 );
+	$deal_info ['percent'] = round ( ($deal_info ['support_amount']+$deal_info['virtual_price']) / $deal_info ['limit_price'] * 100 );
 	
 	// $deal_info['deal_level']=$GLOBALS['db']->getOne("select level from ".DB_PREFIX."deal_level where id=".intval($deal_info['user_level']));
-	$deal_info ['person'] = $deal_info ['total_virtual_person'] + $deal_info ['support_count'];
-	$deal_info ['percent'] = round ( ($deal_info ['total_virtual_price'] / $deal_info ['limit_price']) * 100 );
+	$deal_info ['person'] = $deal_info ['virtual_num'] + $deal_info ['support_count'];
+	//$deal_info ['percent'] = round ( ($deal_info ['total_virtual_price'] / $deal_info ['limit_price']) * 100 );
 	
 	$deal_info ['update_url'] = url_wap ( "deal#update", array (
 			"id" => $deal_info ['id'] 

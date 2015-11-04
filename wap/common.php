@@ -1004,7 +1004,7 @@ function cache_deal_comment($comment)
 	return $comment;
 }
 
-function get_deal_list($limit="",$conditions="",$orderby=" sort asc "){
+function get_deal_list($limit="",$conditions="",$orderby=" sort desc "){
 	
 	if($limit!=""){
 		$limit = " LIMIT ".$limit;
@@ -1121,7 +1121,7 @@ function get_deal_list($limit="",$conditions="",$orderby=" sort asc "){
 	return array("rs_count"=>$deal_count,"list"=>$deal_list);
 }
 
-function get_fore_list($limit="",$conditions="",$orderby=" sort asc "){
+function get_fore_list($limit="",$conditions="",$orderby=" sort desc "){
 	
 	if($limit!=""){
 		$limit = " LIMIT ".$limit;
