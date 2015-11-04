@@ -44,6 +44,7 @@
 <div class="search_row">
 	<form name="search" action="__APP__" method="get">	
 		项目ID: <input type="text" class="textbox" name="deal_id" value="{:trim($_REQUEST['deal_id'])}" style="width:30px;" />
+		订单号: <input type="text" class="textbox" name="dingdanhao" value="{:trim($_REQUEST['dingdanhao'])}" style="width:100px;" />
 		项目名称：<input type="text" class="textbox" name="deal_name" value="{:trim($_REQUEST['deal_name'])}" style="width:100px;" />		
 		
 		报名者名称: <input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
@@ -75,6 +76,7 @@
 	action="true" 
 	datasource="list" 
 	show="id:{%ID}|50px
+		,dingdanhao:订单号
 		,deal_name|get_title:项目名称
 		,user_name:报名者
 		,total_price|format_price:应付总额

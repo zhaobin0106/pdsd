@@ -31,6 +31,10 @@ class DealOrderAction extends CommonAction{
 		{
 			$map['deal_name'] = array('like','%'.trim($_REQUEST['deal_name']).'%');
 		}
+		if(trim($_REQUEST['dingdanhao'])!='')
+		{
+			$map['dingdanhao'] = array('like','%'.trim($_REQUEST['dingdanhao']).'%');
+		}
 		if(trim($_REQUEST['deal_id'] != ''))
 		{
 			$map['deal_id'] = intval($_REQUEST['deal_id']);
@@ -445,32 +449,50 @@ class DealOrderAction extends CommonAction{
 		$list = M("DealOrder")
 				->where($where)
 				->field(DB_PREFIX.'deal_order.*')
+				->order('id desc')
 				->limit($limit)->findAll();
 		
 		if($list)
 		{
 			register_shutdown_function(array(&$this, 'export_csv'), $page+1);
 			
-			$order_value = array( 'user_name'=>'""', 'deal_name'=>'""', 'total_price'=>'""','zip'=>'""','mobile'=>'""','province'=>'""','consignee'=>'""','support_memo'=>'""');
-	    	if($page == 1)
+			$order_value = array('id'=>'""' ,'dingdanhao'=>'""', 'deal_name'=>'""', 'user_name'=>'""','num'=>'""', 'total_price'=>'""','credit_pay'=>'""','online_pay'=>'""','pay_time'=>'""','pay_status'=>'""','repay_make'=>'""','is_refund'=>'""','repay_time'=>'""','create_time'=>'""','kuaidi_desc'=>'""','province'=>'""','zip'=>'""','consignee'=>'""','mobile'=>'""','support_memo'=>'""','repay_memo'=>'""');
+			    	if($page == 1)
 	    	{
-		    	$content = iconv("utf-8","gbk","参与者,项目名称,应付总额,邮编,手机,配送地址,收货人,报名者备注");	    		    	
+		    	$content = iconv("utf-8","gbk","编号,订单号,项目名称,支持者,购买数量,应付总额,余额支付,在线支付,支付时间,支付状态,确认收货,退款,回报日期,下单日期,配送信息,收货地址,邮编,收货人,手机号,支持者备注,发货信息");	    		    	
 		    	$content = $content . "\n";
 	    	}
-	    	
+	
 			foreach($list as $k=>$v)
 			{
-				
-				$order_value['user_name'] = '"' . iconv('utf-8','gbk',$v['user_name']) . '"';
+
+				if($v['order_status']==0)$v['pay_status']="未支付";
+				if($v['order_status']==1)$v['pay_status']="过期支付";
+				if($v['order_status']==2)$v['pay_status']="限额已满";
+				if($v['order_status']==3)$v['pay_status']="已支付";
+				$order_value['id'] = '"' . iconv('utf-8','gbk',$v['id']) . '"';
+				$order_value['dingdanhao'] = '"' . iconv('utf-8','gbk',$v['dingdanhao']) . '"';
 				$order_value['deal_name'] = '"' . iconv('utf-8','gbk',$v['deal_name']) . '"';
+				$order_value['user_name'] = '"' . iconv('utf-8','gbk',$v['user_name']) . '"';
+				$order_value['num'] = '"' . iconv('utf-8','gbk',$v['num']) . '"';
 				$order_value['total_price'] = '"' . iconv('utf-8','gbk',$v['total_price']) . '"';
-				$order_value['zip'] = '"' . iconv('utf-8','gbk',$v['zip']) . '"';
-				$order_value['mobile'] = '"' . iconv('utf-8','gbk',$v['mobile']) . '"';
+				$order_value['credit_pay'] = '"' . iconv('utf-8','gbk',$v['credit_pay']) . '"';
+				$order_value['online_pay'] = '"' . iconv('utf-8','gbk',$v['online_pay']) . '"';
+				$order_value['pay_time'] ='"' . iconv('utf-8','gbk',to_date($v['pay_time'],'Y-m-d H:i:s')) . '"';
+				$order_value['pay_status'] = '"' . iconv('utf-8','gbk',$v['pay_status']) . '"';
+				$order_value['repay_make'] = $v['repay_make_time'] > 1?'"' . iconv('utf-8','gbk','是') . '"':'"' . iconv('utf-8','gbk','否') . '"';
+				$order_value['is_refund'] = $v['is_refund'] > 0?'"' . iconv('utf-8','gbk','是') . '"':'"' . iconv('utf-8','gbk','否') . '"';
+				$order_value['repay_time'] ='"' . iconv('utf-8','gbk',to_date($v['repay_time'],'Y-m-d H:i:s')) . '"';
+				$order_value['create_time'] ='"' . iconv('utf-8','gbk',to_date($v['create_time'],'Y-m-d H:i:s')) . '"';
+				$order_value['kuaidi_desc'] = '"' . iconv('utf-8','gbk',$v['kuaidi_desc']) . '"';
 				$order_value['province'] = '"' . iconv('utf-8','gbk',$v['province']) . '"'. iconv('utf-8','gbk',$v['city']) . iconv('utf-8','gbk',$v['address']);
+				$order_value['zip'] = '"' . iconv('utf-8','gbk',$v['zip']) . '"';
 				$order_value['consignee'] = '"' . iconv('utf-8','gbk',$v['consignee']). '"' ;
-				$order_value['support_memo'] = '"'.iconv('utf-8','gbk',$v['support_memo']) . '"';
+				$order_value['mobile'] = '"' . iconv('utf-8','gbk',$v['mobile']) . '"';
+				$order_value['support_memo'] = '"'.iconv('utf-8','gbk',$v['support_memo']).'"';
+				$order_value['repay_memo'] = '"' . iconv('utf-8','gbk',$v['repay_memo']). '"' ;
 				$content .= implode(",", $order_value) . "\n";
-			}	
+			}
 			
 			//
 			header("Content-Disposition: attachment; filename=order_list.csv");
@@ -535,31 +557,48 @@ class DealOrderAction extends CommonAction{
 		$list = M("DealXianhuoOrder")
 		->where($where)
 		->field(DB_PREFIX.'deal_xianhuo_order.*')
+		->order('id desc')
 		->limit($limit)->findAll();
 	
 		if($list)
 		{
 			register_shutdown_function(array(&$this, 'export_csvs'), $page+1);
 				
-			$order_value = array( 'user_name'=>'""', 'deal_name'=>'""', 'total_price'=>'""','zip'=>'""','mobile'=>'""','province'=>'""','consignee'=>'""','support_memo'=>'""');
-			if($page == 1)
-			{
-				$content = iconv("utf-8","gbk","购买者,项目名称,应付总额,邮编,手机,配送地址,收货人,购买者备注");
-				$content = $content . "\n";
-			}
+			$order_value = array('id'=>'""' ,'dingdanhao'=>'""', 'deal_name'=>'""', 'user_name'=>'""','num'=>'""', 'total_price'=>'""','credit_pay'=>'""','online_pay'=>'""','pay_time'=>'""','pay_status'=>'""','repay_make'=>'""','is_refund'=>'""','repay_time'=>'""','create_time'=>'""','kuaidi_desc'=>'""','province'=>'""','zip'=>'""','consignee'=>'""','mobile'=>'""','support_memo'=>'""','repay_memo'=>'""');
+			    	if($page == 1)
+	    	{
+		    	$content = iconv("utf-8","gbk","编号,订单号,项目名称,购买者,购买数量,应付总额,余额支付,在线支付,支付时间,支付状态,确认收货,退款,回报日期,下单日期,配送信息,收货地址,邮编,收货人,手机号,购买者备注,发货信息");	    		    	
+		    	$content = $content . "\n";
+	    	}
 	
 			foreach($list as $k=>$v)
 			{
-	
-				$order_value['user_name'] = '"' . iconv('utf-8','gbk',$v['user_name']) . '"';
+
+				if($v['order_status']==0)$v['pay_status']="未支付";
+				if($v['order_status']==1)$v['pay_status']="过期支付";
+				if($v['order_status']==2)$v['pay_status']="限额已满";
+				if($v['order_status']==3)$v['pay_status']="已支付";
+				$order_value['id'] = '"' . iconv('utf-8','gbk',$v['id']) . '"';
+				$order_value['dingdanhao'] = '"' . iconv('utf-8','gbk',$v['dingdanhao']) . '"';
 				$order_value['deal_name'] = '"' . iconv('utf-8','gbk',$v['deal_name']) . '"';
+				$order_value['user_name'] = '"' . iconv('utf-8','gbk',$v['user_name']) . '"';
+				$order_value['num'] = '"' . iconv('utf-8','gbk',$v['num']) . '"';
 				$order_value['total_price'] = '"' . iconv('utf-8','gbk',$v['total_price']) . '"';
+				$order_value['credit_pay'] = '"' . iconv('utf-8','gbk',$v['credit_pay']) . '"';
+				$order_value['online_pay'] = '"' . iconv('utf-8','gbk',$v['online_pay']) . '"';
+				$order_value['pay_time'] ='"' . iconv('utf-8','gbk',to_date($v['pay_time'],'Y-m-d H:i:s')) . '"';
+				$order_value['pay_status'] = '"' . iconv('utf-8','gbk',$v['pay_status']) . '"';
+				$order_value['repay_make'] = $v['repay_make_time'] > 1?'"' . iconv('utf-8','gbk','是') . '"':'"' . iconv('utf-8','gbk','否') . '"';
+				$order_value['is_refund'] = $v['is_refund'] > 0?'"' . iconv('utf-8','gbk','是') . '"':'"' . iconv('utf-8','gbk','否') . '"';
+				$order_value['repay_time'] ='"' . iconv('utf-8','gbk',to_date($v['repay_time'],'Y-m-d H:i:s')) . '"';
+				$order_value['create_time'] ='"' . iconv('utf-8','gbk',to_date($v['create_time'],'Y-m-d H:i:s')) . '"';
+				$order_value['kuaidi_desc'] = '"' . iconv('utf-8','gbk',$v['kuaidi_desc']) . '"';
+				$order_value['province'] = '"' . iconv('utf-8','gbk',$v['province']) . '"'. iconv('utf-8','gbk',$v['city']) . iconv('utf-8','gbk',$v['address']);
 				$order_value['zip'] = '"' . iconv('utf-8','gbk',$v['zip']) . '"';
-				$order_value['mobile'] = '"' . iconv('utf-8','gbk',$v['mobile']) . '"';
-				$order_value['province'] = '"' . iconv('utf-8','gbk',$v['province']) . iconv('utf-8','gbk',$v['city']) . iconv('utf-8','gbk',$v['address']). '"';
 				$order_value['consignee'] = '"' . iconv('utf-8','gbk',$v['consignee']). '"' ;
-				$order_value['support_memo'] = '"' . iconv('utf-8','gbk',trim($v['support_memo'])). '"' ;
-				//var_dump(implode(",", $order_value));
+				$order_value['mobile'] = '"' . iconv('utf-8','gbk',$v['mobile']) . '"';
+				$order_value['support_memo'] = '"'.iconv('utf-8','gbk',$v['support_memo']).'"';
+				$order_value['repay_memo'] = '"' . iconv('utf-8','gbk',$v['repay_memo']). '"' ;
 				$content .= implode(",", $order_value) . "\n";
 			}
 			//var_dump('saas121as'.$content);
@@ -598,6 +637,10 @@ class DealOrderAction extends CommonAction{
 		if(trim($_REQUEST['user_name'])!='')
 		{
 			$map['user_name'] = array('like','%'.trim($_REQUEST['user_name']).'%');
+		}
+		if(trim($_REQUEST['dingdanhao'])!='')
+		{
+			$map['dingdanhao'] = array('like','%'.trim($_REQUEST['dingdanhao']).'%');
 		}
 		if(intval($_REQUEST['is_refund'])==1)
 		{
@@ -665,6 +708,10 @@ class DealOrderAction extends CommonAction{
 		if(trim($_REQUEST['user_name'])!='')
 		{
 			$map['user_name'] = array('like','%'.trim($_REQUEST['user_name']).'%');
+		}
+		if(trim($_REQUEST['dingdanhao'])!='')
+		{
+			$map['dingdanhao'] = array('like','%'.trim($_REQUEST['dingdanhao']).'%');
 		}
 		if(intval($_REQUEST['is_refund'])==1)
 		{

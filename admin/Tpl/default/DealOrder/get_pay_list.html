@@ -65,6 +65,7 @@
 <div class="search_row">
 	<form name="search" action="__APP__" method="get">	
  		支持者: <input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
+ 		订单号: <input type="text" class="textbox" name="dingdanhao" value="{:trim($_REQUEST['dingdanhao'])}" style="width:100px;" />
 				退款:<select name="is_refund">
 				<option value="0" <if condition="$_REQUEST['is_refund'] eq 0">selected="selected"</if>>全部</option>
 				<option value="1" <if condition="$_REQUEST['is_refund'] eq 1">selected="selected"</if>>否</option>
@@ -97,6 +98,7 @@
 	action="true" 
 	datasource="list" 
 	show="id:{%ID}|50px
+		,dingdanhao:订单号
 		,deal_name|get_title:项目名称
 		,type|get_type_name:类型
 		,user_name:支持人
