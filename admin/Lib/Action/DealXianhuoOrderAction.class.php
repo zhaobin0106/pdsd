@@ -472,7 +472,7 @@ class DealXianhuoOrderAction extends CommonAction{
 				if($v['order_status']==2)$v['pay_status']="限额已满";
 				if($v['order_status']==3)$v['pay_status']="已支付";
 				$order_value['id'] = '"' . iconv('utf-8','gbk',$v['id']) . '"';
-				$order_value['dingdanhao'] = '"' . iconv('utf-8','gbk','’'.$v['dingdanhao']) . '"';
+				$order_value['dingdanhao'] = '"' . iconv('utf-8','gbk','D'.$v['dingdanhao']) . '"';
 				$order_value['deal_name'] = '"' . iconv('utf-8','gbk',$v['deal_name']) . '"';
 				$order_value['user_name'] = '"' . iconv('utf-8','gbk',$v['user_name']) . '"';
 				$order_value['num'] = '"' . iconv('utf-8','gbk',$v['num']) . '"';
@@ -490,8 +490,8 @@ class DealXianhuoOrderAction extends CommonAction{
 				$order_value['zip'] = '"' . iconv('utf-8','gbk',$v['zip']) . '"';
 				$order_value['consignee'] = '"' . iconv('utf-8','gbk',$v['consignee']). '"' ;
 				$order_value['mobile'] = '"' . iconv('utf-8','gbk',$v['mobile']) . '"';
-				$order_value['support_memo'] = '"'.iconv('utf-8','gbk','’'.$v['support_memo']).'"';
-				$order_value['repay_memo'] = '"' . iconv('utf-8','gbk','’'.$v['repay_memo']). '"' ;
+				$order_value['support_memo'] = '"'.iconv('utf-8','gbk',$v['support_memo']).'"';
+				$order_value['repay_memo'] = '"' . iconv('utf-8','gbk',$v['repay_memo']). '"' ;
 				$content .= implode(",", $order_value) . "\n";
 			}
 			
