@@ -189,9 +189,9 @@ class dealsModule extends BaseModule
 			);
 		}else{
 			$state_list = array(
-				1=>array("name"=>"拼地成功"),
-				2=>array("name"=>"拼地失败"),
-				3=>array("name"=>"拼地中"),
+				1=>array("name"=>"开拼成功"),
+				2=>array("name"=>"开拼失败"),
+				3=>array("name"=>"开拼中"),
 			);
 		}
 		
