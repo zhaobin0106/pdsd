@@ -10,7 +10,7 @@ class accountModule{
 	public function index()
 	{	
 		 
-		$GLOBALS['tmpl']->assign("page_title","支持的项目");
+		$GLOBALS['tmpl']->assign("page_title","开拼的商品");
 		$page_size = intval($GLOBALS['m_config']['page_size']);;
 		$page = intval($_REQUEST['p']);
 		if($page==0)
@@ -59,7 +59,7 @@ class accountModule{
 	public function xianhuo()
 	{
 			
-		$GLOBALS['tmpl']->assign("page_title","购买的商品");
+		$GLOBALS['tmpl']->assign("page_title","现货的商品");
 		$page_size = intval($GLOBALS['m_config']['page_size']);;
 		$page = intval($_REQUEST['p']);
 		if($page==0)
@@ -109,7 +109,7 @@ class accountModule{
 	public function shichi()
 	{
 			
-		$GLOBALS['tmpl']->assign("page_title","报名的活动");
+		$GLOBALS['tmpl']->assign("page_title","报名的试吃");
 		$page_size = intval($GLOBALS['m_config']['page_size']);;
 		$page = intval($_REQUEST['p']);
 		if($page==0)
