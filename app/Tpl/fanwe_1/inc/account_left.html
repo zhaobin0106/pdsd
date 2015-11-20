@@ -1,9 +1,9 @@
 <div class="homeleft pageleft f_l ">
-	<div class="menutitle">项目管理</div>
+	<div class="menutitle">商品管理</div>
 	<ul class="homemenulist">
 		<li {if $module eq 'account'&& $action eq 'index'}class="select"{/if}>
 			<a href="{url r="account#index"}" class="a1">
-				<i></i>拼地的商品
+				<i></i>开拼的商品
 			</a>
 		</li>
 				<li {if $module eq 'account'&& $action eq 'xianhuo'}class="select"{/if}>
@@ -26,7 +26,7 @@
 		{if $user_info.user_level eq 14}
 		<li {if $module eq 'account'&& ($action eq 'project' || $action eq 'get_investor_status' || $action eq 'get_leader_list' || $action eq 'support' || $action eq 'paid')}class="select"{/if}>
 			<a href="{url r="account#project"}" class="a2">
-				<i></i>我的项目
+				<i></i>我的商品
 			</a>
 		</li>
 		{/if}
