@@ -71,7 +71,7 @@
 				{if $deal_info.percent gte 100}
 			已成功
 				{else $deal_info.percent gt 0}
-			拼地失败
+			已失败
 				{/if}	 
 			{else}
 				{if $deal_info.percent gte 100}
@@ -79,7 +79,7 @@
 				{elseif $deal_info.end_time eq 0}
 			长期项目
 				{else}
-			拼地进行中
+			进行中
 				{/if}
 			{/if}
 			</div>	
@@ -135,7 +135,7 @@
 		</div>
 		{/if}
 		<div class="jd1">
-			<span class="zs f_l">拼地者</span>
+			<span class="zs f_l">参与者</span>
 			{if $deal_info.virtual_person eq 0}
 			<span class="nu1 f_r">{$deal_info.support_count}人</span>
 			{/if}
@@ -150,8 +150,8 @@
 	{foreach from=$deal_item_list item=deal_item key=key}
 	<div class="box2 f_l">
 		<div class="box21">
-			<span class="box2_title f_l">拼地 ¥{$deal_item.price_format}</span>
-			<span class="f_r">已有 <em class="f18 f_red">{$deal_item.virtual_person_list}</em> 位拼地者</span>
+			<span class="box2_title f_l">开拼 ¥{$deal_item.price_format}</span>
+			<span class="f_r">已有 <em class="f18 f_red">{$deal_item.virtual_person_list}</em> 位参与者</span>
 		</div>
 		<div class="box22">
 			<span class="box22_1 f_l">
@@ -194,14 +194,14 @@
 			{if $deal_item.support_count < $deal_item.limit_user or $deal_item.limit_user eq 0}
 			<a class="box22_3 theme_bgcolor" href="{url r="cart" p="id=$deal_item.id&type=1&lixing=deal"}" target="_blank">
 				<div>
-					<span  style="font-size:18px"><b>拼地 ¥{$deal_item.price_format}</b></span>
+					<span  style="font-size:18px"><b>已拼 ¥{$deal_item.price_format}</b></span>
 				</div>
 			</a>
 			{else}
 			<div class="box22_3 bg_gray" disabled="disabled">已满额</div>
 			{/if}
 			{else}
-			<div class="box22_3 bg_gray" disabled="disabled">拼地 ¥{$deal_item.price_format}</div>
+			<div class="box22_3 bg_gray" disabled="disabled">开拼 ¥{$deal_item.price_format}</div>
 			{/if}
 			<div class="blank0"></div>
 		</div>
