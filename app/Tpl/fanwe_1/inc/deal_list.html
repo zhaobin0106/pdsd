@@ -129,7 +129,7 @@
 			{if $deal_item.begin_time > $now}
 			<span class="common-begin">即将开始</span>
 			{elseif $deal_item.end_time < $now and $deal_item.end_time neq 0}
-			<span {if $deal_item.percent gte 100}class="common-success"{else}class="common-fail"{/if}>{if $deal_item.percent gte 100}已成功{else $deal_item.percent gt 0}拼地失败{/if}</span> 	 
+			<span {if $deal_item.percent gte 100}class="common-success"{else}class="common-fail"{/if}>{if $deal_item.percent gte 100}已成功{else $deal_item.percent gt 0}已失败{/if}</span> 	 
 			{else}
 			{if $deal_item.percent gte 100}
 				<span class="common-success">已成功</span>
