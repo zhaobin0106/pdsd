@@ -90,7 +90,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 			<div class="deal_item_box" style="height:auto">
 				<div class="deal_content_box">
 					<a href="{url r="fore#show" p="id=$deal_info.id"}" title="{$deal_info.name}" target="_blank" style="display:block;overflow:hidden">
-						<img  src="{if $deal_info.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$deal_info.image w="205" h="160" g="1"}{/if}" />
+						<img  style="width:100%;height:100%;" src="{if $deal_info.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$deal_info.image w="0" h="160" g="1"}{/if}" />
 					</a>
 					<div class="blank"></div>
 					<a href="{url r="fore#show" p="id=$deal_info.id"}" class="deal_title" title="{$deal_info.name}">{$deal_info.name}</a>
@@ -253,7 +253,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 			<div class="deal_item_box" style="height:auto">
 				<div class="deal_content_box">
 					<a href="{url r="deal#show" p="id=$deal_info.id"}" title="{$deal_info.name}" target="_blank" style="display:block;overflow:hidden">
-						<img  src="{if $deal_info.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$deal_info.image w="205" h="160" g="1"}{/if}" />
+						<img  style="width:100%;height:100%;" src="{if $deal_info.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$deal_info.image w="0" h="160" g="1"}{/if}" />
 					</a>
 					<div class="blank"></div>
 					<a href="{url r="deal#show" p="id=$deal_info.id"}" class="deal_title" title="{$deal_info.name}">{$deal_info.name}</a>
@@ -418,7 +418,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 			<div class="deal_item_box" style="height:auto">
 				<div class="deal_content_box">
 					<a href="{url r="deal#show" p="id=$deal_info.id"}" title="{$deal_info.name}" target="_blank" style="display:block;overflow:hidden">
-						<img  src="{if $deal_info.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$deal_info.image w="205" h="160" g="1"}{/if}" />
+						<img  style="width:100%;height:100%;" src="{if $deal_info.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$deal_info.image w="0" h="160" g="1"}{/if}" />
 					</a>
 					<div class="blank"></div>
 					<a href="{url r="deal#show" p="id=$deal_info.id"}" class="deal_title" title="{$deal_info.name}">{$deal_info.name}</a>
