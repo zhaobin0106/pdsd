@@ -105,7 +105,7 @@ $this->_var['cpagejs_1'][]='';
     	<div class="paiduan">
     	
         	<span class="caption-title">
-	        	已拼地：<span class="symbol">¥&nbsp;</span><span class="f_money">{$deal_info.total_virtual_price_format}</span>&nbsp;&nbsp;&nbsp;
+	        	已拼到：<span class="symbol">¥&nbsp;</span><span class="f_money">{$deal_info.total_virtual_price_format}</span>&nbsp;&nbsp;&nbsp;
 	        	目标：<span class="symbol" style="color:#333">¥&nbsp;</span><span class="f_money" style="color:#333">{$deal_info.limit_price_format}</span>
         	</span>
             <span class="f_r " style="">
@@ -122,7 +122,7 @@ $this->_var['cpagejs_1'][]='';
                             <span class="common common-fail">拼地失败</span>
                         {/if}
                         {if $deal_info.status eq 3}
-                            <span class="common common-sprite">拼地中</span>
+                            <span class="common common-sprite">开拼中</span>
                         {/if}
                         {if $deal_info.status eq 4}
                             <span class="common common-sprite">长期项目</span>
@@ -172,7 +172,7 @@ $this->_var['cpagejs_1'][]='';
 			</div>
 	        <div class="div_dt" style="border:none;">
 	            <span class="num">{$deal_info.person}</span><br />
-	            <span class="til">拼地者</span>               
+	            <span class="til">参与者</span>               
 	        </div>
         	<div class="blank"></div>
     	</div>
@@ -196,9 +196,9 @@ $this->_var['cpagejs_1'][]='';
 					{if $item.support_count < $item.limit_user or $item.limit_user eq 0}
 				    <div class="Returntitle webkit-box-flex">
 				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
-				        <span class="span2">{$item.person}人已拼地</span>
+				        <span class="span2">{$item.person}人已拼到</span>
 				    </div>
-				    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:100px;">立即拼地</a>
+				    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:100px;">立即开拼</a>
 					{else}
 				    <div class="Returntitle webkit-box-flex">
 				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
@@ -209,7 +209,7 @@ $this->_var['cpagejs_1'][]='';
 					{else}
 				    <div class="Returntitle webkit-box-flex">
 				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
-				        <span class="span2">{$item.person}人已拼地</span>
+				        <span class="span2">{$item.person}人已拼到</span>
 				    </div>
 				    <a href="javascript:void(0);"  disabled="true" class="ui-button bg_gray mr15 mt10" style="width:100px;">立即拼地</a>
 					{/if}	
