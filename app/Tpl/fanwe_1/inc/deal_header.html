@@ -46,7 +46,7 @@
 				{if $deal_info.is_support_print eq 1 && $deal_info.type neq 1}
 				<!--<li {if ACTION_NAME eq 'support'}class="select"{/if}><a href="{url r="deal#support" p="id=$deal_info.id"}">支持者({$deal_info.person})</a></li>-->
 				{/if}
-				<li {if ACTION_NAME eq 'comment'}class="select"{/if}><a href="{url r="deal#comment" p="id=$deal_info.id"}">拼地者热评({$comment_count})</a></li>				
+				<li {if ACTION_NAME eq 'comment'}class="select"{/if}><a href="{url r="deal#comment" p="id=$deal_info.id"}">参与者热评({$comment_count})</a></li>				
 			</ul>
 		</div>
 	</div>
