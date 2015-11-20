@@ -26,11 +26,11 @@ input{border:solid 1px rgb(169, 169, 169);}
 		 {include file="inc/account_left.html"} 
 		<div class="homeright pageright f_r">
 			<div >
-				<div class="page_title">我的项目</div>	
+				<div class="page_title">我的商品</div>	
 				<div class="full">
 					<form method="post" action="{url r="account#project" }" id="account_project">
 						<span>
-							<label class="label_l f_l mr10">项目类型:</label>
+							<label class="label_l f_l mr10">商品类型:</label>
 							<a class="btn_select f_l mr15" id="search_type_select">
 								<span class="cur_select" id="search_type_cur"></span>
 								<div class="select_arrow"></div>
@@ -52,7 +52,7 @@ input{border:solid 1px rgb(169, 169, 169);}
 							</a>
 						</span>
 						<span>
-							<label class="label_l f_l mr10">项目名称:</label>
+							<label class="label_l f_l mr10">商品名称:</label>
 							<input type="text" class="smaller_textbox mr10" id="project_label" name="search_name" value="{$search_name}">	
 						</span>
 						<span>
@@ -67,7 +67,7 @@ input{border:solid 1px rgb(169, 169, 169);}
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="uc_table">
 						<thead>
 							<tr>
-								<th>项目名称</th>
+								<th>商品名称</th>
 								<th width="100">类型</th>
 								<th width="100">状态</th>
 								<th width="200" style="text-align:right;padding-right:24px">操作</th>
@@ -168,11 +168,11 @@ input{border:solid 1px rgb(169, 169, 169);}
 					<div class="blank20"></div>
 					{else}
 					<div class="empty_tip">
-						从未创建过任何项目 <a href="{url r="project#choose"}" class="btn_creat linkgreen">立即创建项目</a>
+						从未创建过任何商品 <a href="{url r="project#choose"}" class="btn_creat linkgreen">立即创建商品</a>
 					</div>
 					{/if}
 				</div
-				<div class="blank"></div>	
+				><div class="blank"></div>	
 			</div>
 	 		<div class="blank"></div>	
 		</div>
