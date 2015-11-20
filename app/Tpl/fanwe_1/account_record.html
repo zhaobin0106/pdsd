@@ -17,15 +17,15 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="uc_table">
 						<tbody>
 							<tr>
-								<th>项目名称</th>
-								<th>支付时间</th>
+								<th>充值方式</th>
+								<th>充值时间</th>
 								<th>金额</th>
-								<th>是否支付</th>
+								<th>是否充值</th>
 							</tr>
 							{foreach from=$record_list item=record_item}
 							<tr>
 								<td>
-									{if $record_item.deal_name eq null}在线支付{/if}
+									{if $record_item.deal_name eq null}在线充值{/if}
 								</td>
 								<td>
 									{if $record_item.pay_time eq 0}无{/if}
@@ -35,8 +35,8 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 									<span class="f_money b">{$record_item.money}</span>
 								</td>
 								<td>
-									{if $record_item.is_paid eq 1}已支付{/if}
-									{if $record_item.is_paid eq 0}<a class="ui-small-button bg_red f12 b" href="{$record_item.url}" style="float:none;display:inline-block">继续支付</a>{/if}
+									{if $record_item.is_paid eq 1}已充值{/if}
+									{if $record_item.is_paid eq 0}<a class="ui-small-button bg_red f12 b" href="{$record_item.url}" style="float:none;display:inline-block">继续充值</a>{/if}
 								</td>
 							</tr>
 							{/foreach}
