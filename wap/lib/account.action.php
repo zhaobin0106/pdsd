@@ -675,7 +675,7 @@ class accountModule{
 	}
 	public function project()
 	{
- 		$GLOBALS['tmpl']->assign("page_title","我的项目");
+ 		$GLOBALS['tmpl']->assign("page_title","我的商品");
 		if(!$GLOBALS['user_info'])
 		app_redirect(url_wap("user#login"));	
 
