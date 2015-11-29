@@ -1,6 +1,6 @@
 <?php
 return array(
-'DEFAULT_ADMIN'=>'admin',
+'DEFAULT_ADMIN'=>'caiwu',
 'URL_MODEL'=>'0',
 'AUTH_KEY'=>'pdsd',
 'TIME_ZONE'=>'8',
@@ -21,7 +21,7 @@ return array(
 'TEMPLATE'=>'fanwe_1',
 'SITE_LOGO'=>'./public/attachment/201506/13/14/557bcfbff2563.png',
 'SEO_TITLE'=>'预购新鲜',
-'REPLY_ADDRESS'=>'dev_bgy@abc.com',
+'REPLY_ADDRESS'=>'pindiservice@163.com',
 'SMS_ON'=>'1',
 'PUBLIC_DOMAIN_ROOT'=>'',
 'APP_MSG_SENDER_OPEN'=>'1',
@@ -58,8 +58,8 @@ return array(
 'REFERRALS_DELAY'=>'1',
 'MOBILE_MUST'=>'1',
 'MAIL_SEND_PAYMENT'=>'0',
-'REPLY_ADDRESS'=>'dev_bgy@abc.com',
-'MAIL_SEND_DELIVERY'=>'0',
+'REPLY_ADDRESS'=>'pindiservice@163.com',
+'MAIL_SEND_DELIVERY'=>'1',
 'MAIL_ON'=>'1',
 'EDM_ON'=>'0',
 'EDM_USERNAME'=>'',
