@@ -47,7 +47,13 @@ $this->_var['cpagejs_1'][]='';
             </div>
                 	        	        		 	<div style="float:right">
 	 				{foreach from=$deal_info.deal_item_list item=item key=k}
+	 							{if $item.support_count < $item.limit_user or $item.limit_user eq 0}
+
         		    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:60px;background-color:#9ed367;font-size:14px;font-weight:700">报名</a>
+        		    {else}
+        		    			<div class="box22_3 bg_gray" disabled="disabled" style="float:right;width:60px;margin-top:-5px;margin-left:0px;">已满额</div>
+        		    			{/if}
+
         		    {/foreach}
         		    </div>
         		    
