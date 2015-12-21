@@ -67,10 +67,10 @@
 	{if $deal_item.is_limit_user eq 1}
 		
 			<!--<span>限额：{$deal_item.limit_user}位&nbsp;&nbsp;&nbsp;</span>-->
-			<span style="font-size:20px;font-weight:700;margin-right:40px;margin-left:10px">还剩 <b style="color:#65AD33;font-size:20px">{$deal_item.remain_person}</b> 个名额</span>
+			<span style="font-size:20px;font-weight:700;margin-right:40px;margin-left:10px">还剩 <b style="color:#65AD33;font-size:20px">{$deal_info.shengyu_limit}</b> 个名额</span>
 		
 	{/if}
-	<span style="font-size:15px;margin-right:40px;">已有 <em class="f18 f_red" style="font-size:15px">{$deal_item.virtual_person_list}</em> 位报名者</span>
+	<span style="font-size:15px;margin-right:40px;">已有 <em class="f18 f_red" style="font-size:15px">{$deal_info.support_count}</em> 位报名者</span>
 	<span style="font-size:15px">报名截止时间：<em class="f18 f_red" style="font-size:15px">{function name="to_date" v=$deal_info.end_time f="Y年m月d日"}</em></span>
 	</div>
 	

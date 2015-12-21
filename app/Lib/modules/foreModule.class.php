@@ -183,7 +183,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
  			} else
  				$deal_info ['status'] = '4';
  		}
- 			
+	$deal_info ['shengyu_limit'] = $nums - $deal_info['person'];	
  		//项目等级放到项目详细页面模块（对详细页面进行控制）
 		$deal_info['deal_level']=$GLOBALS['db']->getOne("select level from ".DB_PREFIX."deal_level where id=".intval($deal_info['user_level']));
 		$deal_info['virtual_person']=$GLOBALS['db']->getOne("select sum(virtual_person) from ".DB_PREFIX."fore_item where deal_id=".$deal_info['id']);
