@@ -104,17 +104,16 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 			});
 			}
 				</script>
-        <div class="mainlist webkit-box return_cont">
-            <label class="input_lable">内容介绍</label>
-            <div class="r_list ml10">
-                <textarea rows=1 cols=40 style='height:50px;overflow:scroll;overflow-y:auto;;overflow-x:hidden' 
-onfocus="window.activeobj=this;this.clock=setInterval(function(){activeobj.style.height=activeobj.scrollHeight+'px';},200);" onblur="clearInterval(this.clock);">{$deal_item.description}</textarea>
-            </div>
+
+        <div class="mainlist webkit-box return_cont" style="overflow:hidden">
+            <p style="line-height: 20px;width:20%;padding:10px 0">内容介绍</p>
+            <p style="line-height: 20px;width:75%;padding:10px 0;padding-left:5%;font-size:12px">{$deal_item.description}</p>
         </div>
+
         <div class="mainlist webkit-box">
             <label class="input_lable">项目备注</label>
             <div class="r_list ml10">
-                <input type="text" placeholder="给发起人留言" class="textbox">
+                <input type="text" placeholder="给发起人留言" class="textbox" style="color: #333;">
             </div>
         </div>
         				<div id="dizhi" style="display:none">
@@ -141,7 +140,7 @@ onfocus="window.activeobj=this;this.clock=setInterval(function(){activeobj.style
         </div>
         </div>
         <div class="sbmbj">
-            <div class="mainlist webkit-box">
+            <div class="mainlist webkit-box" style="border-top:0">
                 <font class="delivery_fee mr10">
                     	金额：{$deal_item.price_format}&nbsp;&nbsp;
                     <lable id="kuaidi" style="display:none">邮费：<span id="youfei"></span></lable>
@@ -189,7 +188,7 @@ onfocus="window.activeobj=this;this.clock=setInterval(function(){activeobj.style
         {/if}
         {/if}
         <div class="sbmbj">
-            <div class="blocktitle">选择支付方式</div>
+            <div class="blocktitle" style="border-bottom:1px solid #dfdfdf;">选择支付方式</div>
             {foreach from=$payment_list item=payment name=payment key=k} 
             <label class="webkit-box p15 pt5 pb5">
                 <input type="radio" value="{$payment.id}" name="payment" class="mt mt10" />
