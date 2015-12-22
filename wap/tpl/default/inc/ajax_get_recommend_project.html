@@ -36,7 +36,7 @@
 </style>
 <div class="project_recommend overflow_hide">
 	<div class="blank10"></div>
-	<!-- 推荐项目列表 开始 -->
+	<!-- 推荐拼地列表 开始 -->
 	<ul class="project_list">
 		{foreach from=$effective_deal_info item=effective_deal_item}
 		<li class="webkit-box sizing">
@@ -54,7 +54,7 @@
 		</li>
 		{/foreach}
 	</ul>
-	<!-- 推荐项目列表 结束 -->
+	<!-- 推荐拼地列表 结束 -->
 	<div class="blank10"></div>
 	<!-- 自荐理由 开始 -->
 	<div class="tl">自荐理由：</div>
@@ -80,7 +80,7 @@
 		ajax_recommend_save();
 	});
 	function page_style(){
-		//筛选自荐项目
+		//筛选自荐拼地
 		$(".ui_check").click(function(){
 			var rel=$(this).attr("rel");
 			$(".ui_check[rel='"+rel+"']").removeClass("ui_checked");
@@ -102,7 +102,7 @@
 	function ajax_recommend_save(){
 		$(".button_y").bind("click",function(){
 			if($("input[name='project_recommend']:checked").length==0){
-				$.showErr("请选择推荐项目");
+				$.showErr("请选择推荐拼地");
 				return false;
 			}
 			if($("#memo").val()==''){

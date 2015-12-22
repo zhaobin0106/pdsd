@@ -56,7 +56,7 @@ text-decoration: none;
 				<label class="input_lable mr10">应付金额</label>
 				<div class="list_con webkit-box-flex">
 					{if $order_info.kuaidi_price gt 0}
-					项目金额:{function name="format_price" v=$order_info.deal_price}
+					拼地金额:{function name="format_price" v=$order_info.deal_price}
 					运费:{function name="format_price" v=$order_info.kuaidi_price}
 					总额：{function name="format_price" v=$order_info.total_price}
 					{else}
@@ -68,10 +68,10 @@ text-decoration: none;
 				<label class="input_lable mr10">收款情况</label>
 				<div class="list_con webkit-box-flex">
 					{if $order_info.order_status eq 1}
-					因项目过期，资金已退到个人帐户
+					因拼地过期，资金已退到个人帐户
 					{/if}
 					{if $order_info.order_status eq 2}
-					因项目限额已满，资金已退到个人帐户
+					因拼地限额已满，资金已退到个人帐户
 					{/if}	
 					{if $order_info.order_status eq 3}
 					支付成功
@@ -111,14 +111,14 @@ text-decoration: none;
 						{if $order_info.is_refund eq 1}
 						拼地失败，金额已退回会员帐户
 						{else}
-						项目未成功
+						拼地未成功
 						{/if}
 					{else}
 						{if $order_info.is_refund eq 1}
 						拼地失败，金额已退回会员帐户
 						{else}
 						{if $order_info.repay_time eq 0}
-						项目成功，回报未发放
+						拼地成功，回报未发放
 						{else}
 						{$order_info.repay_memo}
 						{/if}

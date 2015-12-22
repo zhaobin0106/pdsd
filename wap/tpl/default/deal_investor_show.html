@@ -48,7 +48,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 					{if $deal_info.percent gte 100}
 						<span class="common common-success">已成功</span>
 					{elseif $deal_info.end_time eq 0}
-				<span class="common common-sprite">长期项目</span>
+				<span class="common common-sprite">长期拼地</span>
 					{else}
 				<span class="common common-success">融资中</span>
 					{/if}
@@ -114,7 +114,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 						{if $deal_info.percent gte 100}
 							已成功
 						{elseif $deal_info.end_time eq 0}
-							长期项目
+							长期拼地
 						{else}
 							融资中
 						{/if}
@@ -132,7 +132,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 			</div>
 			<div class="blank5"></div>
 			<div class="tl">
-				<span class="zs">项目截止时间：</span>
+				<span class="zs">拼地截止时间：</span>
 				<span class="nu1 f_red">{function name="to_date" v=$deal_info.end_time f="Y年m月d日H时i分"}</span>
 			</div>
 			<div class="blank5"></div>
@@ -142,7 +142,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
     	<!-- 2 开始 -->
     	<div class="detailmain_2">
 		    <div>
-		    	<label class="f_666">项目简介：</label>
+		    	<label class="f_666">拼地简介：</label>
 		    	<div class="blank0"></div>
 		    	<div class="f13">
 		    		{$deal_item.business_descripe}
@@ -156,15 +156,15 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 	    		<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tab3">
 				    <tbody>
 				        <tr>
-				            <td align="right" class="td_l">项目类别：</td>
+				            <td align="right" class="td_l">拼地类别：</td>
 				            <td>{$cates}</td>
 				        </tr>
 				        <tr>
-				        	<td align="right" class="td_l">项目标签：</td>
+				        	<td align="right" class="td_l">拼地标签：</td>
 				            <td>{$deal_item.tags}</td>
 				        </tr>
 				        <tr>
-				        	<td align="right" class="td_l">项目所属阶段：</td>
+				        	<td align="right" class="td_l">拼地所属阶段：</td>
 				            <td>{if $deal_item.project_step eq 0}尚未启动{/if}{if $deal_item.project_step eq 1}产品开发中{/if}{if $deal_item.project_step eq 2}产品已上市或上线{/if}{if $deal_item.project_step eq 3}已经有收入{/if}{if $deal_item.project_step eq 4}已经盈利{/if}</td>
 				        </tr>
 				        <tr>
@@ -172,7 +172,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				            <td>{$deal_item.transfer_share}%</td>
 				        </tr>
 				        <tr>
-				        	<td align="right" class="td_l">是否有其他项目：</td>
+				        	<td align="right" class="td_l">是否有其他拼地：</td>
 				            <td>{if $deal_item.has_another_project eq 0}否{else}是{/if}</td>
 				        </tr>
 				        <tr>
@@ -207,7 +207,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tab3 tab4">
 				    <tbody>
 				        <tr>
-				            <th align="right" class="td_l">审核项目</th>
+				            <th align="right" class="td_l">审核拼地</th>
 				            <th>审核状态</th>
 				        </tr>
 				        {if $audit_data_list.legal_id.display_type eq 0}
@@ -291,7 +291,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 			<div class="blank5"></div>
 			{if $leader_info neq null}
 	    		<div class="leader">
-	    			<h3 class="theme_fcolor">项目领投人</h3>
+	    			<h3 class="theme_fcolor">拼地领投人</h3>
 	    			<div class="text webkit-box">
 	    				<div class="l mr10">
 	    					{function name="show_wap_blank_avatar" p="$leader_info.user_id" t="middle"}
@@ -493,7 +493,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 						return false;
 					}
 					if(ajaxobj.status==8){
-						//项目已经结束无法投资！
+						//拼地已经结束无法投资！
 						$.showErr(ajaxobj.info);
 						return false;
 					}

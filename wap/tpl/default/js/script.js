@@ -477,7 +477,7 @@ function bind_header_search()
 {
 	$("#header_submit").bind("click",function(){
 		var kw = $("#header_keyword").val();
-		if($.trim(kw)==""||$.trim(kw)=="搜索项目")
+		if($.trim(kw)==""||$.trim(kw)=="搜索拼地")
 		{
 			$("#header_keyword").val("");
 			$("#header_keyword").focus();
@@ -489,7 +489,7 @@ function bind_header_search()
 	});
 	$("#header_search_form").bind("submit",function(){
 		var kw = $("#header_keyword").val();
-		if($.trim(kw)==""||$.trim(kw)=="搜索项目")
+		if($.trim(kw)==""||$.trim(kw)=="搜索拼地")
 		{
 			$("#header_keyword").val("");
 			$("#header_keyword").focus();
@@ -504,12 +504,12 @@ function bind_header_search()
 		var kw = $("#header_keyword").val();
 		if($.trim(kw)=="")
 		{
-			$("#header_keyword").val("搜索项目");
+			$("#header_keyword").val("搜索拼地");
 		}
 	});
 	$("#header_keyword").bind("focus",function(){
 		var kw = $("#header_keyword").val();
-		if($.trim(kw)=="搜索项目")
+		if($.trim(kw)=="搜索拼地")
 		{
 			$("#header_keyword").val("");
 		}

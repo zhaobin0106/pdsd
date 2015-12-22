@@ -17,7 +17,7 @@
 				{if $deal_info.percent gte 100}
 					已成功
 				{elseif $deal_info.end_time eq 0}
-			长期项目
+			长期拼地
 				{else}
 			融资中
 				{/if}
@@ -81,7 +81,7 @@
 		    </div>
 		</div>
 		<div class="blank10"></div>
-		<div class="jd2 f_red">项目截止时间：{function name="to_date" v=$deal_info.end_time f="Y年m月d日H时i分"}</div>
+		<div class="jd2 f_red">拼地截止时间：{function name="to_date" v=$deal_info.end_time f="Y年m月d日H时i分"}</div>
 	</div>
 	<div class="blank20"></div>
 	<div class="box4">
@@ -141,11 +141,11 @@
 	<div class="blank20"></div>
 	<!-- 第三部分 结束 -->
 
-	<!-- 第四部分项目领投人 开始 -->
+	<!-- 第四部分拼地领投人 开始 -->
 	{if $leader_info neq null && $type eq 0}
 	<div class="box4">
 		<div class="mod_title theme_fcolor">
-			<span>项目领投人</span>
+			<span>拼地领投人</span>
 		</div>
 		<div class="mod_conment">
 			<div class="mod_cont1 overflow_hide">
@@ -200,14 +200,14 @@
 			</div>
 			<div class="mod_cont3 overflow_hide">
 		    	<div class="blank10"></div>
-				<span class="tit theme_fcolor">对创业项目评价：</span>
+				<span class="tit theme_fcolor">对创业拼地评价：</span>
 				<div class="blank0"></div>
 			    <span class="text">{$leader_info.leader_for_project}</span>
 			</div>
 		</div>
 	</div>
 	{/if}
-	<!-- 第四部分项目领投人 结束 -->
+	<!-- 第四部分拼地领投人 结束 -->
 	
 	<!-- 第五部分跟投记录 开始 -->
 	{if $enquiry_info neq null &&$type eq 0}
@@ -334,7 +334,7 @@
 						return false;
 					}
 					if(ajaxobj.status==8){
-						//项目已经结束无法投资！
+						//拼地已经结束无法投资！
 						$.showErr(ajaxobj.info);
 						return false;
 					}

@@ -54,7 +54,7 @@ text-decoration: none;
 				<label class="input_lable mr10">应付金额</label>
 				<div class="list_con webkit-box-flex">
 					{if $order_info.kuaidi_jiage gt 0}
-					项目金额:{function name="format_price" v=$order_info.deal_price}
+					拼地金额:{function name="format_price" v=$order_info.deal_price}
 					运费:{function name="format_price" v=$order_info.kuaidi_jiage}
 					总额：{function name="format_price" v=$order_info.total_price}
 					{else}
@@ -67,7 +67,7 @@ text-decoration: none;
 				<div class="list_con webkit-box-flex">
 
 					{if $order_info.order_status eq 2}
-					因项目限额已满，资金已退到个人帐户
+					因拼地限额已满，资金已退到个人帐户
 					{/if}	
 					{if $order_info.order_status eq 3}
 					支付成功

@@ -24,8 +24,8 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
                     </h3>
                     <div class="info_all">
                         <div class="info_group">
-                            <label class="label_l">项目类型:</label>&nbsp;
-                            <span class="label_r"><span class="f_red">{if $recommend_info_item.deal_type eq 1}股权众筹{/if}{if $recommend_info_item.deal_type eq 0}普通众筹{/if}</span></span>
+                            <label class="label_l">拼地类型:</label>&nbsp;
+                            <span class="label_r"><span class="f_red">{if $recommend_info_item.deal_type eq 1}股权{/if}{if $recommend_info_item.deal_type eq 0}普通{/if}</span></span>
                         </div>
                         <div class="info_group">
                         	<label class="label_l">推荐理由:</label>&nbsp;
@@ -49,7 +49,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 	<div class="blank10"></div>
 	{if $recommend_info eq null}
 	<div class="f14 tc">
-		暂时没有推送的项目，点击立即<a href="{url_wap r="deals"}" class="theme_fcolor ml10" target="_blank">浏览更多项目</a>
+		暂时没有推送的拼地，点击立即<a href="{url_wap r="deals"}" class="theme_fcolor ml10" target="_blank">浏览更多拼地</a>
 	</div>
 	{/if}
 </section>

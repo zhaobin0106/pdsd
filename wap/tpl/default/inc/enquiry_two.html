@@ -38,7 +38,7 @@
 	<div class="ul_block">
 		<ul>
 			<li class="webkit-box">
-				<label class="input_lable">项目估值：</label>
+				<label class="input_lable">拼地估值：</label>
 				<input type="text" placeholder="请输入估值金额" name="stock_value" id="stock_value" class="textbox webkit-box-flex stock_value" value="" style="width:100px;margin-right:5px;" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-.]+/,'');}).call(this)" onblur="this.v();"/>万元
 			</li>
 			<li class="webkit-box">
@@ -91,7 +91,7 @@ $(function(){
 function enquiry_save(){
 	$("#enquiry_two .button_y").bind("click",function(){
 		if($("#stock_value").val()==''){
-			$.showErr("项目估值不能为空！");
+			$.showErr("拼地估值不能为空！");
 			return false;
 		}
 		if((isNaN($(".stock_value").val())||parseFloat($(".stock_value").val())<=0)||$(".stock_value").val()=='')

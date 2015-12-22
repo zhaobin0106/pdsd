@@ -22,11 +22,11 @@
 	<div class="pay_info">
 	 	<p class="h tc red"><i {if $data.pay_status eq 0}class="fa fa-times-circle"{/if}{if $data.pay_status eq 1}class="fa fa-check-circle"{/if}></i>&nbsp;{$data.pay_info}</p>
 	 	{if $type == 'shichi'}
-	 	<a href="{url_wap r="account#shichi"}" class="ui-button theme_color mt10">查看项目</a>
+	 	<a href="{url_wap r="account#shichi"}" class="ui-button theme_color mt10">查看拼地</a>
 	 	{elseif $type == 'xianhuo'}
-	 		 	<a href="{url_wap r="account#xianhuo"}" class="ui-button theme_color mt10">查看项目</a>
+	 		 	<a href="{url_wap r="account#xianhuo"}" class="ui-button theme_color mt10">查看拼地</a>
 	 	{else}
-	 		 		 	<a href="{url_wap r="account"}" class="ui-button theme_color mt10">查看项目</a>
+	 		 		 	<a href="{url_wap r="account"}" class="ui-button theme_color mt10">查看拼地</a>
 	 	{/if}
 	</div>
  {if $data.show_pay_btn eq 1}

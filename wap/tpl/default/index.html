@@ -92,7 +92,7 @@
             <!--list 开始 -->
             
             <!--<h2 class="h2-title bdl sizing">
-                精品项目
+                精品拼地
                 <span class="f_r">
                     <a href="{url_wap r="deals#index"}">查看产品众筹&nbsp;<i class="fa fa-angle-right"></i></a>
                     <a href="{url_wap r="deals#index" p="type=1"}" class="equity">查看股权众筹&nbsp;<i class="fa fa-angle-right"></i></a>
@@ -106,7 +106,7 @@
                             <a class="current">综合推荐</a>
                         </li>
                         <li>
-                            <a href="{url_wap r="deals" p="r=rec"}">推荐项目</a>
+                            <a href="{url_wap r="deals" p="r=rec"}">推荐拼地</a>
                         </li>
                         <li>
                             <a href="{url_wap r="deals" p="r=yure"}">正在预热</a>
@@ -194,7 +194,7 @@
   </div>
     <!-- 左侧菜单 结束 -->
     
-    <!-- 项目列表 开始 -->
+    <!-- 拼地列表 开始 -->
     <div style="width:70%;float:right">
     {foreach from=$deal_list item=deal key=k name=deal}
     {if $smarty.foreach.deal.iteration<11}
@@ -232,7 +232,7 @@
 	                            <span class="common common-sprite">筹资中</span>
 	                        {/if}
 	                        {if $deal.status eq 4}
-	                            <span class="common common-sprite">长期项目</span>
+	                            <span class="common common-sprite">长期拼地</span>
 	                        {/if}
 						{/if}
 					{/if}
@@ -299,7 +299,7 @@
 </section>
 <script type="text/javascript">
     // deal_show_menu();
-    // //项目详情页左侧导航菜单固定
+    // //拼地详情页左侧导航菜单固定
     // var resetDeal_show_menu=null;
     // function deal_show_menu() {
     //     var scroH = $(window).scrollTop();

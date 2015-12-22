@@ -82,7 +82,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 			<div class="blank0"></div>
 		</div>
 		<div class="form_row control-group">
-			<label class="form_lable">对创业项目评价:</label>
+			<label class="form_lable">对创业拼地评价:</label>
 			<div class="blank0"></div>
 			<textarea name="leader_for_project" name="leader_for_project" id="leader_for_project" class="textareabox">{$leader_info.leader_for_project}</textarea>
 			<div class="blank0"></div>
@@ -118,7 +118,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 				return false;
 			}
 			if($("#leader_for_project").val()==''){
-				$.showErr("项目评价不能为空！");
+				$.showErr("拼地评价不能为空！");
 				return false;
 			}				
 			var ajaxurl ='{url r="ajax#leader_info_save"}';
