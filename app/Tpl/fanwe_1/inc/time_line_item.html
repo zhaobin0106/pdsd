@@ -18,14 +18,14 @@
 	<div class="log_user_info">
 		<div class="deal_user_name" style="height:25px; line-height:25px;"><a href="{url r="home" p="id=$log_item.user_id"}">{$log_item.user_name}</a></div>
 		<div class="blank1"></div>
-		<span class="f_l" style="font-size:12px;line-height:20px"  onclick="send_message({$log_item.user_id});">项目发起人</span>	
+		<span class="f_l" style="font-size:12px;line-height:20px"  onclick="send_message({$log_item.user_id});">拼地发起人</span>	
 		<span onclick="send_message({$log_item.user_id});" class="send_message f_l" style="margin-left:5px; height:20px;"></span>				
 	</div>
 	<span class="f_r" style="padding-top:15px;">{$log_item.pass_time}</span>
 	<div class="blank1"></div>
 	</div>
 	{else}
-	<div class="timeline-start"><span>项目上线</span><strong class="timeline-posted-at">{function name="to_date" v=$deal_info.begin_time }</strong>
+	<div class="timeline-start"><span>拼地上线</span><strong class="timeline-posted-at">{function name="to_date" v=$deal_info.begin_time }</strong>
 	<div class="blank1"></div>
 	</div>
 	{/if}
@@ -34,8 +34,8 @@
 	{if $log_item.log_info neq ''}
 	{function name="nl2br" v=$log_item.log_info}
 	{else}
-	由 {$deal_info.user_name} 发起的项目「{$deal_info.name}」上线了。
-	此项目必须
+	由 {$deal_info.user_name} 发起的拼地「{$deal_info.name}」上线了。
+	此拼地必须
 	{if $deal_info.end_time > 0}
 	在 {function name="to_date" v=$deal_info.end_time f="Y年m月d日H:i"} 之前，
 	{/if}

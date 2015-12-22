@@ -65,7 +65,7 @@ body{ background:#f3f3f3; }
 <div class="location_box wrap1000">
 	<div class="location f_l">
 		<i class="fl ico loc_ico mr5"></i>
-		<label>您现在的位置：</label><a>发布产品项目</a><em>>></em><a>基本信息</a>
+		<label>您现在的位置：</label><a>发布产品拼地</a><em>>></em><a>基本信息</a>
 	</div>
 </div>
 <div class="blank"></div>
@@ -74,10 +74,10 @@ body{ background:#f3f3f3; }
 	<div class="agreementhd"></div>
 	<div class="agreementlf f_l">
 		<form id="project_form" action="{url r="project#save"}" method="post">		
-			<div class="pro_msg">项目信息</div>
+			<div class="pro_msg">拼地信息</div>
 			<div class="blank5"></div>
 			<div class="setlist">
-				<label class="setmid">项目标题</label>
+				<label class="setmid">拼地标题</label>
 				<input type="text" class="pro_lf textbox" name="name">
 				<span class="holder_tip">名称不可超过40个字</span>
 			</div>
@@ -97,9 +97,9 @@ body{ background:#f3f3f3; }
 			</div>
 			<div class="blank0"></div>
 			<div class="setlist">
-				<label class="setmid">项目分类</label>
+				<label class="setmid">拼地分类</label>
 				<a class="btn_select f_l" id="cate_id_select">
-					<span class="cur_select" id="cate_id_cur">项目分类：</span>
+					<span class="cur_select" id="cate_id_cur">拼地分类：</span>
 					<div class="select_arrow"></div>
 					<select name="cate_id" class="select-h" id='cate_id'>
 				    	{foreach from=$cate_list item="cate_item" key=key}
@@ -135,7 +135,7 @@ body{ background:#f3f3f3; }
 			</div>	
 			<div class="blank0"></div>		
 			<div class="setlist">
-				<label class="setmid">项目封面</label>
+				<label class="setmid">拼地封面</label>
 				
 				<label class="fileupload" onclick="upd_file(this,'image_file');" style="width:97px;">
 					<input type="file" class="filebox" name="image_file" id="image_file"/  style="cursor:pointer;padding: 0;height: 39px;width: 97px;filter: alpha(opacity=0);-moz-opacity: 0;-khtml-opacity: 0;opacity: 0;">						
@@ -143,17 +143,17 @@ body{ background:#f3f3f3; }
 				<span class="prompt" style="margin-top:3px;">支持jpg、jpeg、png、gif格式，大小不超过{$max_size}M。【推荐尺寸640px*500px】</span>
 			</div>
 			<div class="setlist">
-				<label class="setmid">项目视频</label>
+				<label class="setmid">拼地视频</label>
 				<input type="text" class="pro_lf textbox"  name="vedio">
-				<span class="holder_tip">请输入项目视频地址</span>
+				<span class="holder_tip">请输入拼地视频地址</span>
 			</div>			
 			<div class="setlist">
 				<label class="setmid">简要说明</label>
 				<textarea name="brief" id="intro" class="textareabox textbox w350"></textarea>
-				<span class="holder_tip">不超过75个字，简要描述一下你的项目</span>
+				<span class="holder_tip">不超过75个字，简要描述一下你的拼地</span>
 			</div>
 			<div class="setlist">
-				<label class="setmid">项目详情</label>
+				<label class="setmid">拼地详情</label>
 				<div class="ke_form f_l">
 					{function name="show_ke_form" text_name="descript" width="470" height="300" ctn=""}		
 				</div>
@@ -188,7 +188,7 @@ body{ background:#f3f3f3; }
 					<img id="image" src="{if $deal_image.thumb_url eq ''}{$TMPL}/images/empty_thumb.gif{else}{$deal_image.thumb_url}{/if}" />
 				</a>
 				<div class="blank"></div>
-				<a href="#" class="deal_title" id="deal_title">项目的名称</a>
+				<a href="#" class="deal_title" id="deal_title">拼地的名称</a>
 				<div class="blank"></div>
 			</div>
 			<!--2-->

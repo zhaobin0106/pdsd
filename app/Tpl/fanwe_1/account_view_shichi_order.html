@@ -23,13 +23,13 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 		<div class="switch_nav">
 			<ul>
 				{if $deal_info.type eq 1}
-				<li class="current"><a href="{url r="account#mine_investor_status"}">投资的项目</a></li>
+				<li class="current"><a href="{url r="account#mine_investor_status"}">投资的拼地</a></li>
 				{else}
 				<li class="current"><a href="{url r="account#shichi"}">报名的试吃</a></li>
 				{/if}
 						{if $user_info.user_level eq 14}
 				
-				<li><a href="{url r="account#project"}">我的项目</a></li>
+				<li><a href="{url r="account#project"}">我的拼地</a></li>
 				{/if}
 				<li><a href="{url r="account#credit"}">收支明细</a></li>
 				
@@ -90,7 +90,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 					<td>
 						
 						{if $order_info.kuaidi_jiage gt 0}
-						项目金额：<span class="f_money">{function name="format_price" v=$order_info.deal_price}</span>&nbsp;&nbsp;
+						拼地金额：<span class="f_money">{function name="format_price" v=$order_info.deal_price}</span>&nbsp;&nbsp;
 						运费：<span class="f_money">{function name="format_price" v=$order_info.kuaidi_jiage}</span>&nbsp;&nbsp;
 						总额：<span class="f_money">{function name="format_price" v=$order_info.total_price}</span>
 						{else}
@@ -103,10 +103,10 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 					<td class="deal_name">收款情况</td>
 					<td>
 						{if $order_info.order_status eq 1}
-						因项目过期，资金已退到个人帐户
+						因拼地过期，资金已退到个人帐户
 						{/if}
 						{if $order_info.order_status eq 2}
-						因项目限额已满，资金已退到个人帐户
+						因拼地限额已满，资金已退到个人帐户
 						{/if}	
 						{if $order_info.order_status eq 3}
 						支付成功

@@ -86,12 +86,12 @@ function bind_project_form()
 		
 		if($.trim($(this).find("input[name='name']").val())=='')
 		{
-			$.showErr("请填写项目名称");
+			$.showErr("请填写拼地名称");
 			return false;
 		}
 		if($(this).find("input[name='name']").val().length>25)
 		{
-			$.showErr("项目名称不超过25个字");
+			$.showErr("拼地名称不超过25个字");
 			return false;
 		}
 	/*	if($("#item_form").find("input[name='investor_authority']").val()=='')
@@ -102,24 +102,24 @@ function bind_project_form()
 	*/	
 		if($(this).find("input[name='cate_id']").val()==''||$(this).find("input[name='cate_id']").val()==0)
 		{
-			$.showErr("请选择项目分类");
+			$.showErr("请选择拼地分类");
 			return false;
 		}
 		
 		if($.trim($(this).find("input[name='tags']").val())=='')
 		{
-			$.showErr("请填写项目标签");
+			$.showErr("请填写拼地标签");
 			return false;
 		}
 		if($(this).find("input[name='tags']").val().length>25)
 		{
-			$.showErr("项目标签不超过25个字");
+			$.showErr("拼地标签不超过25个字");
 			return false;
 		}
 		
 		if($("#item_form").find("select[name='project_step']").val()=='')
 		{
-			$.showErr("请选择项目所属阶段");
+			$.showErr("请选择拼地所属阶段");
 			return false;
 		}
 		
@@ -156,7 +156,7 @@ function bind_project_form()
 		}
 		if($("#item_form").find("select[name='has_another_project']").val()=='')
 		{
-			$.showErr("请选择是否有其他项目");
+			$.showErr("请选择是否有其他拼地");
 			return false;
 		}
 		
@@ -190,13 +190,13 @@ function bind_project_form()
 		
 		if($("#item_form").find("input[name='business_stock_type']").val()=='')
 		{
-			$.showErr("请选择众筹股东成立的有限合伙企业入股方式");
+			$.showErr("请选择股东成立的有限合伙企业入股方式");
 			return false;
 		}
 		
 		if($.trim($(this).find("textarea[name='business_descripe']").val())=='')
 		{
-			$.showErr("请企业项目简介");
+			$.showErr("请企业拼地简介");
 			return false;
 		}
 		

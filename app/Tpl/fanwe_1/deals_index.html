@@ -244,7 +244,7 @@ border-radius:2px;
 				</script>
 				
 				<div class="rel-key-rec f_r" style="margin-right:10px">
-					<a href="{url r="deals" p="type=$p_type"}" {if $p_state eq ''} class="current"{/if}>所有项目{if $p_state eq ''}({$deal_count}){/if}</a>
+					<a href="{url r="deals" p="type=$p_type"}" {if $p_state eq ''} class="current"{/if}>所有拼地{if $p_state eq ''}({$deal_count}){/if}</a>
 					{foreach from=$state_list item=state_item key=key}
 					<a href="{$state_item.url}" title="{$state_item.name}" {if $p_state eq $key}class="current"{/if}>{$state_item.name}{if $p_state eq $key}({$deal_count}){/if}</a>
 					{/foreach}	

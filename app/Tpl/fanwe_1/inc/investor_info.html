@@ -1,15 +1,15 @@
 <table width="100%" border="0" cellspacing="1" cellpadding="0" class="tab1">
     <tbody>
         <tr>
-            <td width="19%" align="right">项目类别：</td>
+            <td width="19%" align="right">拼地类别：</td>
             <td width="30%">{$cate}</td>
-            <td width="19%" align="right">项目所属阶段：</td>
+            <td width="19%" align="right">拼地所属阶段：</td>
             <td width="30%">{if $deal_item.project_step eq 0}尚未启动{/if}{if $deal_item.project_step eq 1}产品开发中{/if}{if $deal_item.project_step eq 2}产品已上市或上线{/if}{if $deal_item.project_step eq 3}已经有收入{/if}{if $deal_item.project_step eq 4}已经盈利{/if}</td>
         </tr>
         <tr>
             <td align="right">出让股份：</td>
             <td>{$deal_item.transfer_share}%</td>
-            <td align="right">是否有其他项目：</td>
+            <td align="right">是否有其他拼地：</td>
             <td>{if $deal_item.has_another_project eq 0}否{else}是{/if}</td>
         </tr>
         <tr>
@@ -26,7 +26,7 @@
             <tr>
             <td align="right">企业员工人数：</td>
             <td>{$deal_item.business_employee_num}</td>
-            <td align="right">项目标签：</td>
+            <td align="right">拼地标签：</td>
             <td>{$deal_item.tags}</td>
         </tr>
         <tr>
@@ -39,7 +39,7 @@
 </table>
 <div class="blank20"></div>
 <div class="l_main_hd">
-    <h3 class="mb10">企业项目简介</h3>
+    <h3 class="mb10">企业拼地简介</h3>
     <div class="f16 lh30">{$deal_item.business_descripe}</div>
 </div>
 <div class="blank20"></div>
@@ -50,7 +50,7 @@
                 <li>创业团队</li>
                 <li>历史情况</li>
                 <li>未来计划</li>
-                <li>项目附件</li>
+                <li>拼地附件</li>
             </ul>
         </div>
         <div class="effect_bd">
@@ -89,7 +89,7 @@
                 <i></i>
                 <div class="tit_bg"></div>
                 <div class="tit_text theme_fcolor">
-                    <span class="num">4</span>项目赢利模式说明
+                    <span class="num">4</span>拼地赢利模式说明
                 </div>
             </div>
             <div class="text">{$deal_item.description_5}</div>
@@ -107,7 +107,7 @@
                 <i></i>
                 <div class="tit_bg"></div>
                 <div class="tit_text theme_fcolor">
-                    <span class="num">6</span>项目主要核心竞争力说明
+                    <span class="num">6</span>拼地主要核心竞争力说明
                 </div>
             </div>
             <div class="text">{$deal_item.description_7}</div>                       
@@ -436,7 +436,7 @@
 		{/if}
 		{if $user_info.id eq null}
             <div class="tc pt20 pb20">
-                温馨提示：您需要<a onclick="javascript:show_pop_login();" style="color:red;cursor: pointer;">登录</a>才可以查看项目详细信息！
+                温馨提示：您需要<a onclick="javascript:show_pop_login();" style="color:red;cursor: pointer;">登录</a>才可以查看拼地详细信息！
             </div>
 		{/if}
     </div>   

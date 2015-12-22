@@ -19,7 +19,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 			</div>
 			<div class="switch_nav">
 				<ul>
-					<li><a href="{url r="project#edit" p="id=$deal_item.id"}">项目介绍</a></li>		
+					<li><a href="{url r="project#edit" p="id=$deal_item.id"}">拼地介绍</a></li>		
 					<li class="current"><a href="{url r="project#add_item" p="id=$deal_item.id"}">回报设置</a></li>					
 				</ul>
 			</div>
@@ -103,7 +103,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 					<div class="clear"></div>
 					<div class="form_row control-group">
 						<label class="title control-label w100">回报时间:</label>
-						<label class="tip_box f_l" style="padding-left:0px; padding-right:10px;">项目成功后</label>
+						<label class="tip_box f_l" style="padding-left:0px; padding-right:10px;">拼地成功后</label>
 						<input type="text" value="{$item.repaid_day}" class="textbox w100" name="repaid_day" />
 						<label class="tip_box">天</label>
 					</div>
@@ -134,7 +134,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 						</div>
 						<div id="repaid_day_box">
 							<div class="blank"></div>
-							预计回报发放时间：项目成功结束后<span id="repaid_day">{$item.repaid_day}</span>天内
+							预计回报发放时间：拼地成功结束后<span id="repaid_day">{$item.repaid_day}</span>天内
 							
 						</div>
 <!-- 						<div id="delivery_box">

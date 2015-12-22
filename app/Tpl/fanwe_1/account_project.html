@@ -38,7 +38,7 @@ input{border:solid 1px rgb(169, 169, 169);}
 				              		{if app_conf("INVEST_STATUS")eq 0 }	
 										<option value="-1" {if $search_type eq -1}selected="selected"{/if}>请选择</option>
 										<option value="0" {if $search_type eq 0}selected="selected"{/if}>拼地</option>
-						              	<option value="1" {if $search_type eq 1}selected="selected"{/if}>股权众筹</option>  
+						              	<option value="1" {if $search_type eq 1}selected="selected"{/if}>股权</option>  
 									{/if}
 									{if app_conf("INVEST_STATUS")eq 1 }	
 										<option value="-1" {if $search_type eq -1}selected="selected"{/if}>请选择</option>
@@ -46,7 +46,7 @@ input{border:solid 1px rgb(169, 169, 169);}
 									{/if}
 									{if app_conf("INVEST_STATUS")eq 2 }	
 										<option value="-1" {if $search_type eq -1}selected="selected"{/if}>请选择</option>
-										<option value="1" {if $search_type eq 1}selected="selected"{/if}>股权众筹</option>  
+										<option value="1" {if $search_type eq 1}selected="selected"{/if}>股权</option>  
 									{/if}		    
 								</select>
 							</a>
@@ -82,7 +82,7 @@ input{border:solid 1px rgb(169, 169, 169);}
 								</td>
 								<td>
 									{if $deal_item.type eq 1}
-										股权众筹
+										股权
 									{else}
 										拼地
 									{/if}
@@ -142,7 +142,7 @@ input{border:solid 1px rgb(169, 169, 169);}
 										{/if}
  										<a href="{url r="project#del" p="id=$deal_item.id"}" class="del_deal">删除</a>
 									{else}
-										<a href="{url r="deal#update" p="id=$deal_item.id"}">项目日志</a><br />
+										<a href="{url r="deal#update" p="id=$deal_item.id"}">拼地日志</a><br />
 										<a href="{url r="account#goumai" p="id=$deal_item.id"}">现货记录</a><br />
 										{if $deal_item.type eq 1}<a href="{url r="account#get_leader_list" p="id=$deal_item.id"}">领投资格列表</a><br />{/if}
 										{if $deal_item.is_success eq 1}

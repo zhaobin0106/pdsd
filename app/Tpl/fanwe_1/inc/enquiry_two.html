@@ -34,15 +34,15 @@
 </style>
 <div class="full pr">
 <form id="enquiry_two" action="{url r="investor#enquiry_save"}">
-	<div class="mod_hd f22 theme_fcolor tl">投资项目</div>
+	<div class="mod_hd f22 theme_fcolor tl">投资拼地</div>
 	<div class="blank20"></div>
 	<div class="chance_left tc ps">
-		<h3 class="theme_bgcolor f14">该项目剩余询价机会</h3>
+		<h3 class="theme_bgcolor f14">该拼地剩余询价机会</h3>
 		<span class="theme_fcolor f20">{$inquiry_num}次</span>
 	</div>
 	<div class="mod_bd">
 		<div class="form_row control-group">
-			<label class="f_l">项目估值：</label>
+			<label class="f_l">拼地估值：</label>
 			<div class="f_l">
 				<input type="text" placeholder="请输入金额" name="stock_value" id="stock_value" class="textbox f_l stock_value" value="" style="width:100px;margin-right:5px;" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-.]+/,'');}).call(this)" onblur="this.v();"/>
 				<span class="f_l" style="line-height:33px;">万元</span>
@@ -109,7 +109,7 @@ $(function(){
 function enquiry_save(){
 	$("#enquiry_two .button_y").bind("click",function(){
 		if($("#stock_value").val()==''){
-			$.showErr("项目估值不能为空！");
+			$.showErr("拼地估值不能为空！");
 			return false;
 		}
 		if((isNaN($(".stock_value").val())||parseFloat($(".stock_value").val())<=0)||$(".stock_value").val()=='')

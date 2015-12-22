@@ -195,18 +195,18 @@ $this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
 <div class="location_box wrap1000">
 	<div class="location f_l">
 		<i class="fl ico loc_ico mr5"></i>
-		<label>您现在的位置：</label><a>发布股权项目</a><em>>></em><a>项目基本信息</a>
+		<label>您现在的位置：</label><a>发布股权拼地</a><em>>></em><a>拼地基本信息</a>
 	</div>
 </div>
 <div class="blank10"></div>
 <div class="step_box step_box1">
 	<ul>
-		<li class="l1 cur"><span>1</span> 项目基本信息</li>
+		<li class="l1 cur"><span>1</span> 拼地基本信息</li>
 		<li class="l2"><span>2</span> 市场定位与商业模式</li>
 		<li class="l3"><span>3</span> 编辑及管理团队</li>
-		<li class="l4"><span>4</span> 项目历史执行资料</li>
+		<li class="l4"><span>4</span> 拼地历史执行资料</li>
 		<li class="l5"><span>5</span> 未来三年内计划</li>
-		<li class="l6"><span>6</span> 项目附件</li>
+		<li class="l6"><span>6</span> 拼地附件</li>
 		<li class="l7"><span>7</span> 提交审核</li>
 	</ul>
 </div>
@@ -215,7 +215,7 @@ $this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
 	<div class="hd3">
 		<div class="hd31 f_l">
 			<ul class="clearfix">
-				<li class="select"><a>项目基本信息</a></li>
+				<li class="select"><a>拼地基本信息</a></li>
 			</ul>
 		</div>
 	</div>
@@ -224,16 +224,16 @@ $this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
 	<table width="100%" border="0" cellspacing="1" cellpadding="0" class="tab1">
 	<tbody>
     	<tr>
-      		<td align="right">项目名称：</td>
+      		<td align="right">拼地名称：</td>
           	<td colspan="3">
           		<div class="group">
           			<input name="name" type="text" class="small_textbox textbox w450" id="project_name" value="{$deal_item.name}" maxlength="18">
-          			<span class="holder_tip">请输入项目名称</span>
+          			<span class="holder_tip">请输入拼地名称</span>
           		</div>
           	</td>
         </tr>
         <tr style="display:none;">
-          	<td align="right">项目详细资料查看权限：</td>
+          	<td align="right">拼地详细资料查看权限：</td>
           	<td colspan="3">
           		<div class="f_l f14">
 					<span {if $deal_item.investor_authority eq 0}class="ui_check info_view ml20 ui_checked "{else}class="ui_check info_view"{/if} type="radio" rel="info_view">
@@ -248,10 +248,10 @@ $this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
 			</td>
         </tr>
         <tr>
-          	<td width="22%" align="right">项目分类：</td>
+          	<td width="22%" align="right">拼地分类：</td>
           	<td width="26%">
 				<a class="btn_select f_l" id="industry_id_select">
-					<span class="cur_select" id="industry_id_cur">项目分类：</span>
+					<span class="cur_select" id="industry_id_cur">拼地分类：</span>
 					<div class="select_arrow"></div>
 					<select name="cate_id" class="select-h" id='cate_id'>
 				    	{foreach from=$cate_list item="cate_item" key=key}
@@ -261,19 +261,19 @@ $this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
 				</a>
 				<input type="hidden" name="cate_id" id='cate_id_last' />
     		</td>
-      		<td width="15%" align="right">项目标签：</td>
+      		<td width="15%" align="right">拼地标签：</td>
       		<td width="37%">
       			<div class="group">
       				<input type="text" class="small_textbox textbox w250" id="project_label" name="tags" value="{$deal_item.tags}">
-      				<span class="holder_tip">请输入项目标签</span>
+      				<span class="holder_tip">请输入拼地标签</span>
       			</div>
       		</td>
     	</tr>
         <tr>
-          	<td align="right">项目所属阶段：</td>
+          	<td align="right">拼地所属阶段：</td>
           	<td>
 	            <a class="btn_select btn_select160 f_l" id="phase_id_select">
-					<span class="cur_select" id="phase_id_cur">项目所属行业：</span>
+					<span class="cur_select" id="phase_id_cur">拼地所属行业：</span>
 					<div class="select_arrow"></div>
 					<select name="project_step" class="select-h" id="phase_id">				
 						<option {if $deal_item.project_step eq 0}selected="selected"{/if} value="0" >尚未启动</option>
@@ -284,7 +284,7 @@ $this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
 					</select>
 				</a>
         	</td>
-          	<td align="right">是否有其他项目：</td>
+          	<td align="right">是否有其他拼地：</td>
 		  	<td>
 	          	<a class="btn_select btn_select80 f_l mr10" id="has_otherpro_select">
 					<span class="cur_select" id="has_otherpro_cur"></span>
@@ -401,13 +401,13 @@ $this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
 			</td>  
         </tr>
         <tr id="partake_type_tr">
-        	<td align="right">众筹股东成立的有限合伙企业入股方式：</td>
+        	<td align="right">股东成立的有限合伙企业入股方式：</td>
           	<td colspan="4">
 	          	<div class="f_l f14">
 					<span {if $deal_item.business_stock_type eq 0}class="ui_check info_view ui_checked"{else}class="ui_check info_view"{/if} type="radio" rel="partake_type">
 						<input type="radio" name="business_stock_type" {if $deal_item.business_stock_type eq 0}checked="checked"{/if} value="0"  />
 					</span>
-					直接入股项目总公司
+					直接入股拼地总公司
 					<span  {if $deal_item.business_stock_type eq 1}class="ui_check info_view ui_checked ml20"{else}class="ui_check info_view ml20"{/if} type="radio" rel="partake_type" >
 						<input type="radio" name="business_stock_type" {if $deal_item.business_stock_type eq 1}checked="checked"{/if} value="1" />
 					</span>	
@@ -426,12 +426,12 @@ $this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
 	    </tr>            
         <tr>
           	<td rowspan="2" align="right" valign="top" style="line-height:40px;">
-          		企业项目简介：
+          		企业拼地简介：
           	</td>
           	<td colspan="3">
           		<div class="group">
 	          		<textarea id="project_description" name="business_descripe" rows="5" class="textareabox textbox w550 h200" onkeyup="checkstrlength(this,'#left_words',300);">{$deal_item.business_descripe}</textarea>
-	          		<span class="holder_tip">请输入企业项目简介，不超过300字</span>
+	          		<span class="holder_tip">请输入企业拼地简介，不超过300字</span>
 	          	</div>
           	</td>
     	</tr>
@@ -440,7 +440,7 @@ $this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
         </tr>
         <tr>
           	<td align="right" valign="top" style="line-height:40px;">
-          		上传项目图片：
+          		上传拼地图片：
           	</td>
           	<td colspan="3">
           		<label class="fileupload pic_show pr" onclick="upd_file(this,'image_file');">
@@ -449,15 +449,15 @@ $this->_var['dcpagejs'][] = APP_ROOT_PATH."/system/region.js";
 				</label>
 				<input type="hidden" name="image" value="{$deal_item.image}">
 				<span class="prompt" style="margin-top:3px;"></span>
-				<div colspan="3" class="f_666 f14" style="line-height:25px;"><label class="f_red">温馨提示：</label>项目审核通过后创业者不能再更换项目图片，请选择最有吸引力的一张图片，宽高最佳尺寸为<span class="f_red b">800x600</span>像素，其他产品图片请在商业模式资料编辑栏继续添加</div>
+				<div colspan="3" class="f_666 f14" style="line-height:25px;"><label class="f_red">温馨提示：</label>拼地审核通过后创业者不能再更换项目图片，请选择最有吸引力的一张图片，宽高最佳尺寸为<span class="f_red b">800x600</span>像素，其他产品图片请在商业模式资料编辑栏继续添加</div>
           	</td>
         </tr>
         <tr>
-          	<td align="right">项目视频地址：</td>
+          	<td align="right">拼地视频地址：</td>
           	<td colspan="3">
           		<div class="group">
 	          		<input name="vedio" type="text" value="{$deal_item.vedio}" size="50" class="small_textbox textbox w450" />
-	          		<span class="holder_tip">请输入项目视频地址</span>
+	          		<span class="holder_tip">请输入拼地视频地址</span>
 	          	</div>
           	</td>
         </tr>
@@ -621,7 +621,7 @@ function checkstrlength(obj,left_words,words)
 	var html_var=$("#show_html").html();
 	$(function(){
 		if(html_var){
-			$.weeboxs.open(html_var, {contentType:'text',showButton:true,title:"项目商业计划书撰写指南",width:800,height:300,type:'wee'});
+			$.weeboxs.open(html_var, {contentType:'text',showButton:true,title:"拼地商业计划书撰写指南",width:800,height:300,type:'wee'});
 		}
 
 		// 实例化是否显示企业成立时间

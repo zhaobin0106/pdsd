@@ -77,7 +77,7 @@
 				{if $deal_info.percent gte 100}
 					已成功
 				{elseif $deal_info.end_time eq 0}
-			长期项目
+			长期拼地
 				{else}
 			进行中
 				{/if}
@@ -143,7 +143,7 @@
 			<span class="nu1 f_r">{$deal_info.person}人</span>
 			{/if}
 		</div>
-		<div class="jd2 f_red">项目截止时间：{function name="to_date" v=$deal_info.end_time f="Y年m月d日H时i分"}</div>
+		<div class="jd2 f_red">拼地截止时间：{function name="to_date" v=$deal_info.end_time f="Y年m月d日H时i分"}</div>
 	</div>
 	<!--第一部分end-->
 	<!--第二部分start-->
@@ -186,7 +186,7 @@
 			{if $deal_item.repaid_day gt 0}
 			<div class="blank5"></div>
 			<div>
-				预计发放时间：项目成功结束后{$deal_item.repaid_day}天内
+				预计发放时间：拼地成功结束后{$deal_item.repaid_day}天内
 				</div>
 			{/if}
 			</span>

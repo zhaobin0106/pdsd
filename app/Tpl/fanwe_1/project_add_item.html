@@ -21,7 +21,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 <div class="location_box wrap1000">
 	<div class="location f_l">
 		<i class="fl ico loc_ico mr5"></i>
-		<label>您现在的位置：</label><a>发布产品项目</a><em>>></em><a>回报设置</a>
+		<label>您现在的位置：</label><a>发布产品拼地</a><em>>></em><a>回报设置</a>
 	</div>
 </div>
 <div class="blank"></div>
@@ -32,7 +32,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 		</div>
 		<div class="switch_nav">
 			<ul>
-				<li><a href="{url r="project#edit" p="id=$deal_item.id"}">项目介绍</a></li>		
+				<li><a href="{url r="project#edit" p="id=$deal_item.id"}">拼地介绍</a></li>		
 				<li class="current"><a href="{url r="project#add_item" p="id=$deal_item.id"}">回报设置</a></li>					
 			</ul>
 		</div>		
@@ -141,7 +141,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 				<div class="form_row control-group">
 					<label class="form_lable">回报时间:</label>
 					<label class="tip_box"></label>
-					<span class="f_l" style="line-height:41px;color:#666; font-size:16px;margin-right:15px;">项目成功后</span>
+					<span class="f_l" style="line-height:41px;color:#666; font-size:16px;margin-right:15px;">拼地成功后</span>
 					<input type="text" value="" class="textbox" name="repaid_day" style="width:100px;" />
 					<label class="tip_box">天</label>
 				</div>
@@ -167,7 +167,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 					</div>
 					<div id="repaid_day_box"  class="f14">
 						<div class="blank"></div>
-						预计回报发放时间：项目成功结束后<span id="repaid_day">0</span>天内
+						预计回报发放时间：拼地成功结束后<span id="repaid_day">0</span>天内
 					</div>
 	
 					<div class="blank10"></div>
@@ -184,7 +184,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 			<div class="add_item_btn" style="padding-left:120px;width:250px;">
 				<div class="ui-button theme_bgcolor" rel="green">
 					<div>
-						<span>保存新的回报项目</span>
+						<span>保存新的回报拼地</span>
 					</div>
 				</div>
 				<a href="javascript:void(0);" id="cancel_add">取消添加</a>
@@ -198,7 +198,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 		<div id="add_item_row">
 			<div class="add_item_btn f_l" id="add_item_btn">
 				<div class="ui-button theme_bgcolor" rel="gray">
-					添加新的回报项目
+					添加新的回报拼地
 				</div>
 			</div>
 			<div class="add_item_btn f_l" id="submit_deal_btn" url="{url r="project#submit_deal" p="id=$deal_item.id"}" jump="{url r="account#project"}" style="margin-left:10px;">

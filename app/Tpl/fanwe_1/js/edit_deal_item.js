@@ -157,7 +157,7 @@ function bind_add_item()
 	$("#add_item_btn").bind("click",function(){
 		if($(".item_row").length>=10)
 		{
-			$.showErr("回报项目不能超过10个");
+			$.showErr("回报拼地不能超过10个");
 			return;
 		}
 		$("#add_item_row").hide();

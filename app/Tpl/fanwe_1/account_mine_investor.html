@@ -22,9 +22,9 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 								<thead>
 									<tr>
 										<th style="width:6%">序号</th>
-										<th>项目名称</th>
+										<th>拼地名称</th>
 										{if $type==0}
-										<th style="width:13%">项目估值</th>
+										<th style="width:13%">拼地估值</th>
 										{/if}
 										<th style="width:13%">投资金额</th>
 										<th style="width:20%">申请时间</th>
@@ -139,7 +139,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 		$(".examine_yes").bind('click',function(){
  			var id=$(this).attr("rel");
 			var stock_money=$(this).attr("title");
-			deal_investor(id,1,"是否要通过该询价，通过后您的项目融资金额将会变成"+stock_money,0)
+			deal_investor(id,1,"是否要通过该询价，通过后您的拼地融资金额将会变成"+stock_money,0)
 			 
 		});
 		$(".examine_no").bind('click',function(){

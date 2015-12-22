@@ -31,7 +31,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 
 	<!-- 右侧内容 开始 -->
 	<div class="homeright pageright f_r">
-		<div class="page_title">推荐的项目</div>
+		<div class="page_title">推荐的拼地</div>
 		<div class="blank"></div>		
 		 		
 		<div class="full">
@@ -40,7 +40,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="uc_table" id="account_recommend">
 					<thead>
 						<tr>
-							<th>项目名称</th>
+							<th>拼地名称</th>
 							<th style="width:20%">类型</th>
 							<th style="width:20%">推送时间</th>
 							<th style="width:13%">操作</th>
@@ -56,7 +56,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 									<span>{$recommend_info_item.deal_name}</span>
 								</a>
 							</td>
-							<td>{if $recommend_info_item.deal_type eq 1}股权众筹{/if}{if $recommend_info_item.deal_type eq 0}普通众筹{/if}</td>
+							<td>{if $recommend_info_item.deal_type eq 1}股权{/if}{if $recommend_info_item.deal_type eq 0}普通{/if}</td>
 							<td>{function name="to_date" v=$recommend_info_item.create_time}</td>
 							<td	class="p_op">
 								<a href="javascript:void(0);" class="view_deal theme_fcolor">查看推荐理由</a><br />
@@ -84,7 +84,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 			<div class="blank20"></div>
 			{if $recommend_info eq null}
 			<div class="f14 tc">
-				暂时没有推送的项目，点击立即<a href="{url r="deals"}" class="btn_creat ml10" target="_blank">浏览更多项目</a>
+				暂时没有推送的拼地，点击立即<a href="{url r="deals"}" class="btn_creat ml10" target="_blank">浏览更多拼地</a>
 			</div>
 			{/if}
 		</div>

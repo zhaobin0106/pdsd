@@ -37,10 +37,10 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 								<thead>
 									<tr>
 										<th>序号</th>
-										<th>项目</th>
+										<th>拼地</th>
 										<th>投资人</th>
 										{if $type==0}
-										<th>项目估值</th>
+										<th>拼地估值</th>
 										{/if}
 										<th width="120">投资金额</th>
 										<th width="160">时间</th>
@@ -71,7 +71,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 															<a href="javascript:void(0);" class="examine_yes" rel="{$item.id}" title="{function name="round" v=$item.stock_value e=2}">通过询价</a>&nbsp;
 															<a href="javascript:void(0);" class="examine_no"  rel="{$item.id}">拒绝询价</a>
 														{else}
-															项目未成功
+															拼地未成功
 														{/if}
 													{else}
 													审核未通过
@@ -102,7 +102,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 																<a href="javascript:void(0);" class="lead_examine_yes" rel="{$item.id}" title="{function name="round" v=$item.stock_value e=2}">允许投资</a>&nbsp;
 																<a href="javascript:void(0);" class="lead_examine_no"  rel="{$item.id}">拒绝投资</a>
 															{else}
-																项目未成功
+																拼地未成功
 															{/if}
 														{else}
 														审核未通过
@@ -131,7 +131,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 															<a href="javascript:void(0);" class="gentou_yes" rel="{$item.id}" title="{function name="round" v=$item.stock_value e=2}">允许跟投</a>&nbsp;
 															<a href="javascript:void(0);" class="gentou_no"  rel="{$item.id}">拒绝跟投</a>
 														{else}
-															  项目未成功
+															  拼地未成功
 														{/if}
 													{else}
 													审核未通过
@@ -180,7 +180,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 		$(".examine_yes").bind('click',function(){
  			var id=$(this).attr("rel");
 			var stock_money=$(this).attr("title");
-			deal_investor(id,1,"是否要通过该询价，通过后您的项目融资金额将会变成"+stock_money,0)
+			deal_investor(id,1,"是否要通过该询价，通过后您的拼地融资金额将会变成"+stock_money,0)
 			 
 		});
 		$(".examine_no").bind('click',function(){

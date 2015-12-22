@@ -127,17 +127,17 @@ function bind_project_form()
 		
 		if($(this).find("input[name='cate_id']").val()==''||$(this).find("input[name='cate_id']").val()==0)
 		{
-			$.showErr("请选择项目分类");
+			$.showErr("请选择拼地分类");
 			return false;
 		}
 		if($.trim($(this).find("input[name='name']").val())=='')
 		{
-			$.showErr("请填写项目名称");
+			$.showErr("请填写拼地名称");
 			return false;
 		}
 		if($(this).find("input[name='name']").val().length>25)
 		{
-			$.showErr("项目名称不超过25个字");
+			$.showErr("拼地名称不超过25个字");
 			return false;
 		}
 		if($.trim($(this).find("select[name='province']").val())=='')

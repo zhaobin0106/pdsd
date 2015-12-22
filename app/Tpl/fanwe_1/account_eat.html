@@ -38,7 +38,7 @@ input{border:solid 1px rgb(169, 169, 169);}
 				              		{if app_conf("INVEST_STATUS")eq 0 }	
 										<option value="-1" {if $search_type eq -1}selected="selected"{/if}>请选择</option>
 										<option value="0" {if $search_type eq 0}selected="selected"{/if}>试吃</option>
-						              	<option value="1" {if $search_type eq 1}selected="selected"{/if}>股权众筹</option>  
+						              	<option value="1" {if $search_type eq 1}selected="selected"{/if}>股权</option>  
 									{/if}
 									{if app_conf("INVEST_STATUS")eq 1 }	
 										<option value="-1" {if $search_type eq -1}selected="selected"{/if}>请选择</option>
@@ -46,7 +46,7 @@ input{border:solid 1px rgb(169, 169, 169);}
 									{/if}
 									{if app_conf("INVEST_STATUS")eq 2 }	
 										<option value="-1" {if $search_type eq -1}selected="selected"{/if}>请选择</option>
-										<option value="1" {if $search_type eq 1}selected="selected"{/if}>股权众筹</option>  
+										<option value="1" {if $search_type eq 1}selected="selected"{/if}>股权</option>  
 									{/if}		    
 								</select>
 							</a>
@@ -81,7 +81,7 @@ input{border:solid 1px rgb(169, 169, 169);}
 								</td>
 								<td>
 									{if $deal_item.type eq 1}
-										股权众筹
+										股权
 									{else}
 										试吃
 									{/if}
@@ -111,7 +111,7 @@ input{border:solid 1px rgb(169, 169, 169);}
 					<div class="blank20"></div>
 					{else}
 					<div class="empty_tip">
-						从未创建过任何项目 
+						从未创建过任何拼地 
 					</div>
 					{/if}
 				</div

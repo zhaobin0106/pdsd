@@ -115,7 +115,7 @@
 							</div>
 							<div class="blank5"></div>
 				            <div class="ui-small-button {if $invester_item.id eq $user_info.id}bg_gray{else}theme_bgcolor{/if}">
-				            	<a href="javascript:void(0)" rel="{$invester_item.id}" name="recommend_project">自荐我的项目</a>
+				            	<a href="javascript:void(0)" rel="{$invester_item.id}" name="recommend_project">自荐我的拼地</a>
 				            </div>
 				            <div class="blank0"></div>
 						</div>
@@ -147,7 +147,7 @@
 					    		<a href="{url r="home" p="id=$new_invester_item.id"}" class="v_aut f20 f_333">{$new_invester_item.user_name}</a>
 							</div>
 					        <div class="text f14">
-					        	<a href="javascript:void(0)" onclick="send_message({$new_invester_item.id})">+发私信</a>&nbsp;&nbsp;&nbsp;{if $new_invester_item.id neq $user_info.id}<a href="javascript:void(0)" rel="{$new_invester_item.id}" name="recommend_project">&gt;&gt;自荐项目</a>{/if}
+					        	<a href="javascript:void(0)" onclick="send_message({$new_invester_item.id})">+发私信</a>&nbsp;&nbsp;&nbsp;{if $new_invester_item.id neq $user_info.id}<a href="javascript:void(0)" rel="{$new_invester_item.id}" name="recommend_project">&gt;&gt;自荐拼地</a>{/if}
 					        </div>
 					    </div>
 					    <div class="clear"></div>
@@ -175,7 +175,7 @@
 					    		<a href="{url r="home" p="id=$new_invester_item.id"}" class="v_aut f20 f_333">{$new_invester_item.user_name}</a>
 							</div>
 					        <div class="text f14">
-			        			<a href="javascript:void(0)" onclick="send_message({$new_invester_item.id})">+发私信</a>&nbsp;&nbsp;&nbsp;{if $new_invester_item.id neq $user_info.id}<a href="javascript:void(0)" rel="{$new_invester_item.id}" name="recommend_project">&gt;&gt;自荐项目</a>{/if}
+			        			<a href="javascript:void(0)" onclick="send_message({$new_invester_item.id})">+发私信</a>&nbsp;&nbsp;&nbsp;{if $new_invester_item.id neq $user_info.id}<a href="javascript:void(0)" rel="{$new_invester_item.id}" name="recommend_project">&gt;&gt;自荐拼地</a>{/if}
 					        </div>
 					    </div>
 					    <div class="blank0"></div>
@@ -226,7 +226,7 @@ function ajax_get_recommend_project(){
 					return false;
 				}
 				if(ajaxobj.status==2){
-					$.weeboxs.open(ajaxobj.html, {boxid:'project_recommend_page',contentType:'text',showButton:false, showCancel:false, showOk:false,title:'我的项目',width:480,type:'wee'});
+					$.weeboxs.open(ajaxobj.html, {boxid:'project_recommend_page',contentType:'text',showButton:false, showCancel:false, showOk:false,title:'我的拼地',width:480,type:'wee'});
 					return false;
 				}
 			}

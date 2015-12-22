@@ -17,7 +17,7 @@
 				{if $deal_info.percent gte 100}
 					已成功
 				{elseif $deal_info.end_time eq 0}
-			长期项目
+			长期拼地
 				{else}
 			融资中
 				{/if}
@@ -86,7 +86,7 @@
 		    </div>
 		</div>
 		<div class="blank10"></div>
-		<div class="jd2 f_red">项目截止时间：{function name="to_date" v=$deal_info.end_time f="Y年m月d日H时i分"}</div>
+		<div class="jd2 f_red">拼地截止时间：{function name="to_date" v=$deal_info.end_time f="Y年m月d日H时i分"}</div>
 	</div>
 	<div class="blank20"></div>
 	<div class="box4">

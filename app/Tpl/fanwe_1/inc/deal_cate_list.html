@@ -32,13 +32,13 @@
 							<span>{$hot_item.province}{$hot_item.city}</span>
 						</span>
 						<span class="mr20">
-							<label>项目类型：</label>
+							<label>拼地类型：</label>
 							<span>{$hot_item.cate_name}</span>
 						</span>
 					</div>
 					<div class="blank10"></div>
 					<div class="inf_3">
-						<span>项目介绍：</span>
+						<span>拼地介绍：</span>
 						<span>
 							{if $p_type eq 1}
 							{function name="msubstr" v=$hot_item.business_descripe b=0 e=110}
@@ -55,7 +55,7 @@
 							</div>
 							<div class="blank"></div>
 							<div class="div3 div3_l">
-								<label>项目进度：</label><span>
+								<label>拼地进度：</label><span>
 									{$hot_item.percent}%
 								</span>
 								

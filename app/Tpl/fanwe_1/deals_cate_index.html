@@ -62,10 +62,10 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.2.1.
 			<div class="ui_deals_filter_l f_l">
 				<ul>
 					<li>
-						<a href="{url r="deals" p="type=$p_type"}" target="_blank" title="所有项目">所有项目</a>
+						<a href="{url r="deals" p="type=$p_type"}" target="_blank" title="所有拼地">所有拼地</a>
 					</li>
 					<li>
-						<a href="{url r="deals" p="r=new&type=$p_type"}" target="_blank"  title="新上项目">新上项目</a>
+						<a href="{url r="deals" p="r=new&type=$p_type"}" target="_blank"  title="新上拼地">新上拼地</a>
 					</li>
 					<li>
 						<a href="{url r="deals" p="r=rec&type=$p_type"}" target="_blank"  title="融资中">融资中</a>
@@ -74,7 +74,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.2.1.
 						<a href="{url r="deals" p="r=nend&type=$p_type"}" target="_blank"  title="即将结束">即将结束</a>
 					</li>
 					<li>
-						<a href="{url r="deals" p="r=yure&type=$p_type"}" target="_blank"  title="预热项目">预热项目</a>
+						<a href="{url r="deals" p="r=yure&type=$p_type"}" target="_blank"  title="预热拼地">预热拼地</a>
 					</li>
 					 
 					<li>
@@ -89,11 +89,11 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.2.1.
 						<span class="cur-select" id="cur-select1">请选择</span> 
 						<select name="deal_sort" class="deal_sort">
 							<option {if !$p_r}selected="selected"{/if}  value="{url r="deals" p="type=$p_type"}">请选择</option>
-							<option {if $p_r eq 'rec'}selected="selected"{/if} value="{url r="deals" p="r=rec&type=$p_type"}">推荐项目</option>
+							<option {if $p_r eq 'rec'}selected="selected"{/if} value="{url r="deals" p="r=rec&type=$p_type"}">推荐拼地</option>
 							<option {if $p_r eq 'yure'}selected="selected"{/if} value="{url r="deals" p="r=yure&type=$p_type"}">正在预热</option>
 							<option {if $p_r eq 'new'}selected="selected"{/if} value="{url r="deals" p="r=new&type=$p_type"}">最新上线</option>
 							<option {if $p_r eq 'nend'}selected="selected"{/if} value="{url r="deals" p="r=nend&type=$p_type"}">即将结束</option>
-							<option {if $p_r eq 'classic'}selected="selected"{/if} value="{url r="deals" p="r=classic&type=$p_type"}">经典项目</option>
+							<option {if $p_r eq 'classic'}selected="selected"{/if} value="{url r="deals" p="r=classic&type=$p_type"}">经典拼地</option>
 						</select>
 					</a>
 				</div>
@@ -103,22 +103,22 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.2.1.
 						<span class="cur-select" id="cur-select2">请选择省份</span> 
 						<select name="deal_sort" class="deal_sort">
 							<option {if !$p_r}selected="selected"{/if}  value="{url r="deals" p="type=$p_type"}">请选择</option>
-							<option {if $p_r eq 'rec'}selected="selected"{/if} value="{url r="deals" p="r=rec&type=$p_type"}">推荐项目</option>
+							<option {if $p_r eq 'rec'}selected="selected"{/if} value="{url r="deals" p="r=rec&type=$p_type"}">推荐拼地</option>
 							<option {if $p_r eq 'yure'}selected="selected"{/if} value="{url r="deals" p="r=yure&type=$p_type"}">正在预热</option>
 							<option {if $p_r eq 'new'}selected="selected"{/if} value="{url r="deals" p="r=new&type=$p_type"}">最新上线</option>
 							<option {if $p_r eq 'nend'}selected="selected"{/if} value="{url r="deals" p="r=nend&type=$p_type"}">即将结束</option>
-							<option {if $p_r eq 'classic'}selected="selected"{/if} value="{url r="deals" p="r=classic&type=$p_type"}">经典项目</option>
+							<option {if $p_r eq 'classic'}selected="selected"{/if} value="{url r="deals" p="r=classic&type=$p_type"}">经典拼地</option>
 						</select>
 					</a>
 					<a class="btn-select" id="btn-select3"> 
 						<span class="cur-select" id="cur-select3">请选择城市</span> 
 						<select name="deal_sort" class="deal_sort">
 							<option {if !$p_r}selected="selected"{/if}  value="{url r="deals" p="type=$p_type"}">请选择</option>
-							<option {if $p_r eq 'rec'}selected="selected"{/if} value="{url r="deals" p="r=rec&type=$p_type"}">推荐项目</option>
+							<option {if $p_r eq 'rec'}selected="selected"{/if} value="{url r="deals" p="r=rec&type=$p_type"}">推荐拼地</option>
 							<option {if $p_r eq 'yure'}selected="selected"{/if} value="{url r="deals" p="r=yure&type=$p_type"}">正在预热</option>
 							<option {if $p_r eq 'new'}selected="selected"{/if} value="{url r="deals" p="r=new&type=$p_type"}">最新上线</option>
 							<option {if $p_r eq 'nend'}selected="selected"{/if} value="{url r="deals" p="r=nend&type=$p_type"}">即将结束</option>
-							<option {if $p_r eq 'classic'}selected="selected"{/if} value="{url r="deals" p="r=classic&type=$p_type"}">经典项目</option>
+							<option {if $p_r eq 'classic'}selected="selected"{/if} value="{url r="deals" p="r=classic&type=$p_type"}">经典拼地</option>
 						</select>
 					</a>
 				</div>
@@ -130,7 +130,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.2.1.
 		{if $hot_list}
 		<!-- 热门项目 开始 -->
 		<h3 class="wrap index_title">
-		 	<span>热门项目</span>
+		 	<span>热门拼地</span>
 		 	<a href="{url r="deals" p="type=1"}" target="_blank" class="f_r">查看更多</a>
 		</h3>
 		{foreach from=$hot_list item=hot_item}
@@ -142,7 +142,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.2.1.
 		{if $recommend_list}
 		<!-- 推荐项目 开始 -->
  		<h3 class="wrap index_title">
-		 	<span>推荐项目</span>
+		 	<span>推荐拼地</span>
 		 	<a href="{url r="deals" p="type=1&r=rec"}" target="_blank" class="f_r">查看更多</a>
 		</h3>
 		{foreach from=$recommend_list item=hot_item}
@@ -154,7 +154,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.2.1.
 		{if $classic_list}
 		<!-- 经典项目 开始 -->
 		<h3 class="wrap index_title">
-		 	<span>经典项目</span>
+		 	<span>经典拼地</span>
 		 	<a href="{url r="deals" p="type=1&r=classic"}" target="_blank" class="f_r">查看更多</a>
 		</h3>
 		{foreach from=$classic_list item=hot_item}
@@ -180,7 +180,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.2.1.
 		{if $log_list.left_list&&$log_list.right_list}
 		<!-- 项目动态 开始 -->
 		<h3 class="index_title">
-		 	<span>项目动态</span>
+		 	<span>拼地动态</span>
 		 	<a href="{url r="news"}" target="_blank" class="f_r">查看更多</a>
 		</h3>
 		<div>
@@ -207,13 +207,13 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.2.1.
 									<span>{$log_item.deal_info.province}{$log_item.deal_info.city}</span>
 								</span>
 								<span class="mr20">
-									<label>项目类型：</label>
+									<label>拼地类型：</label>
 									<span>{$log_item.deal_info.cate_name}</span>
 								</span>
 							</div>
 							<div class="blank10"></div>
 							<div class="inf_3">
-								<span>项目介绍：</span><span>{$log_item.deal_info.business_descripe}</span>
+								<span>拼地介绍：</span><span>{$log_item.deal_info.business_descripe}</span>
 							</div>
 							<div class="blank10"></div>
 							<div class="inf_4">
@@ -223,7 +223,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.2.1.
 									</div>
 									<div class="blank"></div>
 									<div class="div3 div3_l">
-										<label>项目进度：</label><span>{$log_item.deal_info.percent}%</span>
+										<label>拼地进度：</label><span>{$log_item.deal_info.percent}%</span>
 									</div>
 									<div class="div3 div3_r">
 										{if $log_item.deal_info.begin_time > $now}
@@ -250,7 +250,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.2.1.
 				{/foreach}
 			</div>
 			<div class="equity_r f_r">
-				<h3>更多项目动态</h3>
+				<h3>更多拼地动态</h3>
 				<ul>
 					{foreach from=$log_list.right_list item=right_item key=k}
 						<li><a href="{url r="deal#show" p="id=$right_item.deal_id"}" class="f_l">{$right_item.deal_name}</a><span class="f_r f_999">{$log_item.left_time}</span></li>

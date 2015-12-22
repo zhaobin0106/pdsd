@@ -97,7 +97,7 @@
 	function ajax_recommend_save(){
 		$(".button_y").bind("click",function(){
 			if($("input[name='project_recommend']:checked").length==0){
-				$.showErr("请选择推荐项目");
+				$.showErr("请选择推荐拼地");
 				return false;
 			}
 			if($("#memo").val()==''){
