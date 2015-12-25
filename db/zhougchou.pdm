@@ -3240,7 +3240,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Creator>hp</a:Creator>
 <a:ModificationDate>1349688411</a:ModificationDate>
 <a:Modifier>hp</a:Modifier>
-<a:Comment>支持的项目数</a:Comment>
+<a:Comment>参与的拼地数</a:Comment>
 <a:DataType>int(11)</a:DataType>
 <a:Length>11</a:Length>
 <a:Mandatory>1</a:Mandatory>
@@ -3253,7 +3253,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Creator>hp</a:Creator>
 <a:ModificationDate>1349688432</a:ModificationDate>
 <a:Modifier>hp</a:Modifier>
-<a:Comment>关注的项目数</a:Comment>
+<a:Comment>关注的拼地数</a:Comment>
 <a:DataType>int(11)</a:DataType>
 <a:Length>11</a:Length>
 <a:Mandatory>1</a:Mandatory>
@@ -3316,7 +3316,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Creator>hp</a:Creator>
 <a:ModificationDate>1349751714</a:ModificationDate>
 <a:Modifier>hp</a:Modifier>
-<a:Comment>同意接收业务通知(支持的项目成功，发布的项目成功等)</a:Comment>
+<a:Comment>同意接收业务通知(参与的拼地成功，发布的项目成功等)</a:Comment>
 <a:DataType>tinyint(1)</a:DataType>
 <a:Length>1</a:Length>
 <a:Mandatory>1</a:Mandatory>

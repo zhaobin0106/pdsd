@@ -134,7 +134,7 @@ class newsModule extends BaseModule
 		{
 			app_redirect(url("user#login"));
 		}
-		$GLOBALS['tmpl']->assign("page_title","我关注的项目动态");
+		$GLOBALS['tmpl']->assign("page_title","我关注的拼地动态");
 		$cate_result = load_dynamic_cache("INDEX_CATE_LIST");
 		if($cate_result===false)
 		{

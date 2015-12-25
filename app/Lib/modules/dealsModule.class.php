@@ -342,7 +342,7 @@ class dealsModule extends BaseModule
  					}
  							
  				}
- 				$page_title=$page_title?$page_title:'产品项目';
+ 				$page_title=$page_title?$page_title:'产品拼地';
  			}
  			$GLOBALS['tmpl']->assign("page_title",$page_title);
  		}

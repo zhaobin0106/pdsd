@@ -342,7 +342,7 @@ class foresModule extends BaseModule
  					}
  							
  				}
- 				$page_title=$page_title?$page_title:'试吃项目';
+ 				$page_title=$page_title?$page_title:'试吃';
  			}
  			$GLOBALS['tmpl']->assign("page_title",$page_title);
  		}

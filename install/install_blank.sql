@@ -844,7 +844,7 @@ CREATE TABLE `%DB_PREFIX%deal_support_log` (
   KEY `user_id` (`user_id`),
   KEY `create_time` (`create_time`),
   KEY `deal_item_id` (`deal_item_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COMMENT='// 项目支持记录';
+) ENGINE=MyISAM AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COMMENT='// 项目记录';
 
 -- ----------------------------
 -- Records of fanwe_deal_support_log
@@ -2365,9 +2365,9 @@ CREATE TABLE `%DB_PREFIX%user` (
   `city` varchar(10) NOT NULL,
   `password_verify` varchar(255) NOT NULL COMMENT '找回密码的验证号',
   `sex` tinyint(1) NOT NULL COMMENT '性别',
-  `build_count` int(11) NOT NULL COMMENT '发起的项目数',
-  `support_count` int(11) NOT NULL COMMENT '支持的项目数',
-  `focus_count` int(11) NOT NULL COMMENT '关注的项目数',
+  `build_count` int(11) NOT NULL COMMENT '发起的拼地数',
+  `support_count` int(11) NOT NULL COMMENT '支持的拼地数',
+  `focus_count` int(11) NOT NULL COMMENT '关注的拼地数',
   `integrate_id` int(11) NOT NULL,
   `intro` text NOT NULL COMMENT '个人简介',
   `ex_real_name` varchar(255) NOT NULL COMMENT '发布者真实姓名',
@@ -2590,10 +2590,10 @@ CREATE TABLE `%DB_PREFIX%user_notify` (
 -- ----------------------------
 -- Records of fanwe_user_notify
 -- ----------------------------
-INSERT INTO `%DB_PREFIX%user_notify` VALUES ('69', '17', '拥有自己的咖啡馆 在 2012-11-07 11:31:10 成功筹到 ¥5,000.00', '1352230271', '0', 'deal#show', 'id=56');
-INSERT INTO `%DB_PREFIX%user_notify` VALUES ('70', '19', '拥有自己的咖啡馆 在 2012-11-07 11:31:10 成功筹到 ¥5,000.00', '1352230271', '0', 'deal#show', 'id=56');
-INSERT INTO `%DB_PREFIX%user_notify` VALUES ('71', '17', '您支持的项目拥有自己的咖啡馆回报已发放', '1352230424', '0', 'account#view_order', 'id=66');
-INSERT INTO `%DB_PREFIX%user_notify` VALUES ('72', '18', '流浪猫的家—爱天使公益咖啡馆的重建需要大家的力量！ 在 2012-11-07 11:55:04 成功筹到 ¥3,000.00', '1352231704', '0', 'deal#show', 'id=58');
+INSERT INTO `%DB_PREFIX%user_notify` VALUES ('69', '17', '拥有自己的咖啡馆 在 2012-11-07 11:31:10 成功拼到 ¥5,000.00', '1352230271', '0', 'deal#show', 'id=56');
+INSERT INTO `%DB_PREFIX%user_notify` VALUES ('70', '19', '拥有自己的咖啡馆 在 2012-11-07 11:31:10 成功拼到 ¥5,000.00', '1352230271', '0', 'deal#show', 'id=56');
+INSERT INTO `%DB_PREFIX%user_notify` VALUES ('71', '17', '您参与的拼地拥有自己的咖啡馆回报已发放', '1352230424', '0', 'account#view_order', 'id=66');
+INSERT INTO `%DB_PREFIX%user_notify` VALUES ('72', '18', '流浪猫的家—爱天使公益咖啡馆的重建需要大家的力量！ 在 2012-11-07 11:55:04 成功拼到 ¥3,000.00', '1352231704', '0', 'deal#show', 'id=58');
 
 -- ----------------------------
 -- Table structure for `%DB_PREFIX%user_refund`

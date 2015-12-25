@@ -34,7 +34,7 @@ if($_REQUEST['act']=='notify_msg_list')
 			//开始发送通知
 			foreach ($deal_notify_items as $k=>$v)
 			{
-				send_notify($v['user_id'],$deal_info['name']." 在 ".to_date($deal_info['success_time'])." 成功筹到 ".format_price($deal_info['limit_price']),"deal#show","id=".$deal_info['id']);
+				send_notify($v['user_id'],$deal_info['name']." 在 ".to_date($deal_info['success_time'])." 成功拼到 ".format_price($deal_info['limit_price']),"deal#show","id=".$deal_info['id']);
 			}
 		}
 		header("Content-Type:text/html; charset=utf-8");

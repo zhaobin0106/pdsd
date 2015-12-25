@@ -719,7 +719,7 @@ class accountModule{
 	}
 	public function focus()
 	{
- 		$GLOBALS['tmpl']->assign("page_title","关注的项目");
+ 		$GLOBALS['tmpl']->assign("page_title","关注的拼地");
 		if(!$GLOBALS['user_info'])
 		app_redirect(url_wap("user#login"));		
 		
