@@ -45,29 +45,33 @@ $this->_var['cpagejs_1'][]='';
             	</span>
             	</div>
             </div>
-                	        	        		 	<div style="float:right">
-	 				{foreach from=$deal_info.deal_item_list item=item key=k}
+                	 				{foreach from=$deal_info.deal_item_list item=item key=k}
+	        	        		 	<div style="float:right">
+	        	        		 	{if ($deal_info.end_time > $now or $deal_info.end_time eq 0) and $deal_info.begin_time < $now and $deal_info.is_effect eq 1 }
 	 							{if $item.support_count < $item.limit_user or $item.limit_user eq 0}
 
         		    <a href="{$item.cart_url}" class="ui-button theme_color mr15 mt10" style="width:60px;background-color:#9ed367;font-size:14px;font-weight:700">报名</a>
         		    {else}
         		    			<div class="box22_3 ui-button theme_color mr15 mt10" disabled="disabled" style="width:60px;background-color:#C0C0C0;font-size:14px;font-weight:700">已满额</div>
         		    			{/if}
-
-        		    {/foreach}
+        		    			{else}
+<div class="box22_3 ui-button theme_color mr15 mt10" disabled="disabled" style="width:60px;background-color:#C0C0C0;font-size:14px;font-weight:700">报名</div>
+{/if}
         		    </div>
         		    
     	<div class="paiduan">
 
         	<span class="caption-title" style="float:none;font-size:14px;font-weight:600;color:#555">
+        		{if $deal_item.is_limit_user eq 1}
 	        	还剩<span class="symbol">&nbsp;{$deal_info.shengyu_limit}</span>&nbsp;个名额 &nbsp;&nbsp;&nbsp;
+	        	{/if}
 	        	已报名<span class="symbol" style="color:#FFAC0E">&nbsp;{$deal_info.person}&nbsp;</span>人
         	</span>		
 			</br>
         	<span style="float:none;font-size:14px;font-weight:600;color:#555">报名截止日期：{function name="to_date" v="$deal_info.end_time" f="Y年m月d日"}</span>
 
 	 	</div>
-
+{/foreach}
     	<div class="blank5"></div>
      	<!--3-->
     	<div class="deal_content_box pd">
