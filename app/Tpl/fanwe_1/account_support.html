@@ -26,7 +26,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 			<tr>
 				<td class="data-title">支持者</td>
 				<td width=193 class="tl"><a href="{url r="home" p="id=$support_item.user_id"}" class="linkgreen" target="_blank">{$support_item.user_name}</a></td>
-				<td class="data-title">支持金额</td>
+				<td class="data-title">金额</td>
 				<td width=193 class="tl">
 					{if $support_item.kuaidi_price gt 0}
 					{function name="format_price" v=$support_item.deal_price}+运费{function name="format_price" v=$support_item.kuaidi_price}={function name="format_price" v=$support_item.total_price}
