@@ -504,7 +504,7 @@ textarea { font-family:inherit; font-size:inherit; font-weight:inherit; resize:n
 }
 /* 输入框提示文字 结束 */
 
-/* 项目状态 开始 */
+/* 状态 开始 */
 .common-fail , .common-sprite , .common-success , .common-begin {
 	color:#FFF;
 	font-family:"SimSun";
@@ -520,7 +520,7 @@ textarea { font-family:inherit; font-size:inherit; font-weight:inherit; resize:n
 .common-sprite{background:#12adff;}
 .common-success{background:#2dce2d;}
 .common-begin{background:#ffae00;}
-/* 项目状态 结束 */
+/* 状态 结束 */
 
 .overflow_hide{overflow:hidden;}
 

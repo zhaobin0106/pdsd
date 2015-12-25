@@ -96,7 +96,7 @@ function bind_project_form()
 		}
 	/*	if($("#item_form").find("input[name='investor_authority']").val()=='')
 		{
-			$.showErr("请选择项目详细资料查看权限");
+			$.showErr("请选择详细资料查看权限");
 			return false;
 		}
 	*/	

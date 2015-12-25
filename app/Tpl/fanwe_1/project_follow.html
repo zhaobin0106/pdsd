@@ -12,15 +12,15 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
 <script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
 <script type="text/javascript" src="{$TMPL}/js/jquery.SuperSlide.2.1.js"></script>
-<!-- 项目背景 开始-->
+<!-- 背景 开始-->
 <div class="deal_body" {if $deal_info.deal_backgroundColor_image neq null} style="background:url({$deal_info.deal_backgroundColor_image}) repeat;" {/if}>
-	<!-- 项目大海报-->
+	<!-- 大海报-->
 	<div class="deal_banner" {if $deal_info.deal_background_image neq null}style="background:url({$deal_info.deal_background_image}) top center no-repeat;padding-top:405px;"{/if}>
 		<!--中间开始-->
 		<div class="xqmain">
 			<div class="xqmain_main">
 				<!--中间页面左边start-->
-					<!--项目头部标题 start-->
+					<!--头部标题 start-->
 				<div class="xqmain_left">
 					<div class="hd1">
 						<span class="title f_l">{$deal_info.name}</span>
@@ -35,8 +35,8 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 						<span>{function name="app_conf" v="SITE_NAME"}</span>
 						{/if}
 					</div>
-					<!--项目头部标题 end-->
-					<!--项目领投人 start-->
+					<!--头部标题 end-->
+					<!--领投人 start-->
 					{if $leader_info neq null}
 						<div class="invester leader">
 							<div class="invester_hd">
@@ -88,8 +88,8 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 							</div>
 						</div>
 					{/if}
-					<!--项目领投人 end-->
-					<!--项目跟投人start-->
+					<!--领投人 end-->
+					<!--跟投人start-->
 					<div class="blank20"></div>
 					{if $enquiry_info_all neq null}
 						<div class="invester follower">
@@ -137,7 +137,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 						</div>
 						<div class="blank20"></div>
 					{/if}
-					<!--项目跟投人start-->
+					<!--跟投人start-->
 				</div>
 				<!--中间页面左边end-->
 				{include file="inc/deal_investor_right.html"}
@@ -151,7 +151,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 		<div class="blank"></div>
 	</div>
 </div>
-<!-- 项目背景 结束-->
+<!-- 背景 结束-->
 <script type="text/javascript">
     jQuery(".slideTxtBox").slide({trigger:"click",delayTime:500});
 </script>

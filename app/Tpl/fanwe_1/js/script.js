@@ -833,11 +833,11 @@ function resetWindowBox(){
 	resetTimeact = setTimeout(resetWindowBox,100);
 }
 $(document).ready(function(){
-	// 项目分类
+	// 分类
 	funSelect("#industry_id_select","#industry_id_cur",'#industry_id_select option:selected');
-	// 项目所属阶段
+	// 所属阶段
 	funSelect("#phase_id_select","#phase_id_cur",'#phase_id_select option:selected');
-	// 项目所属阶段
+	// 所属阶段
 	funSelect("#year_select","#year_cur",'#year_select option:selected');
 	funSelect("#month_select","#month_cur",'#month_select option:selected');
 	// 企业所在城市
@@ -845,7 +845,7 @@ $(document).ready(function(){
 	funSelect("#cityid-2_select","#cityid-2_cur",'#cityid-2_select option:selected');
 	// 公司是否已经成立
 	funSelect("#found_company_select","#found_company_cur",'#found_company_select option:selected');
-	// 是否还有其他项目
+	// 是否还有其他
 	funSelect("#has_otherpro_select","#has_otherpro_cur",'#has_otherpro_select option:selected');
 });
 //自定义select下拉菜单
