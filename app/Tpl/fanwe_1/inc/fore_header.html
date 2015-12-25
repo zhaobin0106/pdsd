@@ -137,7 +137,7 @@
 			<ul class="clearfix">
 				<li {if ACTION_NAME eq 'show'}class="select"{/if}><a href="{url r="fore#show" p="id=$deal_info.id"}">了解详情</a></li>
 				{if $deal_info.is_support_print eq 1 && $deal_info.type neq 1}
-				<!--<li {if ACTION_NAME eq 'support'}class="select"{/if}><a href="{url r="fore#support" p="id=$deal_info.id"}">支持者({$deal_info.person})</a></li>-->
+				<!--<li {if ACTION_NAME eq 'support'}class="select"{/if}><a href="{url r="fore#support" p="id=$deal_info.id"}">关注者({$deal_info.person})</a></li>-->
 				{/if}
 				<li {if ACTION_NAME eq 'comment'}class="select"{/if}><a href="{url r="fore#comment" p="id=$deal_info.id"}">参与者评价({$comment_count})</a></li>				
 			</ul>

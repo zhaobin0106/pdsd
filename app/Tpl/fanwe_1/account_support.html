@@ -14,7 +14,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 	<div class="homeright pageright f_r">
 		<div class="full">
 		<div class="deal_name_title">
-		{$deal_info.name} 支持记录
+		{$deal_info.name} 关注记录
 		</div>
 		{if $support_list}
 		<table class="data-table">
@@ -24,7 +24,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 			<td colspan="5"  class="tl">{$support_item.dingdanhao}</td>
 			</tr>
 			<tr>
-				<td class="data-title">支持者</td>
+				<td class="data-title">关注者</td>
 				<td width=193 class="tl"><a href="{url r="home" p="id=$support_item.user_id"}" class="linkgreen" target="_blank">{$support_item.user_name}</a></td>
 				<td class="data-title">金额</td>
 				<td width=193 class="tl">
@@ -96,7 +96,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 		
 		{else}
 		<div class="empty_tip">
-			没有任何支持记录
+			没有任何记录
 		</div>
 		{/if}
 		

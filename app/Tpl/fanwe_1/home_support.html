@@ -21,7 +21,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 			<div class="nav_hd wrap">
 				<ul class="clearfix">
 					{if $user_info.user_level eq 14}<li {if ACTION_NAME eq 'home' or ACTION_NAME eq 'index'}class="nav_select"{/if}><a href="{url r="home" p="id=$home_user_info.id"}">发起的项目</a></li>{/if}
-					<li {if ACTION_NAME eq 'home' or ACTION_NAME eq 'support'}class="nav_select"{/if}><a href="{url r="home#support" p="id=$home_user_info.id"}">支持的项目({$deal_count})</a></li>
+					<li {if ACTION_NAME eq 'home' or ACTION_NAME eq 'support'}class="nav_select"{/if}><a href="{url r="home#support" p="id=$home_user_info.id"}">关注的拼地({$deal_count})</a></li>
 				</ul>
 			</div>
 		</div>

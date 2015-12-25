@@ -30,8 +30,8 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 				<h1>小提示：</h1>
 				<ul>
 					<li>【建议设置3个以上的回报】，回报多样化更能提高关注度。</li>
-					<li>【建议设置几十、几百、上千元的支持档位】，回报差异化更能满足不同人的需求。</li>
-					<li>【建议设置有创意的回报】，与众不同的回报更能打动支持者。</li>
+					<li>【建议设置几十、几百、上千元的关注档位】，回报差异化更能满足不同人的需求。</li>
+					<li>【建议设置有创意的回报】，与众不同的回报更能打动关注者。</li>
 				</ul>
 			</div>
 			
@@ -113,8 +113,8 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 					<div class="deal_preview_title">编辑预览</div>
 					<div class="blank"></div>
 					<div class="item_preview">
-						<div id="support_price_box">支持￥<span id="support_price">{function name="round" v=$item.price e=2}</span>元<div class="blank"></div></div>						
-						<div>0位支持者&nbsp;&nbsp;&nbsp;&nbsp;<span id="limit_user_box" {if $item.limit_user eq 0}style="display:none;"{/if}>限额<span id="limit_user">{$item.limit_user}</span>位,剩余<span id="remain_user">{$item.limit_user}</span>位</span><div class="blank"></div></div>
+						<div id="support_price_box">￥<span id="support_price">{function name="round" v=$item.price e=2}</span>元<div class="blank"></div></div>						
+						<div>0位关注者&nbsp;&nbsp;&nbsp;&nbsp;<span id="limit_user_box" {if $item.limit_user eq 0}style="display:none;"{/if}>限额<span id="limit_user">{$item.limit_user}</span>位,剩余<span id="remain_user">{$item.limit_user}</span>位</span><div class="blank"></div></div>
 						<div id="repaid_content">{function name="nl2br" v=$item.description}</div>	
 										
 						<div id="image_box_outer" {if !$deal_item_images}style="display:none;"{/if}>
@@ -145,7 +145,7 @@ $this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajaxupload.js";
 						<div class="blank"></div>
 						<div class="ui-button_green">
 							<div>
-								<span>支持￥<font id="support_price_btn">{function name="round" v=$item.price e=2}</font>元</span>
+								<span>￥<font id="support_price_btn">{function name="round" v=$item.price e=2}</font>元</span>
 							</div>
 						</div>
 						<div class="blank1"></div>

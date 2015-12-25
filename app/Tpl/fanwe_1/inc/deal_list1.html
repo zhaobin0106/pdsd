@@ -123,7 +123,7 @@
 			                                     </li>
 			                                     <li>
 			                                         <a href="{url r="deal#support" p="id=$deal_item.id"}" title="{$deal_item.name}">
-			                                            支持者(<span>{$deal_item.support_count}</a></span>)
+			                                            关注者(<span>{$deal_item.support_count}</a></span>)
 			                                         </a>
 			                                     </li>
 			                            </ul>
@@ -178,7 +178,7 @@
 									
 							<div class="blank"></div>
 							<div class="div3"><span class="num">{$deal_item.percent}%</span><span class="til">达到</span></div>
-							<div class="div3"><span class="num" ><font>{function name="round" v=$deal_item.support_amount e=2}</font>元</span><span class="til">已获支持</span></div>
+							<div class="div3"><span class="num" ><font>{function name="round" v=$deal_item.support_amount e=2}</font>元</span><span class="til">已获关注</span></div>
 							<div class="div3">
 								{if $deal_item.begin_time > $now}
 								<span class="num"><font>{$deal_item.left_days}</font>天</span>
