@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$("textarea[name='memo']").bind("focus click",function(){
-		if($.trim($(this).val())=="在此填写任何你想告诉发起人的话")
+		if($.trim($(this).val())=="")
 		{
 			$(this).val("");			
 		}		
@@ -9,7 +9,7 @@ $(document).ready(function(){
 	$("textarea[name='memo']").bind("blur",function(){
 		if($.trim($(this).val())=="")
 		{
-			$(this).val("在此填写任何你想告诉发起人的话");			
+			$(this).val("");			
 		}		
 	});
 	
