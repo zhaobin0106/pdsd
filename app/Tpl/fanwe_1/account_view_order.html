@@ -25,13 +25,13 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 				{if $deal_info.type eq 1}
 				<li class="current"><a href="{url r="account#mine_investor_status"}">投资的拼地</a></li>
 				{else}
-				<li class="current"><a href="{url r="account#index"}">关注的拼地</a></li>
+				<li class="current"><a href="{url r="account#index"}">购买的商品</a></li>
 				{/if}
 						{if $user_info.user_level eq 14}
 				
 				<li><a href="{url r="account#project"}">我的拼地</a></li>
 				{/if}
-				<li><a href="{url r="account#focus"}">关注的拼地</a></li>
+				<!-- <li style="display:none"><a href="{url r="account#focus"}">关注的拼地</a></li> -->
 				<li><a href="{url r="account#credit"}">收支明细</a></li>
 				
 			</ul>
