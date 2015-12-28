@@ -17,9 +17,10 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 					{if $refund_list}
 					<table class="data-table">
 						<tr>
-							<th width="120">金额</th>
+							<th width="70">金额</th>
 							<th width="120">时间</th>
-							<th>提现备注</th>
+							<th width="120">提现备注</th>
+							<th>提现信息</th>
 							<th>状态</th>
 							<th width="120">支付时间</th>
 							<th width="50">操作</th>
@@ -29,6 +30,7 @@ $this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
 							<td>{function name="format_price" v=$refund_item.money}</td>
 							<td>{function name="to_date" v=$refund_item.create_time}</td>
 							<td>{$refund_item.memo}</td>
+							<td>{$refund_item.bank_info}</td>
 							<td>
 								{if $refund_item.is_pay eq 1}
 								申请通过，请耐心等待金额支付 {$refund_item.reply}
