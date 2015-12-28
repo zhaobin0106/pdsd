@@ -598,7 +598,7 @@ class accountModule extends BaseModule {
 		$GLOBALS ['tmpl']->assign ( "g_links", $g_links );
 		if (! $GLOBALS ['user_info'])
 			app_redirect ( url ( "user#login" ) );
-		$GLOBALS ['tmpl']->assign ( "page_title", "支持的项目详情" );
+		$GLOBALS ['tmpl']->assign ( "page_title", "开拼的商品详情" );
 		$id = intval ( $_REQUEST ['id'] );
 		$order_info = $GLOBALS ['db']->getRow ( "select * from " . DB_PREFIX . "deal_order where id = " . $id . " and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) );
 		if (! $order_info) {
