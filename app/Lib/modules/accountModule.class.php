@@ -610,7 +610,7 @@ class accountModule extends BaseModule {
 			$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
 			$repay_make_date = $order_info ['repay_time'] + $left_date * 24 * 3600;
 			if ($repay_make_date > get_gmtime () && $order_info ['repay_time'] > 0) {
-				$order_info ['repay_make_date'] = date ( 'Y-m-d H:i:s', $repay_make_date+8*3600 );
+				$order_info ['repay_make_date'] = date ( 'Y/m/d H:i:s', $repay_make_date+8*3600 );
 			} else {
 				$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_order set repay_make_time =  " . get_gmtime () . " where id = " . $id );
 				$order_info ['repay_make_time'] = get_gmtime ();
@@ -703,7 +703,7 @@ class accountModule extends BaseModule {
 					$left_date = intval ( app_conf ( "REPAY_MAKE" ) ) ? 7 : intval ( app_conf ( "REPAY_MAKE" ) );
 			$repay_make_date = $order_info ['repay_time'] + $left_date * 24 * 3600;
 			if ($repay_make_date > get_gmtime () && $order_info ['repay_time'] > 0) {
-				$order_info ['repay_make_date'] = date ( 'Y-m-d H:i:s', $repay_make_date+8*3600 );
+				$order_info ['repay_make_date'] = date ( 'Y/m/d H:i:s', $repay_make_date+8*3600 );
 			} else {
 				$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_xianhuo_order set repay_make_time =  " . get_gmtime () . " where id = " . $id );
 				$order_info ['repay_make_time'] = get_gmtime ();
@@ -1696,7 +1696,7 @@ class accountModule extends BaseModule {
 					"money" => "-" . $money
 			), intval ( $GLOBALS ['user_info'] ['id'] ), "补交" . $order_info ['deal_name'] . "项目快递费用" );
 		}
-		showSuccess ( "", $ajax, get_gopreview () );
+		showSuccess ( "", $ajax, url ( "account#shichi" ) );
 	}
 	public function do_sbujiao() {
 		$ajax = intval ( $_REQUEST ['ajax'] );
@@ -1721,7 +1721,7 @@ class accountModule extends BaseModule {
 					"money" => "-" . $money 
 			), intval ( $GLOBALS ['user_info'] ['id'] ), "补交" . $order_info ['deal_name'] . "商品快递费用" );
 		}
-		showSuccess ( "", $ajax, get_gopreview () );
+		showSuccess ( "", $ajax, url ( "account#xianhuo" ) );
 	}
 	public function money_index() {
 		$GLOBALS ['tmpl']->display ( "account_money_index.html" );
