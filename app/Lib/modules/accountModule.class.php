@@ -1163,6 +1163,17 @@ class accountModule extends BaseModule {
 		$limit = (($page - 1) * $page_size) . "," . $page_size;
 		
 		$refund_list = $GLOBALS ['db']->getAll ( "select * from " . DB_PREFIX . "user_refund where user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) . " order by create_time desc limit " . $limit );
+		foreach ($refund_list as $key => $value) {
+				$bank_info=$GLOBALS['db']->getRow("select * from  ".DB_PREFIX."user_bank where id=$value[user_bank_id]");
+				if(empty($bank_info)){
+					$user_info=$GLOBALS['db']->getRow("select * from  ".DB_PREFIX."user where id=" . intval ( $GLOBALS ['user_info'] ['id'] ) );
+					$refund_list[$key]['bank_info'] = "开户名:".$user_info['ex_real_name']." ".$user_info['ex_account_bank']." 卡号:".$user_info['ex_account_info'];
+					
+					//return "开户名:".$GLOBALS['user_info']['ex_real_name']." ".$bank_info['ex_account_bank']." 卡号:".$bank_info['ex_account_info'];
+				}else{
+					$refund_list[$key]['bank_info'] ="开户名:".$bank_info['real_name']." ".$bank_info['bank_name']." 卡号:".$bank_info['bankcard']." 开户地点:".$bank_info['region_lv2'].$bank_info['region_lv3'].$bank_info['bankzone'];
+				}
+		}
 		$refund_count = $GLOBALS ['db']->getOne ( "select count(*) from " . DB_PREFIX . "user_refund where user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) );
 		
 		$GLOBALS ['tmpl']->assign ( "refund_list", $refund_list );
@@ -1788,6 +1799,11 @@ class accountModule extends BaseModule {
 		$bank_id = strim ( $_REQUEST ['bank_id'] );
 		$otherbank = intval ( $_REQUEST ['otherbank'] );
 		$data = array ();
+		$real_name = strim ( $_REQUEST ['real_name'] );
+		if ($real_name == '') {
+			showErr ( '请填开户名称', $ajax );
+		}
+		$data ['real_name'] = $real_name;
 		if (empty ( $bank_id )) {
 			showErr ( "请选择银行" . $bank_id, $ajax );
 		} else {
