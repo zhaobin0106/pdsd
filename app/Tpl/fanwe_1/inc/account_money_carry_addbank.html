@@ -190,7 +190,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/add_consignee.js";
 	<div class="button_row tc">
 		<input type="hidden" name="ajax" value="1">
 		<input type="button" value="确认添加" class="ui-button ui-center-button theme_bgcolor">
-		<input type="button" value="取消" class="ui-button ui-center-button bg_gray">
+		<input type="button" value="取消" onclick="qxbank()" class="ui-center-button bg_gray">
     </div>
 	<div class="blank20"></div>      
 </form>
@@ -212,4 +212,8 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/add_consignee.js";
 		});
 		
 	});
+	function qxbank(){
+		$(".dialog-mask").hide();
+		$("#addbank-box").hide();
+	}
 </script>
