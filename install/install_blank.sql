@@ -2367,7 +2367,7 @@ CREATE TABLE `%DB_PREFIX%user` (
   `sex` tinyint(1) NOT NULL COMMENT '性别',
   `build_count` int(11) NOT NULL COMMENT '发起的拼地数',
   `support_count` int(11) NOT NULL COMMENT '支持的拼地数',
-  `focus_count` int(11) NOT NULL COMMENT '关注的拼地数',
+  `focus_count` int(11) NOT NULL COMMENT '参与的拼地数',
   `integrate_id` int(11) NOT NULL,
   `intro` text NOT NULL COMMENT '个人简介',
   `ex_real_name` varchar(255) NOT NULL COMMENT '发布者真实姓名',

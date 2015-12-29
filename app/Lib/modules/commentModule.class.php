@@ -44,7 +44,7 @@ class commentModule extends BaseModule
 		$p  =  $page->show();
 		$GLOBALS['tmpl']->assign('pages',$p);	
 				
-		$GLOBALS['tmpl']->assign("page_title","文章列表");
+		$GLOBALS['tmpl']->assign("page_title","收到的评论");
 		$GLOBALS['tmpl']->display("comment_index.html");
 	}
 	
@@ -54,7 +54,7 @@ class commentModule extends BaseModule
                 $g_links =get_link_by_id(14);
                 
                 $GLOBALS['tmpl']->assign("g_links",$g_links);
-		$GLOBALS['tmpl']->assign("page_title","最新动态");
+		$GLOBALS['tmpl']->assign("page_title","发出的评论");
 		if(!$GLOBALS['user_info'])
 		{
 			app_redirect(url("user#login"));

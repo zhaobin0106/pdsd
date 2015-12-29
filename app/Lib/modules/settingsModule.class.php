@@ -14,7 +14,7 @@ class settingsModule extends BaseModule
         //links
         $g_links =get_link_by_id(14);
         $GLOBALS['tmpl']->assign("g_links",$g_links);
-		$GLOBALS['tmpl']->assign("page_title","最新动态");
+		$GLOBALS['tmpl']->assign("page_title","资料修改");
 		if(!$GLOBALS['user_info'])
 		app_redirect(url("user#login"));
 		$region_pid = 0;
@@ -298,7 +298,7 @@ class settingsModule extends BaseModule
                 $g_links =get_link_by_id(14);
                 
                 $GLOBALS['tmpl']->assign("g_links",$g_links);
-		$GLOBALS['tmpl']->assign("page_title","最新动态");
+		$GLOBALS['tmpl']->assign("page_title","收货地址管理");
 		if(!$GLOBALS['user_info'])
 		app_redirect(url("user#login"));
 

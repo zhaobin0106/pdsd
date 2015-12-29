@@ -3253,7 +3253,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Creator>hp</a:Creator>
 <a:ModificationDate>1349688432</a:ModificationDate>
 <a:Modifier>hp</a:Modifier>
-<a:Comment>关注的拼地数</a:Comment>
+<a:Comment>参与的拼地数</a:Comment>
 <a:DataType>int(11)</a:DataType>
 <a:Length>11</a:Length>
 <a:Mandatory>1</a:Mandatory>
