@@ -82,7 +82,7 @@ class accountModule extends BaseModule {
 			$GLOBALS ['tmpl']->assign ( "g_links", $g_links );
 			if (! $GLOBALS ['user_info'])
 				app_redirect ( url ( "user#login" ) );
-			$GLOBALS ['tmpl']->assign ( "page_title", "试吃的项目" );
+			$GLOBALS ['tmpl']->assign ( "page_title", "报名的试吃" );
 	
 			$page_size = ACCOUNT_PAGE_SIZE;
 			$page = intval ( $_REQUEST ['p'] );
@@ -411,7 +411,7 @@ class accountModule extends BaseModule {
 		$g_links = get_link_by_id ( 14 );
 		
 		$GLOBALS ['tmpl']->assign ( "g_links", $g_links );
-		$GLOBALS ['tmpl']->assign ( "page_title", "我的项目列表" );
+		$GLOBALS ['tmpl']->assign ( "page_title", "我的商品列表" );
 		if (! $GLOBALS ['user_info'])
 			app_redirect ( url ( "user#login" ) );
 		
@@ -645,7 +645,7 @@ class accountModule extends BaseModule {
 	$GLOBALS ['tmpl']->assign ( "g_links", $g_links );
 	if (! $GLOBALS ['user_info'])
 		app_redirect ( url ( "user#login" ) );
-	$GLOBALS ['tmpl']->assign ( "page_title", "试吃的项目详情" );
+	$GLOBALS ['tmpl']->assign ( "page_title", "报名的试吃详情" );
 	$id = intval ( $_REQUEST ['id'] );
 	$order_info = $GLOBALS ['db']->getRow ( "select * from " . DB_PREFIX . "fore_item_order where id = " . $id . " and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) );
 	if (! $order_info) {
