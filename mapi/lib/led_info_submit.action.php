@@ -38,7 +38,7 @@ class led_info_submit
 		$deal_user_id = $GLOBALS ['db']->getRow ( "SELECT user_id FROM " . DB_PREFIX . "deal WHERE id=" . $deal_id );
 		if ($deal_user_id == $user_id)
 		{
-			$data = responseErrorInfo ( "不能投资自己发起的项目" );
+			$data = responseErrorInfo ( "不能投资自己发起的拼地" );
 			output ( $data );
 		}
 		
