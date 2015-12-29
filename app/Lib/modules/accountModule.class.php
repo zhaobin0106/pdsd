@@ -1058,7 +1058,7 @@ class accountModule extends BaseModule {
 		
 		$GLOBALS ['db']->autoExecute ( DB_PREFIX . "deal_order", $order_info, "UPDATE", "id=" . $order_info ['id'] );
 		
-		send_notify ( $order_info ['user_id'], "您支持的项目" . $order_info ['deal_name'] . "回报已发放", "account#view_order", "id=" . $order_info ['id'] );
+		send_notify ( $order_info ['user_id'], "您参与" . $order_info ['deal_name'] . "回报已发放", "account#view_order", "id=" . $order_info ['id'] );
 		showSuccess ( "回报设置成功", $ajax );
 	}
 	public function save_chi_repay() {
