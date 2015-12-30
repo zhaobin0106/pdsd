@@ -110,7 +110,7 @@ class go_pay
 					require_once APP_ROOT_PATH . "system/libs/user.php";
 					$re = modify_account ( array (
 							"money" => "-" . $credit 
-					), intval ( $user ['id'] ), "支持" . $deal_info ['name'] . "项目支付" );
+					), intval ( $user ['id'] ),  $deal_info ['name'] . "支付" );
 					if ($re)
 					{
 						$GLOBALS ['db']->query ( "update  " . DB_PREFIX . "deal_order set credit_pay=" . $credit . " where id=" . $order_id );

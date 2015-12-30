@@ -67,7 +67,7 @@ class pay_order
 					require_once APP_ROOT_PATH . "system/libs/user.php";
 					$re = modify_account ( array (
 							"money" => "-" . $continue_credit 
-					), intval ( $user ['id'] ), "支持" . $order ['deal_name'] . "项目支付" );
+					), intval ( $user ['id'] ),  $order ['deal_name'] . "支付" );
 					if ($re)
 					{
 						$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_order set credit_pay = credit_pay + " . $continue_credit . " where id = " . $order ['id'] ); // 追加使用余额支付

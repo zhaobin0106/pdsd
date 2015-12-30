@@ -36,7 +36,7 @@ class uc_account_delorder
 					if($money>0)
 					{
 						require_once APP_ROOT_PATH."system/libs/user.php";
-						modify_account(array("money"=>$money),$user_id,"删除".$order_info['deal_name']."项目支付，退回支付款。");						
+						modify_account(array("money"=>$money),$user_id,"删除".$order_info['deal_name']."支付，退回支付款。");						
 					}
 				}
 				$root['response_code'] = 1;
