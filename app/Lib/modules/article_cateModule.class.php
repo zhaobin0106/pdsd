@@ -15,7 +15,7 @@ class article_cateModule extends BaseModule
 	{	
 		$id=intval($_REQUEST['id']);
 		$xid=$id;
-		$GLOBALS['tmpl']->assign("page_title","文章列表");
+		//$GLOBALS['tmpl']->assign("page_title","文章列表");
 		//改写
         $g_links =get_link_by_id(14);
         $GLOBALS['tmpl']->assign("g_links",$g_links);
