@@ -342,7 +342,7 @@ class dealsModule extends BaseModule
  					}
  							
  				}
- 				$page_title=$page_title?$page_title:'产品拼地';
+ 				$page_title=$page_title?$page_title:'开拼';
  			}
  			$GLOBALS['tmpl']->assign("page_title",$page_title);
  		}
