@@ -2,7 +2,7 @@
 class settingsModule{
 	public function index()
 	{	
-		$GLOBALS['tmpl']->assign("page_title","最新动态");
+		$GLOBALS['tmpl']->assign("page_title","个人中心");
 		if(!$GLOBALS['user_info'])
 		app_redirect(url_wap("user#login"));
 		$level_name="";
@@ -16,7 +16,7 @@ class settingsModule{
 	//修改资料（展示）
 	public function modify()
 	{	
-		$GLOBALS['tmpl']->assign("page_title","最新动态");
+		$GLOBALS['tmpl']->assign("page_title","修改资料");
 		if(!$GLOBALS['user_info'])
 		app_redirect(url_wap("user#login"));
 		$region_pid = 0;
@@ -273,7 +273,7 @@ class settingsModule{
 	}
 	public function consignee()
 	{
- 		$GLOBALS['tmpl']->assign("page_title","最新动态");
+ 		$GLOBALS['tmpl']->assign("page_title","收货地址管理");
 		if(!$GLOBALS['user_info'])
 		app_redirect(url_wap("user#login"));
 
