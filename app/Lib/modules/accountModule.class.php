@@ -538,7 +538,7 @@ class accountModule extends BaseModule {
 					require_once APP_ROOT_PATH . "system/libs/user.php";
 					modify_account ( array (
 							"money" => $money 
-					), intval ( $GLOBALS ['user_info'] ['id'] ), "删除" . $order_info ['deal_name'] . "项目支付，退回支付款。" );
+					), intval ( $GLOBALS ['user_info'] ['id'] ), "删除" . $order_info ['deal_name'] . "支付，退回支付款。" );
 				}
 			}
 			showSuccess ( "", $ajax, get_gopreview () );
@@ -584,7 +584,7 @@ class accountModule extends BaseModule {
 					require_once APP_ROOT_PATH . "system/libs/user.php";
 					modify_account ( array (
 							"money" => $money 
-					), intval ( $GLOBALS ['user_info'] ['id'] ), "删除" . $order_info ['deal_name'] . "项商品支付，退回支付款。" );
+					), intval ( $GLOBALS ['user_info'] ['id'] ), "删除" . $order_info ['deal_name'] . "商品支付，退回支付款。" );
 				}
 			}
 			showSuccess ( "", $ajax, get_gopreview () );
@@ -602,7 +602,7 @@ class accountModule extends BaseModule {
 		$id = intval ( $_REQUEST ['id'] );
 		$order_info = $GLOBALS ['db']->getRow ( "select * from " . DB_PREFIX . "deal_order where id = " . $id . " and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) );
 		if (! $order_info) {
-			showErr ( "无效的项目支持", 0, get_gopreview () );
+			showErr ( "无效的拼地支持", 0, get_gopreview () );
 		}
 
 		// ========如果超过系统设置的时间，则自动设置收到回报 start
@@ -649,7 +649,7 @@ class accountModule extends BaseModule {
 	$id = intval ( $_REQUEST ['id'] );
 	$order_info = $GLOBALS ['db']->getRow ( "select * from " . DB_PREFIX . "fore_item_order where id = " . $id . " and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) );
 	if (! $order_info) {
-		showErr ( "无效的项目支持", 0, get_gopreview () );
+		showErr ( "无效的试吃报名", 0, get_gopreview () );
 	}
 	// ========如果超过系统设置的时间，则自动设置收到回报 start
 		if($order_info['repay_make_time']==0 && $order_info['repay_time'] > 0){
@@ -757,7 +757,7 @@ class accountModule extends BaseModule {
 					require_once APP_ROOT_PATH . "system/libs/user.php";
 					$re = modify_account ( array (
 							"money" => "-" . $credit 
-					), intval ( $GLOBALS ['user_info'] ['id'] ), "支持" . $order_info ['deal_name'] . "项目支付" );
+					), intval ( $GLOBALS ['user_info'] ['id'] ), $order_info ['deal_name'] . "支付" );
 					if ($re) {
 						
 						$GLOBALS ['db']->query ( "update " . DB_PREFIX . "deal_order set credit_pay = credit_pay + " . $credit . " where id = " . $order_info ['id'] ); // 追加使用余额支付
@@ -822,7 +822,7 @@ class accountModule extends BaseModule {
 					require_once APP_ROOT_PATH . "system/libs/user.php";
 					$re = modify_account ( array (
 							"money" => "-" . $credit
-					), intval ( $GLOBALS ['user_info'] ['id'] ), "报名" . $order_info ['deal_name'] . "项目支付" );
+					), intval ( $GLOBALS ['user_info'] ['id'] ), "报名" . $order_info ['deal_name'] . "支付" );
 					if ($re) {
 	
 						$GLOBALS ['db']->query ( "update " . DB_PREFIX . "fore_item_order set credit_pay = credit_pay + " . $credit . " where id = " . $order_info ['id'] ); // 追加使用余额支付
