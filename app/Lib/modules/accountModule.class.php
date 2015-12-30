@@ -929,7 +929,7 @@ class accountModule extends BaseModule {
 		if (! $GLOBALS ['user_info']) {
 			app_redirect ( url ( "user#login" ) );
 		}
-		$GLOBALS ['tmpl']->assign ( "page_title", "拼地记录列表" );
+		$GLOBALS ['tmpl']->assign ( "page_title", "拼地记录" );
 		$deal_id = intval ( $_REQUEST ['id'] );
 		$deal_info = $GLOBALS ['db']->getRow ( "select * from " . DB_PREFIX . "deal where id = " . $deal_id . " and is_delete = 0 and is_effect = 1 and is_success = 1 and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) );
 		
@@ -969,7 +969,7 @@ class accountModule extends BaseModule {
 		if (! $GLOBALS ['user_info']) {
 			app_redirect ( url ( "user#login" ) );
 		}
-		$GLOBALS ['tmpl']->assign ( "page_title", "我的试吃-报名列表" );
+		$GLOBALS ['tmpl']->assign ( "page_title", "报名记录" );
 		$deal_id = intval ( $_REQUEST ['id'] );
 		$deal_info = $GLOBALS ['db']->getRow ( "select * from " . DB_PREFIX . "fore where id = " . $deal_id . " and is_delete = 0 and is_effect = 1 and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) );
 	
@@ -1007,7 +1007,7 @@ class accountModule extends BaseModule {
 		if (! $GLOBALS ['user_info']) {
 			app_redirect ( url ( "user#login" ) );
 		}
-		$GLOBALS ['tmpl']->assign ( "page_title", "我的商品-购买记录" );
+		$GLOBALS ['tmpl']->assign ( "page_title", "购买记录" );
 		$deal_id = intval ( $_REQUEST ['id'] );
 		$deal_info = $GLOBALS ['db']->getRow ( "select * from " . DB_PREFIX . "deal where id = " . $deal_id . " and is_delete = 0 and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ) );
 		
