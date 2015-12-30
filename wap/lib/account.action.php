@@ -304,7 +304,7 @@ class accountModule{
 				if($money>0)
 				{
 					require_once APP_ROOT_PATH."system/libs/user.php";
-					modify_account(array("money"=>$money),intval($GLOBALS['user_info']['id']),"删除".$order_info['deal_name']."项目支付，退回支付款。");						
+					modify_account(array("money"=>$money),intval($GLOBALS['user_info']['id']),"删除".$order_info['deal_name']."支付，退回支付款。");						
 				}
 			}
 			showSuccess("",$ajax,get_gopreview());
@@ -333,7 +333,7 @@ class accountModule{
 				if($money>0)
 				{
 					require_once APP_ROOT_PATH."system/libs/user.php";
-					modify_account(array("money"=>$money),intval($GLOBALS['user_info']['id']),"删除".$order_info['deal_name']."项目支付，退回支付款。");
+					modify_account(array("money"=>$money),intval($GLOBALS['user_info']['id']),"删除".$order_info['deal_name']."支付，退回支付款。");
 				}
 			}
 			showSuccess("",$ajax,get_gopreview());
@@ -390,7 +390,7 @@ class accountModule{
 				$GLOBALS['db']->query("update ".DB_PREFIX."deal_order set credit_pay = credit_pay + ".$credit." where id = ".$order_info['id']);//追加使用余额支付
 				
 				require_once APP_ROOT_PATH."system/libs/user.php";
-				modify_account(array("money"=>"-".$credit),intval($GLOBALS['user_info']['id']),"支持".$order_info['deal_name']."项目支付");		
+				modify_account(array("money"=>"-".$credit),intval($GLOBALS['user_info']['id']),$order_info['deal_name']."支付");		
 				}		
 			}
 			$result = pay_order($order_info['id']);
@@ -446,7 +446,7 @@ class accountModule{
 				$GLOBALS['db']->query("update ".DB_PREFIX."fore_item_order set credit_pay = credit_pay + ".$credit." where id = ".$order_info['id']);//追加使用余额支付
 	
 				require_once APP_ROOT_PATH."system/libs/user.php";
-				modify_account(array("money"=>"-".$credit),intval($GLOBALS['user_info']['id']),"报名".$order_info['deal_name']."项目支付");
+				modify_account(array("money"=>"-".$credit),intval($GLOBALS['user_info']['id']),"报名".$order_info['deal_name']."支付");
 			}
 		}
 		$result = pay_fore_order($order_info['id']);
