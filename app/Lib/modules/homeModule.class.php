@@ -122,7 +122,7 @@ class homeModule extends BaseModule
                 $g_links =get_link_by_id(14);
                 
                 $GLOBALS['tmpl']->assign("g_links",$g_links);
-		$GLOBALS['tmpl']->assign("page_title","最新动态");
+		$GLOBALS['tmpl']->assign("page_title","");
 
 		$id = intval($_REQUEST['id']);
 		
