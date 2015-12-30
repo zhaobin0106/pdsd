@@ -394,7 +394,7 @@ class cartModule {
 					} else {
 						modify_account ( array (
 								"money" => "-" . $order_info ['credit_pay'] 
-						), intval ( $GLOBALS ['user_info'] ['id'] ), "支持" . $order_info ['deal_name'] . "项目支付" );
+						), intval ( $GLOBALS ['user_info'] ['id'] ),  $order_info ['deal_name'] . "支付" );
 					}
 				}
 				if ($type == 2) {
