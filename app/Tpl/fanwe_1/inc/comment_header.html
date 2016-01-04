@@ -1,11 +1,15 @@
 <div class="page_title">
-		{if ACTION_NAME eq 'index'}收到的评论{/if}
-		{if ACTION_NAME eq 'send'}发出的评论{/if}
+		{if ACTION_NAME eq 'index'}收到的拼地评论{/if}
+		{if ACTION_NAME eq 'send'}发出的拼地评论{/if}
+		{if ACTION_NAME eq 'fore_index'}收到的试吃评论{/if}
+		{if ACTION_NAME eq 'fore_send'}发出的试吃评论{/if}
 </div>
 <div class="blank"></div>		
 <div class="switch_nav">
 	<ul>
 		<li {if ACTION_NAME eq 'index'}class="current"{/if}><a href="{url r="comment"}">收到的评论</a></li>
-		<li {if ACTION_NAME eq 'send'}class="current"{/if}><a href="{url r="comment#send"}">发出的评论</a></li>						
+		<li {if ACTION_NAME eq 'send'}class="current"{/if}><a href="{url r="comment#send"}">发出的评论</a></li>	
+		<li {if ACTION_NAME eq 'fore_index'}class="current"{/if}><a href="{url r="comment#fore_index"}">收到的试吃评论</a></li>
+		<li {if ACTION_NAME eq 'fore_send'}class="current"{/if}><a href="{url r="comment#fore_send"}">发出的试吃评论</a></li>						
 	</ul>		
 </div>
