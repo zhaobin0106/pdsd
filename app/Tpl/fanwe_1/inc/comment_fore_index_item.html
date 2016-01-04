@@ -19,7 +19,7 @@
 		</div>
 		<div class="reply_box" id="reply_box_{$comment_item.id}">
 			<div class="blank10"></div>
-			<form name="comment_{$log_item.id}_form" rel="{$comment_item.log_id}" class="comment_form" action="{url r="fore#save_comment" p="log_id=$comment_item.log_id&deal_id=$comment_item.fore_id&pid=$comment_item.id"}">		
+			<form name="comment_{$log_item.id}_form" rel="{$comment_item.log_id}" class="comment_form" action="{url r="fore#save_comment" p="log_id=$comment_item.log_id&fore_id=$comment_item.fore_id&pid=$comment_item.id"}">		
 			<div class="reply_content">
 				<textarea name="content">回复 {$comment_item.user_name}:</textarea>
 				<input type="hidden" name="ajax" value="1" />
