@@ -1058,7 +1058,19 @@ function cache_deal_comment($comment)
 	}
 	return $comment;
 }
-
+function cache_fore_comment($comment)
+{
+	if($comment['deal_info_cache']=="")
+	{
+		$comment['deal_info']  = $deal_info_cache =  $GLOBALS['db']->getRow("select id,name from ".DB_PREFIX."fore where id = ".$comment['fore_id']);
+		$GLOBALS['db']->query("update ".DB_PREFIX."fore_comment set deal_info_cache = '".serialize($deal_info_cache)."' where id = ".$comment['id']);
+	}
+	else
+	{
+		$comment['deal_info'] = unserialize($comment['deal_info_cache']);
+	}
+	return $comment;
+}
 function get_deal_list($limit="",$conditions="",$orderby=" sort desc ",$deal_type='deal'){
 	
 	

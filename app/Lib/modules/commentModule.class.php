@@ -44,10 +44,45 @@ class commentModule extends BaseModule
 		$p  =  $page->show();
 		$GLOBALS['tmpl']->assign('pages',$p);	
 				
-		$GLOBALS['tmpl']->assign("page_title","收到的评论");
+		$GLOBALS['tmpl']->assign("page_title","收到的拼地评论");
 		$GLOBALS['tmpl']->display("comment_index.html");
 	}
-	
+	public function fore_index()
+	{	
+              //links
+                $g_links =get_link_by_id(14);
+                
+                $GLOBALS['tmpl']->assign("g_links",$g_links);
+		if(!$GLOBALS['user_info'])
+		{
+			app_redirect(url("user#login"));
+		}
+		
+		$page_size = DEAL_COMMENT_PAGE_SIZE;
+		$page = intval($_REQUEST['p']);
+		if($page==0)$page = 1;		
+		$limit = (($page-1)*$page_size).",".$page_size	;
+
+		$sql = "select * from ".DB_PREFIX."fore_comment where reply_user_id = ".intval($GLOBALS['user_info']['id'])." or deal_user_id = ".intval($GLOBALS['user_info']['id'])." order by create_time desc limit ".$limit;
+		$sql_count = "select count(*) from ".DB_PREFIX."fore_comment where reply_user_id = ".intval($GLOBALS['user_info']['id'])." or deal_user_id = ".intval($GLOBALS['user_info']['id']);
+		
+		$comment_list = $GLOBALS['db']->getAll($sql);
+		foreach($comment_list as $k=>$v)
+		{
+			$comment_list[$k] = cache_fore_comment($comment_list[$k]);
+		}
+		$comment_count = $GLOBALS['db']->getOne($sql_count);
+		
+		
+		$GLOBALS['tmpl']->assign("comment_list",$comment_list);
+
+		$page = new Page($comment_count,$page_size);   //初始化分页对象 		
+		$p  =  $page->show();
+		$GLOBALS['tmpl']->assign('pages',$p);	
+				
+		$GLOBALS['tmpl']->assign("page_title","收到的试吃评论");
+		$GLOBALS['tmpl']->display("comment_fore_index.html");
+	}
 	public function send()
 	{	
                     //links
@@ -85,7 +120,43 @@ class commentModule extends BaseModule
 		
 		$GLOBALS['tmpl']->display("comment_send.html");
 	}
-	
+	public function fore_send()
+	{	
+                    //links
+                $g_links =get_link_by_id(14);
+                
+                $GLOBALS['tmpl']->assign("g_links",$g_links);
+		$GLOBALS['tmpl']->assign("page_title","发出的试吃评论");
+		if(!$GLOBALS['user_info'])
+		{
+			app_redirect(url("user#login"));
+		}
+		$page_size = DEAL_COMMENT_PAGE_SIZE;
+		$page = intval($_REQUEST['p']);
+		if($page==0)$page = 1;		
+		$limit = (($page-1)*$page_size).",".$page_size	;
+
+		$sql = "select * from ".DB_PREFIX."fore_comment where user_id = ".intval($GLOBALS['user_info']['id'])." order by create_time desc limit ".$limit;
+		$sql_count = "select count(*) from ".DB_PREFIX."fore_comment where user_id = ".intval($GLOBALS['user_info']['id']);
+		
+		$comment_list = $GLOBALS['db']->getAll($sql);
+		$deal_list = array();
+		foreach($comment_list as $k=>$v)
+		{
+			$comment_list[$k] = cache_fore_comment($comment_list[$k]);
+		}
+		$comment_count = $GLOBALS['db']->getOne($sql_count);
+		
+		
+		$GLOBALS['tmpl']->assign("comment_list",$comment_list);
+
+		$page = new Page($comment_count,$page_size);   //初始化分页对象 		
+		$p  =  $page->show();
+		$GLOBALS['tmpl']->assign('pages',$p);	
+				
+		
+		$GLOBALS['tmpl']->display("comment_fore_send.html");
+	}
 	
 }
 ?>
