@@ -606,8 +606,7 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
 		}
 		
 		$comment['fore_id'] = intval($_REQUEST['fore_id']);
-		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."foer where id = ".$comment['fore_id']." and is_delete = 0 and is_effect = 1 ");
-		var_dump($comment['fore_id'],$deal_info);exit;
+		$deal_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."fore where id = ".$comment['fore_id']." and is_delete = 0 and is_effect = 1 ");
 		if(!$deal_info)
 		{
 			showErr("该项目暂时不能评论",$ajax);
