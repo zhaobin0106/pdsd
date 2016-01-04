@@ -59,7 +59,7 @@ class homeModule extends BaseModule
 			$deal_list = array();
 			if($deal_count > 0){
 				$now_time = get_gmtime();
-				$deal_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where ".$condition." order by sort asc limit ".$limit);
+				$deal_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where ".$condition." order by sort desc limit ".$limit);
 				$deal_ids = array();
 				foreach($deal_list as $k=>$v)
 				{
@@ -160,7 +160,7 @@ class homeModule extends BaseModule
 		}
 		
 		$sql = "select distinct(d.id) as id,d.* from ".DB_PREFIX."deal as d left join ".DB_PREFIX."deal_support_log as dsl on d.id = dsl.deal_id ".
-			   " where $condition and dsl.user_id = ".$home_user_info['id']." order by d.sort asc limit ".$limit;
+			   " where $condition and dsl.user_id = ".$home_user_info['id']." order by d.sort desc limit ".$limit;
 	
 		$sql_count = "select count(distinct(d.id)) from ".DB_PREFIX."deal as d left join ".DB_PREFIX."deal_support_log as dsl on d.id = dsl.deal_id ".
 			   " where $condition and dsl.user_id = ".$home_user_info['id'];
