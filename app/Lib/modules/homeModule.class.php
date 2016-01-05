@@ -160,7 +160,7 @@ class homeModule extends BaseModule
 		}
 		
 		$sql = "select distinct(d.id) as id,d.* from ".DB_PREFIX."deal as d left join ".DB_PREFIX."deal_support_log as dsl on d.id = dsl.deal_id ".
-			   " where $condition and dsl.user_id = ".$home_user_info['id']." order by d.sort desc limit ".$limit;
+			   " where $condition and dsl.user_id = ".$home_user_info['id']." order by dsl.create_time desc limit ".$limit;
 	
 		$sql_count = "select count(distinct(d.id)) from ".DB_PREFIX."deal as d left join ".DB_PREFIX."deal_support_log as dsl on d.id = dsl.deal_id ".
 			   " where $condition and dsl.user_id = ".$home_user_info['id'];
