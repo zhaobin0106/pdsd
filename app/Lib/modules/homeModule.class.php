@@ -159,20 +159,20 @@ class homeModule extends BaseModule
 			$condition=" d.type=1 ";
 		}
 		
-		$sql = "select count(distinct(dsl.deal_id)) as did,d.*,dsl.create_time as dctime from ".DB_PREFIX."deal as d left join ".DB_PREFIX."deal_support_log as dsl on d.id = dsl.deal_id ".
-			   " where $condition and dsl.user_id = ".$home_user_info['id']." group by dsl.deal_id order by dsl.create_time desc limit ".$limit;
-		// $sql = "select d.* from ".DB_PREFIX."deal as d where $condition and d.id in(select distinct(dsl.deal_id) from ".DB_PREFIX."deal_support_log where dsl.user_id = ".$home_user_info['id']." group by dsl.deal_id order by dsl.create_time desc) limit ".$limit;
+		$sql = "select distinct(d.id) as id,d.* from ".DB_PREFIX."deal as d join ".DB_PREFIX."deal_support_log as dsl on d.id = dsl.deal_id ".
+			   " where $condition and dsl.user_id = ".$home_user_info['id']." order by dsl.create_time desc limit ".$limit;
 	
 		$sql_count = "select count(distinct(d.id)) from ".DB_PREFIX."deal as d left join ".DB_PREFIX."deal_support_log as dsl on d.id = dsl.deal_id ".
 			   " where $condition and dsl.user_id = ".$home_user_info['id'];
 		//得到当前页面项目信息
-
+	
 		$deal_count = $GLOBALS['db']->getOne($sql_count);
 		/*（home模块）准备虚拟数据 start*/
 			$deal_list = array();
 			if($deal_count > 0){
 				$now_time = get_gmtime();
 				$deal_list = $GLOBALS['db']->getAll($sql);
+				
 				$deal_ids = array();
 				foreach($deal_list as $k=>$v)
 				{
