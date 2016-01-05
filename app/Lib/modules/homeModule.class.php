@@ -165,7 +165,6 @@ class homeModule extends BaseModule
 		$sql_count = "select count(distinct(d.id)) from ".DB_PREFIX."deal as d left join ".DB_PREFIX."deal_support_log as dsl on d.id = dsl.deal_id ".
 			   " where $condition and dsl.user_id = ".$home_user_info['id'];
 		//得到当前页面项目信息
-					var_dump($sql);exit;
 
 		$deal_count = $GLOBALS['db']->getOne($sql_count);
 		/*（home模块）准备虚拟数据 start*/
