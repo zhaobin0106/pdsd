@@ -160,7 +160,7 @@ class homeModule extends BaseModule
 		}
 		
 		$sql = "select distinct(d.id) as id,d.*,dsl.deal_id as did from ".DB_PREFIX."deal as d left join ".DB_PREFIX."deal_support_log as dsl on d.id = dsl.deal_id ".
-			   " where $condition and dsl.user_id = ".$home_user_info['id']." group by dsl.deal_id order by dsl.create_time desc limit ".$limit;
+			   " where $condition and dsl.user_id = ".$home_user_info['id']." group by dsl.deal_id limit ".$limit;
 	//$sql = "select d.* from ".DB_PREFIX."deal as d ".
 			   // " where $condition and d.id in (select distinct(dsl.deal_id) from ".DB_PREFIX."deal_support_log as dsl where dsl.user_id = ".$home_user_info['id']." order by dsl.create_time desc) limit ".$limit;
 			   //var_dump($sql);exit;
