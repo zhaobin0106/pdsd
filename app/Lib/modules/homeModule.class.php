@@ -159,7 +159,7 @@ class homeModule extends BaseModule
 			$condition=" d.type=1 ";
 		}
 		
-		$sql = "select distinct(d.id) as id,d.*,dsl.create_time as dctime from ".DB_PREFIX."deal as d left join ".DB_PREFIX."deal_support_log as dsl on d.id = dsl.deal_id ".
+		$sql = "select count(distinct(d.id)) as did,d.*,dsl.create_time as dctime from ".DB_PREFIX."deal as d left join ".DB_PREFIX."deal_support_log as dsl on d.id = dsl.deal_id ".
 			   " where $condition and dsl.user_id = ".$home_user_info['id']." group by dsl.deal_id order by dsl.create_time desc limit ".$limit;
 		// $sql = "select d.* from ".DB_PREFIX."deal as d where $condition and d.id in(select distinct(dsl.deal_id) from ".DB_PREFIX."deal_support_log where dsl.user_id = ".$home_user_info['id']." group by dsl.deal_id order by dsl.create_time desc) limit ".$limit;
 	
