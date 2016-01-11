@@ -242,20 +242,20 @@
                 <!--3-->
                 <div class="deal_content_box pd" style="margin:0 5px">
                    <!-- <div class="ui">
-                        {if $deal.percent gte 100}
+                        { $deal.percent gte 100}
                         <span class="common-success" style="width:100%;"></span>
-                        {else}
+                        {}
                         <span class="progress" style="width:{$deal.percent}%;"></span>
-                        {/if}
+                        {/}
                     </div>-->
                     <!--<div class="blank">
                     </div>->
-                   <!-- {if $deal.status==0}
+                   <!-- {$deal.status==0}
                     <div class="div_dt">
                         <span class="num">距离开始还有{$deal.left_days}天</span><br />
                         <span class="til"></span>
                     </div>
-                    {else}
+                    {}
                     <div class="div_dt">
                         <span class="num">{$deal.percent}%</span><br />
                         <span class="til">已达</span>
@@ -277,8 +277,7 @@
                         <span class="til" style="color:#8A8A8A"><img src="./tpl/default/images/biao05.png" style="vertical-align:middle;margin:0 0 5px 0px;display:inline-block;width:15px;height:15px" title="头像" />{$deal.support_count}人关注</span>
                     </div>
                     
-                    {/if}
-                    <div class="blank"></div>
+<!--  -->                    <div class="blank"></div>
                 </div>
             </div>
         </a>
