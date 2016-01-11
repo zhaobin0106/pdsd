@@ -192,7 +192,7 @@ $this->_var['cpagejs_1'][]='';
 	 	{/if} 	
 	    	<div class="detailReturn">
 	    		<div class="Returntop webkit-box mb10">
-	    			{if $deal_info.remain_days>0}
+	    		{if ($deal_info.end_time > $now or $deal_info.end_time eq 0) and $deal_info.begin_time < $now and $deal_info.is_effect eq 1 }
 					{if $item.support_count < $item.limit_user or $item.limit_user eq 0}
 				    <div class="Returntitle webkit-box-flex">
 				        <span class="span1"><i class="font-yen support-yen">¥</i>&nbsp;{$item.price_format}</span>
