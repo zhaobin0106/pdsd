@@ -79,6 +79,7 @@ class dealModule{
 		$GLOBALS['tmpl']->assign("deal_index_url",url_wap("deal#index",array("id"=>$id)));
 		$GLOBALS['tmpl']->assign("usermessage_url",url_wap("ajax#usermessage",array("id"=>$deal_info['user_id'])));
 		$GLOBALS['tmpl']->assign("home_url",url_wap("deal#home",array("id"=>$deal_info['user_id'])));
+		$GLOBALS['tmpl']->assign('now',NOW_TIME);
 		if($deal_info['type']==1){
 		
 			set_deal_status($deal_info);
