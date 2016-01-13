@@ -1032,13 +1032,13 @@ function get_deal_list($limit="",$conditions="",$orderby=" sort desc "){
 	}
 	
 	//权限浏览控制
-	if($GLOBALS['user_info']['user_level']!=0){
-		$level=$GLOBALS['db']->getOne("SELECT level from ".DB_PREFIX."user_level where id=".$GLOBALS['user_info']['user_level']);
-		$condition .=" AND (d.user_level ='' or d.user_level=0 or d.user_level <=$level)   ";
-	}
-	else{
-		$condition.=" AND (d.user_level =0 or d.user_level =1 or d.user_level ='')  ";
-	}
+	// if($GLOBALS['user_info']['user_level']!=0){
+	// 	$level=$GLOBALS['db']->getOne("SELECT level from ".DB_PREFIX."user_level where id=".$GLOBALS['user_info']['user_level']);
+	// 	$condition .=" AND (d.user_level ='' or d.user_level=0 or d.user_level <=$level)   ";
+	// }
+	// else{
+	// 	$condition.=" AND (d.user_level =0 or d.user_level =1 or d.user_level ='')  ";
+	// }
  	$deal_count = $GLOBALS['db']->getOne("select count(*)  from ".DB_PREFIX."deal as d  where ".$condition);
  
   	/*（所需项目）准备虚拟数据 start*/
