@@ -6,12 +6,14 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
 <script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}">
 </script>
 <section class="cart_index">
-    <form class="pay_form" action="{url_wap r="cart#go_pay"}"  method="post">
+    <form class="pay_form" action="{url_wap r="cart#go_pay"}" onsubmit="return check_form();"  method="post">
         <div class="blocktitle">订单详情</div>
         <div class="blocktop">
-<!--             <div class="imglist" style="width: 70px;height: 70px;">
-                <img src="{$deal_info.user_info.image}">
-            </div> -->
+            <div class="imglist" style="width: 70px;height: 70px;">
+                            <img src="{function name="get_user_avatar" uid=$user_info.id type="middle"}" width="100%">
+
+<!--                 <img src="{$deal_info.user_info.image}">
+ -->            </div>
             <div class="rtimglist">
                 <h1>{$deal_info.name}</h1>
                <!--  <label>发起人：</label>
@@ -28,14 +30,14 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
                 <div class="sbmbj" style="border-bottom: 1px solid #dfdfdf">
         
         	{if $shouhuolist}
-        	<p style="height:30px;line-height:30px;padding:10px 0 0 15px;font-family: '微软雅黑';font-size:15px">请选择配送方式（必选）</p>
+        	<p style="height:30px;line-height:30px;padding:10px 0 0 15px;font-family: '微软雅黑';font-size:15px">请选择配送方式（<font style="color:red">必选</font>）</p>
 			{foreach from=$shouhuolist item=kuaidi key=k}
 			   <div class="consignee_radio_row p15 pt10 pb10">
                 <label class="Address webkit-box">
 			<input type="radio" name="kuaidi_id" value="{$kuaidi.id}"  {if $lixing eq 2}onClick="Show({$kuaidi.id}){else}{if $type eq 2}onClick="Show({$kuaidi.id}){else}onClick="ShowAdmin({$kuaidi.id}){/if}{/if}"/>
-                    <address class="webkit-box-flex ml5">
+                    <p class="webkit-box-flex ml5">
 			名称：{$kuaidi.kuaidi_name} 简介：{$kuaidi.kuaidi_desc} {if $kuaidi.is_kuaidi eq 1}使用快递{else}不使用快递{/if} 费用：{if $lixing eq 2}{$kuaidi.kuaidi_jiage}{else}{if $type eq 2}{$kuaidi.kuaidi_jiage}{else}{$kuaidi.kuaidi_price}{/if}{/if}
-			         </address>
+			         </p>
                 </label>
                 </div>
 			{/foreach}
@@ -249,5 +251,27 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
                 $("input[name='payment']").attr("disabled",false);
             }
         });
-    });                 
+    });
+    function check_form()
+    {
+        var radioArr = new Array("kuaidi_id");
+        var _return = true;
+        var count = radioArr.length;
+        for(var i = 0; i < count; i++){
+            var radios = document.getElementsByName(radioArr[i]);
+            var num = radios.length;
+            var isCheck = false;
+            for(var j = 0; j < num; j++){
+                if(radios[j].checked){
+                isCheck = true;
+                }
+            }
+            if(!isCheck){
+                alert('请选择配送方式');
+                return false;
+                }
+                var left_money={$user_info.money};
+    var need_money=Number($('#jiansuan').val());
+        }
+    }                 
 </script>
