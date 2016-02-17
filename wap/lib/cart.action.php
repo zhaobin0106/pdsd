@@ -158,11 +158,13 @@ class cartModule {
 		$credit = doubleval ( $_REQUEST ['credit'] );
 		$kuaidi_id = intval ( $_REQUEST ['kuaidi_id'] );
 		$type = intval ( $_REQUEST ['type'] );
-		
 		$memo = strim ( $_REQUEST ['memo'] );
 		$payment_id = intval ( $_REQUEST ['payment'] );
 		$lixing = intval ( $_REQUEST ['lixing'] );
 		$payment_id = intval ( $_REQUEST ['payment'] );
+		if(($credit > doubleval($GLOBALS ['user_info']['money']) || $GLOBALS ['user_info']['money'] == 0) && empty($payment_id)){
+			showErr ( "请选择支付方式", 0, get_gopreview_wap () );
+		}
 		if (! $_REQUEST ['kuaidi_id']) {
 			showErr ( "请选择配送方式", 0, get_gopreview_wap () );
 		}
