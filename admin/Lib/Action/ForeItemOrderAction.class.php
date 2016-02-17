@@ -285,7 +285,7 @@ class ForeItemOrderAction extends CommonAction{
 				
 				require_once APP_ROOT_PATH."system/libs/cart.php";
 				$rs = payment_fore_paid($payment_notice['notice_sn'],"");	
-				$this->error("收款完成");
+				$this->success("收款完成");
 			}
 			else
 			{
