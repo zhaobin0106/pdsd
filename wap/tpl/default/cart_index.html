@@ -194,7 +194,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
             {foreach from=$payment_list item=payment name=payment key=k} 
             <label class="webkit-box p15 pt5 pb5">
                 <input type="radio" value="{$payment.id}" name="payment" class="mt mt10" />
-                <div class="ml5 webkit-box-flex" style="height:40px;line-height:40px">{$payment.name}</div>
+                <div class="ml5 webkit-box-flex" style="height:40px;line-height:40px">{$payment.name}&nbsp;&nbsp;{if $smarty.foreach.payment.first}<span style="color: red;font-style: italic">推荐</span>{/if}</div>
             </label>
             <br/>
             {/foreach}
