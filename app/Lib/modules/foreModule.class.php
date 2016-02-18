@@ -166,7 +166,16 @@ require APP_ROOT_PATH.'app/Lib/shop_lip.php';
  		}else{
 	 		$deal_info['person']=$deal_info['support_count']+$deal_info['virtual_num'];
 			$deal_info['total_virtual_price']=number_price_format($deal_info['support_amount']+$deal_info['virtual_price']);
- 			$deal_info['percent']=round(($deal_info['person']/$nums)*100);
+				if($nums == 0){
+					if($deal_info ['person'] > 0){
+						$deal_info ['percent'] = 99;
+					}else{
+						$deal_info ['percent'] = 0;
+					}
+				}else{
+					$deal_info ['percent'] = round ( ($deal_info ['person'] / $nums) * 100 );
+				}
+ 			//$deal_info['percent']=round(($deal_info['person']/$nums)*100);
  		}
  		if ($deal_info ['begin_time'] > NOW_TIME) {
  			$deal_info ['status'] = '0';
