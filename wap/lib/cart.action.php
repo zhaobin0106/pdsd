@@ -27,7 +27,7 @@ class cartModule {
 			}
 			$count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."fore_item_order where  fore_id = " . $deal_item ['fore_id']." and user_id = " . intval ( $GLOBALS ['user_info'] ['id'] ));
 			if($count >= $deal_item['enroll']){
-				showErr ( "已达到报名上限", 0 ,url ( "fore#show", array (
+				showErr ( "已达到报名上限，若您有未付款的订单，请到个人中心报名的试吃继续支付", 0 ,url_wap ( "account#shichi", array (
 							"id" => $deal_item ['fore_id'] 
 					) ));
 									
