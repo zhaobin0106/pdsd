@@ -26,13 +26,13 @@ $this->_var['cpagejs_1'][]='';
                     <span class="common common-fail" style="background-color:#9ed367">即将开始</span>
                 {else}
 	            	{if $deal_info.percent >=100}
-						<span class="common common-success" style="background-color:#9ed367">已结束</span>
+						<span class="common common-success" style="background-color:#9ed367">活动结束</span>
 					{else}
                     	{if $deal_info.status eq 1}
-                            <span class="common common-success" style="background-color:#9ed367">已结束</span>
+                            <span class="common common-success" style="background-color:#9ed367">活动结束</span>
                         {/if}
                         {if $deal_info.status eq 2}
-                            <span class="common common-fail" style="background-color:#9ed367">活动失败</span>
+                            <span class="common common-fail" style="background-color:#9ed367">活动结束</span>
                         {/if}
                         {if $deal_info.status eq 3}
                             <span class="common common-sprite" style="background-color:#9ed367">尝鲜报名中</span>
