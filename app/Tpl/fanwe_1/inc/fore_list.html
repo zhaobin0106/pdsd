@@ -131,7 +131,7 @@
 			{if $fore_item.begin_time > $now}
 			<span class="common-begin">即将开始</span>
 			{elseif $fore_item.end_time < $now and $fore_item.end_time neq 0}
-			<span {if $fore_item.percent gte 100}class="common-success"{else}class="common-fail"{/if}>{if $fore_item.percent gte 100}已成功{else $fore_item.percent gt 0}活动失败{/if}</span> 	 
+			<span {if $fore_item.percent gte 100}class="common-success"{else}class="common-fail"{/if}>{if $fore_item.percent gte 100}已成功{else $fore_item.percent gt 0}活动结束{/if}</span> 	 
 			{else}
 			{if $fore_item.percent gte 100}
 				<span class="common-success">已结束</span>
@@ -164,7 +164,7 @@
 			</div>
 			{else $fore_item.percent gt 0}
 			<div class="ui-progress">
-				<span style="width:{$fore_item.percent}%;background:#4d4d4f;"></span>
+				<span class="theme_bgcolor" style="width:{$fore_item.percent}%;"></span>
 			</div>
 			{/if}
 		{else}

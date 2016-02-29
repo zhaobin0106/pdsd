@@ -1284,7 +1284,16 @@ function get_fore_list($limit="",$conditions="",$orderby=" sort desc ",$deal_typ
 				$deal_list[$k]['virtual_person']=$deal_list[$k]['virtual_num'];
 				$deal_list[$k]['support_count'] =$deal_list[$k]['virtual_num']+$deal_list[$k]['support_count'];
 				$deal_list[$k]['support_amount'] =$deal_list[$k]['virtual_price']+$deal_list[$k]['support_amount'];
-				$deal_list[$k]['percent'] = round(($deal_list[$k]['support_count'])/$nums*100);
+				if($nums == 0){
+					if($deal_list[$k]['support_count'] > 0){
+						$deal_list[$k]['percent'] = 99;
+					}else{
+						$deal_list[$k]['percent'] = 0;
+					}
+				}else{
+					$deal_list[$k]['percent'] = round ( ($deal_list[$k]['support_count'] / $nums) * 100 );
+				}
+				// $deal_list[$k]['percent'] = round(($deal_list[$k]['support_count'])/$nums*100);
 			}
 			if($deal_type=='deal_cate'||$deal_type=='deal_cate_preheat'){
 				$deal_list[$k]['user_info']=$GLOBALS['db']->getRowCached("select * from  ".DB_PREFIX."user where id=".$v['user_id']);
