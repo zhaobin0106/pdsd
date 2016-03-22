@@ -16,10 +16,10 @@
 					<label class="input_lable">验  证  码：</label>
 					<input value=""  id="settings_mobile_code" name="code"  class="textbox webkit-box-flex" type="text" placeholder="输入验证码">
 				</li>
-				<li class="webkit-box">
+<!-- 				<li class="webkit-box">
 					<label class="input_lable">电子邮箱：</label>
 					<input value=""  id="nput100 sizing webkit-box-flex" name="email" id="email"  class="textbox webkit-box-flex" type="text" placeholder="输入邮箱">
-				</li>
+				</li> -->
 			</ul>
 		</div>
 		<div class="blank15"></div>
@@ -79,15 +79,15 @@
 			$.showErr("绑定的手机号码不正确！");
 			return false;
 		}
-		if(!$.checkEmail($.trim($("#user_getpwd_by_mobile").find("input[name='email']").val())))
-		{
-			$.showErr("邮箱格式有误",function(){			
-				$("#user_getpwd_by_mobile").find("input[name='email']").val("");
-				$("#user_getpwd_by_mobile").find("input[name='email']").focus();
+		// if(!$.checkEmail($.trim($("#user_getpwd_by_mobile").find("input[name='email']").val())))
+		// {
+		// 	$.showErr("邮箱格式有误",function(){			
+		// 		$("#user_getpwd_by_mobile").find("input[name='email']").val("");
+		// 		$("#user_getpwd_by_mobile").find("input[name='email']").focus();
 				
-			});
-			return false;
-		}
+		// 	});
+		// 	return false;
+		// }
 		 
 		var code_val=$.trim($("#settings_mobile_code").val());
 		var mobile=$.trim($("#settings-mobile").val());

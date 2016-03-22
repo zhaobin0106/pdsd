@@ -507,23 +507,23 @@ class userModule{
 			$GLOBALS['db']->query("update ".DB_PREFIX."user set wx_openid='".$user_info['wx_openid']."' where id=".$user['id']);
  			$user_id = $user['id'];	
  		}else{
- 			if(!$user_info['email'])
-			{
-				$data['status'] = 0;
-				$data['info'] = "邮箱为空";
-				ajax_return($data);
-			}
-			if(!check_email($user_info['email'])){
-				$data['status'] = 0;
-				$data['info'] = "邮箱格式错误";
-				ajax_return($data);
-			}
-			$has_email=get_user_has('email',$user_info['email']);
-			if($has_email){
-				$data['status'] = 0;
-				$data['info'] = "邮箱已存在，请重新填写";
-				ajax_return($data);
-			}
+ 		// 	if(!$user_info['email'])
+			// {
+			// 	$data['status'] = 0;
+			// 	$data['info'] = "邮箱为空";
+			// 	ajax_return($data);
+			// }
+			// if(!check_email($user_info['email'])){
+			// 	$data['status'] = 0;
+			// 	$data['info'] = "邮箱格式错误";
+			// 	ajax_return($data);
+			// }
+			// $has_email=get_user_has('email',$user_info['email']);
+			// if($has_email){
+			// 	$data['status'] = 0;
+			// 	$data['info'] = "邮箱已存在，请重新填写";
+			// 	ajax_return($data);
+			// }
 			$has_user_name=get_user_has('user_name',$user_info['user_name']);
 			if($has_user_name){
 				$user_info['user_name']=$user_info['user_name'].rand(10000,99999);
