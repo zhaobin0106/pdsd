@@ -115,7 +115,7 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
         <div class="mainlist webkit-box">
             <label class="input_lable">备注信息</label>
             <div class="r_list ml10">
-                <input type="text" placeholder="给发起人留言" class="textbox" style="color: #333;">
+                <input type="text" name="memo" placeholder="给发起人留言" class="textbox" style="color: #333;">
             </div>
         </div>
         				<div id="dizhi" style="display:none">
@@ -203,8 +203,8 @@ $this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/cart_pay.js";
         <div class="alwaysfoot">
             <input class="input30" type="submit" value="提交表单">
             <input type="hidden" id="back_url" value="{url_wap r="account"}" />
-            <input type="hidden" value="{$memo}" name="memo" />
-            <input type="hidden" value="0" name="is_kuaidi"id="is_kuaidi"/>
+<!--             <input type="hidden" value="{$memo}" name="memo" />
+ -->            <input type="hidden" value="0" name="is_kuaidi"id="is_kuaidi"/>
             <input type="hidden" value="{$deal_item.id}" name="id" />
             <input type="hidden" value="1" name="ajax" />
             <input type="hidden" value="{$type}" name="type" />
